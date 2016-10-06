@@ -5,20 +5,28 @@
  */
 package controller;
 
+import classes.DataManager;
 import classes.DigitalClock;
+import classes.Usuario;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -35,6 +43,9 @@ public class MainMenuController implements Initializable {
       Double xs,ys;
       boolean maximized=false;
       boolean minimized=false;
+      MainMenuController myController;
+      Usuario user;
+      DataManager dm = new DataManager();
             
             
       /**
@@ -102,6 +113,28 @@ public class MainMenuController implements Initializable {
             stage = (Stage) b.getScene().getWindow();
             stage.setIconified(true);
       }     
+      
+      @FXML public void clientes(ActionEvent evt) throws IOException{            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search.fxml"));
+            SearchController searchController;
+            Parent root = loader.load();
+            searchController = loader.getController();
+            searchController.setMenuController(myController);            
+            Scene scene = new Scene(root);
+            scene.setFill(Color.TRANSPARENT);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.show();
+      }
+      
+      public void setController(MainMenuController c){
+            this.myController = c;
+      }
+      
+     public void setUser(Usuario u){
+           this.user = u;
+     }
       
       public void drag(){
 

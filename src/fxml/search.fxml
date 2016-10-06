@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="background-all" stylesheets="@../css/search.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SearchController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="40.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutY="7.0" text="Busqueda de clientes" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="738.0" layoutY="7.0" mnemonicParsing="false" onAction="#minimize" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="minimize-button" text="Button" AnchorPane.rightAnchor="31.0" />
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="771.0" layoutY="7.0" mnemonicParsing="false" onAction="#close" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="close-button" text="Button" AnchorPane.rightAnchor="1.0" />
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="81.0" layoutY="214.0" text="Buscar por" />
+                  <ComboBox layoutX="149.0" layoutY="210.0" prefWidth="150.0" />
+                  <TextField layoutX="121.0" layoutY="267.0" />
+                  <Button layoutX="159.0" layoutY="323.0" mnemonicParsing="false" text="Buscar" />
+                  <Separator layoutX="396.0" layoutY="202.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="150.0" />
+                  <TableView layoutX="429.0" layoutY="180.0" prefHeight="200.0" prefWidth="338.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Contrato" />
+                      <TableColumn prefWidth="75.0" text="Nombre" />
+                        <TableColumn prefWidth="75.0" text="Cedula" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="540.0" layoutY="405.0" mnemonicParsing="false" text="Seleccionar Cliente" />
+                  <Separator layoutX="299.0" layoutY="149.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
+                  <ImageView fx:id="logo" fitHeight="155.0" fitWidth="248.0" layoutX="272.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+               </children></AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

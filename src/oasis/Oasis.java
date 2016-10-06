@@ -5,6 +5,7 @@
  */
 package oasis;
 
+import controller.LoginController;
 import controller.MainMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,9 +23,10 @@ public class Oasis extends Application {
       
       @Override
       public void start(Stage stage) throws Exception {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));            
             Parent root = loader.load();
-            MainMenuController con = loader.getController();
+            LoginController con = loader.getController();
+            
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);            
             stage.setScene(scene);

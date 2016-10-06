@@ -29,15 +29,15 @@
                         </ImageView>
                      </children>
                   </GridPane>
-                  <Label layoutX="280.0" layoutY="163.0" text="Usuario">
+                  <Label layoutX="272.0" layoutY="157.0" text="Usuario">
                      <font>
                         <Font name="Segoe UI" size="17.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="232.0" layoutY="185.0" />
-                  <PasswordField layoutX="232.0" layoutY="245.0" />
-                  <Button layoutX="267.0" layoutY="293.0" mnemonicParsing="false" text="Inciar Sesion" />
-                  <Label layoutX="266.0" layoutY="223.0" text="Contraseña">
+                  <TextField fx:id="user" layoutX="224.0" layoutY="179.0" />
+                  <PasswordField fx:id="pass" layoutX="224.0" layoutY="239.0" />
+                  <Button layoutX="259.0" layoutY="287.0" mnemonicParsing="false" onAction="#login" text="Inciar Sesion" />
+                  <Label layoutX="258.0" layoutY="217.0" text="Contraseña">
                      <font>
                         <Font name="Segoe UI" size="17.0" />
                      </font>

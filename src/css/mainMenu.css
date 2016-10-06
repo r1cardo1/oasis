@@ -66,8 +66,27 @@ and open the template in the editor.
     -fx-border-width:2px;
 }
 
+.user-button:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
+    -fx-graphic:url("../images/user.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
 .asistencia-button{
+    
     -fx-background-color:transparent;
+    -fx-graphic:url("../images/check_book.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.asistencia-button:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
     -fx-graphic:url("../images/check_book.png");
     -fx-border-color:gray;
     -fx-border-radius:20px;
@@ -82,8 +101,26 @@ and open the template in the editor.
     -fx-border-width:2px;
 }
 
+.visitas-button:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
+    -fx-graphic:url("../images/conference.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
 .reporte-button{
     -fx-background-color:transparent;
+    -fx-graphic:url("../images/report.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.reporte-button:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
     -fx-graphic:url("../images/report.png");
     -fx-border-color:gray;
     -fx-border-radius:20px;
@@ -98,8 +135,26 @@ and open the template in the editor.
     -fx-border-width:2px;
 }
 
+.admin-button:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
+    -fx-graphic:url("../images/user_shield.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
 .logout-button{
     -fx-background-color:transparent;
+    -fx-graphic:url("../images/logout.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.logout-button:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
     -fx-graphic:url("../images/logout.png");
     -fx-border-color:gray;
     -fx-border-radius:20px;

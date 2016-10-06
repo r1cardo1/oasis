@@ -73,7 +73,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1" />
+                              <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1" />
                               <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2" />
