@@ -19,9 +19,18 @@ and open the template in the editor.
     -fx-background-color: white;
 }
 
+.border-pane{
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-border-radius:10 10 0 0;
+}
+
 .content-pane{
-    -fx-background-radius: 0 0 10 10;
-    -fx-background-color:white;
+
+    -fx-background-image:url("../images/container.png");
+    -fx-background-size:cover;
+    -fx-background-radius: 10px;
+    
 }
 
 .grid-pane{
@@ -48,3 +57,52 @@ and open the template in the editor.
     -fx-background-color: transparent;
     -fx-graphic: url("../images/minimize.png");
 }
+
+.user-button{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/user.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.asistencia-button{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/check_book.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.visitas-button{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/conference.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.reporte-button{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/report.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.admin-button{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/user_shield.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.logout-button{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/logout.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
