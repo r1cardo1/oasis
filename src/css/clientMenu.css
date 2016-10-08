@@ -1,0 +1,69 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 7, 2016, 12:10:47 AM
+    Author     : Ricardo Marcano
+*/
+
+.background-all{
+    -fx-background-image: url("../images/container.png");
+    -fx-background-size: cover;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: gray;   
+}
+
+.open-table{   
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/table.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.open-table:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
+    -fx-graphic:url("../images/table.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.view-guess{   
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/conference.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.view-guess:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
+    -fx-graphic:url("../images/conference.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.assistance{   
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/check_book.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.assistance:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
+    -fx-graphic:url("../images/check_book.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+

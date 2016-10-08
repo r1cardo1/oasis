@@ -25,8 +25,7 @@ public class Oasis extends Application {
       public void start(Stage stage) throws Exception {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));            
             Parent root = loader.load();
-            LoginController con = loader.getController();
-            
+            LoginController con = loader.getController();            
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);            
             stage.setScene(scene);

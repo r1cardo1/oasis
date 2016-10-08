@@ -1,0 +1,22 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 7, 2016, 9:54:43 PM
+    Author     : Ricardo Marcano
+*/
+
+.back-button{
+    -fx-background-color: transparent;
+    -fx-graphic: url("../images/back.png");
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius:10px;
+       
+}
+
+.table-column{
+    -fx-alignment: center;
+}

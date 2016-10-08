@@ -19,18 +19,13 @@ and open the template in the editor.
     -fx-background-color: white;
 }
 
-.border-pane{
-    -fx-border-color:gray;
-    -fx-border-width:2px;
-    -fx-border-radius:10 10 0 0;
-}
-
 .content-pane{
-
     -fx-background-image:url("../images/container.png");
-    -fx-background-size:cover;
-    -fx-background-radius: 10px;
-    
+    -fx-background-size:cover; 
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-opacity: 1;
+        
 }
 
 .grid-pane{
@@ -42,20 +37,43 @@ and open the template in the editor.
 
 .close-button{
     -fx-padding: 0 0 0 0;
-    -fx-background-color: transparent;
+    -fx-background-color:#990000;
     -fx-graphic: url("../images/close.png");
+    -fx-background-radius: 0 0 5 5;
+}
+
+.close-button:hover{
+    -fx-padding: 0 0 0 0;
+    -fx-background-color:#ff3333;
+    -fx-graphic: url("../images/close.png");
+    -fx-background-radius: 0 0 5 5;
 }
 
 .maximize-button{
     -fx-padding: 0 0 0 0;
     -fx-background-color: transparent;
     -fx-graphic: url("../images/maximize.png");
+    
 }
 
 .minimize-button{
     -fx-padding: 0 0 0 0;
     -fx-background-color: transparent;
     -fx-graphic: url("../images/minimize.png");
+}
+
+.maximize-button:hover{
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: #3333ff;
+    -fx-graphic: url("../images/maximize.png");
+    -fx-background-radius: 0 0 5 5;
+}
+
+.minimize-button:hover{
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: #3333ff;
+    -fx-graphic: url("../images/minimize.png");
+    -fx-background-radius: 0 0 5 5;
 }
 
 .user-button{
@@ -160,4 +178,22 @@ and open the template in the editor.
     -fx-border-radius:20px;
     -fx-border-width:2px;
 }
+
+.blacklist-button{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/blacklist.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
+.blacklist-button:hover{
+    -fx-background-radius: 22px;
+    -fx-background-color:#cccccc;
+    -fx-graphic:url("../images/blacklist.png");
+    -fx-border-color:gray;
+    -fx-border-radius:20px;
+    -fx-border-width:2px;
+}
+
 

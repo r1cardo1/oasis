@@ -8,11 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background-anchor" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background-anchor" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <GridPane layoutX="141.0" layoutY="44.0" prefHeight="71.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columnConstraints>
@@ -47,7 +47,7 @@
          <top>
             <Pane fx:id="topPane" prefHeight="30.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER">
                <children>
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="554.0" layoutY="-3.0" mnemonicParsing="false" onAction="#close" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="close-button" text="Button" />
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="560.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="close-button" text="Button" />
                </children>
             </Pane>
          </top>

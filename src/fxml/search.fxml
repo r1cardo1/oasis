@@ -15,38 +15,40 @@
          <top>
             <AnchorPane prefHeight="40.0" prefWidth="798.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" layoutY="7.0" text="Busqueda de clientes" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <Label fx:id="topPane" alignment="CENTER" layoutY="7.0" text="Busqueda de clientes" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="738.0" layoutY="7.0" mnemonicParsing="false" onAction="#minimize" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="minimize-button" text="Button" AnchorPane.rightAnchor="31.0" />
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="771.0" layoutY="7.0" mnemonicParsing="false" onAction="#close" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="close-button" text="Button" AnchorPane.rightAnchor="1.0" />
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="738.0" layoutY="7.0" mnemonicParsing="false" onAction="#minimize" prefHeight="15.0" prefWidth="30.0" styleClass="minimize-button" text="Button" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="0.0" />
+                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="771.0" layoutY="7.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="close-button" text="Button" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </top>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="main" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="81.0" layoutY="214.0" text="Buscar por" />
-                  <ComboBox layoutX="149.0" layoutY="210.0" prefWidth="150.0" />
-                  <TextField layoutX="121.0" layoutY="267.0" />
-                  <Button layoutX="159.0" layoutY="323.0" mnemonicParsing="false" text="Buscar" />
-                  <Separator layoutX="396.0" layoutY="202.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="150.0" />
-                  <TableView layoutX="429.0" layoutY="180.0" prefHeight="200.0" prefWidth="338.0">
+                  <Label layoutX="54.0" layoutY="202.0" text="Buscar por" />
+                  <ComboBox fx:id="stipo" layoutX="130.0" layoutY="198.0" prefWidth="150.0" />
+                  <TextField fx:id="str" layoutX="311.0" layoutY="198.0" />
+                  <Button layoutX="504.0" layoutY="198.0" mnemonicParsing="false" onAction="#search" text="Buscar" />
+                  <TableView fx:id="table" layoutX="39.0" layoutY="253.0" prefHeight="200.0" prefWidth="720.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Contrato" />
-                      <TableColumn prefWidth="75.0" text="Nombre" />
-                        <TableColumn prefWidth="75.0" text="Cedula" />
+                      <TableColumn fx:id="cedula" prefWidth="75.0" style="-fx-alignment: center;" text="Cedula" />
+                      <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
+                        <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
+                        <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
+                        <TableColumn fx:id="restringido" prefWidth="75.0" text="Restringido" />
                     </columns>
                   </TableView>
-                  <Button layoutX="540.0" layoutY="405.0" mnemonicParsing="false" text="Seleccionar Cliente" />
+                  <Button layoutX="328.0" layoutY="489.0" mnemonicParsing="false" onAction="#selectClient" text="Seleccionar Cliente" />
                   <Separator layoutX="299.0" layoutY="149.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
                   <ImageView fx:id="logo" fitHeight="155.0" fitWidth="248.0" layoutX="272.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/logo.png" />
                      </image>
                   </ImageView>
+                  <AnchorPane fx:id="aux" prefHeight="200.0" prefWidth="200.0" />
                </children></AnchorPane>
          </center>
       </BorderPane>

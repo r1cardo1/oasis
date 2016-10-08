@@ -9,27 +9,33 @@ and open the template in the editor.
 */
 
 .background-anchor{
-    -fx-background-color: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 20%, rgba(237,251,255,1) 28%, rgba(0,76,143,1) 99%, rgba(183,222,237,1) 100%);
-    -fx-background-radius: 0 0 20 20;
-    -fx-opacity: 0.9;
+    -fx-background-image:url("../images/container.png");
+    -fx-background-radius: 10px;
+    -fx-background-size: cover;
+    -fx-border-color:black;
+    -fx-border-width:1px;
+    
 
 }
 
 .close-button{
-    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: #990000;
     -fx-graphic: url("../images/close.png");
+    -fx-background-radius: 0 0 5 5;
 }
 
-.top-pane{
-    -fx-background-color: white;
-    -fx-background-radius: 20 20 0 0;
-    -fx-opacity: 0.9;
+.close-button:hover{
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: #ff3333;
+    -fx-graphic: url("../images/close.png");
+    -fx-background-radius: 0 0 5 5;
 }
+
 
 .text-field{
-    -fx-background-color: #b4def3;
     -fx-border-color: gray;
-    -fx-border-width: 2px;
-    -fx-border-radius:8px;
-    -fx-background-radius: 9px;
+    -fx-border-width: 1px;
+    -fx-border-radius:0px;
+    -fx-background-radius: 0px;
 }

@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -99,7 +100,7 @@ public class LoginController implements Initializable {
                                     Parent root = loader.load();
                                     controller = loader.getController();
                                     controller.setController(controller);
-                                    Scene scene = new Scene(root);
+                                    Scene scene = new Scene(root);                                  
                                     scene.setFill(Color.TRANSPARENT);
                                     Stage stage = new Stage();
                                     stage.setScene(scene);
@@ -109,12 +110,20 @@ public class LoginController implements Initializable {
                                     controller.setUser(userLogin);
                                     primStage.close();
                               }else{
-                                    JOptionPane.showMessageDialog(null,"Contraseña Incorrecta");
+                                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                  alert.setTitle("Alerta");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Contraseña Incorrecta");
+                    alert.show();
                               }
                   }
             }
             if(userLogin==null){
-                  JOptionPane.showMessageDialog(null,"El usuario no existe");
+                  Alert alert = new Alert(Alert.AlertType.ERROR);
+                  alert.setTitle("Alerta");
+                    alert.setHeaderText(null);
+                    alert.setContentText("El usuario ingresado no existe");
+                    alert.show();
             }
       }
   

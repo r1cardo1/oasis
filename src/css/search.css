@@ -11,25 +11,37 @@ and open the template in the editor.
 .background-all{
     -fx-background-image: url("../images/container.png");
     -fx-background-size: cover;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-color: gray;   
+    -fx-border-color: black;   
+    -fx-border-width: 1px;
 }
 
 .close-button{
     -fx-padding: 0 0 0 0;
-    -fx-background-color: transparent;
+    -fx-background-color: #990000;
     -fx-graphic: url("../images/close.png");
+    -fx-background-radius: 0 0 5 5;
 }
 
-.maximize-button{
+.close-button:hover{
     -fx-padding: 0 0 0 0;
-    -fx-background-color: transparent;
-    -fx-graphic: url("../images/maximize.png");
+    -fx-background-color: #ff3333;
+    -fx-graphic: url("../images/close.png");
+    -fx-background-radius: 0 0 5 5;
 }
 
 .minimize-button{
     -fx-padding: 0 0 0 0;
     -fx-background-color: transparent;
     -fx-graphic: url("../images/minimize.png");
+}
+
+.minimize-button:hover{
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: #3333ff;
+    -fx-graphic: url("../images/minimize.png");
+    -fx-background-radius: 0 0 5 5;
+}
+
+.table-column{
+    -fx-alignment: center;
 }

@@ -7,6 +7,7 @@ package classes;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
@@ -32,35 +33,12 @@ public class DataManager {
         }
     }
     
-    //Inserta una nueva pelicula en la Base de Datos
-    public boolean insert(String nombre,String genero,int anio,String actor,String pais){
-        try {
-            String query = "INSERT INTO peliculas VALUES(NULL,'"+nombre+"','"+genero+"','"+anio+"','"+actor+"','"+pais+"');";
-            st.executeUpdate(query);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-    //Devuelve el resultset con los datos de peliculas
-    public ResultSet selectXtodas(){
-        try {
-            String query = "SELECT * FROM peliculas";
-            rs = st.executeQuery(query);
-            return rs;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    //Devuelve el resultset con los datos de peliculas con select por genero
+
     public ResultSet login(String user){
         try {
-            String query = "SELECT * FROM oasisclub.usuarios WHERE usuario = '"+user+"'";
-            rs = st.executeQuery(query);            
+            String query = "SELECT * FROM oasisclub.usuarios WHERE usuario LIKE '"+user+"';";
+            rs = st.executeQuery(query);     
+            
             return rs;
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +46,64 @@ public class DataManager {
         }
     }
     
-    //Devuelve el resultset con los datos de peliculas con select por pais
+    public ResultSet searchClientbyCI(String str){
+        try{
+            String sql = "SELECT * FROM oasisclub.clientes WHERE cedula LIKE '%"+str+"%'";
+            rs = st.executeQuery(sql);
+            return rs;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+      public ResultSet searchClientbyContract(String str){
+        try{
+            String sql = "SELECT * FROM oasisclub.clientes WHERE contrato LIKE '%"+str+"%';";
+            rs = st.executeQuery(sql);
+            return rs;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }  
+      
+    public ResultSet searchClientbyName(String str){
+        try{
+            String sql = "SELECT * FROM oasisclub.clientes WHERE nombre LIKE '%"+str+"%';";
+            rs = st.executeQuery(sql);
+            return rs;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }  
+    
+    public String openTable(String contrato, String ninvitados, String nmesa, String fecha,String hora,String usuario){
+        try{
+            String query = "INSERT INTO oasisclub.asistencias(contrato,num_inv,fecha,hora,mesa,user) VALUES ('"+contrato+"','"+ninvitados+"','"+fecha+"','"+hora+"','"+nmesa+"','"+usuario+"');";
+            st.executeUpdate(query);
+            return "OK";
+        }catch(Exception e){
+            e.printStackTrace();
+            return "FAIL";
+        }
+        
+    }
+    
+    public ResultSet visits(){
+        try{
+        String query ="SELECT * FROM oasisclub.asistencias;";
+        rs = st.executeQuery(query);
+        return rs;
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+      
+
     public ResultSet selectXpais(String pais){
         try {
             String query = "SELECT * FROM peliculas WHERE pais = '"+pais+"'";
@@ -80,7 +115,7 @@ public class DataManager {
         }
     }
         
-    //Elimina la pelicula
+
     public boolean delete(int id){
         try {
             String query = "DELETE FROM peliculas WHERE id = '"+id+"'";
@@ -92,7 +127,7 @@ public class DataManager {
         }
     }
     
-    //Actualiza los datos de la pelicula
+
     public boolean update(int id,String nombre,String genero,int anio,String actor,String pais){
         try {
             String query = "UPDATE peliculas SET"
@@ -108,4 +143,35 @@ public class DataManager {
             return false;
         }
     }
+    
+
+    public boolean insert(String nombre,String genero,int anio,String actor,String pais){
+        try {
+            String query = "INSERT INTO peliculas VALUES(NULL,'"+nombre+"','"+genero+"','"+anio+"','"+actor+"','"+pais+"');";
+            st.executeUpdate(query);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+
+    public ResultSet selectXtodas(){
+        try {
+            String query = "SELECT * FROM peliculas";
+            rs = st.executeQuery(query);
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        
+        
+    }
+    
+    public void closers() throws SQLException{
+            rs.close();
+        }
+
 }

@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -46,6 +47,8 @@ public class MainMenuController implements Initializable {
       MainMenuController myController;
       Usuario user;
       DataManager dm = new DataManager();
+      @FXML AnchorPane main;
+      @FXML AnchorPane aux;
             
             
       /**
@@ -119,13 +122,41 @@ public class MainMenuController implements Initializable {
             SearchController searchController;
             Parent root = loader.load();
             searchController = loader.getController();
-            searchController.setMenuController(myController);            
+            searchController.setMenuController(myController);    
+            searchController.user = this.user;
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.initStyle(StageStyle.TRANSPARENT);
+            searchController.primStage = stage;
             stage.show();
+      }
+      
+      @FXML public void logout(ActionEvent evt) throws IOException{
+          Stage stage = new Stage();
+          FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+          LoginController controller;
+          Parent root = load.load();
+          controller = load.getController();
+          Scene scene = new Scene(root);
+          stage.setScene(scene);
+          controller.setStage(stage);
+          stage.initStyle(StageStyle.TRANSPARENT);
+          stage.show();
+          primStage.close();
+      }
+      
+      @FXML public void visitas(ActionEvent evt) throws IOException{
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/visitas.fxml"));
+          Pane pan = loader.load();
+          aux.getChildren().add(pan);
+
+          VisitasController controller = loader.getController();
+          controller.menu = myController;
+          aux.toFront();
+
+          main.setVisible(false);
       }
       
       public void setController(MainMenuController c){

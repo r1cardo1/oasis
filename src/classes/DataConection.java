@@ -50,24 +50,34 @@ public class DataConection  {
           Statement st;
           st=conn.createStatement();
           String sql="CREATE TABLE IF NOT EXISTS oasisclub.clientes("
-                  + "cedula INT(10) NOT NULL,"
-                  + "nombre VARCHAR(20) NOT NULL,"
-                  + "apellido VARCHAR(20) NOT NULL,"
+                  + "cedula VARCHAR(10) NOT NULL,"
+                  + "nombre VARCHAR(100) NOT NULL,"
                   + "contrato VARCHAR(10) NOT NULL,"
-                  + "banco VARCHAR(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                  + "plan VARCHAR(20) NOT NULL,"
+                  + "banco VARCHAR(20) NOT NULL,"
+                  + "restringido VARCHAR(10) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           String sql1 = "CREATE TABLE IF NOT EXISTS oasisclub.asistencias("
-                  + "contrato VARCHAR(10) NOT NULL,"
+                  + "contrato VARCHAR(20) NOT NULL,"
                   + "num_inv INT NOT NULL,"
                   + "fecha VARCHAR(20) NOT NULL,"
-                  + "hora VARCHAR(10) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                  + "hora VARCHAR(20) NOT NULL,"
+                  + "mesa VARCHAR(20) NOT NULL,"
+                  + "user VARCHAR(100) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           String sql2 = "CREATE TABLE IF NOT EXISTS oasisclub.usuarios("
                   + "nombre VARCHAR(20) NOT NULL,"
                   + "apellido VARCHAR(20) NOT NULL,"
-                  + "usuario VARCHAR(20) NOT NULL,"
-                  + "clave VARCHAR(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                  + "usuario VARCHAR(20) NOT NULL UNIQUE,"
+                  + "clave VARCHAR(20) NOT NULL,"
+                  + "nivel INT(10) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+          String sql3 = "INSERT INTO oasisclub.usuarios(nombre,apellido,usuario,clave,nivel) "
+                  + "SELECT * FROM (SELECT 'oasis','club','root','admin',1) AS tmp"
+                  + " WHERE NOT EXISTS ("
+                  + "SELECT usuario FROM oasisclub.usuarios WHERE usuario = 'root') LIMIT 1"
+                  + ";";
           st.executeUpdate(sql);
           st.executeUpdate(sql1);
           st.executeUpdate(sql2);
+          st.executeUpdate(sql3);
     }
       
 }

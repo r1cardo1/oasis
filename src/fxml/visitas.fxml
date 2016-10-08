@@ -1,11 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisitasController">
-    
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/visits.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisitasController">
+   <children>
+      <AnchorPane prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutY="27.0" text="Lista de asistencia al Club" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Button layoutX="43.0" layoutY="12.0" mnemonicParsing="false" onAction="#backAction" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="back-button" stylesheets="@../css/visits.css" text="Volver" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <TableView fx:id="table" layoutX="37.0" layoutY="50.0" prefHeight="200.0" prefWidth="581.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+              <columns>
+                <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
+                <TableColumn fx:id="nombre" prefWidth="75.0" text="Cliente" />
+                  <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
+                  <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
+                  <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
+                  <TableColumn fx:id="hora" prefWidth="75.0" text="Hora" />
+                  <TableColumn fx:id="ninvitados" prefWidth="75.0" text="Invitados" />
+                  <TableColumn fx:id="nmesa" prefWidth="75.0" text="Mesa" />
+              </columns>
+            </TableView>
+            <ComboBox fx:id="combo" layoutX="114.0" layoutY="14.0" prefWidth="150.0" />
+            <Label layoutX="50.0" layoutY="18.0" text="Filtrar por" />
+            <Pane fx:id="rangeDate" layoutX="283.0" layoutY="9.0" prefHeight="35.0" prefWidth="469.0" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
+               <children>
+                  <DatePicker fx:id="from" layoutX="52.0" layoutY="5.0" />
+                  <DatePicker fx:id="to" layoutX="281.0" layoutY="5.0" />
+                  <Label layoutX="237.0" layoutY="9.0" text="Hasta" />
+                  <Label layoutX="14.0" layoutY="9.0" text="Desde" />
+               </children>
+            </Pane>
+            <Pane fx:id="pdate" layoutX="539.0" layoutY="9.0" prefHeight="35.0" prefWidth="469.0" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
+               <children>
+                  <DatePicker fx:id="date" layoutX="148.0" layoutY="5.0" />
+                  <Label layoutX="96.0" layoutY="9.0" text="Fecha:" />
+               </children>
+            </Pane>
+            <Pane fx:id="pfilter" layoutX="535.0" layoutY="18.0" prefHeight="35.0" prefWidth="469.0" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
+               <children>
+                  <TextField fx:id="filter" layoutX="99.0" layoutY="5.0" />
+                  <Label layoutX="56.0" layoutY="9.0" text="Filtro" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>

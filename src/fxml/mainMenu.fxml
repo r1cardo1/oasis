@@ -9,96 +9,103 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent;" styleClass="border-pane" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/mainMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
    <children>
-      <BorderPane layoutX="188.0" layoutY="179.0" prefHeight="200.0" prefWidth="200.0" styleClass="top-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <AnchorPane layoutX="145.0" layoutY="-7.0" prefHeight="80.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="content-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <GridPane layoutX="-116.0" layoutY="-2.0" prefHeight="80.0" prefWidth="900.0" styleClass="grid-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                        <AnchorPane fx:id="aux" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+                        <AnchorPane layoutX="145.0" layoutY="-7.0" prefHeight="80.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ImageView fitHeight="81.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                                 <image>
-                                    <Image url="@../images/logo.png" />
-                                 </image>
-                              </ImageView>
-                              <Pane prefHeight="200.0" prefWidth="200.0">
+                              <GridPane layoutX="-116.0" layoutY="-2.0" prefHeight="80.0" prefWidth="900.0" styleClass="grid-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <Button contentDisplay="GRAPHIC_ONLY" layoutX="44.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="home-button" text="Button" />
+                                    <ImageView fitHeight="81.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                                       <image>
+                                          <Image url="@../images/logo.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Pane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button contentDisplay="GRAPHIC_ONLY" layoutX="44.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="home-button" text="Button" />
+                                       </children>
+                                    </Pane>
+                                    <VBox prefHeight="80.0" prefWidth="202.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                       <children>
+                                          <Label fx:id="date" text="\$date">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="hour" text="\$hour">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </VBox>
                                  </children>
-                              </Pane>
-                              <VBox prefHeight="80.0" prefWidth="202.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                 <children>
-                                    <Label fx:id="date" text="\$date">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="hour" text="\$hour">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets />
-                                 </GridPane.margin>
-                              </VBox>
+                              </GridPane>
                            </children>
-                        </GridPane>
+                        </AnchorPane>
+                        <AnchorPane fx:id="main" layoutX="121.0" layoutY="345.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+                           <children>
+                              <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#visitas" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="132.0" styleClass="admin-button" text="Clientes Restringidos" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                 </children>
+                              </GridPane>
+                              <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="121.0" layoutY="345.0" prefHeight="200.0" prefWidth="200.0" styleClass="content-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+               </center>
+               <top>
+                  <AnchorPane fx:id="topPane" prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1" />
-                              <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2" />
-                              <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                           </children>
-                        </GridPane>
-                        <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label alignment="CENTER" layoutX="384.0" layoutY="5.0" maxWidth="1.7976931348623157E308" text="Oasis Club Manager" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="869.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="close-button" text="Button" AnchorPane.rightAnchor="8.0" />
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="839.0" mnemonicParsing="false" onAction="#maximize" prefHeight="15.0" prefWidth="30.0" styleClass="maximize-button" text="Button" AnchorPane.rightAnchor="38.0" />
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="809.0" mnemonicParsing="false" onAction="#minimize" prefHeight="15.0" prefWidth="30.0" styleClass="minimize-button" text="Button" AnchorPane.rightAnchor="68.0" />
                      </children>
                   </AnchorPane>
-               </children></AnchorPane>
-         </center>
-         <top>
-            <AnchorPane fx:id="topPane" prefHeight="30.0" prefWidth="200.0" styleClass="top-pane" BorderPane.alignment="CENTER">
-               <children>
-                  <Label alignment="CENTER" layoutX="384.0" layoutY="5.0" maxWidth="1.7976931348623157E308" text="Oasis Club Manager" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="869.0" mnemonicParsing="false" onAction="#close" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="30.0" prefWidth="30.0" styleClass="close-button" text="Button" AnchorPane.rightAnchor="1.0" />
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="839.0" mnemonicParsing="false" onAction="#maximize" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="30.0" prefWidth="30.0" styleClass="maximize-button" text="Button" AnchorPane.rightAnchor="31.0" />
-                  <Button contentDisplay="GRAPHIC_ONLY" layoutX="809.0" mnemonicParsing="false" onAction="#minimize" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="30.0" prefWidth="30.0" styleClass="minimize-button" text="Button" AnchorPane.rightAnchor="61.0" />
-               </children>
-            </AnchorPane>
-         </top>
-      </BorderPane>
+               </top>
+            </BorderPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
