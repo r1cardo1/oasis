@@ -8,10 +8,17 @@ package controller;
 import classes.DataManager;
 import classes.Usuario;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,6 +51,7 @@ public class LoginController implements Initializable {
       private double xs,ys=0;
       public Stage primStage;
       DataManager dm = new DataManager();
+      DataManager dmaux = new DataManager();
       @FXML TextField user;
       @FXML PasswordField pass;
       
@@ -95,6 +103,11 @@ public class LoginController implements Initializable {
                         userLogin = new Usuario(rs.getString("nombre"),rs.getString("apellido"),rs.getString("usuario"),rs.getString("clave"));
                         if(userLogin.getUsuario().equals(user.getText()))
                               if(userLogin.getClave().equals(pass.getText())){
+                                    Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                                    dmaux.logLogin(userLogin.getNombre(), userLogin.getApellido(), userLogin.getUsuario(),LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                                                        Integer.toString(time.get(Calendar.HOUR)==0?12:time.get(Calendar.HOUR)) 
+                                            + ":" + Integer.toString(time.get(Calendar.MINUTE)) 
+                                            + ":" + Integer.toString(time.get(Calendar.SECOND)));
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
                                     MainMenuController controller;
                                     Parent root = loader.load();
@@ -110,11 +123,16 @@ public class LoginController implements Initializable {
                                     controller.setUser(userLogin);
                                     primStage.close();
                               }else{
+                                    Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                                    dmaux.logfailLogin(userLogin.getUsuario(),pass.getText(),InetAddress.getLocalHost().getHostName()+" - " + System.getProperty("user.name") ,LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                                                        Integer.toString(time.get(Calendar.HOUR)==0?12:time.get(Calendar.HOUR)) 
+                                            + ":" + Integer.toString(time.get(Calendar.MINUTE)) 
+                                            + ":" + Integer.toString(time.get(Calendar.SECOND)));
                                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                  alert.setTitle("Alerta");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Contraseña Incorrecta");
-                    alert.show();
+                                    alert.setTitle("Alerta");
+                                    alert.setHeaderText(null);
+                                     alert.setContentText("Contraseña Incorrecta");
+                                     alert.show();
                               }
                   }
             }
@@ -125,6 +143,7 @@ public class LoginController implements Initializable {
                     alert.setContentText("El usuario ingresado no existe");
                     alert.show();
             }
+            
       }
   
       

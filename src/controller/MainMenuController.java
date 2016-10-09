@@ -66,8 +66,8 @@ public class MainMenuController implements Initializable {
           st.setNode((Node) evt.getSource());
           st.setFromX(1);
           st.setFromY(1);
-          st.setToX(1.2);
-          st.setToY(1.2);
+          st.setToX(1.1);
+          st.setToY(1.1);
           st.setDuration(Duration.millis(60));
           st.play();
     }
@@ -75,8 +75,8 @@ public class MainMenuController implements Initializable {
       @FXML public void focusout(MouseEvent evt){
           ScaleTransition st = new ScaleTransition();
           st.setNode((Node) evt.getSource());
-          st.setFromX(1.2);
-          st.setFromY(1.2);
+          st.setFromX(1.1);
+          st.setFromY(1.1);
           st.setToX(1);
           st.setToY(1);
           st.setDuration(Duration.millis(60));
@@ -151,11 +151,31 @@ public class MainMenuController implements Initializable {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/visitas.fxml"));
           Pane pan = loader.load();
           aux.getChildren().add(pan);
-
           VisitasController controller = loader.getController();
           controller.menu = myController;
           aux.toFront();
+          main.setVisible(false);
+      }
+      
+      @FXML public void restringidos(ActionEvent evt) throws IOException{
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/blackList.fxml"));
+          Pane pan = loader.load();
+          aux.getChildren().add(pan);
 
+          BlackListController controller = loader.getController();
+          controller.menu = myController;
+          aux.toFront();
+
+          main.setVisible(false);
+      }
+      
+      @FXML public void adminMenu(ActionEvent evt) throws IOException{
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
+          Pane pan = loader.load();
+          aux.getChildren().add(pan);
+          AdminMenuController controller = loader.getController();
+          controller.menu = myController;
+          aux.toFront();
           main.setVisible(false);
       }
       

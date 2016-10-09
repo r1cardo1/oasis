@@ -16,7 +16,8 @@
                   <Font size="29.0" />
                </font>
             </Label>
-            <Button layoutX="43.0" layoutY="12.0" mnemonicParsing="false" onAction="#backAction" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="back-button" stylesheets="@../css/visits.css" text="Volver" />
+            <Button contentDisplay="GRAPHIC_ONLY" layoutX="44.0" layoutY="28.0" mnemonicParsing="false" onAction="#backAction" styleClass="back-button" stylesheets="@../css/visits.css" text="Volver" />
+            <Label layoutX="46.0" layoutY="62.0" text="Atras" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">

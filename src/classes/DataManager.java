@@ -102,7 +102,42 @@ public class DataManager {
         }
     }
     
-      
+    public ResultSet getRestringidos(){
+        try{
+            String query = "SELECT * FROM oasisclub.clientes WHERE restringido = 'SI';";
+            rs = st.executeQuery(query);
+            return rs;
+        }catch(Exception e){
+            return rs;
+        }
+    }
+    
+    public void logLogin(String nombre,String apellido,String usuario,String fecha,String hora){
+        try{
+            String query ="INSERT INTO oasisclub.login(nombre,apellido,usuario,fecha,hora) VALUES ('"+nombre+"','"+apellido+"','"+usuario+"','"+fecha+"','"+hora+"');";
+            st.executeUpdate(query);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+        
+        public void logfailLogin(String usuario,String clave,String equipo, String fecha, String hora){
+        try{
+            String query ="INSERT INTO oasisclub.faillogin(usuario,clave,equipo,fecha,hora) VALUES ('"+usuario+"','"+clave+"','"+equipo+"','"+fecha+"','"+hora+"');";
+            st.executeUpdate(query);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+        
+        public void search(String usuario,String modo,String filtro,String fecha,String hora){
+            try{
+                String query = "INSERT INTO oasisclub.search(usuario,modo,filtro,fecha,hora) VALUES('"+usuario+"','"+modo+"','"+filtro+"','"+fecha+"','"+hora+"');";
+                st.executeUpdate(query);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }     
 
     public ResultSet selectXpais(String pais){
         try {

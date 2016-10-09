@@ -7,6 +7,7 @@ package classes;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -34,7 +35,7 @@ public class DigitalClock extends Label {
       new KeyFrame(Duration.seconds(0),
         new EventHandler<ActionEvent>() {
           @Override public void handle(ActionEvent actionEvent) {
-            Calendar time = Calendar.getInstance();
+            Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
             String hourString = StringUtilities.pad(2, ' ', time.get(Calendar.HOUR) == 0 ? "12" : time.get(Calendar.HOUR) + "");
             String minuteString = StringUtilities.pad(2, '0', time.get(Calendar.MINUTE) + "");
             String secondString = StringUtilities.pad(2, '0', time.get(Calendar.SECOND) + "");

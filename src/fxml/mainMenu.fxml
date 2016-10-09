@@ -76,12 +76,12 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#visitas" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="132.0" styleClass="admin-button" text="Clientes Restringidos" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="100.0" prefWidth="100.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#visitas" prefHeight="100.0" prefWidth="100.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#adminMenu" prefHeight="100.0" prefWidth="100.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" prefHeight="100.0" prefWidth="100.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#restringidos" prefHeight="100.0" prefWidth="132.0" styleClass="admin-button" text="Clientes Restringidos" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                               <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -98,9 +98,9 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="869.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="close-button" text="Button" AnchorPane.rightAnchor="8.0" />
-                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="839.0" mnemonicParsing="false" onAction="#maximize" prefHeight="15.0" prefWidth="30.0" styleClass="maximize-button" text="Button" AnchorPane.rightAnchor="38.0" />
-                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="809.0" mnemonicParsing="false" onAction="#minimize" prefHeight="15.0" prefWidth="30.0" styleClass="minimize-button" text="Button" AnchorPane.rightAnchor="68.0" />
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="869.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="close-button" text="Button" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0" />
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="839.0" mnemonicParsing="false" onAction="#maximize" prefHeight="15.0" prefWidth="30.0" styleClass="maximize-button" text="Button" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="0.0" />
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="809.0" mnemonicParsing="false" onAction="#minimize" prefHeight="15.0" prefWidth="30.0" styleClass="minimize-button" text="Button" AnchorPane.rightAnchor="68.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </top>

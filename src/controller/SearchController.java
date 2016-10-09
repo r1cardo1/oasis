@@ -12,7 +12,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -108,6 +112,12 @@ public class SearchController implements Initializable {
       @FXML public void search(ActionEvent evt) throws SQLException{
           table.getItems().clear();
           table.getSelectionModel().clearSelection();
+          Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+          dm.search(user.getNombre()+" "+user.getApellido(), (String) stipo.getSelectionModel().getSelectedItem(), str.getText(),LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                                                        Integer.toString(time.get(Calendar.HOUR)==0?12:time.get(Calendar.HOUR)) 
+                                            + ":" + Integer.toString(time.get(Calendar.MINUTE)) 
+                                            + ":" + Integer.toString(time.get(Calendar.SECOND)));
+          
           if(stipo.getSelectionModel().getSelectedItem().equals("CEDULA")){
               ResultSet rs;
               rs = dm.searchClientbyCI(str.getText().toUpperCase());
@@ -159,6 +169,12 @@ public class SearchController implements Initializable {
                     alert.setContentText("El usuario esta restringido");
                     alert.show();
               }
+          }else{
+              Alert alert = new Alert(AlertType.INFORMATION);
+                  alert.setTitle("Alerta");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Debe seleccionar un cliente");
+                    alert.show();
           }
           
       }

@@ -7,14 +7,18 @@ and open the template in the editor.
     Created on : Oct 7, 2016, 9:54:43 PM
     Author     : Ricardo Marcano
 */
-
 .back-button{
-    -fx-background-color: transparent;
-    -fx-graphic: url("../images/back.png");
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-border-radius:10px;
-       
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.back-button:hover{
+    -fx-padding:0px;
+    -fx-background-color:lightgray;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
 }
 
 .table-column{
