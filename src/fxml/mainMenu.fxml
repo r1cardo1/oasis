@@ -68,7 +68,7 @@
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="132.0" prefWidth="132.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#reportMenu" prefHeight="132.0" prefWidth="132.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>

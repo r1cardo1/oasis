@@ -1,0 +1,86 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 10, 2016, 10:28:18 AM
+    Author     : Ricardo Marcano
+*/
+
+.back-button{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.back-button:hover{
+    -fx-padding:0px;
+    -fx-background-color:lightgray;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.login-button{
+    -fx-background-color:white;
+    -fx-graphic:url("../images/login.png");
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
+}
+
+.login-button:hover{
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
+    -fx-graphic:url("../images/login.png");
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+}
+
+.search-button{
+    -fx-background-color:white;
+    -fx-graphic:url("../images/searchClient.png");
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
+}
+
+.search-button:hover{
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
+    -fx-graphic:url("../images/searchClient.png");
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+}
+
+.table-button{
+    -fx-background-color:white;
+    -fx-graphic:url("../images/table.png");
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
+}
+
+.table-button:hover{
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
+    -fx-graphic:url("../images/table.png");
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+}

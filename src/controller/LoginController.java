@@ -47,130 +47,141 @@ import javax.swing.JOptionPane;
  */
 public class LoginController implements Initializable {
 
-      @FXML Pane topPane;
-      private double xs,ys=0;
-      public Stage primStage;
-      DataManager dm = new DataManager();
-      DataManager dmaux = new DataManager();
-      @FXML TextField user;
-      @FXML PasswordField pass;
-      
-      /**
-       * Initializes the controller class.
-       */
-      @Override
-      public void initialize(URL url, ResourceBundle rb) {
-            // TODO
-            drag();
-            
-      }      
-      
-      @FXML public void focusin(MouseEvent evt){
-          ScaleTransition st = new ScaleTransition();
-          st.setNode((Node) evt.getSource());
-          st.setFromX(1);
-          st.setFromY(1);
-          st.setToX(1.2);
-          st.setToY(1.2);
-          st.setDuration(Duration.millis(60));
-          st.play();
-    }
-    
-      @FXML public void focusout(MouseEvent evt){
-          ScaleTransition st = new ScaleTransition();
-          st.setNode((Node) evt.getSource());
-          st.setFromX(1.2);
-          st.setFromY(1.2);
-          st.setToX(1);
-          st.setToY(1);
-          st.setDuration(Duration.millis(60));
-          st.play();
-    }
-      
-      @FXML public void close(ActionEvent evt){
-            Stage stage;
-            Button  b = (Button) evt.getSource();
-            stage = (Stage) b.getScene().getWindow();
-            stage.close();
-      }      
-      
-      @FXML public void login(ActionEvent evt) throws SQLException, IOException{
-            ResultSet rs = dm.login(user.getText());
-            Usuario userLogin=null;
+    @FXML
+    Pane topPane;
+    private double xs, ys = 0;
+    public Stage primStage;
+    DataManager dm = new DataManager();
+    DataManager dmaux = new DataManager();
+    @FXML
+    TextField user;
+    @FXML
+    PasswordField pass;
 
-            if(rs!=null){
-                  while(rs.next()){
-                        userLogin = new Usuario(rs.getString("nombre"),rs.getString("apellido"),rs.getString("usuario"),rs.getString("clave"),rs.getInt("nivel"));
-                        if(userLogin.getUsuario().equals(user.getText()))
-                              if(userLogin.getClave().equals(pass.getText())){
-                                    Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
-                                    dmaux.logLogin(userLogin.getNombre(), userLogin.getApellido(), userLogin.getUsuario(),LocalDate.now().format(DateTimeFormatter.ISO_DATE),
-                                                        Integer.toString(time.get(Calendar.HOUR)==0?12:time.get(Calendar.HOUR)) 
-                                            + ":" + Integer.toString(time.get(Calendar.MINUTE)) 
-                                            + ":" + Integer.toString(time.get(Calendar.SECOND)));
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
-                                    MainMenuController controller;
-                                    Parent root = loader.load();
-                                    controller = loader.getController();
-                                    controller.setController(controller);
-                                    Scene scene = new Scene(root);                                  
-                                    scene.setFill(Color.TRANSPARENT);
-                                    Stage stage = new Stage();
-                                    stage.setScene(scene);
-                                    stage.initStyle(StageStyle.TRANSPARENT);
-                                    stage.show();
-                                    controller.setStage(stage);
-                                    controller.setUser(userLogin);
-                                    primStage.close();
-                              }else{
-                                    Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
-                                    dmaux.logfailLogin(userLogin.getUsuario(),pass.getText(),InetAddress.getLocalHost().getHostName()+" - " + System.getProperty("user.name") ,LocalDate.now().format(DateTimeFormatter.ISO_DATE),
-                                                        Integer.toString(time.get(Calendar.HOUR)==0?12:time.get(Calendar.HOUR)) 
-                                            + ":" + Integer.toString(time.get(Calendar.MINUTE)) 
-                                            + ":" + Integer.toString(time.get(Calendar.SECOND)));
-                                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                                    alert.setTitle("Alerta");
-                                    alert.setHeaderText(null);
-                                     alert.setContentText("Contraseña Incorrecta");
-                                     alert.show();
-                              }
-                  }
-            }
-            if(userLogin==null){
-                  Alert alert = new Alert(Alert.AlertType.ERROR);
-                  alert.setTitle("Alerta");
-                    alert.setHeaderText(null);
-                    alert.setContentText("El usuario ingresado no existe");
-                    alert.show();
-            }
-            
-      }
-  
-      
-      public void drag(){
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        drag();
 
-            topPane.setOnMousePressed(new EventHandler<MouseEvent>(){
-                  @Override
-                  public void handle(MouseEvent evt){
-                        xs=evt.getSceneX();
-                        ys=evt.getSceneY();
-                  }
-            });           
-            
-            topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+    }
+
+    @FXML
+    public void focusin(MouseEvent evt) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode((Node) evt.getSource());
+        st.setFromX(1);
+        st.setFromY(1);
+        st.setToX(1.2);
+        st.setToY(1.2);
+        st.setDuration(Duration.millis(60));
+        st.play();
+    }
+
+    @FXML
+    public void focusout(MouseEvent evt) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode((Node) evt.getSource());
+        st.setFromX(1.2);
+        st.setFromY(1.2);
+        st.setToX(1);
+        st.setToY(1);
+        st.setDuration(Duration.millis(60));
+        st.play();
+    }
+
+    @FXML
+    public void close(ActionEvent evt) {
+        Stage stage;
+        Button b = (Button) evt.getSource();
+        stage = (Stage) b.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void login(ActionEvent evt) throws SQLException, IOException {
+        ResultSet rs = dm.login(user.getText());
+        Usuario userLogin = null;
+
+        if (rs != null) {
+            while (rs.next()) {
+                userLogin = new Usuario(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("clave"), rs.getInt("nivel"));
+                if (userLogin.getUsuario().equals(user.getText())) {
+                    if (userLogin.getClave().equals(pass.getText())) {
+                        Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                        dmaux.logLogin(userLogin.getNombre(), userLogin.getApellido(), userLogin.getUsuario(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                                Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                                + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                                + ":" + Integer.toString(time.get(Calendar.SECOND)));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
+                        MainMenuController controller;
+                        Parent root = loader.load();
+                        controller = loader.getController();
+                        controller.setController(controller);
+                        Scene scene = new Scene(root);
+                        scene.setFill(Color.TRANSPARENT);
+                        Stage stage = new Stage();
+                        stage.setScene(scene);
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.show();
+                        controller.setStage(stage);
+                        controller.setUser(userLogin);
+                        primStage.close();
+                    } else {
+                        Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                        dmaux.logfailLogin(userLogin.getUsuario(), pass.getText(), InetAddress.getLocalHost().getHostName() + " - " + System.getProperty("user.name"), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                                Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                                + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                                + ":" + Integer.toString(time.get(Calendar.SECOND)));
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Alerta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Contraseña Incorrecta");
+                        alert.show();
+                    }
+                }
+            }
+        }
+        if (userLogin == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Alerta");
+            alert.setHeaderText(null);
+            alert.setContentText("El usuario ingresado no existe");
+            alert.show();
+        }
+    }
+
+    public void drag() {
+
+        topPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent evt) {
+                xs = evt.getSceneX();
+                ys = evt.getSceneY();
+            }
+        });
+
+        topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 primStage.setX(event.getScreenX() - xs);
                 primStage.setY(event.getScreenY() - ys);
             }
         });
-            
+        
+        user.textProperty().addListener((ov, oldValue, newValue) -> {
+            user.setText(newValue.toUpperCase());
+        });
+        pass.textProperty().addListener((ov, oldValue, newValue) -> {
+            pass.setText(newValue.toUpperCase());
+        });
 
-            
-      }
+    }
 
-      public void setStage(Stage s){
-           primStage = s;
-      }
- 
+    public void setStage(Stage s) {
+        primStage = s;
+    }
+
 }

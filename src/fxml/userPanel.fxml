@@ -36,7 +36,7 @@
             <HBox alignment="CENTER" layoutX="96.0" layoutY="420.0" prefHeight="60.0" prefWidth="200.0" spacing="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#newUser" text="Nuevo Usuario" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Eliminar Usuario" />
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteUser" text="Eliminar Usuario" />
                   <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Modificar Usuario" />
                </children>
             </HBox>

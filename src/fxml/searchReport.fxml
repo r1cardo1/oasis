@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="780.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SearchReportController">
+   <children>
+      <AnchorPane fx:id="aux" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="main" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="362.0" layoutY="32.0" prefHeight="80.0" prefWidth="780.0" text="Reporte de busquedas" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <TabPane layoutX="-46.0" layoutY="14.0" prefHeight="520.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                      <Tab text="Vista Grafica">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane fx:id="gUserView" prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <BarChart prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+                                             <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                             </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="gDateView" layoutX="10.0" layoutY="10.0" prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <BarChart prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+                                             <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis side="LEFT" />
+                                             </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="gRangeDateView" layoutX="20.0" layoutY="20.0" prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <BarChart layoutX="140.0" layoutY="26.0" prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+                                            <xAxis>
+                                              <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                          </BarChart>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="24.0" layoutY="-75.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <AnchorPane prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" layoutX="182.0" layoutY="-30.0" prefHeight="40.0" prefWidth="300.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="TOP" text="Seleccione Modo" />
+                                                <ComboBox fx:id="gcMode" prefWidth="150.0" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="45.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox fx:id="hgDate" alignment="CENTER_LEFT" layoutX="382.0" layoutY="5.0" prefHeight="40.0" prefWidth="460.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="TOP" text="Seleccione Fecha" />
+                                                <DatePicker />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" right="80.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox fx:id="hgRangeDate" alignment="CENTER_LEFT" layoutX="362.0" layoutY="10.0" prefHeight="40.0" prefWidth="460.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="TOP" text="Desde" />
+                                                <DatePicker />
+                                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="10.0" layoutY="22.0" text="Hasta" />
+                                                <DatePicker layoutX="54.0" layoutY="18.0" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </HBox>
+                                          <HBox fx:id="hgUser" alignment="CENTER_LEFT" layoutX="310.0" layoutY="10.0" prefHeight="40.0" prefWidth="460.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="TOP" text="Seleccione Usuario" />
+                                                <ComboBox fx:id="mgUser" prefHeight="25.0" prefWidth="175.0" promptText="Seleccione un usuario" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="20.0" />
+                                             </padding>
+                                          </HBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Vista Tabla">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <AnchorPane fx:id="tRangeDateView" prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                       <children>
+                                          <TableView layoutX="290.0" layoutY="126.0" prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+                                            <columns>
+                                              <TableColumn prefWidth="75.0" text="Nombre de usuario" />
+                                                <TableColumn prefWidth="75.0" text="Usuario" />
+                                                <TableColumn prefWidth="75.0" text="Tipo de busqueda" />
+                                                <TableColumn prefWidth="75.0" text="Filtro de busqueda" />
+                                                <TableColumn prefWidth="75.0" text="Fecha de busqueda" />
+                                                <TableColumn prefWidth="75.0" text="Hora de busqueda" />
+                                            </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label layoutX="50.0" layoutY="12.0" text="Seleccione Usuario" />
+                                          <ComboBox fx:id="tcUser" layoutX="166.0" layoutY="8.0" prefWidth="150.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
