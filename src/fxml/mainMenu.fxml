@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -35,24 +36,8 @@
                                           <Image url="@../images/logo.png" />
                                        </image>
                                     </ImageView>
-                                    <Pane prefHeight="200.0" prefWidth="200.0">
-                                       <children>
-                                          <Button contentDisplay="GRAPHIC_ONLY" layoutX="44.0" layoutY="4.0" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" styleClass="home-button" text="Button" />
-                                       </children>
-                                    </Pane>
+                                    <Pane prefHeight="200.0" prefWidth="200.0" />
                                     <VBox prefHeight="80.0" prefWidth="202.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                       <children>
-                                          <Label fx:id="date" text="\$date">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="hour" text="\$hour">
-                                             <font>
-                                                <Font size="20.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -73,15 +58,32 @@
                                   <RowConstraints />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="100.0" prefWidth="100.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#visitas" prefHeight="100.0" prefWidth="100.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#adminMenu" prefHeight="100.0" prefWidth="100.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" prefHeight="100.0" prefWidth="100.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#restringidos" prefHeight="100.0" prefWidth="132.0" styleClass="admin-button" text="Clientes Restringidos" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="132.0" prefWidth="132.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#visitas" prefHeight="132.0" prefWidth="132.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="132.0" prefWidth="132.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#adminMenu" prefHeight="132.0" prefWidth="132.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" prefHeight="132.0" prefWidth="132.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#restringidos" prefHeight="132.0" prefWidth="132.0" styleClass="blacklist-button" text="Clientes Restringidos" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></Button>
                                  </children>
                               </GridPane>
                               <Separator prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -104,6 +106,32 @@
                      </children>
                   </AnchorPane>
                </top>
+               <bottom>
+                  <AnchorPane prefHeight="20.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="20.0" prefWidth="402.0" spacing="5.0" AnchorPane.leftAnchor="10.0">
+                           <children>
+                              <Label text="Fecha" />
+                              <Label fx:id="date" text="\$date" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Hora:" />
+                              <Label fx:id="hour" text="\$hour" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" layoutX="20.0" layoutY="10.0" prefHeight="20.0" prefWidth="402.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
+                           <children>
+                              <Label text="Nombre:" />
+                              <Label fx:id="lname" text="\$name" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Separator orientation="VERTICAL" prefHeight="200.0" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Usuario:" />
+                              <Label fx:id="luser" text="\$user" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </bottom>
             </BorderPane>
          </children>
       </AnchorPane>

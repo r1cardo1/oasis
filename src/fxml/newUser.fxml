@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="300.0" styleClass="content-pane" stylesheets="@../css/newUser.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewUserController">
+   <children>
+      <AnchorPane prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="topPane" alignment="CENTER" layoutX="136.0" layoutY="9.0" prefHeight="30.0" prefWidth="300.0" text="Nuevo Usuario" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button contentDisplay="GRAPHIC_ONLY" layoutX="252.0" layoutY="5.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="close-button" text="Button" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="37.0" layoutY="153.0" prefHeight="400.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutX="100.0" layoutY="85.0" prefHeight="370.0" prefWidth="300.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="Nombre">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="nombre" />
+                  <Label layoutX="146.0" layoutY="174.0" text="Apellido">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="apellido" layoutX="10.0" layoutY="191.0" />
+                  <Label layoutX="146.0" layoutY="195.0" text="Usuario">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="usuario" layoutX="10.0" layoutY="212.0" />
+                  <Label layoutX="146.0" layoutY="216.0" text="Clave">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <PasswordField fx:id="pass" onKeyReleased="#onKeyPressed" />
+                  <Label layoutX="146.0" layoutY="237.0" text="Repita la clave">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <PasswordField fx:id="cpass" layoutX="10.0" layoutY="254.0" onKeyReleased="#onKeyPressed" />
+                  <Label layoutX="146.0" layoutY="258.0" text="Tipo de usuario" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <ComboBox fx:id="lvl" prefWidth="150.0" />
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#register" text="Registrar" />
+                        <Button layoutX="184.0" layoutY="17.0" mnemonicParsing="false" onAction="#close" text="Cancelar" />
+                     </children>
+                  </Pane>
+               </children>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

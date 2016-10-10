@@ -95,7 +95,7 @@ public class DataConection  {
                   + "hora VARCHAR(10) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           
           String sql3 = "INSERT INTO oasisclub.usuarios(nombre,apellido,usuario,clave,nivel) "
-                  + "SELECT * FROM (SELECT 'oasis','club','root','admin',1) AS tmp"
+                  + "SELECT * FROM (SELECT 'OASIS','CLUB','ROOT','ADMIN',3) AS tmp"
                   + " WHERE NOT EXISTS ("
                   + "SELECT usuario FROM oasisclub.usuarios WHERE usuario = 'root') LIMIT 1"
                   + ";";

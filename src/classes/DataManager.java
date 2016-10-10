@@ -19,7 +19,7 @@ public class DataManager {
     private DataConection conexion = new DataConection();
     private Connection con;
     private Statement st;
-    private ResultSet rs;
+    private ResultSet rs=null;
 
     public DataManager() {
         try{
@@ -31,8 +31,7 @@ public class DataManager {
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-    
+    }   
 
     public ResultSet login(String user){
         try {
@@ -121,7 +120,7 @@ public class DataManager {
         }
     }
         
-        public void logfailLogin(String usuario,String clave,String equipo, String fecha, String hora){
+    public void logfailLogin(String usuario,String clave,String equipo, String fecha, String hora){
         try{
             String query ="INSERT INTO oasisclub.faillogin(usuario,clave,equipo,fecha,hora) VALUES ('"+usuario+"','"+clave+"','"+equipo+"','"+fecha+"','"+hora+"');";
             st.executeUpdate(query);
@@ -130,7 +129,7 @@ public class DataManager {
         }
     }
         
-        public void search(String usuario,String modo,String filtro,String fecha,String hora){
+    public void search(String usuario,String modo,String filtro,String fecha,String hora){
             try{
                 String query = "INSERT INTO oasisclub.search(usuario,modo,filtro,fecha,hora) VALUES('"+usuario+"','"+modo+"','"+filtro+"','"+fecha+"','"+hora+"');";
                 st.executeUpdate(query);
@@ -138,30 +137,43 @@ public class DataManager {
                 e.printStackTrace();
             }
         }     
-
-    public ResultSet selectXpais(String pais){
-        try {
-            String query = "SELECT * FROM peliculas WHERE pais = '"+pais+"'";
-            rs = st.executeQuery(query);
-            return rs;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
         
-
-    public boolean delete(int id){
-        try {
-            String query = "DELETE FROM peliculas WHERE id = '"+id+"'";
-            st.executeUpdate(query);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+    public ResultSet getUsuarios(){
+        rs=null;
+            try{
+                String query ="SELECT * FROM oasisclub.usuarios;";
+                rs = st.executeQuery(query);
+                return rs;
+            }catch(Exception e){
+                return null;
+            }
         }
-    }
-    
+        
+    public void newUser(Usuario u){
+            try{
+                String query = "INSERT INTO oasisclub.usuarios(nombre,apellido,usuario,clave,nivel) "
+                  + "SELECT * FROM (SELECT '"+u.getNombre()+"','"+u.getApellido()+"','"+u.getUsuario()+"','"+u.getClave()+"',"+Integer.toString(u.getNivel())+") AS tmp"
+                  + " WHERE NOT EXISTS ("
+                  + "SELECT usuario FROM oasisclub.usuarios WHERE usuario = '"+u.getUsuario()+"') LIMIT 1"
+                  + ";";
+                st.executeUpdate(query);
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+            
+        }
+        
+    public ResultSet searchUserbyUsername(String u){
+        rs=null;
+            try{
+                String query = "SELECT * FROM oasisclub.usuarios WHERE usuario = '"+u+"'";
+                rs = st.executeQuery(query);
+                return rs;
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                return null;
+            }
+        }
 
     public boolean update(int id,String nombre,String genero,int anio,String actor,String pais){
         try {
@@ -177,36 +189,5 @@ public class DataManager {
             e.printStackTrace();
             return false;
         }
-    }
-    
-
-    public boolean insert(String nombre,String genero,int anio,String actor,String pais){
-        try {
-            String query = "INSERT INTO peliculas VALUES(NULL,'"+nombre+"','"+genero+"','"+anio+"','"+actor+"','"+pais+"');";
-            st.executeUpdate(query);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-
-    public ResultSet selectXtodas(){
-        try {
-            String query = "SELECT * FROM peliculas";
-            rs = st.executeQuery(query);
-            return rs;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        
-        
-    }
-    
-    public void closers() throws SQLException{
-            rs.close();
-        }
-
+    }    
 }

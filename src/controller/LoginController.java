@@ -100,7 +100,7 @@ public class LoginController implements Initializable {
 
             if(rs!=null){
                   while(rs.next()){
-                        userLogin = new Usuario(rs.getString("nombre"),rs.getString("apellido"),rs.getString("usuario"),rs.getString("clave"));
+                        userLogin = new Usuario(rs.getString("nombre"),rs.getString("apellido"),rs.getString("usuario"),rs.getString("clave"),rs.getInt("nivel"));
                         if(userLogin.getUsuario().equals(user.getText()))
                               if(userLogin.getClave().equals(pass.getText())){
                                     Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));

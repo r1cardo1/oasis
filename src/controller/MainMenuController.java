@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -49,6 +51,8 @@ public class MainMenuController implements Initializable {
       DataManager dm = new DataManager();
       @FXML AnchorPane main;
       @FXML AnchorPane aux;
+      @FXML Label luser;
+      @FXML Label lname;
             
             
       /**
@@ -104,6 +108,11 @@ public class MainMenuController implements Initializable {
                   maximized = false;
             }else{
                   stage.setMaximized(true);
+                  Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                stage.setX(primaryScreenBounds.getMinX());
+                stage.setY(primaryScreenBounds.getMinY());
+                stage.setWidth(primaryScreenBounds.getWidth());
+                stage.setHeight(primaryScreenBounds.getHeight());
                   maximized = true;
             }
             
@@ -174,6 +183,7 @@ public class MainMenuController implements Initializable {
           Pane pan = loader.load();
           aux.getChildren().add(pan);
           AdminMenuController controller = loader.getController();
+          controller.myController = controller;
           controller.menu = myController;
           aux.toFront();
           main.setVisible(false);
@@ -183,8 +193,10 @@ public class MainMenuController implements Initializable {
             this.myController = c;
       }
       
-     public void setUser(Usuario u){
+      public void setUser(Usuario u){
            this.user = u;
+           lname.setText(user.getNombre() + " "+ user.getApellido());
+           luser.setText(user.getUsuario());
      }
       
       public void drag(){
@@ -207,6 +219,5 @@ public class MainMenuController implements Initializable {
             
 
             
-      }
-            
+      }            
 }

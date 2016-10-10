@@ -14,12 +14,30 @@ public class Usuario {
       private String apellido;
       private String usuario;
       private String clave;
+      private int nivel;
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public Usuario(String nombre, String apellido, String usuario, String clave, int nivel) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.clave = clave;
+        this.nivel = nivel;
+    }
 
       public Usuario(String nombre, String apellido, String usuario, String clave) {
             this.nombre = nombre;
             this.apellido = apellido;
             this.usuario = usuario;
             this.clave = clave;
+            
       }
 
       public String getNombre() {
