@@ -52,6 +52,8 @@ public class ReportMenuController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loginReport.fxml"));
         Pane pan = loader.load();
+        LoginReportController controller = loader.getController();
+        controller.menu = myController;
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();
@@ -62,8 +64,13 @@ public class ReportMenuController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/searchReport.fxml"));
         Pane pan = loader.load();
+        SearchReportController controller = loader.getController();
+        controller.menu = myController;
+        
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();
     }
+
+
 }

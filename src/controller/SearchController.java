@@ -127,10 +127,12 @@ public class SearchController implements Initializable {
         table.getItems().clear();
         table.getSelectionModel().clearSelection();
         Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+        String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
         dm.search(user.getUsuario(), (String) stipo.getSelectionModel().getSelectedItem(), str.getText(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                 Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
                 + ":" + Integer.toString(time.get(Calendar.MINUTE))
-                + ":" + Integer.toString(time.get(Calendar.SECOND)));
+                + ":" + Integer.toString(time.get(Calendar.SECOND))
+                + " "+ ampm );
 
         if (stipo.getSelectionModel().getSelectedItem().equals("CEDULA")) {
             ResultSet rs;

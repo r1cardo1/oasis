@@ -206,6 +206,28 @@ public class DataManager {
           return null;
     }
     }
+    
+    public ResultSet getAllSearch(){
+        try{
+                String query ="SELECT * FROM oasisclub.search;";
+                rs = st.executeQuery(query);
+                return rs;
+          }catch(Exception e){
+          System.out.println(e.getMessage());
+          return null;
+    }
+    }
+    
+    public ResultSet getLogLogins(){
+        try{
+            String query ="SELECT * FROM oasisclub.login;";
+            rs = st.executeQuery(query);
+            return rs;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 
     public boolean update(int id, String nombre, String genero, int anio, String actor, String pais) {
         try {

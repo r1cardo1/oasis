@@ -109,12 +109,14 @@ public class LoginController implements Initializable {
             while (rs.next()) {
                 userLogin = new Usuario(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("clave"), rs.getInt("nivel"));
                 if (userLogin.getUsuario().equals(user.getText())) {
-                    if (userLogin.getClave().equals(pass.getText())) {
+                    if (userLogin.getClave().equals(pass.getText())) {                        
                         Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                        String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
                         dmaux.logLogin(userLogin.getNombre(), userLogin.getApellido(), userLogin.getUsuario(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                                 Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
                                 + ":" + Integer.toString(time.get(Calendar.MINUTE))
-                                + ":" + Integer.toString(time.get(Calendar.SECOND)));
+                                + ":" + Integer.toString(time.get(Calendar.SECOND))
+                                + ampm);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/mainMenu.fxml"));
                         MainMenuController controller;
                         Parent root = loader.load();

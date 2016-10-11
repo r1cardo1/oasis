@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -10,6 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="800.0" stylesheets="@../css/clientMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientMenuController">
    <children>
+      <AnchorPane fx:id="aux" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0" />
       <AnchorPane fx:id="mainPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
          <children>
             <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -22,9 +24,18 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#openTable" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="open-table" text="Abrir Mesa" GridPane.columnIndex="1" />
-                  <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="assistance" text="Ver Asistencia" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button contentDisplay="TOP" mnemonicParsing="false" onMouseEntered="#focusin" onMouseExited="#focusout" prefHeight="100.0" prefWidth="100.0" styleClass="view-guess" text="Ver Invitados" GridPane.rowIndex="1" />
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#openTable" prefHeight="132.0" prefWidth="132.0" styleClass="open-table" text="Abrir Mesa" GridPane.columnIndex="1">
+                     <effect>
+                        <DropShadow />
+                     </effect></Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="132.0" prefWidth="132.0" styleClass="assistance" text="Ver Asistencia" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <effect>
+                        <DropShadow />
+                     </effect></Button>
+                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="132.0" prefWidth="132.0" styleClass="view-guess" text="Ver Invitados" GridPane.rowIndex="1">
+                     <effect>
+                        <DropShadow />
+                     </effect></Button>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Label layoutX="32.0" layoutY="52.0" text="Nombre:">
@@ -73,7 +84,6 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="aux" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0" />
       <GridPane prefWidth="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

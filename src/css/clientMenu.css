@@ -16,54 +16,67 @@ and open the template in the editor.
     -fx-border-color: gray;   
 }
 
-.open-table{   
-    -fx-background-color:transparent;
+.open-table{
+    -fx-background-color:white;
     -fx-graphic:url("../images/table.png");
-    -fx-border-color:gray;
-    -fx-border-radius:20px;
-    -fx-border-width:2px;
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
 }
 
 .open-table:hover{
-    -fx-background-radius: 22px;
-    -fx-background-color:#cccccc;
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
     -fx-graphic:url("../images/table.png");
-    -fx-border-color:gray;
-    -fx-border-radius:20px;
-    -fx-border-width:2px;
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
 }
 
-.view-guess{   
-    -fx-background-color:transparent;
+.view-guess{
+    -fx-background-color:white;
     -fx-graphic:url("../images/conference.png");
-    -fx-border-color:gray;
-    -fx-border-radius:20px;
-    -fx-border-width:2px;
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
 }
 
 .view-guess:hover{
-    -fx-background-radius: 22px;
-    -fx-background-color:#cccccc;
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
     -fx-graphic:url("../images/conference.png");
-    -fx-border-color:gray;
-    -fx-border-radius:20px;
-    -fx-border-width:2px;
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
 }
 
-.assistance{   
-    -fx-background-color:transparent;
+.assistance{
+    -fx-background-color:white;
     -fx-graphic:url("../images/check_book.png");
-    -fx-border-color:gray;
-    -fx-border-radius:20px;
-    -fx-border-width:2px;
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
 }
 
 .assistance:hover{
-    -fx-background-radius: 22px;
-    -fx-background-color:#cccccc;
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
     -fx-graphic:url("../images/check_book.png");
-    -fx-border-color:gray;
-    -fx-border-radius:20px;
-    -fx-border-width:2px;
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
 }
+
 
