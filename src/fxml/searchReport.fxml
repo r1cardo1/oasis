@@ -31,39 +31,15 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane fx:id="gUserView" prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                    <AnchorPane prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                                        <children>
-                                          <BarChart prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+                                          <BarChart fx:id="barChart" prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
                                              <xAxis>
-                                                <CategoryAxis side="BOTTOM" />
+                                                <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                                              </xAxis>
                                              <yAxis>
                                                 <NumberAxis side="LEFT" />
                                              </yAxis>
-                                          </BarChart>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane fx:id="gDateView" layoutX="10.0" layoutY="10.0" prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-                                       <children>
-                                          <BarChart prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
-                                             <xAxis>
-                                                <CategoryAxis side="BOTTOM" />
-                                             </xAxis>
-                                             <yAxis>
-                                                <NumberAxis side="LEFT" />
-                                             </yAxis>
-                                          </BarChart>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane fx:id="gRangeDateView" layoutX="20.0" layoutY="20.0" prefHeight="491.0" prefWidth="780.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-                                       <children>
-                                          <BarChart layoutX="140.0" layoutY="26.0" prefHeight="451.0" prefWidth="780.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
-                                            <xAxis>
-                                              <CategoryAxis side="BOTTOM" />
-                                            </xAxis>
-                                            <yAxis>
-                                              <NumberAxis side="LEFT" />
-                                            </yAxis>
                                           </BarChart>
                                        </children>
                                     </AnchorPane>
@@ -99,10 +75,10 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </HBox>
-                                          <HBox fx:id="hgUser" alignment="CENTER_LEFT" layoutX="310.0" layoutY="10.0" prefHeight="40.0" prefWidth="460.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="0.0">
+                                          <HBox fx:id="hgUser" alignment="CENTER_LEFT" layoutX="310.0" layoutY="10.0" prefHeight="40.0" prefWidth="460.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label alignment="CENTER" contentDisplay="TOP" text="Seleccione Usuario" />
-                                                <ComboBox fx:id="mgUser" prefHeight="25.0" prefWidth="175.0" promptText="Seleccione un usuario" />
+                                                <Label alignment="CENTER" contentDisplay="TOP" prefHeight="34.0" prefWidth="62.0" text="Seleccione Usuario" textAlignment="CENTER" wrapText="true" />
+                                                <ComboBox fx:id="mgUser" onAction="#action" prefHeight="25.0" prefWidth="121.0" promptText="Usuario" />
                                              </children>
                                              <padding>
                                                 <Insets left="20.0" />

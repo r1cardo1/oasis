@@ -195,6 +195,17 @@ public class DataManager {
             return null;
         }
     }
+    
+    public ResultSet getSearchByUser(String u){
+          try{
+                String query ="SELECT COUNT(usuario) FROM oasisclub.search WHERE usuario = '"+u+"';";
+                rs = st.executeQuery(query);
+                return rs;
+          }catch(Exception e){
+          System.out.println(e.getMessage());
+          return null;
+    }
+    }
 
     public boolean update(int id, String nombre, String genero, int anio, String actor, String pais) {
         try {
