@@ -25,7 +25,7 @@ public class DataManager {
     public DataManager() {
         try {
             if ((con = conexion.getConexionMYSQL()) == null) {
-                JOptionPane.showMessageDialog(null, "Error con la conexion a la BD");
+                JOptionPane.showMessageDialog(null, "-Error con la conexion a la BD");
                 return;
             }
             st = con.createStatement();
@@ -244,4 +244,54 @@ public class DataManager {
             return false;
         }
     }
+
+      public ResultSet getPlans() {
+            try{
+                  String query = "SELECT * FROM oasisclub.planes;";
+                  rs = st.executeQuery(query);
+                  return rs;
+            }catch(Exception e){
+                  System.out.println(e.getMessage());
+                  return null;
+            }
+      }
+
+      public void addPlan(Plan plan) {
+            try{
+                  String query = "INSERT INTO oasisclub.planes(plan,invitados) VALUES ('"+plan.getPlan()+"',"+Integer.toString(plan.getCant())+");";
+                  st.executeUpdate(query);
+            }catch(Exception ex){
+                  System.out.println(ex.getMessage());
+            }
+      }
+
+      public void deletePlan(Plan plan) {
+            try{
+                  String query = "DELETE FROM oasisclub.planes WHERE plan = '"+plan.getPlan()+"';";
+                  st.executeUpdate(query);
+            }catch(Exception ex){
+                  System.out.println(ex.getMessage());
+            }
+      }
+
+      public void updatePlan(Plan neww,Plan old) {
+            try{
+                  String query = "UPDATE oasisclub.planes SET plan='"+neww.getPlan()+"',invitados="+Integer.toString(neww.getCant())+" WHERE plan = '"+old.getPlan()+"'; ";
+                  System.out.println(query);
+                  st.executeUpdate(query);
+            }catch(Exception e){
+                  System.out.println(e.getMessage());
+            }
+      }
+
+      public ResultSet getCantByPlan(String plan) {
+            try{
+                  String query = "SELECT FROM oasisclub.planes WHERE plan = '"+plan+"';";
+                  rs = st.executeQuery(query);
+                  return rs;
+            }catch(Exception e){
+                  System.out.println(e.getMessage());
+                  return null;
+            }
+      }
 }

@@ -8,3 +8,11 @@ and open the template in the editor.
     Author     : Ricardo Marcano
 */
 
+.background{
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-insets: 2px;
+    -fx-border-radius: 10px;
+}

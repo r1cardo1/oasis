@@ -205,12 +205,6 @@ public class SearchController implements Initializable {
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         plan.setCellValueFactory(new PropertyValueFactory<>("plan"));
         restringido.setCellValueFactory(new PropertyValueFactory("restringido"));
-        cedula.prefWidthProperty().bind(table.widthProperty().divide(5));
-        nombre.prefWidthProperty().bind(table.widthProperty().divide(5));
-        contrato.prefWidthProperty().bind(table.widthProperty().divide(5));
-        plan.prefWidthProperty().bind(table.widthProperty().divide(5));
-        restringido.prefWidthProperty().bind(table.widthProperty().divide(5));
-
     }
 
     public void initCombo() {

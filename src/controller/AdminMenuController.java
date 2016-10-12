@@ -43,6 +43,18 @@ public class AdminMenuController implements Initializable {
         aux.toFront();
         main.setVisible(false);
     }
+    
+    @FXML public void plans() throws IOException{
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/plans.fxml"));
+        Pane pan = loader.load();
+        aux.getChildren().add(pan);
+        PlansController controller = loader.getController();
+        controller.menu = myController;
+        controller.myController = controller;
+        controller.usuario = this.usuario;
+        aux.toFront();
+        main.setVisible(false);
+    }
 
     @FXML
     public void back(ActionEvent evt) {

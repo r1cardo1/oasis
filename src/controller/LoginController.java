@@ -32,6 +32,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -127,6 +128,8 @@ public class LoginController implements Initializable {
                         Stage stage = new Stage();
                         stage.setScene(scene);
                         stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
+                        stage.setTitle("Oasis Club Manager");
                         stage.show();
                         controller.setStage(stage);
                         controller.setUser(userLogin);

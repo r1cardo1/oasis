@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -31,6 +32,8 @@ public class Oasis extends Application {
             stage.setScene(scene);
             stage.initStyle(StageStyle.TRANSPARENT);      
             con.setStage(stage);
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
+            stage.setTitle("Inicio de sesion Oasis Club");
             stage.show();
       }
 

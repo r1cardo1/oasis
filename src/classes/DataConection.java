@@ -107,6 +107,10 @@ public class DataConection  {
                   + "fecha VARCHAR(20) NOT NULL,"
                   + "hora VARCHAR(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           
+          String sql8= "CREATE TABLE IF NOT EXISTS oasisclub.planes("
+                  + "plan VARCHAR(20) NOT NULL,"
+                  + "invitados int(40) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+          
           st.executeUpdate(sql);
           st.executeUpdate(sql1);
           st.executeUpdate(sql2);
@@ -115,6 +119,7 @@ public class DataConection  {
           st.executeUpdate(sql5);
           st.executeUpdate(sql6);
           st.executeUpdate(sql7);
+          st.executeUpdate(sql8);
           
     }
       

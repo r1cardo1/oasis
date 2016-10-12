@@ -60,27 +60,27 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="132.0" prefWidth="132.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="95.0" prefWidth="95.0" styleClass="user-button" text="Clientes" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#visitas" prefHeight="132.0" prefWidth="132.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#visitas" prefHeight="95.0" prefWidth="95.0" styleClass="visitas-button" text="Visitas" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#reportMenu" prefHeight="132.0" prefWidth="132.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#reportMenu" prefHeight="95.0" prefWidth="95.0" styleClass="reporte-button" text="Reportes" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#adminMenu" prefHeight="132.0" prefWidth="132.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#adminMenu" prefHeight="95.0" prefWidth="95.0" styleClass="admin-button" text="Administrar" GridPane.rowIndex="2">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" prefHeight="132.0" prefWidth="132.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" prefHeight="95.0" prefWidth="95.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#restringidos" prefHeight="132.0" prefWidth="132.0" styleClass="blacklist-button" text="Clientes Restringidos" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#restringidos" prefHeight="95.0" prefWidth="95.0" styleClass="blacklist-button" text="Clientes Restringidos" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
