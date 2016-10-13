@@ -286,7 +286,7 @@ public class DataManager {
 
       public ResultSet getCantByPlan(String plan) {
             try{
-                  String query = "SELECT FROM oasisclub.planes WHERE plan = '"+plan+"';";
+                  String query = "SELECT * FROM oasisclub.planes WHERE plan = '"+plan+"';";
                   rs = st.executeQuery(query);
                   return rs;
             }catch(Exception e){

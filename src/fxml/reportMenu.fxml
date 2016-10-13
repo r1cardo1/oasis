@@ -36,17 +36,17 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#loginReport" prefHeight="132.0" prefWidth="132.0" styleClass="login-button" text="Inicios de sesion">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#loginReport" prefHeight="95.0" prefWidth="95.0" styleClass="login-button" text="Inicios de sesion">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#searchReport" prefHeight="132.0" prefWidth="132.0" styleClass="search-button" text="Busqueda de clientes" GridPane.columnIndex="1">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#searchReport" prefHeight="95.0" prefWidth="95.0" styleClass="search-button" text="Busqueda de clientes" GridPane.columnIndex="1">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="132.0" prefWidth="132.0" styleClass="table-button" text="Aperturas de mesas" GridPane.rowIndex="1">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="95.0" prefWidth="95.0" styleClass="table-button" text="Aperturas de mesas" GridPane.rowIndex="1">
                            <effect>
                               <DropShadow />
                            </effect>

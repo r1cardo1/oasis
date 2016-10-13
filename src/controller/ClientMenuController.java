@@ -9,6 +9,7 @@ import classes.Cliente;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
@@ -64,7 +65,7 @@ public class ClientMenuController implements Initializable {
           st.play();
     }
     
-    @FXML public void openTable(ActionEvent evt) throws IOException{
+    @FXML public void openTable(ActionEvent evt) throws IOException, SQLException{
         aux.setVisible(false);
         FXMLLoader loader  = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
         OpenTableController controller;
@@ -75,7 +76,10 @@ public class ClientMenuController implements Initializable {
         controller = loader.getController();
         controller.client = this.client;
         controller.user = this.user;
-        controller.initData();
+        try{
+             controller.initData();
+        }catch(Exception ex)
+        {System.out.println(ex.getMessage());}
         aux.toFront();
         aux.setVisible(true);
         mainPane.setVisible(false);     

@@ -24,15 +24,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#openTable" prefHeight="132.0" prefWidth="132.0" styleClass="open-table" text="Abrir Mesa" GridPane.columnIndex="1">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#openTable" prefHeight="95.0" prefWidth="95.0" styleClass="open-table" text="Abrir Mesa" GridPane.columnIndex="1">
                      <effect>
                         <DropShadow />
                      </effect></Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="132.0" prefWidth="132.0" styleClass="assistance" text="Ver Asistencia" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="95.0" prefWidth="95.0" styleClass="assistance" text="Ver Asistencia" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <effect>
                         <DropShadow />
                      </effect></Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="132.0" prefWidth="132.0" styleClass="view-guess" text="Ver Invitados" GridPane.rowIndex="1">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="95.0" prefWidth="95.0" styleClass="view-guess" text="Ver Invitados" GridPane.rowIndex="1">
                      <effect>
                         <DropShadow />
                      </effect></Button>
