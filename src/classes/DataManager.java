@@ -294,4 +294,13 @@ public class DataManager {
                   return null;
             }
       }
+
+      public void addInvad(String nombre, String apellido, String cedula, String contrato,String fecha) {
+            try{
+                  String query ="INSERT INTO oasisclub.invad(nombre,apellido,cedula,contrato,fecha) VALUES ('"+nombre+"','"+apellido+"','"+cedula+"','"+contrato+"','"+fecha+"');";
+                  st.executeUpdate(query);
+            }catch(Exception ex){
+                  System.out.println(ex.getMessage());
+            }
+      }
 }

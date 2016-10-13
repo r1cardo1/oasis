@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -8,13 +9,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" stylesheets="@../css/openTable.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenTableController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenTableController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="35.0" prefHeight="480.0" prefWidth="765.0" styleClass="background" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="15.0">
                <children>
-                  <VBox alignment="TOP_RIGHT" layoutX="24.0" layoutY="43.0" prefHeight="152.0" prefWidth="130.0" spacing="10.0">
+                  <VBox alignment="TOP_RIGHT" layoutX="25.0" layoutY="47.0" prefHeight="152.0" prefWidth="130.0" spacing="12.0">
                      <children>
                         <Label layoutX="36.0" layoutY="30.0" text="Nombre" AnchorPane.leftAnchor="30.0">
                            <font>
@@ -82,15 +83,19 @@
                         <TextField fx:id="addcedula" layoutX="159.0" layoutY="10.0" promptText="Cedula" />
                      </children>
                   </HBox>
-                  <Button layoutX="468.0" layoutY="321.0" mnemonicParsing="false" onAction="#addAction" text="Añadir" />
-                  <Button alignment="CENTER" layoutX="155.0" layoutY="321.0" mnemonicParsing="false" onAction="#openTable" text="Abrir Mesa" />
+                  <Button contentDisplay="RIGHT" layoutX="441.0" layoutY="321.0" mnemonicParsing="false" onAction="#addAction" styleClass="add-button" text="Añadir" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="141.0" layoutY="321.0" mnemonicParsing="false" onAction="#openTable" styleClass="select-button" text="Abrir Mesa" />
                   <Separator layoutX="358.0" layoutY="-6.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Label layoutX="147.0" layoutY="14.0" text="Datos del cliente" />
                   <Label layoutX="493.0" layoutY="14.0" text="Invitados Adicionales" />
-                  <Button layoutX="579.0" layoutY="321.0" mnemonicParsing="false" onAction="#deleteAction" text="Eliminar" />
+                  <Button contentDisplay="RIGHT" layoutX="579.0" layoutY="321.0" mnemonicParsing="false" onAction="#deleteAction" styleClass="delete-button" text="Eliminar" />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/openTable.css" />
+      <URL value="@../css/theme.css" />
+   </stylesheets>
 </AnchorPane>

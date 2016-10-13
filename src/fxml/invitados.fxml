@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.InvitadosController">
+   <children>
+      <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="176.0" layoutY="23.0" prefHeight="80.0" prefWidth="800.0" text="Lista de invitados" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="41.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" AnchorPane.leftAnchor="40.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <TableView fx:id="table" layoutX="308.0" layoutY="178.0" prefHeight="520.0" prefWidth="800.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="80.0">
+              <columns>
+                <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
+                <TableColumn fx:id="apellido" prefWidth="75.0" text="Apellido" />
+                  <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
+                  <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <HBox alignment="CENTER" layoutX="40.0" layoutY="24.0" prefHeight="40.0" prefWidth="224.0" spacing="10.0">
+               <children>
+                  <Label text="Buscar por:" />
+                  <ComboBox prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0">
+               <children>
+                  <Label text="Filtro" />
+                  <TextField alignment="CENTER" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0" visible="false">
+               <children>
+                  <Label text="Fecha:" />
+                  <DatePicker />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0" visible="false">
+               <children>
+                  <Label text="Desde" />
+                  <DatePicker />
+                  <Label layoutX="10.0" layoutY="22.0" text="Hasta" />
+                  <DatePicker layoutX="54.0" layoutY="18.0" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/invitados.css" />
+      <URL value="@../css/theme.css" />
+   </stylesheets>
+</AnchorPane>

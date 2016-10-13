@@ -16,3 +16,69 @@ and open the template in the editor.
     -fx-background-insets: 2px;
     -fx-border-radius: 10px;
 }
+
+.text-field{
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-border-radius:0px;
+    -fx-background-radius: 0px;
+}
+
+.add-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/add-button.png");
+
+}
+
+.add-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/add-button.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}
+
+.delete-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/delete-button.png");
+
+}
+
+.delete-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/delete-button.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}
+
+.select-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/select-button.png");
+}
+
+.select-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/select-button.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}

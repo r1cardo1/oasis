@@ -57,13 +57,13 @@ public class OpenTableController implements Initializable {
             ResultSet rs = dm.getCantByPlan(client.getPlan());
             if (rs.next()) {
                   max = rs.getInt("invitados");
-            }else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("El plan que posee el cliente no tiene un numero de invitados,"
-                    + "Contacte con el administrador para indicar uno.");
-            alert.show();
+            } else {
+                  Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                  alert.setTitle("Alerta");
+                  alert.setHeaderText(null);
+                  alert.setContentText("El plan que posee el cliente no tiene un numero de invitados,"
+                          + "Contacte con el administrador para indicar uno.");
+                  alert.show();
             }
 
       }
@@ -71,17 +71,31 @@ public class OpenTableController implements Initializable {
       @FXML
       public void openTable(ActionEvent evt) {
             if (!nmesa.getText().isEmpty() && !ninvitados.getText().isEmpty()) {
-                  Calendar time = Calendar.getInstance();
-                  String hour;
-                  String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
-                  hour = (LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME));
-                  String result;
-                  result = dm.openTable(txtcontrato.getText(), ninvitados.getText(), nmesa.getText(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
-                  if (result.equals("OK")) {
-                        JOptionPane.showMessageDialog(null, "Apertura de mesa exitosa");
-                  }
-                  if (result.equals("FAIL")) {
-                        JOptionPane.showMessageDialog(null, "Fallo al abrir la mesa");
+                  if (Integer.parseInt(ninvitados.getText()) <= max) {
+                        Calendar time = Calendar.getInstance();
+                        String hour;
+                        String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
+                        hour = (LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME));
+                        String result;
+                        result = dm.openTable(txtcontrato.getText(), ninvitados.getText(), nmesa.getText(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
+                        for (int i = 0; i < table.getItems().size(); i++) {
+                              Invitado inv = (Invitado) table.getItems().get(i);
+                              dm.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                        }
+                        if (result.equals("OK")) {
+                              Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                              alert.setTitle("Alerta");
+                              alert.setHeaderText(null);
+                              alert.setContentText("Apertura de mesa exitosa");
+                              alert.show();
+                        }
+
+                  } else {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Alerta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("El cliente tiene mas invitados de los permitidos por su plan");
+                        alert.show();
                   }
             }
       }
@@ -97,15 +111,15 @@ public class OpenTableController implements Initializable {
             if (table.getItems().size() < max) {
                   if (!addnombre.getText().isEmpty()) {
                         if (!addapellido.getText().isEmpty()) {
-                              table.getItems().add(new Invitado(addnombre.getText(), addapellido.getText(), addcedula.getText()));
+                              table.getItems().add(new Invitado(addnombre.getText(), addapellido.getText(), addcedula.getText(), client.getContrato()));
                         }
                   }
-            }else{
-                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("Ya agrego el numero maximo de invitados adicionales");
-            alert.show();
+            } else {
+                  Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                  alert.setTitle("Alerta");
+                  alert.setHeaderText(null);
+                  alert.setContentText("Ya agrego el numero maximo de invitados adicionales");
+                  alert.show();
             }
       }
 

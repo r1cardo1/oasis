@@ -13,11 +13,21 @@ public class Invitado {
       String nombre;
       String apellido;
       String cedula;
+      String contrato;
 
-      public Invitado(String nombre, String apellido, String cedula) {
+      public Invitado(String nombre, String apellido, String cedula, String contrato) {
             this.nombre = nombre;
             this.apellido = apellido;
             this.cedula = cedula;
+            this.contrato = contrato;
+      }
+
+      public String getContrato() {
+            return contrato;
+      }
+
+      public void setContrato(String contrato) {
+            this.contrato = contrato;
       }
 
       public String getNombre() {
