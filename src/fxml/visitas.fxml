@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/visits.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisitasController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisitasController">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,6 +23,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
+            <Pane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white; -fx-background-radius: 8px; -fx-border-color: black; -fx-border-radius: 8px; -fx-opacity: 0.5;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
             <TableView fx:id="table" layoutX="37.0" layoutY="50.0" prefHeight="200.0" prefWidth="581.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
               <columns>
                 <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
@@ -33,30 +35,46 @@
                   <TableColumn fx:id="ninvitados" prefWidth="75.0" text="Invitados" />
                   <TableColumn fx:id="nmesa" prefWidth="75.0" text="Mesa" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <ComboBox fx:id="combo" layoutX="114.0" layoutY="14.0" prefWidth="150.0" />
             <Label layoutX="50.0" layoutY="18.0" text="Filtrar por" />
-            <Pane fx:id="rangeDate" layoutX="283.0" layoutY="9.0" prefHeight="35.0" prefWidth="469.0" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
+            <Pane fx:id="rangeDate" layoutX="280.0" layoutY="9.0" prefHeight="35.0" prefWidth="469.0" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
                <children>
-                  <DatePicker fx:id="from" layoutX="52.0" layoutY="5.0" />
-                  <DatePicker fx:id="to" layoutX="281.0" layoutY="5.0" />
-                  <Label layoutX="237.0" layoutY="9.0" text="Hasta" />
-                  <Label layoutX="14.0" layoutY="9.0" text="Desde" />
+                  <DatePicker fx:id="from" layoutX="52.0" layoutY="5.0" onAction="#fromDate" prefHeight="27.0" prefWidth="130.0" />
+                  <DatePicker fx:id="to" layoutX="233.0" layoutY="5.0" prefWidth="130.0" />
+                  <Label layoutX="197.0" layoutY="10.0" text="Hasta" />
+                  <Label layoutX="-3.0" layoutY="10.0" text="Desde" />
+                  <Button contentDisplay="RIGHT" layoutX="390.0" layoutY="2.0" mnemonicParsing="false" onAction="#toDate" styleClass="search-button" text="Buscar" />
                </children>
             </Pane>
             <Pane fx:id="pdate" layoutX="539.0" layoutY="9.0" prefHeight="35.0" prefWidth="469.0" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
                <children>
                   <DatePicker fx:id="date" layoutX="148.0" layoutY="5.0" />
                   <Label layoutX="96.0" layoutY="9.0" text="Fecha:" />
+                  <Button contentDisplay="RIGHT" layoutX="390.0" layoutY="2.0" mnemonicParsing="false" onAction="#date" styleClass="search-button" text="Buscar" />
                </children>
             </Pane>
-            <Pane fx:id="pfilter" layoutX="535.0" layoutY="18.0" prefHeight="35.0" prefWidth="469.0" visible="false" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
+            <Pane fx:id="pfilter" layoutX="280.0" layoutY="9.0" prefHeight="35.0" prefWidth="469.0" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="9.0">
                <children>
                   <TextField fx:id="filter" layoutX="99.0" layoutY="5.0" />
                   <Label layoutX="56.0" layoutY="9.0" text="Filtro" />
+                  <Button contentDisplay="RIGHT" layoutX="390.0" layoutY="2.0" mnemonicParsing="false" onAction="#search" styleClass="search-button" text="Buscar" />
                </children>
             </Pane>
+            <HBox alignment="CENTER" layoutY="421.0" prefHeight="40.0" prefWidth="200.0" spacing="100.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportExcel" styleClass="export-excel-button" text="Exportar como Excel" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="export-pdf-button" text="Exportar como PDF" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/visits.css" />
+      <URL value="@../css/theme.css" />
+   </stylesheets>
 </AnchorPane>

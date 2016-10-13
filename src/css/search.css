@@ -45,3 +45,47 @@ and open the template in the editor.
 .table-column{
     -fx-alignment: center;
 }
+
+.text-field{
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-border-radius:0px;
+    -fx-background-radius: 0px;
+}
+
+.search-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+}
+
+.search-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:blue;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+}
+
+.select-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/select-button.png");
+}
+
+.select-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:blue;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/select-button.png");
+}
+

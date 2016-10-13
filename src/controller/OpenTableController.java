@@ -57,13 +57,14 @@ public class OpenTableController implements Initializable {
             ResultSet rs = dm.getCantByPlan(client.getPlan());
             if (rs.next()) {
                   max = rs.getInt("invitados");
-            }
+            }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Alerta");
             alert.setHeaderText(null);
             alert.setContentText("El plan que posee el cliente no tiene un numero de invitados,"
                     + "Contacte con el administrador para indicar uno.");
             alert.show();
+            }
 
       }
 
@@ -99,6 +100,12 @@ public class OpenTableController implements Initializable {
                               table.getItems().add(new Invitado(addnombre.getText(), addapellido.getText(), addcedula.getText()));
                         }
                   }
+            }else{
+                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alerta");
+            alert.setHeaderText(null);
+            alert.setContentText("Ya agrego el numero maximo de invitados adicionales");
+            alert.show();
             }
       }
 

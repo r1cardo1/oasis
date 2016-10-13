@@ -7,13 +7,15 @@ package controller;
 
 import classes.Asistencia;
 import classes.DataManager;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,7 +32,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Callback;
 import javafx.util.Duration;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * FXML Controller class
@@ -119,9 +136,29 @@ public class VisitasController implements Initializable {
 
         }
     }
+    
+    public void reloadTable(){
+        table.getItems().clear();
+        ResultSet rs = dm.visits();
+        ResultSet aux;
+        Asistencia asist = null;
+        try{
+        while (rs.next()) {
+            aux = dmaux.searchClientbyContract(rs.getString("contrato"));
+            if (aux.next()) {
+                asist = new Asistencia(rs.getString("mesa"), rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
+                        aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"));
+            }
+            table.getItems().add(asist);
+
+        }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
     public void initCombo() {
-        combo.getItems().addAll("NOMBRE", "CONTRATO", "CEDULA", "FECHA", "RANGO DE FECHA");
+        combo.getItems().addAll("NOMBRE", "CONTRATO", "CEDULA", "FECHA", "RANGO DE FECHA","TODAS");
         combo.getSelectionModel().selectFirst();
         combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -177,6 +214,12 @@ public class VisitasController implements Initializable {
             case "RANGO DE FECHA":
                 rangeDate.setVisible(true);
                 break;
+            case "TODAS":
+                try{
+                    reloadTable();
+                }catch(Exception ex){
+                    System.out.println(ex.getMessage());
+                }
         }
     }
 
@@ -186,28 +229,151 @@ public class VisitasController implements Initializable {
         menu.main.toFront();
     }
 
-    @FXML
-    public void focusin(MouseEvent evt) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode((Node) evt.getSource());
-        st.setFromX(1);
-        st.setFromY(1);
-        st.setToX(1.2);
-        st.setToY(1.2);
-        st.setDuration(Duration.millis(60));
-        st.play();
+    public void fromDate() {
+        final Callback<DatePicker, DateCell> dayCellFactory
+                = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item.isBefore(
+                                from.getValue().plusDays(1))) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                };
+            }
+        };
+        to.setDayCellFactory(dayCellFactory);
+        to.setValue(from.getValue().plusDays(1));
     }
 
-    @FXML
-    public void focusout(MouseEvent evt) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode((Node) evt.getSource());
-        st.setFromX(1.2);
-        st.setFromY(1.2);
-        st.setToX(1);
-        st.setToY(1);
-        st.setDuration(Duration.millis(60));
-        st.play();
+    public void date() {
+       
+        table.getItems().clear();
+        ResultSet rs = dm.visits();
+        ResultSet aux;
+        Asistencia asist = null;
+        try{
+            while(rs.next()){
+                if(date.getValue().isEqual(LocalDate.parse(rs.getString("fecha")))){
+                    aux = dmaux.searchClientbyContract(rs.getString("contrato"));
+                    if (aux.next()) {
+                        asist = new Asistencia(rs.getString("mesa"), rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
+                                aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"));
+                    }
+                    table.getItems().add(asist);
+                }
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }
+
+    public void toDate() {
+        table.getItems().clear();
+        ResultSet rs = dm.visits();
+        ResultSet aux;
+        Asistencia asist = null;
+        try {
+            while (rs.next()) {
+                if ((from.getValue().isEqual(LocalDate.parse(rs.getString("fecha"))) || from.getValue().isBefore(LocalDate.parse(rs.getString("fecha"))))
+                        && (to.getValue().isEqual(LocalDate.parse(rs.getString("fecha"))) || to.getValue().isAfter(LocalDate.parse(rs.getString("fecha"))))) {
+                    aux = dmaux.searchClientbyContract(rs.getString("contrato"));
+                    if (aux.next()) {
+                        asist = new Asistencia(rs.getString("mesa"), rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
+                                aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"));
+                    }
+                    table.getItems().add(asist);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void search(){
+        
+    }
+    
+    public void exportExcel(){
+        try{
+        String filename = "NewExcelFile.xls" ;
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet sheet = workbook.createSheet("FirstSheet");  
+            int bool = 1;
+            
+            HSSFRow rowhead = sheet.createRow(0);
+            
+            rowhead.createCell(0);
+            rowhead.createCell(1).setCellValue("Cedula");
+            rowhead.createCell(2).setCellValue("Cliente");
+            rowhead.createCell(3).setCellValue("Contrato");
+            rowhead.createCell(4).setCellValue("Plan");
+            rowhead.createCell(5).setCellValue("Fecha");
+            rowhead.createCell(6).setCellValue("Hora");
+            rowhead.createCell(7).setCellValue("Invitados");
+            rowhead.createCell(8).setCellValue("Mesa");
+            makeRowBold(workbook,rowhead);       
+            
+            for(int i=0;i<table.getItems().size();i++){
+            HSSFRow row = sheet.createRow(i+1);
+            Asistencia a = (Asistencia) table.getItems().get(i);
+            row.createCell(1).setCellValue(a.getCedula());
+            row.createCell(2).setCellValue(a.getNombre());
+            row.createCell(3).setCellValue(a.getContrato());
+            row.createCell(4).setCellValue(a.getPlan());
+            row.createCell(5).setCellValue(a.getFecha());
+            row.createCell(6).setCellValue(a.getHora());
+            row.createCell(7).setCellValue(a.getInvitados());
+            row.createCell(8).setCellValue(a.getMesa());
+            }
+            autoSizeColumns(workbook);
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            workbook.write(fileOut);
+            fileOut.close();
+            System.out.println("Your excel file has been generated!");
+
+        } catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
+        
+    }
+    
+public void makeRowBold(Workbook wb, Row row){
+    CellStyle style = wb.createCellStyle();//Create style
+    Font font = wb.createFont();//Create font
+    font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+    font.setColor(new HSSFColor.WHITE().getIndex());//Make font bold
+    style.setFont(font);//set it to bold
+    style.setAlignment(HorizontalAlignment.CENTER);
+    style.setFillBackgroundColor(new HSSFColor.BLACK().getIndex());
+    style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+    
+
+    for(int i = 0; i < row.getLastCellNum(); i++){//For each cell in the row 
+        row.getCell(i).setCellStyle(style);//Set the sty;e
+    }
+}
+
+public void autoSizeColumns(Workbook workbook) {
+    int numberOfSheets = workbook.getNumberOfSheets();
+    for (int i = 0; i < numberOfSheets; i++) {
+        Sheet sheet = workbook.getSheetAt(i);
+        if (sheet.getPhysicalNumberOfRows() > 0) {
+            Row row = sheet.getRow(0);
+            Iterator<Cell> cellIterator = row.cellIterator();
+            while (cellIterator.hasNext()) {
+                Cell cell = cellIterator.next();
+                int columnIndex = cell.getColumnIndex();
+                sheet.autoSizeColumn(columnIndex);
+            }
+        }
+    }
+}
 
 }

@@ -21,6 +21,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -170,30 +171,47 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void visitas(ActionEvent evt) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/visitas.fxml"));
-        Pane pan = loader.load();
-        aux.getChildren().add(pan);
-        VisitasController controller = loader.getController();
-        controller.menu = myController;
-        aux.toFront();
-        main.setVisible(false);
+        if(user.getNivel()>=2){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/visitas.fxml"));
+            AnchorPane pan = loader.load();
+            aux.getChildren().add(pan);
+            VisitasController controller = loader.getController();
+            controller.menu = myController;
+            aux.toFront();
+            main.setVisible(false);
+            
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Alerta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+                        alert.show();
+        }
     }
 
     @FXML
     public void restringidos(ActionEvent evt) throws IOException {
+        if(user.getNivel()>=2){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/blackList.fxml"));
         Pane pan = loader.load();
         aux.getChildren().add(pan);
-
         BlackListController controller = loader.getController();
         controller.menu = myController;
         aux.toFront();
 
         main.setVisible(false);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Alerta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+                        alert.show();
+        }
     }
 
     @FXML
     public void adminMenu(ActionEvent evt) throws IOException {
+        if(user.getNivel()==3){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
         Pane pan = loader.load();
         aux.getChildren().add(pan);
@@ -203,9 +221,17 @@ public class MainMenuController implements Initializable {
         controller.usuario = user;
         aux.toFront();
         main.setVisible(false);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Alerta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+                        alert.show();
+        }
     }
     
     @FXML public void reportMenu() throws IOException{
+        if(user.getNivel()>=2){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reportMenu.fxml"));
         Pane pan = loader.load();
         aux.getChildren().add(pan);
@@ -215,6 +241,13 @@ public class MainMenuController implements Initializable {
         controller.usuario = user;
         aux.toFront();
         main.setVisible(false);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Alerta");
+                        alert.setHeaderText(null);
+                        alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+                        alert.show();
+        }
     }
 
     public void setController(MainMenuController c) {
