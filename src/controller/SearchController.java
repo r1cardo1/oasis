@@ -179,6 +179,7 @@ public class SearchController implements Initializable {
                 controller = loader.getController();
                 controller.user = this.user;
                 controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
+                controller.myController=controller;
                 main.getChildren().clear();
                 main.getChildren().add(swap);
                 controller.initData();

@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenTableController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenTableController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -89,6 +89,7 @@
                   <Label layoutX="147.0" layoutY="14.0" text="Datos del cliente" />
                   <Label layoutX="493.0" layoutY="14.0" text="Invitados Adicionales" />
                   <Button contentDisplay="RIGHT" layoutX="579.0" layoutY="321.0" mnemonicParsing="false" onAction="#deleteAction" styleClass="delete-button" text="Eliminar" />
+                  <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" />
                </children>
             </AnchorPane>
          </children>

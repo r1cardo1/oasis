@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.InvitadosController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InvitadosController">
    <children>
       <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,30 +33,35 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox alignment="CENTER" layoutX="40.0" layoutY="24.0" prefHeight="40.0" prefWidth="224.0" spacing="10.0">
+            <HBox alignment="CENTER" layoutX="40.0" layoutY="24.0" prefHeight="40.0" prefWidth="224.0" spacing="10.0" AnchorPane.topAnchor="24.0">
                <children>
                   <Label text="Buscar por:" />
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="mode" prefWidth="150.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0">
+            <HBox fx:id="hbfield" alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0" AnchorPane.topAnchor="24.0">
                <children>
                   <Label text="Filtro" />
                   <TextField alignment="CENTER" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0" visible="false">
+            <HBox fx:id="hbdate" alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0" visible="false" AnchorPane.topAnchor="24.0">
                <children>
                   <Label text="Fecha:" />
-                  <DatePicker />
+                  <DatePicker fx:id="date" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0" visible="false">
+            <HBox fx:id="hbrange" alignment="CENTER_LEFT" layoutX="290.0" layoutY="25.0" prefHeight="40.0" prefWidth="462.0" spacing="10.0" visible="false" AnchorPane.topAnchor="24.0">
                <children>
                   <Label text="Desde" />
-                  <DatePicker />
+                  <DatePicker fx:id="from" onAction="#fromDate" />
                   <Label layoutX="10.0" layoutY="22.0" text="Hasta" />
-                  <DatePicker layoutX="54.0" layoutY="18.0" />
+                  <DatePicker fx:id="to" layoutX="54.0" layoutY="18.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="456.0" prefHeight="40.0" prefWidth="800.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportExcel" styleClass="export-excel-button" text="Exportar en excel" />
                </children>
             </HBox>
          </children>

@@ -14,13 +14,23 @@ public class Invitado {
       String apellido;
       String cedula;
       String contrato;
+      String fecha;
 
-      public Invitado(String nombre, String apellido, String cedula, String contrato) {
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.cedula = cedula;
-            this.contrato = contrato;
-      }
+    public Invitado(String nombre, String apellido, String cedula, String contrato, String fecha) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.contrato = contrato;
+        this.fecha = fecha;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
       public String getContrato() {
             return contrato;

@@ -8,6 +8,21 @@ and open the template in the editor.
     Author     : Ricardo Marcano
 */
 
+.back-button{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.back-button:hover{
+    -fx-padding:0px;
+    -fx-background-color:lightgray;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+
 .background{
     -fx-background-color: white;
     -fx-background-radius: 10px;

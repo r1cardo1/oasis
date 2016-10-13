@@ -42,6 +42,7 @@ public class OpenTableController implements Initializable {
       Usuario user;
       int max = 0;
       DataManager dm = new DataManager();
+      ClientMenuController menu;
 
       @Override
       public void initialize(URL url, ResourceBundle rb) {
@@ -111,7 +112,7 @@ public class OpenTableController implements Initializable {
             if (table.getItems().size() < max) {
                   if (!addnombre.getText().isEmpty()) {
                         if (!addapellido.getText().isEmpty()) {
-                              table.getItems().add(new Invitado(addnombre.getText(), addapellido.getText(), addcedula.getText(), client.getContrato()));
+                              table.getItems().add(new Invitado(addnombre.getText(), addapellido.getText(), addcedula.getText(), client.getContrato(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
                         }
                   }
             } else {
@@ -130,5 +131,11 @@ public class OpenTableController implements Initializable {
                   table.getSelectionModel().clearSelection();
             }
       }
+      
+          public void back() {
+        menu.aux.getChildren().clear();
+        menu.main.setVisible(true);
+        menu.main.toFront();
+    }
 
 }

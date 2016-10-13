@@ -12,7 +12,7 @@
 <AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="800.0" stylesheets="@../css/clientMenu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientMenuController">
    <children>
       <AnchorPane fx:id="aux" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0" />
-      <AnchorPane fx:id="mainPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
+      <AnchorPane fx:id="main" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="160.0">
          <children>
             <Pane prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: white; -fx-background-radius: 8px; -fx-border-color: black; -fx-border-radius: 8px; -fx-opacity: 0.8;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0" />
             <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -33,7 +33,7 @@
                      <effect>
                         <DropShadow />
                      </effect></Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="95.0" prefWidth="95.0" styleClass="view-guess" text="Ver Invitados" GridPane.rowIndex="1">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#viewInvitados" prefHeight="95.0" prefWidth="95.0" styleClass="view-guess" text="Ver Invitados" GridPane.rowIndex="1">
                      <effect>
                         <DropShadow />
                      </effect></Button>

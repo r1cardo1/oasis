@@ -303,4 +303,15 @@ public class DataManager {
                   System.out.println(ex.getMessage());
             }
       }
+
+    public ResultSet getInvitados() {
+        try{
+            String query = "SELECT * FROM oasisclub.invad";
+            rs=st.executeQuery(query);
+            return rs;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
 }

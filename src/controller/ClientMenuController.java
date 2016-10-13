@@ -22,71 +22,91 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
-    
-
 public class ClientMenuController implements Initializable {
 
     public Cliente client;
-    @FXML Label contrato;
-    @FXML Label nombre;
-    @FXML Label cedula;
-    @FXML Label plan;
-    @FXML AnchorPane mainPane;
-    @FXML AnchorPane aux;
+    @FXML
+    Label contrato;
+    @FXML
+    Label nombre;
+    @FXML
+    Label cedula;
+    @FXML
+    Label plan;
+    @FXML
+    AnchorPane main;
+    @FXML
+    AnchorPane aux;
     Usuario user;
-    
-    
-    
-            
+    ClientMenuController myController;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       aux.toBack();
-    }    
-    
-    @FXML public void focusin(MouseEvent evt){
-          ScaleTransition st = new ScaleTransition();
-          st.setNode((Node) evt.getSource());
-          st.setFromX(1);
-          st.setFromY(1);
-          st.setToX(1.2);
-          st.setToY(1.2);
-          st.setDuration(Duration.millis(60));
-          st.play();
+        aux.toBack();
     }
-    
-    @FXML public void focusout(MouseEvent evt){
-          ScaleTransition st = new ScaleTransition();
-          st.setNode((Node) evt.getSource());
-          st.setFromX(1.2);
-          st.setFromY(1.2);
-          st.setToX(1);
-          st.setToY(1);
-          st.setDuration(Duration.millis(60));
-          st.play();
+
+    @FXML
+    public void focusin(MouseEvent evt) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode((Node) evt.getSource());
+        st.setFromX(1);
+        st.setFromY(1);
+        st.setToX(1.2);
+        st.setToY(1.2);
+        st.setDuration(Duration.millis(60));
+        st.play();
     }
-    
-    @FXML public void openTable(ActionEvent evt) throws IOException, SQLException{
+
+    @FXML
+    public void focusout(MouseEvent evt) {
+        ScaleTransition st = new ScaleTransition();
+        st.setNode((Node) evt.getSource());
+        st.setFromX(1.2);
+        st.setFromY(1.2);
+        st.setToX(1);
+        st.setToY(1);
+        st.setDuration(Duration.millis(60));
+        st.play();
+    }
+
+    @FXML
+    public void openTable(ActionEvent evt) throws IOException, SQLException {
         aux.setVisible(false);
-        FXMLLoader loader  = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
         OpenTableController controller;
         AnchorPane pan = loader.load();
         aux.getChildren().add(pan);
-        pan.prefHeightProperty().bind(aux.heightProperty());
-        pan.prefWidthProperty().bind(aux.widthProperty());
+        controller = loader.getController();
+        controller.menu = myController;
+        controller.client = this.client;
+        controller.user = this.user;
+        try {
+            controller.initData();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        aux.toFront();
+        aux.setVisible(true);
+        main.setVisible(false);
+
+    }
+
+    public void viewInvitados() throws IOException {
+        aux.setVisible(false);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/invitados.fxml"));
+        InvitadosController controller;
+        AnchorPane pan = loader.load();
+        aux.getChildren().add(pan);
         controller = loader.getController();
         controller.client = this.client;
         controller.user = this.user;
-        try{
-             controller.initData();
-        }catch(Exception ex)
-        {System.out.println(ex.getMessage());}
+        controller.menu = myController;
         aux.toFront();
         aux.setVisible(true);
-        mainPane.setVisible(false);     
-        
+        main.setVisible(false);
     }
-    
-    public void initData(){
+
+    public void initData() {
         contrato.setText(client.getContrato());
         nombre.setText(client.getNombre());
         cedula.setText(client.getCedula());
