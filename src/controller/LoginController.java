@@ -8,7 +8,12 @@ package controller;
 import classes.DataManager;
 import classes.Usuario;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.Socket;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 import javafx.animation.ScaleTransition;
@@ -58,7 +64,7 @@ public class LoginController implements Initializable {
     TextField user;
     @FXML
     PasswordField pass;
-
+    
     /**
      * Initializes the controller class.
      */
@@ -188,5 +194,5 @@ public class LoginController implements Initializable {
     public void setStage(Stage s) {
         primStage = s;
     }
-
-}
+    
+   }

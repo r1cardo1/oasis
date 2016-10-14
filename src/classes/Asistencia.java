@@ -19,6 +19,14 @@ public class Asistencia {
     String contrato;
     String plan;
 
+    public Asistencia(String invitados, String cedula, String nombre, String contrato, String plan) {
+        this.invitados = invitados;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.contrato = contrato;
+        this.plan = plan;
+    }  
+
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }

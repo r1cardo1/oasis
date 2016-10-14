@@ -101,6 +101,7 @@ public class ClientMenuController implements Initializable {
         controller.client = this.client;
         controller.user = this.user;
         controller.menu = myController;
+        controller.initTable();
         aux.toFront();
         aux.setVisible(true);
         main.setVisible(false);
@@ -111,5 +112,22 @@ public class ClientMenuController implements Initializable {
         nombre.setText(client.getNombre());
         cedula.setText(client.getCedula());
         plan.setText(client.getPlan());
+    }
+    
+    public void viewAsistencia() throws IOException, SQLException{
+        aux.setVisible(false);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/asistencia.fxml"));
+        AsistenciaController controller;
+        AnchorPane pan = loader.load();
+        aux.getChildren().add(pan);
+        controller = loader.getController();
+        controller.client = this.client;
+        controller.user = this.user;
+        controller.menu = myController;
+        controller.setACombos();
+        controller.initTable();
+        aux.toFront();
+        aux.setVisible(true);
+        main.setVisible(false);
     }
 }

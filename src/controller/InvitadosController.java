@@ -5,7 +5,6 @@
  */
 package controller;
 
-import classes.Asistencia;
 import classes.Cliente;
 import classes.DataManager;
 import classes.Invitado;
@@ -47,25 +46,25 @@ public class InvitadosController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initTable();
+
     }
 
-    public void initTable(){
+    public void initTable() {
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        
         ResultSet rs = dm.getInvitados();
-        try{
-            while(rs.next()){
-                table.getItems().add(new Invitado(rs.getString("nombre"),rs.getString("apellido"),rs.getString("cedula"),rs.getString("contrato"),rs.getString("fecha")));
+        try {
+            while (rs.next()) {
+                if (client.getContrato().equals(rs.getString("contrato")));
+                    table.getItems().add(new Invitado(rs.getString("nombre"), rs.getString("apellido"), rs.getString("cedula"), rs.getString("contrato"), rs.getString("fecha")));
             }
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
-    
+
     public void exportExcel() {
 
     }
@@ -168,11 +167,11 @@ public class InvitadosController implements Initializable {
     public void reloadTable() {
         table.getItems().clear();
         ResultSet rs = dm.getInvitados();
-        try{
-            while(rs.next()){
-                table.getItems().add(new Invitado(rs.getString("nombre"),rs.getString("apellido"),rs.getString("cedula"),rs.getString("contrato"),rs.getString("fecha")));
+        try {
+            while (rs.next()) {
+                table.getItems().add(new Invitado(rs.getString("nombre"), rs.getString("apellido"), rs.getString("cedula"), rs.getString("contrato"), rs.getString("fecha")));
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

@@ -29,7 +29,7 @@
                      <effect>
                         <DropShadow />
                      </effect></Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="95.0" prefWidth="95.0" styleClass="assistance" text="Ver Asistencia" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#viewAsistencia" prefHeight="95.0" prefWidth="95.0" styleClass="assistance" text="Ver Asistencia" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <effect>
                         <DropShadow />
                      </effect></Button>

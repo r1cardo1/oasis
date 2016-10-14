@@ -5,15 +5,22 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo
  */
-public class Usuario {
+public class Usuario implements Serializable{
       private String nombre;
       private String apellido;
       private String usuario;
       private String clave;
+
+    public Usuario(String usuario, String clave) {
+        this.usuario = usuario;
+        this.clave = clave;
+    }
       private int nivel;
 
     public void setNivel(int nivel) {

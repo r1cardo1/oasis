@@ -38,7 +38,6 @@ public class DataManager {
         try {
             String query = "SELECT * FROM oasisclub.usuarios WHERE usuario LIKE '" + user + "';";
             rs = st.executeQuery(query);
-
             return rs;
         } catch (Exception e) {
             e.printStackTrace();
@@ -311,6 +310,17 @@ public class DataManager {
             return rs;
         }catch(Exception ex){
             System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    public ResultSet getAsistenciaPorContrato(String contrato) {
+        try{
+            String query="SELECT * FROM oasisclub.asistencias WHERE contrato='"+contrato+"';";
+            rs=st.executeQuery(query);
+            return rs;
+        }catch(Exception ex){
+            ex.printStackTrace();
             return null;
         }
     }
