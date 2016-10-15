@@ -11,19 +11,18 @@ import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -31,7 +30,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -70,30 +68,6 @@ public class MainMenuController implements Initializable {
         // TODO
         new DigitalClock(date, hour);
         drag();
-    }
-
-    @FXML
-    public void focusin(MouseEvent evt) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode((Node) evt.getSource());
-        st.setFromX(1);
-        st.setFromY(1);
-        st.setToX(1.1);
-        st.setToY(1.1);
-        st.setDuration(Duration.millis(60));
-        st.play();
-    }
-
-    @FXML
-    public void focusout(MouseEvent evt) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode((Node) evt.getSource());
-        st.setFromX(1.1);
-        st.setFromY(1.1);
-        st.setToX(1);
-        st.setToY(1);
-        st.setDuration(Duration.millis(60));
-        st.play();
     }
 
     @FXML
@@ -151,6 +125,8 @@ public class MainMenuController implements Initializable {
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         searchController.primStage = stage;
+         stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
+            stage.setTitle("Busqueda de clientes Oasis");
         stage.show();
     }
 
@@ -251,8 +227,16 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    public void viewReservas() {
-        
+    public void viewReservas() throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reserva.fxml"));
+            AnchorPane pan = loader.load();
+            aux.getChildren().add(pan);
+            ReservaController controller = loader.getController();
+            controller.myController = controller;
+            controller.menu = myController;
+            controller.usuario = user;
+            aux.toFront();
+            main.setVisible(false);
     }
 
     public void setController(MainMenuController c) {

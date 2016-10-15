@@ -1,0 +1,124 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15/10/2016, 02:43:49 AM
+    Author     : Ricardo
+*/
+
+.table-column{
+   -fx-alignment:center;
+}
+
+.back-button{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.back-button:hover{
+    -fx-padding:0px;
+    -fx-background-color:lightgray;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.add-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/add-button.png");
+
+}
+
+.add-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/add-button.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}
+
+.delete-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/delete-button.png");
+
+}
+
+.delete-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/delete-button.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}
+
+.search-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+}
+
+.search-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:blue;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+}
+
+.edit-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/edit.png");
+
+}
+
+.edit-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/edit.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}
+
+.search-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+}
+
+.search-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}

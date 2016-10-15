@@ -24,7 +24,7 @@ public class AsistenciaController implements Initializable {
     @FXML
     ComboBox tmcombo, gmcombo, gacombo, tacombo;
     @FXML
-    TableColumn<Asistencia, String> nombre, cedula, contrato, plan, fecha;
+    TableColumn<Asistencia, String> nombre, cedula, contrato, plan, invitados;
     @FXML
     TableView table;
     @FXML
@@ -104,7 +104,7 @@ public class AsistenciaController implements Initializable {
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         contrato.setCellValueFactory(new PropertyValueFactory<>("contrato"));
         plan.setCellValueFactory(new PropertyValueFactory<>("plan"));
-        fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        invitados.setCellValueFactory(new PropertyValueFactory<>("invitados"));
     }
 
     public void initChart() {

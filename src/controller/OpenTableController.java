@@ -10,6 +10,7 @@ import classes.DataManager;
 import classes.Invitado;
 import classes.PrinterOptions;
 import classes.Usuario;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,13 +21,17 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -39,7 +44,7 @@ import javax.print.attribute.standard.PrinterName;
 public class OpenTableController implements Initializable {
 
     @FXML
-    TextField txtnombre, txtcedula, txtcontrato, txtplan, ninvitados, nmesa, addnombre, addapellido, addcedula;
+    TextField txtnombre, txtcedula, txtcontrato, txtplan, ninvitados,  addnombre, addapellido, addcedula;
     @FXML
     DatePicker fecha;
     @FXML
@@ -51,6 +56,7 @@ public class OpenTableController implements Initializable {
     int max = 0;
     DataManager dm = new DataManager();
     ClientMenuController menu;
+    String printer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,7 +70,7 @@ public class OpenTableController implements Initializable {
         txtplan.setText(client.getPlan());
         fecha.setValue(LocalDate.now());
         ResultSet rs = dm.getCantByPlan(client.getPlan());
-        if (rs.next()) {
+        /*if (rs.next()) {
             max = rs.getInt("invitados");
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -73,25 +79,24 @@ public class OpenTableController implements Initializable {
             alert.setContentText("El plan que posee el cliente no tiene un numero de invitados,"
                     + "Contacte con el administrador para indicar uno.");
             alert.show();
-        }
+        }*/
 
     }
 
     @FXML
-    public void openTable(ActionEvent evt) {
-        if (!nmesa.getText().isEmpty() && !ninvitados.getText().isEmpty()) {
-            if (Integer.parseInt(ninvitados.getText()) <= max) {
+    public void openTable(ActionEvent evt) throws IOException {
+        if (!ninvitados.getText().isEmpty()) {            
                 Calendar time = Calendar.getInstance();
                 String hour;
                 String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
                 hour = (LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME));
                 String result;
-                result = dm.openTable(txtcontrato.getText(), ninvitados.getText(), nmesa.getText(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
+                result = dm.openTable(txtcontrato.getText(), ninvitados.getText(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
                     dm.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
                 }
-                /*PrinterOptions p = new PrinterOptions();
+                PrinterOptions p = new PrinterOptions();
 
                 p.resetAll();
                 p.initialize();
@@ -131,13 +136,16 @@ public class OpenTableController implements Initializable {
                 p.setText("No \tArt\\tCant\tPrec");
                 p.newLine();
                 p.addLineSeperator();
-                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + (Integer.parseInt(ninvitados.getText()) + table.getItems().size()) + "\t" + "3500");
+                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                p.addLineSeperator();
+                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*4000 );
                 p.addLineSeperator();
                 p.feed((byte) 3);
                 p.finit();
 
-                feedPrinter(p.finalCommandSet().getBytes());*/
-
+               // feedPrinter(p.finalCommandSet().getBytes());
+               print(p.finalCommandSet().getBytes());
+                
                 if (result.equals("OK")) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Alerta");
@@ -146,13 +154,7 @@ public class OpenTableController implements Initializable {
                     alert.show();
                 }
 
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Alerta");
-                alert.setHeaderText(null);
-                alert.setContentText("El cliente tiene mas invitados de los permitidos por su plan");
-                alert.show();
-            }
+            
         }
     }
 
@@ -164,19 +166,11 @@ public class OpenTableController implements Initializable {
 
     @FXML
     public void addAction() {
-        if (table.getItems().size() < max) {
             if (!addnombre.getText().isEmpty()) {
                 if (!addapellido.getText().isEmpty()) {
                     table.getItems().add(new Invitado(addnombre.getText(), addapellido.getText(), addcedula.getText(), client.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE)));
                 }
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("Ya agrego el numero maximo de invitados adicionales");
-            alert.show();
-        }
     }
 
     @FXML
@@ -193,10 +187,10 @@ public class OpenTableController implements Initializable {
         menu.main.toFront();
     }
 
-    private static boolean feedPrinter(byte[] b) {
+    private boolean feedPrinter(byte[] b) {
         try {
-
-            AttributeSet attrSet = new HashPrintServiceAttributeSet(new PrinterName("EPSON TM-U220 ReceiptE4", null)); //EPSON TM-U220 ReceiptE4
+              
+            AttributeSet attrSet = new HashPrintServiceAttributeSet(new PrinterName("NPI3B7AEC (HP LaserJet Professional M1212nf MFP)", null)); //EPSON TM-U220 ReceiptE4
 
             DocPrintJob job = PrintServiceLookup.lookupPrintServices(null, attrSet)[0].createPrintJob();
             //PrintServiceLookup.lookupDefaultPrintService().createPrintJob();  
@@ -218,6 +212,17 @@ public class OpenTableController implements Initializable {
         }
 
         return true;
+    }
+    
+    public void print(byte[] b) throws IOException{
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/selectPrinter.fxml"));
+          Parent root = loader.load();
+          Scene scene = new Scene(root);
+          SelectPrinterController controller = loader.getController();
+          controller.a=b;          
+          stage.setScene(scene);
+          stage.show();
     }
 
 }

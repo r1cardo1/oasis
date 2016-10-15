@@ -16,13 +16,11 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.ScaleTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -30,11 +28,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Callback;
-import javafx.util.Duration;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -67,8 +62,6 @@ public class VisitasController implements Initializable {
       TableColumn<Asistencia, String> fecha;
       @FXML
       TableColumn<Asistencia, String> hora;
-      @FXML
-      TableColumn<Asistencia, String> nmesa;
       @FXML
       TableColumn<Asistencia, String> ninvitados;
       @FXML
@@ -111,7 +104,6 @@ public class VisitasController implements Initializable {
             plan.setCellValueFactory(new PropertyValueFactory<>("plan"));
             fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
             hora.setCellValueFactory(new PropertyValueFactory<>("hora"));
-            nmesa.setCellValueFactory(new PropertyValueFactory<>("mesa"));
             ninvitados.setCellValueFactory(new PropertyValueFactory<>("invitados"));
 
             cedula.prefWidthProperty().bind(table.widthProperty().divide(8));
@@ -120,7 +112,6 @@ public class VisitasController implements Initializable {
             plan.prefWidthProperty().bind(table.widthProperty().divide(8));
             fecha.prefWidthProperty().bind(table.widthProperty().divide(8));
             hora.prefWidthProperty().bind(table.widthProperty().divide(8));
-            nmesa.prefWidthProperty().bind(table.widthProperty().divide(8));
             ninvitados.prefWidthProperty().bind(table.widthProperty().divide(8));
 
             ResultSet rs = dm.visits();
@@ -317,7 +308,6 @@ public class VisitasController implements Initializable {
                   rowhead.createCell(5).setCellValue("Fecha");
                   rowhead.createCell(6).setCellValue("Hora");
                   rowhead.createCell(7).setCellValue("Invitados");
-                  rowhead.createCell(8).setCellValue("Mesa");
                   makeRowBold(workbook, rowhead);
 
                   for (int i = 0; i < table.getItems().size(); i++) {
@@ -330,7 +320,6 @@ public class VisitasController implements Initializable {
                         row.createCell(5).setCellValue(a.getFecha());
                         row.createCell(6).setCellValue(a.getHora());
                         row.createCell(7).setCellValue(a.getInvitados());
-                        row.createCell(8).setCellValue(a.getMesa());
                         centerRow(workbook,row);
                   }
                   

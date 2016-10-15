@@ -62,7 +62,6 @@ public class DataConection  {
                   + "num_inv INT NOT NULL,"
                   + "fecha VARCHAR(20) NOT NULL,"
                   + "hora VARCHAR(20) NOT NULL,"
-                  + "mesa VARCHAR(20) NOT NULL,"
                   + "user VARCHAR(100) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           
           String sql2 = "CREATE TABLE IF NOT EXISTS oasisclub.usuarios("
@@ -91,8 +90,7 @@ public class DataConection  {
                   + "cliente VARCHAR(20) NOT NULL,"
                   + "contrato VARCHAR(20) NOT NULL,"
                   + "fecha VARCHAR(20) NOT NULL,"
-                  + "nmesa VARCHAR(10) NOT NULL,"
-                  + "hora VARCHAR(10) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                  + "hora VARCHAR(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           
           String sql3 = "INSERT INTO oasisclub.usuarios(nombre,apellido,usuario,clave,nivel) "
                   + "SELECT * FROM (SELECT 'OASIS','CLUB','ROOT','ADMIN',3) AS tmp"
@@ -118,6 +116,14 @@ public class DataConection  {
                   + "fecha VARCHAR(20) NOT NULL,"
                   + "contrato VARCHAR(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           
+          String sql10 = "CREATE TABLE IF NOT EXISTS oasisclub.reserva("
+                  + "titular VARCHAR(50) NOT NULL,"
+                  + "cedula VARCHAR(50) NOT NULL,"
+                  + "telefono VARCHAR(20) NOT NULL,"
+                  + "plan VARCHAR(20) NOT NULL,"
+                  + "invitados VARCHAR(20) NOT NULL,"
+                  + "fecha VARCHAR(20) NOT NULL,"
+                  + "observacion VARCHAR(200) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           st.executeUpdate(sql);
           st.executeUpdate(sql1);
           st.executeUpdate(sql2);
@@ -128,6 +134,8 @@ public class DataConection  {
           st.executeUpdate(sql7);
           st.executeUpdate(sql8);
           st.executeUpdate(sql9);
+          st.executeUpdate(sql10);
+          
           
     }
       

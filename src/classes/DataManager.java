@@ -78,9 +78,9 @@ public class DataManager {
         }
     }
 
-    public String openTable(String contrato, String ninvitados, String nmesa, String fecha, String hora, String usuario) {
+    public String openTable(String contrato, String ninvitados, String fecha, String hora, String usuario) {
         try {
-            String query = "INSERT INTO oasisclub.asistencias(contrato,num_inv,fecha,hora,mesa,user) VALUES ('" + contrato + "','" + ninvitados + "','" + fecha + "','" + hora + "','" + nmesa + "','" + usuario + "');";
+            String query = "INSERT INTO oasisclub.asistencias(contrato,num_inv,fecha,hora,user) VALUES ('" + contrato + "','" + ninvitados + "','" + fecha + "','" + hora + "','" + usuario + "');";
             st.executeUpdate(query);
             return "OK";
         } catch (Exception e) {
@@ -324,4 +324,75 @@ public class DataManager {
             return null;
         }
     }
+
+      public ResultSet getReservas() {
+            try{
+                  String query = "SELECT * FROM oasisclub.reserva;";
+                  rs = st.executeQuery(query);
+                  return rs;
+            }catch(Exception ex){
+                  ex.printStackTrace();
+                  return null;
+            }
+      }
+
+      public ResultSet getReservasByName(String titular) {
+            try{
+                  String query ="SELECT * FROM oasisclub.reserva WHERE titular LIKE '%"+titular+"%';";
+                  rs=st.executeQuery(query);
+                  return rs;                  
+            }catch(Exception ex){
+                  ex.printStackTrace();
+                  return null;
+            }
+      }
+
+      public ResultSet getReservasByCI(String ci) {
+            try{
+                  String query ="SELECT * FROM oasisclub.reserva WHERE cedula LIKE '%"+ci+"%';";
+                  rs=st.executeQuery(query);
+                  return rs;                  
+            }catch(Exception ex){
+                  ex.printStackTrace();
+                  return null;
+            }
+      }
+
+      public void guardaReservacion(Reserva reserva) {
+            try{
+                  String query="INSERT INTO oasisclub.reserva(titular,cedula,telefono,plan,fecha,observacion,invitados) VALUES ('"+reserva.getTitular()+"','"+reserva.getCedula()+"','"+reserva.getTelefono()+"','"+reserva.getPlan()+"','"+reserva.getFecha()+"','"+reserva.getObservaciones()+"','"+reserva.invitados+"');";
+                  st.executeUpdate(query);
+            }catch(Exception ex){
+                  ex.printStackTrace();
+            }
+      }
+
+      public void actualizaReservacion(Reserva old, Reserva neww) {
+            try{
+                  String query ="UPDATE oasisclub.reserva SET titular='"+neww.titular+"', "
+                          + "cedula='"+neww.cedula+"', "
+                          + "telefono='"+neww.telefono+"', "
+                          + "plan='"+neww.plan+"', "
+                          + "fecha='"+neww.fecha+"', "
+                          + "observacion='"+neww.observaciones+"',"
+                          + "invitados='"+neww.invitados+"' "
+                          + "WHERE "
+                          + "cedula='"+old.cedula+"';";
+                  st.executeUpdate(query);
+            }catch(Exception ex){
+                  ex.printStackTrace();
+            }
+      }
+
+      public void eliminaReserva(Reserva r) {
+            try{
+                  String query="DELETE FROM oasisclub.reserva WHERE cedula='"+r.cedula+"' AND fecha='"+r.fecha+"';";
+                  st.executeUpdate(query);
+            }catch(Exception ex){
+                  ex.printStackTrace();
+            }
+            
+      }
+      
+      
 }

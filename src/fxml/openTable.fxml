@@ -15,7 +15,7 @@
          <children>
             <AnchorPane layoutX="35.0" prefHeight="480.0" prefWidth="765.0" styleClass="background" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="15.0">
                <children>
-                  <VBox alignment="TOP_RIGHT" layoutX="25.0" layoutY="47.0" prefHeight="152.0" prefWidth="130.0" spacing="12.0">
+                  <VBox alignment="TOP_RIGHT" layoutX="24.0" layoutY="80.0" prefHeight="152.0" prefWidth="130.0" spacing="12.0">
                      <children>
                         <Label layoutX="36.0" layoutY="30.0" text="Nombre" AnchorPane.leftAnchor="30.0">
                            <font>
@@ -42,11 +42,6 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="31.0" layoutY="168.0" text="Numero de mesa" AnchorPane.leftAnchor="31.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
                         <Label layoutX="34.0" layoutY="194.0" text="Fecha" AnchorPane.leftAnchor="34.0">
                            <font>
                               <Font size="14.0" />
@@ -54,14 +49,13 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox layoutX="166.0" layoutY="43.0" prefHeight="219.0" prefWidth="174.0" spacing="5.0">
+                  <VBox layoutX="165.0" layoutY="76.0" prefHeight="219.0" prefWidth="174.0" spacing="5.0">
                      <children>
                         <TextField fx:id="txtnombre" editable="false" layoutX="395.0" layoutY="106.0" />
                         <TextField fx:id="txtcedula" editable="false" layoutX="395.0" layoutY="139.0" />
-                        <TextField fx:id="txtcontrato" editable="false" layoutX="395.0" layoutY="165.0" />
-                        <TextField fx:id="txtplan" editable="false" layoutX="395.0" layoutY="191.0" />
+                        <TextField fx:id="txtplan" editable="false" layoutX="395.0" layoutY="165.0" />
+                        <TextField fx:id="txtcontrato" editable="false" layoutX="395.0" layoutY="191.0" />
                         <TextField fx:id="ninvitados" layoutX="389.0" layoutY="216.0" />
-                        <TextField fx:id="nmesa" layoutX="389.0" layoutY="250.0" />
                         <DatePicker fx:id="fecha" layoutX="389.0" layoutY="282.0" />
                      </children>
                   </VBox>

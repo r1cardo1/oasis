@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectPrinterController">
+   <children>
+      <Label alignment="CENTER" layoutX="186.0" layoutY="53.0" text="Seleccione una impresora" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <ComboBox fx:id="combo" layoutX="125.0" layoutY="88.0" prefWidth="150.0" />
+      <Button layoutX="99.0" layoutY="146.0" mnemonicParsing="false" onAction="#accept" text="Aceptar" />
+      <Button layoutX="249.0" layoutY="146.0" mnemonicParsing="false" onAction="#cancel" text="Cancelar" />
+   </children>
+</AnchorPane>
