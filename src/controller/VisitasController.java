@@ -120,8 +120,8 @@ public class VisitasController implements Initializable {
             while (rs.next()) {
                   aux = dmaux.searchClientbyContract(rs.getString("contrato"));
                   if (aux.next()) {
-                        asist = new Asistencia(rs.getString("mesa"), rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
-                                aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"));
+                        asist = new Asistencia(rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
+                                aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"),rs.getString("invad"));
                   }
                   table.getItems().add(asist);
 
@@ -137,8 +137,8 @@ public class VisitasController implements Initializable {
                   while (rs.next()) {
                         aux = dmaux.searchClientbyContract(rs.getString("contrato"));
                         if (aux.next()) {
-                              asist = new Asistencia(rs.getString("mesa"), rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
-                                      aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"));
+                              asist = new Asistencia(rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
+                                      aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"),rs.getString("invad"));
                         }
                         table.getItems().add(asist);
 
@@ -254,8 +254,8 @@ public class VisitasController implements Initializable {
                         if (date.getValue().isEqual(LocalDate.parse(rs.getString("fecha")))) {
                               aux = dmaux.searchClientbyContract(rs.getString("contrato"));
                               if (aux.next()) {
-                                    asist = new Asistencia(rs.getString("mesa"), rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
-                                            aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"));
+                                    asist = new Asistencia( rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
+                                            aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"),rs.getString("invad"));
                               }
                               table.getItems().add(asist);
                         }
@@ -276,8 +276,8 @@ public class VisitasController implements Initializable {
                                 && (to.getValue().isEqual(LocalDate.parse(rs.getString("fecha"))) || to.getValue().isAfter(LocalDate.parse(rs.getString("fecha"))))) {
                               aux = dmaux.searchClientbyContract(rs.getString("contrato"));
                               if (aux.next()) {
-                                    asist = new Asistencia(rs.getString("mesa"), rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
-                                            aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"));
+                                    asist = new Asistencia( rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
+                                            aux.getString("cedula"), aux.getString("nombre"), aux.getString("contrato"), aux.getString("plan"),rs.getString("invad"));
                               }
                               table.getItems().add(asist);
                         }

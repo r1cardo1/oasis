@@ -60,6 +60,7 @@ public class DataConection  {
           String sql1 = "CREATE TABLE IF NOT EXISTS oasisclub.asistencias("
                   + "contrato VARCHAR(20) NOT NULL,"
                   + "num_inv INT NOT NULL,"
+                  + "invad VARCHAR(30) NOT NULL,"
                   + "fecha VARCHAR(20) NOT NULL,"
                   + "hora VARCHAR(20) NOT NULL,"
                   + "user VARCHAR(100) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";

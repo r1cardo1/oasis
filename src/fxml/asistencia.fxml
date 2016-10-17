@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -17,12 +18,43 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <Button layoutX="50.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" AnchorPane.leftAnchor="40.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
          <children>
             <TabPane prefHeight="520.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
+                <Tab text="Tabla">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="table" layoutX="300.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
+                                <columns>
+                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
+                                  <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
+                                    <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
+                                    <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
+                                    <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
+                                    <TableColumn fx:id="invad" prefWidth="75.0" text="Invitados Adic" />
+                                    <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="14.0" prefHeight="40.0" prefWidth="529.0" spacing="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="15.0">
+                                 <children>
+                                    <Label text="Año" />
+                                    <ComboBox fx:id="tacombo" prefWidth="150.0" />
+                                    <Label text="Mes" />
+                                    <ComboBox fx:id="tmcombo" onAction="#updateTable" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
                 <Tab text="Grafico">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -47,37 +79,13 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Tabla">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="table" layoutX="300.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
-                                <columns>
-                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
-                                  <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
-                                    <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
-                                    <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
-                                    <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
-                                </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
-                              <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="14.0" prefHeight="40.0" prefWidth="529.0" spacing="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="15.0">
-                                 <children>
-                                    <Label text="Año" />
-                                    <ComboBox fx:id="tacombo" prefWidth="150.0" />
-                                    <Label text="Mes" />
-                                    <ComboBox fx:id="tmcombo" prefWidth="150.0" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
               </tabs>
             </TabPane>
          </children>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/theme.css" />
+      <URL value="@../css/asistencia.css" />
+   </stylesheets>
 </AnchorPane>

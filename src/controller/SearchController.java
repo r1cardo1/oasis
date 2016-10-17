@@ -17,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,6 +36,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -74,36 +78,13 @@ public class SearchController implements Initializable {
     DataManager dm = new DataManager();
     Usuario user;
     Stage primStage;
+    SearchController myController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initCombo();
         initTable();
         drag();
-    }
-
-    @FXML
-    public void focusin(MouseEvent evt) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode((Node) evt.getSource());
-        st.setFromX(1);
-        st.setFromY(1);
-        st.setToX(1.2);
-        st.setToY(1.2);
-        st.setDuration(Duration.millis(60));
-        st.play();
-    }
-
-    @FXML
-    public void focusout(MouseEvent evt) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode((Node) evt.getSource());
-        st.setFromX(1.2);
-        st.setFromY(1.2);
-        st.setToX(1);
-        st.setToY(1);
-        st.setDuration(Duration.millis(60));
-        st.play();
     }
 
     @FXML
@@ -122,8 +103,7 @@ public class SearchController implements Initializable {
         stage.close();
     }
 
-    @FXML
-    public void search(ActionEvent evt) throws SQLException {
+    public void search() throws SQLException {
         table.getItems().clear();
         table.getSelectionModel().clearSelection();
         Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
@@ -132,7 +112,7 @@ public class SearchController implements Initializable {
                 Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
                 + ":" + Integer.toString(time.get(Calendar.MINUTE))
                 + ":" + Integer.toString(time.get(Calendar.SECOND))
-                + " "+ ampm );
+                + " " + ampm);
 
         if (stipo.getSelectionModel().getSelectedItem().equals("CEDULA")) {
             ResultSet rs;
@@ -166,38 +146,10 @@ public class SearchController implements Initializable {
         }
 
     }
-
-    @FXML
-    public void selectClient(ActionEvent evt) throws IOException {
-        if (!table.getSelectionModel().isEmpty()) {
-            Cliente c = (Cliente) table.getSelectionModel().getSelectedItem();
-            if (c.getRestringido().equals("NO")) {
-                Scene scene;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/clientMenu.fxml"));
-                AnchorPane swap = loader.load();
-                ClientMenuController controller;
-                controller = loader.getController();
-                controller.user = this.user;
-                controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
-                controller.myController=controller;
-                main.getChildren().clear();
-                main.getChildren().add(swap);
-                controller.initData();
-            } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Alerta");
-                alert.setHeaderText(null);
-                alert.setContentText("El usuario esta restringido");
-                alert.show();
-            }
-        } else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("Debe seleccionar un cliente");
-            alert.show();
-        }
-
+    
+    public void keysearch(KeyEvent evt) throws SQLException{
+        if(evt.getCode().equals(KeyCode.ENTER))
+            search();
     }
 
     public void initTable() {
@@ -235,6 +187,66 @@ public class SearchController implements Initializable {
             }
         });
 
+    }
+
+    public void viewAsistencia() throws IOException, SQLException {
+        if (!table.getSelectionModel().isEmpty()) {
+            aux.setVisible(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/asistencia.fxml"));
+            AsistenciaController controller;
+            AnchorPane pan = loader.load();
+            aux.getChildren().add(pan);
+            controller = loader.getController();
+            controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
+            controller.user = this.user;
+            controller.menu = myController;
+            controller.setACombos();
+            controller.initTable();
+            aux.toFront();
+            aux.setVisible(true);
+            main.setVisible(false);
+        }
+    }
+
+    public void openTable(ActionEvent evt) throws IOException, SQLException {
+        if (!table.getSelectionModel().isEmpty()) {
+            aux.setVisible(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
+            OpenTableController controller;
+            AnchorPane pan = loader.load();
+            aux.getChildren().add(pan);
+            controller = loader.getController();
+            controller.menu = myController;
+            controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
+            controller.user = this.user;
+            try {
+                controller.initData();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            aux.toFront();
+            aux.setVisible(true);
+            main.setVisible(false);
+        }
+
+    }
+
+    public void viewInvitados() throws IOException {
+        if (!table.getSelectionModel().isEmpty()) {
+            aux.setVisible(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/invitados.fxml"));
+            InvitadosController controller;
+            AnchorPane pan = loader.load();
+            aux.getChildren().add(pan);
+            controller = loader.getController();
+            controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
+            controller.user = this.user;
+            controller.menu = myController;
+            controller.initTable();
+            aux.toFront();
+            aux.setVisible(true);
+            main.setVisible(false);
+        }
     }
 
 }

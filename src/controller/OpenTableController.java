@@ -55,7 +55,7 @@ public class OpenTableController implements Initializable {
     Usuario user;
     int max = 0;
     DataManager dm = new DataManager();
-    ClientMenuController menu;
+    SearchController menu;
     String printer;
 
     @Override
@@ -91,7 +91,7 @@ public class OpenTableController implements Initializable {
                 String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
                 hour = (LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME));
                 String result;
-                result = dm.openTable(txtcontrato.getText(), ninvitados.getText(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
+                result = dm.openTable(txtcontrato.getText(), ninvitados.getText(),Integer.toString(table.getItems().size()), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
                     dm.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));

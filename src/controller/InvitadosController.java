@@ -38,7 +38,7 @@ public class InvitadosController implements Initializable {
     ComboBox combo;
     @FXML
     DatePicker from, to, date;
-    ClientMenuController menu;
+    SearchController menu;
     DataManager dm = new DataManager();
     DataManager dmaux = new DataManager();
     Cliente client;

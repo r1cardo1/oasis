@@ -12,20 +12,16 @@ package classes;
 public class Asistencia {
 
       String invitados;
+      String invad;
       String fecha;
       String hora;
       String cedula;
       String nombre;
       String contrato;
       String plan;
+      
+      
 
-      public Asistencia(String invitados, String cedula, String nombre, String contrato, String plan) {
-            this.invitados = invitados;
-            this.cedula = cedula;
-            this.nombre = nombre;
-            this.contrato = contrato;
-            this.plan = plan;
-      }
 
       public void setCedula(String cedula) {
             this.cedula = cedula;
@@ -59,8 +55,7 @@ public class Asistencia {
             return plan;
       }
 
-      public Asistencia(String mesa, String invitados, String fecha, String hora, String cedula, String nombre, String contrato, String plan) {
-
+      public Asistencia(String invitados, String fecha, String hora, String cedula, String nombre, String contrato, String plan, String invad) {
             this.invitados = invitados;
             this.fecha = fecha;
             this.hora = hora;
@@ -68,7 +63,16 @@ public class Asistencia {
             this.nombre = nombre;
             this.contrato = contrato;
             this.plan = plan;
+            this.invad = invad;
       }
+
+    public void setInvad(String invad) {
+        this.invad = invad;
+    }
+
+    public String getInvad() {
+        return invad;
+    }
 
       public Asistencia(String mesa, String invitados, String fecha, String hora) {
 

@@ -119,14 +119,15 @@ public class MainMenuController implements Initializable {
         searchController = loader.getController();
         searchController.setMenuController(myController);
         searchController.user = this.user;
+        searchController.myController = searchController;
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         searchController.primStage = stage;
-         stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
-            stage.setTitle("Busqueda de clientes Oasis");
+        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
+        stage.setTitle("Busqueda de clientes Oasis");
         stage.show();
     }
 
@@ -228,15 +229,15 @@ public class MainMenuController implements Initializable {
     }
 
     public void viewReservas() throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reserva.fxml"));
-            AnchorPane pan = loader.load();
-            aux.getChildren().add(pan);
-            ReservaController controller = loader.getController();
-            controller.myController = controller;
-            controller.menu = myController;
-            controller.usuario = user;
-            aux.toFront();
-            main.setVisible(false);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reserva.fxml"));
+        AnchorPane pan = loader.load();
+        aux.getChildren().add(pan);
+        ReservaController controller = loader.getController();
+        controller.myController = controller;
+        controller.menu = myController;
+        controller.usuario = user;
+        aux.toFront();
+        main.setVisible(false);
     }
 
     public void setController(MainMenuController c) {

@@ -78,9 +78,9 @@ public class DataManager {
         }
     }
 
-    public String openTable(String contrato, String ninvitados, String fecha, String hora, String usuario) {
+    public String openTable(String contrato, String ninvitados,String invad, String fecha, String hora, String usuario) {
         try {
-            String query = "INSERT INTO oasisclub.asistencias(contrato,num_inv,fecha,hora,user) VALUES ('" + contrato + "','" + ninvitados + "','" + fecha + "','" + hora + "','" + usuario + "');";
+            String query = "INSERT INTO oasisclub.asistencias(contrato,num_inv,invad,fecha,hora,user) VALUES ('" + contrato + "','" + ninvitados + "','"+invad+"','" + fecha + "','" + hora + "','" + usuario + "');";
             st.executeUpdate(query);
             return "OK";
         } catch (Exception e) {
