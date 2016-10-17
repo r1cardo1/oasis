@@ -28,9 +28,10 @@ and open the template in the editor.
 
 .grid-pane{
     -fx-background-image: url("../images/topbackground.png");
-    -fx-background-position:center;
+    
     -fx-background-size: cover;
-    -fx-background-repeat: no-repeat;
+
+    
 }
 
 .close-button{

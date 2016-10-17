@@ -83,7 +83,7 @@ public class DataConection  {
                   + "modo VARCHAR(20) NOT NULL,"
                   + "filtro VARCHAR(20) NOT NULL,"
                   + "fecha VARCHAR(20) NOT NULL,"
-                  + "hora VARCHAR(10) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+                  + "hora VARCHAR(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
           
           String sql6 = "CREATE TABLE IF NOT EXISTS oasisclub.opentables("
                   + "usuario VARCHAR(20) NOT NULL,"

@@ -82,6 +82,7 @@ public class SelectPrinterController implements Initializable {
             
 
             job.print(doc, null);
+            
 
         } catch (javax.print.PrintException pex) {
 

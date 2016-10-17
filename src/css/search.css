@@ -65,10 +65,11 @@ and open the template in the editor.
 .search-button:hover{
     -fx-background-radius:0px;
     -fx-background-color:white;
-    -fx-border-color:blue;
+    -fx-border-color:gray;
     -fx-border-width:2px;
     -fx-background-insets:-1px;
     -fx-graphic:url("../images/search-button.png");
+        -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
 }
 
 .select-button{
@@ -83,9 +84,9 @@ and open the template in the editor.
 .select-button:hover{
     -fx-background-radius:0px;
     -fx-background-color:white;
-    -fx-border-color:blue;
+    -fx-border-color:gray;
     -fx-border-width:2px;
     -fx-background-insets:-1px;
-    -fx-graphic:url("../images/select-button.png");
+    -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
 }
 

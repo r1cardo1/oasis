@@ -28,7 +28,7 @@
          <center>
             <AnchorPane fx:id="main" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="11.0" layoutY="365.0" prefHeight="565.0" prefWidth="798.0" style="-fx-background-color: white; -fx-background-radius: 8px; -fx-border-color: black; -fx-border-radius: 8px; -fx-opacity: 0.8;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="180.0" />
+                  <Pane layoutX="11.0" layoutY="365.0" prefHeight="565.0" prefWidth="798.0" style="-fx-background-color: white; -fx-background-radius: 8px; -fx-border-color: black; -fx-border-radius: 8px; -fx-opacity: 0.6;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="180.0" />
                   <Label layoutX="54.0" layoutY="202.0" text="Buscar por" />
                   <ComboBox fx:id="stipo" layoutX="130.0" layoutY="198.0" prefWidth="150.0" />
                   <TextField fx:id="str" layoutX="312.0" layoutY="198.0" />

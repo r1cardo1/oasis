@@ -106,20 +106,18 @@ public class OpenTableController implements Initializable {
                 p.setText("Oasis Club C.A");
                 p.newLine();
                 p.setText("Carretera Kilómetro 7 1/2");
-                p.newLine();
-                p.addLineSeperator();
+                p.newLine();                
                 p.setText("Vía la Cañada Sector Camuri.");
                 p.newLine();
                 p.setText("San francisco, Zulia");
                 p.addLineSeperator();
                 p.newLine();
-
                 p.alignLeft();
                 p.setText("Fecha \t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
                 p.newLine();
                 p.setText("Cliente \t:" + client.getNombre());
                 p.newLine();
-                p.setText("Cedula: \t:" +client.getCedula());
+                p.setText("Cedula \t:" +client.getCedula());
                 p.newLine();
                 p.setText("Contrato \t:"+client.getContrato());
                 p.newLine();
@@ -142,9 +140,10 @@ public class OpenTableController implements Initializable {
                 p.addLineSeperator();
                 p.feed((byte) 3);
                 p.finit();
-
+                System.out.println(p.finalCommandSet());
                // feedPrinter(p.finalCommandSet().getBytes());
                print(p.finalCommandSet().getBytes());
+               System.out.println(p.finalCommandSet());
                 
                 if (result.equals("OK")) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
