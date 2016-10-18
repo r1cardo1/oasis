@@ -64,11 +64,12 @@
                   </AnchorPane>
                   <AnchorPane fx:id="main" prefHeight="568.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="100.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="70.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
                               <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openTable" prefWidth="120.0" styleClass="open-table-button" text="Abrir mesa" />
                               <Button contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewAsistencia" prefWidth="120.0" styleClass="ver-visitas-button" text="Ver visitas" />
                               <Button contentDisplay="RIGHT" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewInvitados" prefWidth="120.0" styleClass="ver-invitados-button" text="Ver Invitados" />
+                              <Button contentDisplay="RIGHT" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" onAction="#reservar" prefWidth="120.0" styleClass="reserva-button" text="Reservar" />
                            </children>
                         </HBox>
                         <TableView fx:id="table" editable="true" prefHeight="342.0" prefWidth="720.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">

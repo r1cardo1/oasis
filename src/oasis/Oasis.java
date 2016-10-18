@@ -6,15 +6,17 @@
 package oasis;
 
 import controller.LoginController;
-import controller.MainMenuController;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 /**
  *
@@ -28,6 +30,7 @@ public class Oasis extends Application {
             Parent root = loader.load();
             LoginController con = loader.getController();            
             Scene scene = new Scene(root);
+            con.primStage=stage;
             scene.setFill(Color.TRANSPARENT);            
             stage.setScene(scene);
             stage.initStyle(StageStyle.TRANSPARENT);      
@@ -35,6 +38,7 @@ public class Oasis extends Application {
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
             stage.setTitle("Inicio de sesion Oasis Club");
             stage.show();
+            fadein(root);
       }
 
       /**
@@ -42,6 +46,15 @@ public class Oasis extends Application {
        */
       public static void main(String[] args) {
             launch(args);
+      }
+      
+      public void fadein(Node n){
+            FadeTransition ft = new FadeTransition();
+            ft.setNode(n);
+            ft.setFromValue(0);
+            ft.setToValue(1);
+            ft.setDuration(Duration.millis(350));
+            ft.play();
       }
       
 }

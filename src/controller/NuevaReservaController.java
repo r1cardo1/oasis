@@ -5,6 +5,7 @@
  */
 package controller;
 
+import classes.Cliente;
 import classes.DataManager;
 import classes.Reserva;
 import java.net.URL;
@@ -41,7 +42,8 @@ public class NuevaReservaController implements Initializable {
       Reserva r;
       Boolean save = true;
       ReservaController menu;
-
+      Cliente client;
+      
       @Override
       public void initialize(URL url, ResourceBundle rb) {
             // TODO
@@ -96,11 +98,15 @@ public class NuevaReservaController implements Initializable {
             if(!titular.getText().isEmpty() && !cedula.getText().isEmpty())
                   if(save){
                         dm.guardaReservacion(new Reserva(titular.getText(),cedula.getText(),telefono.getText(),plan.getText(),invitados.getText(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),observacion.getText()));
+                        try{
                         menu.reloadTable();
+                        }catch(Exception ex){
+                              System.out.println(ex.getMessage());
+                        }
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Alerta");
                         alert.setHeaderText(null);
-                        alert.setContentText("El usuario ya existe");
+                        alert.setContentText("Reserva añadida con exito");
                         alert.show();
                         Stage stage;
                         Button b = (Button) evt.getSource();
@@ -112,7 +118,7 @@ public class NuevaReservaController implements Initializable {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Alerta");
                         alert.setHeaderText(null);
-                        alert.setContentText("El usuario ya existe");
+                        alert.setContentText("Reserva actualizada con exito");
                         alert.show();
                         Stage stage;
                         Button b = (Button) evt.getSource();
@@ -120,5 +126,13 @@ public class NuevaReservaController implements Initializable {
                         stage.close();
                   }
       }
+
+      void initClient() {
+            titular.setText(client.getNombre());
+            cedula.setText(client.getCedula());
+            plan.setText(client.getPlan());            
+      }
+      
+      
 
 }

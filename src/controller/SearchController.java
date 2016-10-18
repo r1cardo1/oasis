@@ -17,18 +17,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -41,8 +36,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import javax.swing.JOptionPane;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -247,6 +241,23 @@ public class SearchController implements Initializable {
             aux.setVisible(true);
             main.setVisible(false);
         }
+    }
+    
+    public void reservar() throws IOException{
+          if(!table.getSelectionModel().isEmpty()){
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NuevaReserva.fxml"));
+            Parent root = loader.load();
+            NuevaReservaController controller = loader.getController();
+            controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
+            controller.initClient();
+            controller.primStage=stage;
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
+            
+          }
     }
 
 }

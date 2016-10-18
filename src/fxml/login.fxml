@@ -45,7 +45,7 @@
                                  </font>
                               </Label>
                               <PasswordField fx:id="pass" />
-                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#login" styleClass="login-button" text="Inciar Sesion" />
+                              <Button fx:id="login" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#login" styleClass="login-button" text="Inciar Sesion" />
                            </children>
                         </VBox>
                      </children>
