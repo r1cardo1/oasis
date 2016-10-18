@@ -31,6 +31,7 @@ public class Oasis extends Application {
             LoginController con = loader.getController();            
             Scene scene = new Scene(root);
             con.primStage=stage;
+            
             scene.setFill(Color.TRANSPARENT);            
             stage.setScene(scene);
             stage.initStyle(StageStyle.TRANSPARENT);      
@@ -38,7 +39,9 @@ public class Oasis extends Application {
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
             stage.setTitle("Inicio de sesion Oasis Club");
             stage.show();
-            fadein(root);
+
+
+            con.initHost();
       }
 
       /**

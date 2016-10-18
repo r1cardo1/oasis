@@ -7,8 +7,8 @@ package classes;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,80 +34,105 @@ public class DataManager {
         }
     }
 
-    public ResultSet login(String user) {
+    public Usuario login(Usuario user) {
+        Usuario u = null;
         try {
             String query = "SELECT * FROM oasisclub.usuarios WHERE usuario LIKE '" + user + "';";
             rs = st.executeQuery(query);
-            return rs;
+            if(rs.next())
+                u=new Usuario(rs.getString("nombre"),rs.getString("apellido"),rs.getString("usuario"),rs.getString("clave"),rs.getInt("nivel"));
+            if(u!=null)
+                if(user.getUsuario().equals(u.getUsuario()))
+                    if(user.getClave().equals(u.getClave()))
+                        return u;
+            return null;           
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public ResultSet searchClientbyCI(String str) {
+    public ArrayList<Cliente> searchClientbyCI(String str) {
+        ArrayList<Cliente> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM oasisclub.clientes WHERE cedula LIKE '%" + str + "%'";
             rs = st.executeQuery(sql);
-            return rs;
+            while(rs.next())
+                list.add(new Cliente(rs.getString("cedula"),rs.getString("nombre"),rs.getString("contrato"),
+                rs.getString("plan"),rs.getString("banco"),rs.getString("restringido")));
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return list;
         }
     }
 
-    public ResultSet searchClientbyContract(String str) {
+    public ArrayList<Cliente> searchClientbyContract(String str) {
+        ArrayList<Cliente> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM oasisclub.clientes WHERE contrato LIKE '%" + str + "%';";
             rs = st.executeQuery(sql);
-            return rs;
+            while(rs.next())
+                list.add(new Cliente(rs.getString("cedula"),rs.getString("nombre"),rs.getString("contrato"),
+                rs.getString("plan"),rs.getString("banco"),rs.getString("restringido")));
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return list;
         }
     }
 
-    public ResultSet searchClientbyName(String str) {
+    public ArrayList<Cliente> searchClientbyName(String str) {
+        ArrayList<Cliente> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM oasisclub.clientes WHERE nombre LIKE '%" + str + "%';";
             rs = st.executeQuery(sql);
-            return rs;
+            while(rs.next())
+                list.add(new Cliente(rs.getString("cedula"),rs.getString("nombre"),rs.getString("contrato"),
+                rs.getString("plan"),rs.getString("banco"),rs.getString("restringido")));
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return list;
         }
     }
 
-    public String openTable(String contrato, String ninvitados,String invad, String fecha, String hora, String usuario) {
+    public void openTable(String contrato, String ninvitados,String invad, String fecha, String hora, String usuario) {
         try {
             String query = "INSERT INTO oasisclub.asistencias(contrato,num_inv,invad,fecha,hora,user) VALUES ('" + contrato + "','" + ninvitados + "','"+invad+"','" + fecha + "','" + hora + "','" + usuario + "');";
             st.executeUpdate(query);
-            return "OK";
         } catch (Exception e) {
             e.printStackTrace();
-            return "FAIL";
         }
 
     }
 
-    public ResultSet visits() {
+    public ArrayList<Asistencia> visits() {
+        ArrayList<Asistencia> list = new ArrayList<>();
         try {
             String query = "SELECT * FROM oasisclub.asistencias;";
             rs = st.executeQuery(query);
-            return rs;
+            while(rs.next())
+                list.add(new Asistencia(rs.getString("num_inv"),rs.getString("fecha"),
+                        rs.getString("hora"),rs.getString("contrato"),rs.getString("invad"),
+                        rs.getString("user")));
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return list;
         }
     }
 
-    public ResultSet getRestringidos() {
+    public ArrayList<Cliente> getRestringidos() {
+        ArrayList<Cliente> list = new ArrayList<>();
         try {
             String query = "SELECT * FROM oasisclub.clientes WHERE restringido = 'SI';";
             rs = st.executeQuery(query);
-            return rs;
+            while(rs.next())
+                list.add(new Cliente(rs.getString("cedula"),rs.getString("nombre"),rs.getString("contrato"),rs.getString("plan"),rs.getString("banco"),rs.getString("restringido")));
+            return list;
         } catch (Exception e) {
-            return rs;
+            return list;
         }
     }
 
@@ -138,14 +163,16 @@ public class DataManager {
         }
     }
 
-    public ResultSet getUsuarios() {
-        rs = null;
+    public ArrayList<Usuario> getUsuarios() {
+        ArrayList<Usuario> list = new ArrayList<>();
         try {
             String query = "SELECT * FROM oasisclub.usuarios;";
             rs = st.executeQuery(query);
-            return rs;
+            while(rs.next())
+                list.add(new Usuario(rs.getString("nombre"),rs.getString("apellido"),rs.getString("usuario"),rs.getString("clave"),rs.getInt("nivel")));
+            return list;
         } catch (Exception e) {
-            return null;
+            return list;
         }
     }
 
@@ -228,23 +255,7 @@ public class DataManager {
         }
     }
 
-    public boolean update(int id, String nombre, String genero, int anio, String actor, String pais) {
-        try {
-            String query = "UPDATE peliculas SET"
-                    + " nombre = '" + nombre + "',"
-                    + " genero = '" + genero + "',"
-                    + " anio = '" + anio + "',"
-                    + " actor = '" + actor + "',"
-                    + " pais = '" + pais + "' WHERE id = '" + id + "';";
-            st.executeUpdate(query);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-      public ResultSet getPlans() {
+       public ResultSet getPlans() {
             try{
                   String query = "SELECT * FROM oasisclub.planes;";
                   rs = st.executeQuery(query);

@@ -44,7 +44,6 @@ public class SelectPrinterController implements Initializable {
 
       public void initCombo() {
             PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
-            System.out.println("Number of print services: " + printServices.length);
 
             for (PrintService printer : printServices) {
                   combo.getItems().add(printer.getName());

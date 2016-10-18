@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,10 +87,15 @@ public class OpenTableController implements Initializable {
     @FXML
     public void openTable(ActionEvent evt) throws IOException {
         if (!ninvitados.getText().isEmpty()) {            
-                Calendar time = Calendar.getInstance();
+                
                 String hour;
-                String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
-                hour = (LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME));
+                String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();                
+                Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+                hour =  Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                                            + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                                            + ":" + Integer.toString(time.get(Calendar.SECOND))
+                                            + ampm;
                 String result;
                 result = dm.openTable(txtcontrato.getText(), ninvitados.getText(),Integer.toString(table.getItems().size()), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
                 for (int i = 0; i < table.getItems().size(); i++) {
@@ -110,14 +116,15 @@ public class OpenTableController implements Initializable {
                 p.setText("Vía la Cañada Sector Camuri.");
                 p.newLine();
                 p.setText("San francisco, Zulia");
-                p.addLineSeperator();
                 p.newLine();
+                p.addLineSeperator();
                 p.alignLeft();
-                p.setText("Fecha \t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                p.newLine();
+                p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
                 p.newLine();
                 p.setText("Cliente \t:" + client.getNombre());
                 p.newLine();
-                p.setText("Cedula \t:" +client.getCedula());
+                p.setText("Cedula \t\t:" +client.getCedula());
                 p.newLine();
                 p.setText("Contrato \t:"+client.getContrato());
                 p.newLine();
@@ -131,29 +138,25 @@ public class OpenTableController implements Initializable {
 
                 p.newLine();
 
-                p.setText("No \tArt\\tCant\tPrec");
+                p.setText("No \tArt\t\tCant\tPrec");
                 p.newLine();
                 p.addLineSeperator();
-                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                p.newLine();
+                p.setText("1" + "\t" + "Apert. Mesa" + "\t" +  "1" + "\t" + "0");
+                p.newLine();
+                if(table.getItems().size()>0)
+                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                p.newLine();
                 p.addLineSeperator();
+                p.newLine();
                 p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*4000 );
+                p.newLine();
                 p.addLineSeperator();
                 p.feed((byte) 3);
                 p.finit();
-                System.out.println(p.finalCommandSet());
                // feedPrinter(p.finalCommandSet().getBytes());
                print(p.finalCommandSet().getBytes());
-               System.out.println(p.finalCommandSet());
-                
-                if (result.equals("OK")) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Alerta");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Apertura de mesa exitosa");
-                    alert.show();
-                }
-
-            
+               System.out.println(p.finalCommandSet());           
         }
     }
 
@@ -186,33 +189,6 @@ public class OpenTableController implements Initializable {
         menu.main.toFront();
     }
 
-    private boolean feedPrinter(byte[] b) {
-        try {
-              
-            AttributeSet attrSet = new HashPrintServiceAttributeSet(new PrinterName("NPI3B7AEC (HP LaserJet Professional M1212nf MFP)", null)); //EPSON TM-U220 ReceiptE4
-
-            DocPrintJob job = PrintServiceLookup.lookupPrintServices(null, attrSet)[0].createPrintJob();
-            //PrintServiceLookup.lookupDefaultPrintService().createPrintJob();  
-            
-            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-            Doc doc = new SimpleDoc(b, flavor, null);
-            //PrintJobWatcher pjDone = new PrintJobWatcher(job);
-            
-
-            job.print(doc, null);
-
-        } catch (javax.print.PrintException pex) {
-
-            System.out.println("Printer Error " + pex.getMessage());
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
-    
     public void print(byte[] b) throws IOException{
           Stage stage = new Stage();
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/selectPrinter.fxml"));

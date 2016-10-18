@@ -7,7 +7,10 @@ package controller;
 
 import classes.Asistencia;
 import classes.DataManager;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -36,12 +40,17 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Picture;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.IOUtils;
 
 /**
  * FXML Controller class
@@ -292,13 +301,42 @@ public class VisitasController implements Initializable {
       }
 
       public void exportExcel() {
+          
+          FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XLS", "*.xls"));
+        File f =fileChooser.showSaveDialog(null);
+            
             try {
-                  String filename = "NewExcelFile.xls";
+                  String filename = f.getAbsolutePath();
                   HSSFWorkbook workbook = new HSSFWorkbook();
                   HSSFSheet sheet = workbook.createSheet("FirstSheet");
                   int bool = 1;
+                  
+                  InputStream inputStream = new FileInputStream("src/images/excel-logo.jpg");
 
-                  HSSFRow rowhead = sheet.createRow(2);
+                    byte[] imageBytes = IOUtils.toByteArray(inputStream);
+
+                    int pictureureIdx = workbook.addPicture(imageBytes, Workbook.PICTURE_TYPE_JPEG);
+
+                    inputStream.close();
+
+                    CreationHelper helper = workbook.getCreationHelper();
+
+                    Drawing drawing = sheet.createDrawingPatriarch();
+
+                    ClientAnchor anchor = helper.createClientAnchor();
+
+                    anchor.setCol1(1);
+                    anchor.setRow1(0);
+
+                    Picture pict =drawing.createPicture(anchor, pictureureIdx);
+                    
+                    
+
+
+                  HSSFRow rowhead = sheet.createRow(8);
 
                   rowhead.createCell(0);
                   rowhead.createCell(1).setCellValue("Cedula");
@@ -311,7 +349,7 @@ public class VisitasController implements Initializable {
                   makeRowBold(workbook, rowhead);
 
                   for (int i = 0; i < table.getItems().size(); i++) {
-                        HSSFRow row = sheet.createRow(i + 3);
+                        HSSFRow row = sheet.createRow(i + 9);
                         Asistencia a = (Asistencia) table.getItems().get(i);
                         row.createCell(1).setCellValue(a.getCedula());
                         row.createCell(2).setCellValue(a.getNombre());
@@ -319,11 +357,11 @@ public class VisitasController implements Initializable {
                         row.createCell(4).setCellValue(a.getPlan());
                         row.createCell(5).setCellValue(a.getFecha());
                         row.createCell(6).setCellValue(a.getHora());
-                        row.createCell(7).setCellValue(a.getInvitados());
+                        row.createCell(7).setCellValue(Integer.parseInt(a.getInvitados()));
                         centerRow(workbook,row);
                   }
-                  
                   autoSizeColumns(workbook);
+                  pict.resize();
                   FileOutputStream fileOut = new FileOutputStream(filename);
                   workbook.write(fileOut);
                   fileOut.close();
@@ -367,7 +405,7 @@ public class VisitasController implements Initializable {
             for (int i = 0; i < numberOfSheets; i++) {
                   Sheet sheet = workbook.getSheetAt(i);
                   if (sheet.getPhysicalNumberOfRows() > 0) {
-                        Row row = sheet.getRow(2);
+                        Row row = sheet.getRow(8);
                         
                         Iterator<Cell> cellIterator = row.cellIterator();
                         while (cellIterator.hasNext()) {
@@ -379,5 +417,8 @@ public class VisitasController implements Initializable {
                   }
             }
       }
+      
+      
+   
 
 }

@@ -19,6 +19,16 @@ public class Asistencia {
       String nombre;
       String contrato;
       String plan;
+      String usuario;
+
+    Asistencia(String invitados, String fecha, String hora, String contrato, String invad, String usuario) {
+        this.invitados=invitados;
+        this.fecha=fecha;
+        this.hora=hora;
+        this.contrato=contrato;
+        this.invad=invad;
+        this.usuario=usuario;
+    }
       
       
 
