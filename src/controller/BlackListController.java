@@ -8,8 +8,8 @@ package controller;
 import classes.Cliente;
 import classes.DataManager;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,10 +47,10 @@ public class BlackListController implements Initializable {
     plan.setCellValueFactory(new PropertyValueFactory<>("plan"));    
 
     
-    ResultSet  rs =dm.getRestringidos();
-    if(rs != null)
-    while(rs.next()){
-        table.getItems().add(new Cliente(rs.getString("cedula"),rs.getString("nombre"),rs.getString("contrato"),rs.getString("plan"),rs.getString("banco"),rs.getString("restringido")));
+   ArrayList<Cliente> list =dm.getRestringidos();
+    if(!list.isEmpty())
+    for(Cliente c:list){
+        table.getItems().add(c);
     }
 }
           public void back(ActionEvent evt){

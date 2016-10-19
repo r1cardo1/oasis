@@ -12,6 +12,7 @@ import classes.Usuario;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -54,15 +55,12 @@ public class InvitadosController implements Initializable {
         apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        ResultSet rs = dm.getInvitados();
-        try {
-            while (rs.next()) {
-                if (client.getContrato().equals(rs.getString("contrato")));
-                    table.getItems().add(new Invitado(rs.getString("nombre"), rs.getString("apellido"), rs.getString("cedula"), rs.getString("contrato"), rs.getString("fecha")));
+        ArrayList<Invitado> list = dm.getInvitados();        
+            for(Invitado in:list) {
+                if (client.getContrato().equals(in.getContrato()));
+                    table.getItems().add(in);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        
     }
 
     public void exportExcel() {
@@ -166,14 +164,9 @@ public class InvitadosController implements Initializable {
 
     public void reloadTable() {
         table.getItems().clear();
-        ResultSet rs = dm.getInvitados();
-        try {
-            while (rs.next()) {
-                table.getItems().add(new Invitado(rs.getString("nombre"), rs.getString("apellido"), rs.getString("cedula"), rs.getString("contrato"), rs.getString("fecha")));
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        ArrayList<Invitado> list = dm.getInvitados();
+       for(Invitado in:list)
+             table.getItems().add(in);
     }
 
 }

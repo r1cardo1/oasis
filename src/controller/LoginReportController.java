@@ -7,6 +7,7 @@ package controller;
 
 import classes.DataManager;
 import classes.Login;
+import classes.Usuario;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,17 +65,15 @@ public class LoginReportController implements Initializable {
     }
 
     public void initUsers() throws SQLException {
-        ResultSet rs = dm.getUsuarios();
-        while (rs.next()) {
-            users.add(rs.getString("usuario"));
+        ArrayList<Usuario> user = dm.getUsuarios();
+        for(Usuario u:user) {
+            users.add(u.getUsuario());
         }
-        rs.close();
         logins = new int[users.size()];
+        int log;
         for (int i = 0; i < users.size(); i++) {
-            rs = dm.getLogins(users.get(i));
-            if (rs.next()) {
-                logins[i] = rs.getInt("COUNT(usuario)");
-            }
+            log = dm.getLogins(users.get(i));            
+                logins[i] =log;            
         }
         XYChart.Series<String, Integer> series;
         series = new XYChart.Series<>();
@@ -90,10 +89,9 @@ public class LoginReportController implements Initializable {
     public void initCombo() throws SQLException {
         tcUser.getItems().addAll("TODOS");
         mgUser.getItems().add("TODOS");
-        ResultSet rs;
-        rs = dm.getUsuarios();
-        while (rs.next()) {
-            String str = rs.getString("usuario");
+       ArrayList<Usuario> user = dm.getUsuarios();
+        for(Usuario u:user) {
+            String str = u.getUsuario();
             tcUser.getItems().add(str);
             mgUser.getItems().add(str);
         }
@@ -149,22 +147,22 @@ public class LoginReportController implements Initializable {
         usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         hora.setCellValueFactory(new PropertyValueFactory<>("hora"));
-        ResultSet rs = dm.getLogLogins();
-        while (rs.next()) {
-            table.getItems().add(new Login(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("fecha"), rs.getString("hora")));
+        ArrayList<Login> logins = dm.getLogLogins();
+       for(Login log:logins) {
+            table.getItems().add(log);
         }
     }
     
     @FXML
     public void taction() throws SQLException {
         table.getItems().clear();
-        ResultSet rs = dm.getLogLogins();
-        while (rs.next()) {
-            if (rs.getString("usuario").equals(tcUser.getSelectionModel().getSelectedItem())) {
-                table.getItems().add(new Login(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("fecha"), rs.getString("hora")));
+        ArrayList<Login> logins = dm.getLogLogins();
+        for(Login log:logins) {
+            if (log.getUsuario().equals(tcUser.getSelectionModel().getSelectedItem())) {
+                table.getItems().add(log);
             } else {
                 if (tcUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
-                    table.getItems().add(new Login(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("fecha"), rs.getString("hora")));
+                    table.getItems().add(log);
                 }
             }
         }

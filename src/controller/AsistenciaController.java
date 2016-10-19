@@ -43,10 +43,10 @@ public class AsistenciaController implements Initializable {
 
     public void setACombos() throws SQLException {
         ArrayList<String> years = new ArrayList<>();
-        ResultSet rs = dm.getAsistenciaPorContrato(client.getContrato());
-        while (rs.next()) {
-            if (!years.contains(Integer.toString(LocalDate.parse(rs.getString("fecha")).getYear()))) {
-                years.add(Integer.toString(LocalDate.parse(rs.getString("fecha")).getYear()));
+        ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
+       for(Asistencia asist : list) {
+            if (!years.contains(Integer.toString(LocalDate.parse(asist.getFecha()).getYear()))) {
+                years.add(Integer.toString(LocalDate.parse(asist.getFecha()).getYear()));
             }
         }
         for (int i = 0; i < years.size(); i++) {
@@ -60,12 +60,12 @@ public class AsistenciaController implements Initializable {
     }
 
     public void updateGMCombo() throws SQLException {
-        ResultSet rs = dm.getAsistenciaPorContrato(client.getContrato());
+        ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
         int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
-        while (rs.next()) {
-            if (LocalDate.parse(rs.getString("fecha")).getYear() - Integer.parseInt((String) gacombo.getSelectionModel().getSelectedItem()) == 0) {
-                montBool[LocalDate.parse(rs.getString("fecha")).getMonthValue()] = 1;
+        for(Asistencia asist : list) {
+            if (LocalDate.parse(asist.getFecha()).getYear() - Integer.parseInt((String) gacombo.getSelectionModel().getSelectedItem()) == 0) {
+                montBool[LocalDate.parse(asist.getFecha()).getMonthValue()] = 1;
             }
         }
         for (int i = 0; i < montBool.length; i++) {
@@ -76,12 +76,12 @@ public class AsistenciaController implements Initializable {
     }
 
     public void updateTMCombo() throws SQLException {
-        ResultSet rs = dm.getAsistenciaPorContrato(client.getContrato());
+        ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
         int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
-        while (rs.next()) {
-            if (LocalDate.parse(rs.getString("fecha")).getYear() - Integer.parseInt((String) tacombo.getSelectionModel().getSelectedItem()) == 0) {
-                montBool[LocalDate.parse(rs.getString("fecha")).getMonthValue()] = 1;
+        for(Asistencia asist:list) {
+            if (LocalDate.parse(asist.getFecha()).getYear() - Integer.parseInt((String) tacombo.getSelectionModel().getSelectedItem()) == 0) {
+                montBool[LocalDate.parse(asist.getFecha()).getMonthValue()] = 1;
             }
         }
         for (int i = 0; i < montBool.length; i++) {
@@ -98,8 +98,7 @@ public class AsistenciaController implements Initializable {
     public void updateTable() throws SQLException {
         if (!tmcombo.getSelectionModel().isEmpty()) {
             table.getItems().clear();
-            ResultSet rs = dm.getAsistenciaPorContrato(client.getContrato());
-            DataManager dmaux = new DataManager();
+            ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
             String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
             int mont = 0;
             for (int i = 1; i < montsNames.length; i++) {
@@ -107,12 +106,11 @@ public class AsistenciaController implements Initializable {
                     mont = i;
                 }
             }
-            while (rs.next()) {
-                if (LocalDate.parse(rs.getString("fecha")).getMonthValue() - mont == 0) {
-                    table.getItems().add(new Asistencia(rs.getString("num_inv"), rs.getString("fecha"), rs.getString("hora"),
-                            client.getCedula(), client.getNombre(), client.getContrato(), client.getPlan(), rs.getString("invad")));
-                }
-                System.out.println(rs.getString("invad"));
+           for(Asistencia asist:list){
+                if (LocalDate.parse(asist.getFecha()).getMonthValue() - mont == 0) {
+                    table.getItems().add(new Asistencia(asist.getInvitados(), asist.getFecha(), asist.getHora(),
+                            client.getCedula(), client.getNombre(), client.getContrato(), client.getPlan(), asist.getInvad()));
+                }                
             }
         }
     }

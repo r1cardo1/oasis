@@ -165,18 +165,18 @@ public class DataManager {
             }
       }
 
-      public ArrayList<Login> getLogins(String u) {
+      public int getLogins(String u) {
             ArrayList<Login> list = new ArrayList<>();
+            int count=0;
             try {
                   String query = "SELECT COUNT(usuario) FROM oasisclub.login WHERE usuario = '" + u + "';";
                   rs = st.executeQuery(query);
-                  while (rs.next()) {
-                        list.add(new Login(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("fecha"), rs.getString("hora")));
-                  }
-                  return list;
+                  if(rs.next())
+                        count=rs.getInt("COUNT(usuario)");
+                  return count;
             } catch (Exception e) {
                   System.out.println(e.getMessage());
-                  return list;
+                  return count;
             }
       }
 
