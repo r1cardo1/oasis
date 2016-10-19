@@ -32,6 +32,7 @@ public class ReportMenuController implements Initializable {
     @FXML
     AnchorPane aux;
     ReportMenuController myController;
+    String host;
 
     /**
      * Initializes the controller class.
@@ -54,6 +55,7 @@ public class ReportMenuController implements Initializable {
         Pane pan = loader.load();
         LoginReportController controller = loader.getController();
         controller.menu = myController;
+        controller.host = this.host;
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();
@@ -66,7 +68,7 @@ public class ReportMenuController implements Initializable {
         Pane pan = loader.load();
         SearchReportController controller = loader.getController();
         controller.menu = myController;
-        
+        controller.host=this.host;
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();

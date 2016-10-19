@@ -5,11 +5,13 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo
  */
-public class Invitado {
+public class Invitado implements Serializable{
       String nombre;
       String apellido;
       String cedula;

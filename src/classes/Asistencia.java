@@ -5,11 +5,13 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo Marcano
  */
-public class Asistencia {
+public class Asistencia implements Serializable{
 
       String invitados;
       String invad;
@@ -21,7 +23,7 @@ public class Asistencia {
       String plan;
       String usuario;
 
-    Asistencia(String invitados, String fecha, String hora, String contrato, String invad, String usuario) {
+   public Asistencia(String invitados, String fecha, String hora, String contrato, String invad, String usuario) {
         this.invitados=invitados;
         this.fecha=fecha;
         this.hora=hora;
@@ -29,6 +31,8 @@ public class Asistencia {
         this.invad=invad;
         this.usuario=usuario;
     }
+
+ 
       
       
 

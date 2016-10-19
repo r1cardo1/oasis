@@ -6,8 +6,11 @@
 package controller;
 
 import classes.Cliente;
-import classes.DataManager;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -28,30 +31,31 @@ public class BlackListController implements Initializable {
     @FXML TableColumn<Cliente, String> contrato;
     @FXML TableColumn<Cliente, String> plan;
     @FXML TableView table;
-    DataManager dm = new DataManager();
     MainMenuController menu;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             initTable();
-        } catch (SQLException ex) {
+        } catch (SQLException | RemoteException | NotBoundException ex) {
             Logger.getLogger(BlackListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
     
-    public void initTable() throws SQLException{
+    public void initTable() throws SQLException, RemoteException, NotBoundException{
     cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
     nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
     contrato.setCellValueFactory(new PropertyValueFactory<>("contrato"));
     plan.setCellValueFactory(new PropertyValueFactory<>("plan"));    
 
-    
-   ArrayList<Cliente> list =dm.getRestringidos();
+    Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+   ArrayList<Cliente> list =inter.getRestringido();
     if(!list.isEmpty())
-    for(Cliente c:list){
-        table.getItems().add(c);
-    }
+        list.stream().forEach((c) -> {
+            table.getItems().add(c);
+    });
 }
           public void back(ActionEvent evt){
           menu.aux.getChildren().clear();

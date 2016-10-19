@@ -5,11 +5,13 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo
  */
-public class Plan {
+public class Plan implements Serializable{
       String plan;
       int cant;
 

@@ -6,13 +6,15 @@
 package controller;
 
 import classes.Cliente;
-import classes.DataManager;
 import classes.Invitado;
 import classes.PrinterOptions;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,22 +47,24 @@ public class OpenTableController implements Initializable {
     Cliente client;
     Usuario user;
     int max = 0;
-    DataManager dm = new DataManager();
     SearchController menu;
     String printer;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initTable();
     }
 
-    public void initData() throws SQLException {
+    public void initData() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         txtnombre.setText(client.getNombre());
         txtcedula.setText(client.getCedula());
         txtcontrato.setText(client.getContrato());
         txtplan.setText(client.getPlan());
         fecha.setValue(LocalDate.now());
-        int cant = dm.getCantByPlan(client.getPlan());
+        int cant = inter.getCantByPlan(client.getPlan());
         /*if (rs.next()) {
             max = rs.getInt("invitados");
         } else {
@@ -75,7 +79,9 @@ public class OpenTableController implements Initializable {
     }
 
     @FXML
-    public void openTable(ActionEvent evt) throws IOException {
+    public void openTable(ActionEvent evt) throws IOException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         if (!ninvitados.getText().isEmpty()) {            
                 
                 String hour;
@@ -86,10 +92,10 @@ public class OpenTableController implements Initializable {
                                             + ":" + Integer.toString(time.get(Calendar.MINUTE))
                                             + ":" + Integer.toString(time.get(Calendar.SECOND))
                                             + ampm;
-                dm.openTable(txtcontrato.getText(), ninvitados.getText(),Integer.toString(table.getItems().size()), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
+                inter.openTable(txtcontrato.getText(), ninvitados.getText(),Integer.toString(table.getItems().size()), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
-                    dm.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                    inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
                 }
                 PrinterOptions p = new PrinterOptions();
 

@@ -5,16 +5,21 @@
  */
 package controller;
 
-import classes.DataManager;
+
 import classes.Reserva;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -56,20 +61,20 @@ public class ReservaController implements Initializable {
       DatePicker from, to, date;
       ReservaController myController;
       MainMenuController menu;
-      DataManager dm = new DataManager();
       Usuario usuario;
+    String host;
 
       @Override
       public void initialize(URL url, ResourceBundle rb) {
             try {
                   initTable();
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-            }
+            } catch (RemoteException | NotBoundException | SQLException ex) {
+              Logger.getLogger(ReservaController.class.getName()).log(Level.SEVERE, null, ex);
+          }
             initCombo();
       }
 
-      public void initTable() throws SQLException {
+      public void initTable() throws SQLException, RemoteException, NotBoundException {
             titular.setCellValueFactory(new PropertyValueFactory<>("titular"));
             cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
             telefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
@@ -86,23 +91,25 @@ public class ReservaController implements Initializable {
                   @Override
                   public void changed(ObservableValue observableValue, String old, String neww) {
                         try {
-                              changePane(old, neww);
-                        } catch (SQLException ex) {
-                              ex.printStackTrace();
-                        }
+                              changePane(old, neww);                        
+                        } catch (RemoteException | NotBoundException | SQLException ex) {
+                          Logger.getLogger(ReservaController.class.getName()).log(Level.SEVERE, null, ex);
+                      }
                   }
             });
       }
 
-      public void reloadTable() throws SQLException {
+      public void reloadTable() throws RemoteException, NotBoundException {
+          Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
             table.getItems().clear();
-            ArrayList<Reserva> reservas = dm.getReservas();
-           for(Reserva r:reservas) {
-                  table.getItems().add(r);
-            }
+            ArrayList<Reserva> reservas = inter.getReservas();
+            reservas.stream().forEach((r) -> {
+                table.getItems().add(r);
+          });
       }
 
-      public void changePane(String old, String neww) throws SQLException {
+      public void changePane(String old, String neww) throws SQLException, RemoteException, NotBoundException {
             switch (old) {
                   case "TITULAR":
                         if (!neww.equals("CONTRATO") || !neww.equals("CEDULA")) {
@@ -145,7 +152,7 @@ public class ReservaController implements Initializable {
             }
       }
       
-      public void filterSearch() throws SQLException{
+      public void filterSearch() throws SQLException, RemoteException, NotBoundException{
             switch((String) combo.getSelectionModel().getSelectedItem()){
                   case "TITULAR":
                         searchByName();
@@ -156,38 +163,46 @@ public class ReservaController implements Initializable {
             }
       }
 
-      public void searchByName() throws SQLException {
+      public void searchByName() throws SQLException, RemoteException, NotBoundException {
+          Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
             if (!filter.getText().isEmpty()) {
                   table.getItems().clear();
-                  ArrayList<Reserva> reservas = dm.getReservasByName(filter.getText().toUpperCase());
-                  for(Reserva r:reservas) {
-                        table.getItems().add(r);
-                  }
+                  ArrayList<Reserva> reservas = inter.getReservasByName(filter.getText().toUpperCase());
+                  reservas.stream().forEach((r) -> {
+                      table.getItems().add(r);
+              });
             }
       }
 
-      public void searchByCI() throws SQLException {
+      public void searchByCI() throws SQLException, RemoteException, NotBoundException {
             if (!filter.getText().isEmpty()) {
                   table.getItems().clear();
-                  ArrayList<Reserva> reservas = dm.getReservasByCI(filter.getText().toUpperCase());
-                  for(Reserva r:reservas) {
-                        table.getItems().add(r);
-                  }
+                  Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+                  ArrayList<Reserva> reservas = inter.getReservasByCI(filter.getText().toUpperCase());
+                  reservas.stream().forEach((r) -> {
+                      table.getItems().add(r);
+                });
             }
       }
 
-      public void searchByDate() throws SQLException {
+      public void searchByDate() throws SQLException, RemoteException, NotBoundException {
             table.getItems().clear();
-            ArrayList<Reserva> res = dm.getReservas();
+            Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+            ArrayList<Reserva> res = inter.getReservas();
             for(Reserva rsv:res) {
                   if (date.getValue().isEqual(LocalDate.parse(rsv.getFecha())))
                         table.getItems().add(rsv);
             }
       }
 
-      public void searchByRangeDate() throws SQLException {
+      public void searchByRangeDate() throws SQLException, RemoteException, NotBoundException {
             table.getItems().clear();
-            ArrayList<Reserva> res = dm.getReservas();
+            Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+            ArrayList<Reserva> res = inter.getReservas();
             for(Reserva rsv:res) {
                    if ((from.getValue().isEqual(LocalDate.parse(rsv.getFecha())) || from.getValue().isBefore(LocalDate.parse(rsv.getFecha())))
                                 && (to.getValue().isEqual(LocalDate.parse(rsv.getFecha())) || to.getValue().isAfter(LocalDate.parse(rsv.getFecha()))))
@@ -236,9 +251,11 @@ public class ReservaController implements Initializable {
             }
       }
       
-      public void eliminaReserva() throws SQLException{
+      public void eliminaReserva() throws SQLException, RemoteException, NotBoundException{
             if(!table.getSelectionModel().isEmpty()){
-                  dm.eliminaReserva((Reserva)table.getSelectionModel().getSelectedItem());
+                Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+                  inter.eliminaReserva((Reserva)table.getSelectionModel().getSelectedItem());
                   reloadTable();
             }
       }

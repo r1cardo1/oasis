@@ -5,10 +5,12 @@
  */
 package controller;
 
-import classes.DataManager;
 import classes.Usuario;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -40,7 +42,7 @@ public class NewUserController implements Initializable {
 
     Stage primStage;
     double xs, ys;
-    DataManager dm;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -106,9 +108,10 @@ public class NewUserController implements Initializable {
     }
 
     @FXML
-    public void register(ActionEvent evt) throws SQLException {
-        dm = new DataManager();
-        ArrayList<Usuario> user = dm.searchUserbyUsername(usuario.getText());
+    public void register(ActionEvent evt) throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        ArrayList<Usuario> user = inter.searchUserbyUsername(usuario.getText());
         if (!user.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Alerta");
@@ -120,7 +123,7 @@ public class NewUserController implements Initializable {
                 if (!apellido.getText().isEmpty()) {
                     if (!usuario.getText().isEmpty()) {
                         if (pass.getText().equals(cpass.getText()) & !pass.getText().isEmpty()) {
-                            dm.newUser(new Usuario(nombre.getText(), apellido.getText(), usuario.getText(), pass.getText(), lvl.getSelectionModel().getSelectedItem().equals("USUARIO") ? 1
+                            inter.newUser(new Usuario(nombre.getText(), apellido.getText(), usuario.getText(), pass.getText(), lvl.getSelectionModel().getSelectedItem().equals("USUARIO") ? 1
                                     : lvl.getSelectionModel().getSelectedItem().equals("ADMINISTRADOR") ? 2 : 3));
                             panel.initTable();
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

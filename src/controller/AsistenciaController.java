@@ -2,9 +2,13 @@ package controller;
 
 import classes.Asistencia;
 import classes.Cliente;
-import classes.DataManager;
+
 import classes.Usuario;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -31,19 +35,22 @@ public class AsistenciaController implements Initializable {
     CategoryAxis xAxis;
     @FXML
     AreaChart chart;
-    DataManager dm = new DataManager();
+
     SearchController menu;
     Usuario user;
     Cliente client;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initTable();
     }
 
-    public void setACombos() throws SQLException {
+    public void setACombos() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         ArrayList<String> years = new ArrayList<>();
-        ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
+        ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());
        for(Asistencia asist : list) {
             if (!years.contains(Integer.toString(LocalDate.parse(asist.getFecha()).getYear()))) {
                 years.add(Integer.toString(LocalDate.parse(asist.getFecha()).getYear()));
@@ -59,8 +66,10 @@ public class AsistenciaController implements Initializable {
         updateTMCombo();
     }
 
-    public void updateGMCombo() throws SQLException {
-        ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
+    public void updateGMCombo() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());
         int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
         for(Asistencia asist : list) {
@@ -75,8 +84,10 @@ public class AsistenciaController implements Initializable {
         }
     }
 
-    public void updateTMCombo() throws SQLException {
-        ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
+    public void updateTMCombo() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());
         int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
         for(Asistencia asist:list) {
@@ -95,10 +106,12 @@ public class AsistenciaController implements Initializable {
         updateTable();
     }
 
-    public void updateTable() throws SQLException {
+    public void updateTable() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         if (!tmcombo.getSelectionModel().isEmpty()) {
             table.getItems().clear();
-            ArrayList<Asistencia> list = dm.getAsistenciaPorContrato(client.getContrato());
+            ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());
             String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
             int mont = 0;
             for (int i = 1; i < montsNames.length; i++) {

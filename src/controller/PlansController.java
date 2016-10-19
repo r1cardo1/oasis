@@ -5,14 +5,19 @@
  */
 package controller;
 
-import classes.DataManager;
+
 import classes.Plan;
 import classes.Usuario;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,7 +36,6 @@ public class PlansController implements Initializable {
       AdminMenuController menu;
       PlansController myController;
       Usuario usuario;
-      DataManager dm = new DataManager();
       @FXML
       TableView table;
       @FXML
@@ -41,6 +45,7 @@ public class PlansController implements Initializable {
       @FXML
       TextField txtplan, txtcant;
       Boolean editMode = false;
+    String host;
 
       @Override
       public void initialize(URL url, ResourceBundle rb) {
@@ -48,32 +53,40 @@ public class PlansController implements Initializable {
                   initTable();
             } catch (SQLException ex) {
                   System.out.println(ex.getMessage());
-            }
+            } catch (RemoteException | NotBoundException ex) {
+              Logger.getLogger(PlansController.class.getName()).log(Level.SEVERE, null, ex);
+          }
       }
 
-      public void initTable() throws SQLException {
+      public void initTable() throws SQLException, RemoteException, NotBoundException {
             plan.setCellValueFactory(new PropertyValueFactory<>("plan"));
             cant.setCellValueFactory(new PropertyValueFactory<>("cant"));
-            ArrayList<Plan> plans = dm.getPlans();
+            Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+            ArrayList<Plan> plans = inter.getPlans();
            for(Plan p:plans) {
                   table.getItems().add(p);
             }
       }
 
-      public void updateTable() throws SQLException {
+      public void updateTable() throws SQLException, RemoteException, NotBoundException {
             table.getItems().clear();
-             ArrayList<Plan> plans = dm.getPlans();
+            Registry reg = LocateRegistry.getRegistry(host,27019);
+            oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+            ArrayList<Plan> plans = inter.getPlans();
            for(Plan p:plans) {
                   table.getItems().add(p);
             }
       }
 
       @FXML
-      public void addAction() throws SQLException {
+      public void addAction() throws SQLException, RemoteException, NotBoundException {
             if (!editMode) {
                   if (!txtplan.getText().isEmpty()) {
                         if (!txtcant.getText().isEmpty()) {
-                              dm.addPlan(new Plan(txtplan.getText(), Integer.parseInt(txtcant.getText())));
+                            Registry reg = LocateRegistry.getRegistry(host,27019);
+                            oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+                              inter.addPlan(new Plan(txtplan.getText(), Integer.parseInt(txtcant.getText())));
                               updateTable();
                               table.getSelectionModel().clearSelection();
                               txtcant.clear();
@@ -83,8 +96,10 @@ public class PlansController implements Initializable {
             }
             if (editMode) {
                   if (!txtplan.getText().isEmpty()) {
-                        if (!txtcant.getText().isEmpty()) {                              
-                              dm.updatePlan(new Plan(txtplan.getText(), Integer.parseInt(txtcant.getText())), (Plan) table.getSelectionModel().getSelectedItem());
+                        if (!txtcant.getText().isEmpty()) {     
+                            Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+                              inter.updatePlan(new Plan(txtplan.getText(), Integer.parseInt(txtcant.getText())), (Plan) table.getSelectionModel().getSelectedItem());
                               updateTable();
                               table.getSelectionModel().clearSelection();
                               txtcant.clear();
@@ -96,9 +111,11 @@ public class PlansController implements Initializable {
       }
 
       @FXML
-      public void deleteAction() throws SQLException {
+      public void deleteAction() throws SQLException, RemoteException, NotBoundException {
             if (!table.getSelectionModel().isEmpty()) {
-                  dm.deletePlan((Plan) table.getSelectionModel().getSelectedItem());
+                Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+                  inter.deletePlan((Plan) table.getSelectionModel().getSelectedItem());
                   updateTable();
                   table.getSelectionModel().clearSelection();
             }

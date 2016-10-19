@@ -5,7 +5,7 @@
  */
 package controller;
 
-import classes.DataManager;
+
 import classes.Usuario;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -32,7 +32,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -67,8 +66,6 @@ public class LoginController implements Initializable {
       Pane topPane;
       private double xs, ys = 0;
       public Stage primStage;
-      DataManager dm = new DataManager();
-      DataManager dmaux = new DataManager();
       @FXML
       Button login;
       @FXML
@@ -139,7 +136,7 @@ public class LoginController implements Initializable {
                   userLogin = u;
                   Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
                   String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-                  dmaux.logLogin(userLogin.getNombre(), userLogin.getApellido(), userLogin.getUsuario(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                  inter.logLogin(userLogin.getNombre(), userLogin.getApellido(), userLogin.getUsuario(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                           Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
                           + ":" + Integer.toString(time.get(Calendar.MINUTE))
                           + ":" + Integer.toString(time.get(Calendar.SECOND))
@@ -149,6 +146,7 @@ public class LoginController implements Initializable {
                   Parent root = loader.load();
                   controller = loader.getController();
                   controller.setController(controller);
+                  controller.host=this.host;
                   Scene scene = new Scene(root);
                   scene.setFill(Color.TRANSPARENT);
                   Stage stage = new Stage();
@@ -163,7 +161,7 @@ public class LoginController implements Initializable {
                   primStage.close();
             } else {
                   Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
-                  dmaux.logfailLogin(user.getText(), pass.getText(), InetAddress.getLocalHost().getHostName() + " - " + System.getProperty("user.name"), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                  inter.logfailLogin(user.getText(), pass.getText(), InetAddress.getLocalHost().getHostName() + " - " + System.getProperty("user.name"), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                           Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
                           + ":" + Integer.toString(time.get(Calendar.MINUTE))
                           + ":" + Integer.toString(time.get(Calendar.SECOND)));
@@ -180,35 +178,23 @@ public class LoginController implements Initializable {
       }
 
       public void drag() {
-            pass.setOnKeyReleased(new EventHandler<KeyEvent>() {
-                  @Override
-                  public void handle(KeyEvent event) {
-                        if (event.getCode().equals(KeyCode.ENTER)) {
-                              try {
-                                    login();
-                              } catch (SQLException ex) {
-                                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                              } catch (IOException ex) {
-                                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                              }
-                        }
-                  }
-
+            pass.setOnKeyReleased((KeyEvent event) -> {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    try {
+                        login();
+                    } catch (SQLException | IOException ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             });
-            topPane.setOnMousePressed(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent evt) {
-                        xs = evt.getSceneX();
-                        ys = evt.getSceneY();
-                  }
+            topPane.setOnMousePressed((MouseEvent evt) -> {
+                xs = evt.getSceneX();
+                ys = evt.getSceneY();
             });
 
-            topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent event) {
-                        primStage.setX(event.getScreenX() - xs);
-                        primStage.setY(event.getScreenY() - ys);
-                  }
+            topPane.setOnMouseDragged((MouseEvent event) -> {
+                primStage.setX(event.getScreenX() - xs);
+                primStage.setY(event.getScreenY() - ys);
             });
 
             user.textProperty().addListener((ov, oldValue, newValue) -> {

@@ -6,9 +6,12 @@
 package controller;
 
 import classes.Cliente;
-import classes.DataManager;
 import classes.Reserva;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,13 +39,13 @@ public class NuevaReservaController implements Initializable {
       Label topPane;
       @FXML TextField titular,cedula,plan,telefono,invitados,observacion;
       @FXML DatePicker fecha;
-      DataManager dm = new DataManager();
       Double xs, ys;
       Stage primStage;
       Reserva r;
       Boolean save = true;
       ReservaController menu;
       Cliente client;
+    String host;
       
       @Override
       public void initialize(URL url, ResourceBundle rb) {
@@ -94,10 +97,13 @@ public class NuevaReservaController implements Initializable {
 
       }
       
-      public void save(ActionEvent evt) throws SQLException{
+      public void save(ActionEvent evt) throws SQLException, RemoteException, NotBoundException{
+          Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
             if(!titular.getText().isEmpty() && !cedula.getText().isEmpty())
                   if(save){
-                        dm.guardaReservacion(new Reserva(titular.getText(),cedula.getText(),telefono.getText(),plan.getText(),invitados.getText(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),observacion.getText()));
+                      
+                        inter.guardaReservacion(new Reserva(titular.getText(),cedula.getText(),telefono.getText(),plan.getText(),invitados.getText(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),observacion.getText()));
                         try{
                         menu.reloadTable();
                         }catch(Exception ex){
@@ -113,7 +119,7 @@ public class NuevaReservaController implements Initializable {
                         stage = (Stage) b.getScene().getWindow();
                         stage.close();
                   }else{
-                        dm.actualizaReservacion(r,new Reserva(titular.getText(),cedula.getText(),telefono.getText(),plan.getText(),invitados.getText(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),observacion.getText()));
+                        inter.actualizaReservacion(r,new Reserva(titular.getText(),cedula.getText(),telefono.getText(),plan.getText(),invitados.getText(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),observacion.getText()));
                         menu.reloadTable();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Alerta");

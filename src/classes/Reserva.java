@@ -5,19 +5,21 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo
  */
-public class Reserva {
+public class Reserva implements Serializable{
 
-      String titular;
-      String cedula;
-      String telefono;
-      String plan;
-      String invitados;
-      String fecha;
-      String observaciones;
+      public String titular;
+      public String cedula;
+      public String telefono;
+      public String plan;
+      public String invitados;
+      public String fecha;
+      public String observaciones;
 
       public Reserva(String titular, String cedula, String telefono, String plan, String invitados, String fecha, String observaciones) {
             this.titular = titular;

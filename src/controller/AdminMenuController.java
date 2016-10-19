@@ -25,6 +25,7 @@ public class AdminMenuController implements Initializable {
     AnchorPane aux;
     AdminMenuController myController;
     Usuario usuario;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -40,6 +41,7 @@ public class AdminMenuController implements Initializable {
         controller.menu = myController;
         controller.myController = controller;
         controller.usuario = this.usuario;
+        controller.host = this.host;
         aux.toFront();
         main.setVisible(false);
     }
@@ -52,6 +54,8 @@ public class AdminMenuController implements Initializable {
         controller.menu = myController;
         controller.myController = controller;
         controller.usuario = this.usuario;
+        controller.host = this.host;
+       
         aux.toFront();
         main.setVisible(false);
     }

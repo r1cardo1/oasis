@@ -6,11 +6,13 @@
 package controller;
 
 import classes.Cliente;
-import classes.DataManager;
 import classes.Invitado;
 import classes.Usuario;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -40,22 +42,23 @@ public class InvitadosController implements Initializable {
     @FXML
     DatePicker from, to, date;
     SearchController menu;
-    DataManager dm = new DataManager();
-    DataManager dmaux = new DataManager();
     Cliente client;
     Usuario user;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
 
-    public void initTable() {
+    public void initTable() throws RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-        ArrayList<Invitado> list = dm.getInvitados();        
+        ArrayList<Invitado> list = inter.getInvitados();        
             for(Invitado in:list) {
                 if (client.getContrato().equals(in.getContrato()));
                     table.getItems().add(in);
@@ -162,9 +165,11 @@ public class InvitadosController implements Initializable {
         }
     }
 
-    public void reloadTable() {
+    public void reloadTable() throws RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
-        ArrayList<Invitado> list = dm.getInvitados();
+        ArrayList<Invitado> list = inter.getInvitados();
        for(Invitado in:list)
              table.getItems().add(in);
     }

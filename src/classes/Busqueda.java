@@ -5,11 +5,13 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo Marcano
  */
-public class Busqueda {
+public class Busqueda implements Serializable{
     String usuario;
     String tipo;
     String filtro;

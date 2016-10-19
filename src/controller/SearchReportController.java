@@ -6,13 +6,18 @@
 package controller;
 
 import classes.Busqueda;
-import classes.DataManager;
 import classes.Usuario;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -49,9 +54,10 @@ public class SearchReportController implements Initializable {
     TableColumn<Busqueda, String> user, tipo, filtro, fecha, hora;
     @FXML
     TableView table;
-    DataManager dm = new DataManager();
     Usuario usuario;
     ReportMenuController menu;
+    String host;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,21 +67,24 @@ public class SearchReportController implements Initializable {
             initTable();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(SearchReportController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void first() throws SQLException {
-
+    public void first() throws SQLException, RemoteException, NotBoundException {
+Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         ArrayList<String> list = new ArrayList<>();
 
-        ArrayList<Usuario> users = dm.getUsuarios();
+        ArrayList<Usuario> users = inter.getUsuarios();
         for (Usuario u : users) {
             list.add(u.getUsuario());
         }
         int count;
         int[] searchs = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            count = dm.getSearchByUser(list.get(i));
+            count = inter.getSearchByUser(list.get(i));
             searchs[i] = count;
         }
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
@@ -85,11 +94,13 @@ public class SearchReportController implements Initializable {
         barChart.getData().add(series);
     }
 
-    public void initCombo() throws SQLException {
+    public void initCombo() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         tcUser.getItems().addAll("TODOS");
         mgUser.getItems().add("TODOS");
         ResultSet rs;
-        ArrayList<Usuario> users = dm.getUsuarios();
+        ArrayList<Usuario> users = inter.getUsuarios();
         for (Usuario u : users) {
             String str = u.getUsuario();
             tcUser.getItems().add(str);
@@ -135,25 +146,27 @@ public class SearchReportController implements Initializable {
     }
 
     @FXML
-    public void action() throws SQLException {
+    public void action() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         int count;
         barChart.getData().clear();
         if (!mgUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
-            count = dm.getSearchByUser((String) mgUser.getSelectionModel().getSelectedItem());
+            count = inter.getSearchByUser((String) mgUser.getSelectionModel().getSelectedItem());
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.getData().add(new XYChart.Data<>((String) mgUser.getSelectionModel().getSelectedItem(), count));
             barChart.getData().add(series);
         } else {
             ArrayList<String> list = new ArrayList<>();
 
-            ArrayList<Usuario> users = dm.getUsuarios();
+            ArrayList<Usuario> users = inter.getUsuarios();
             for(Usuario u:users) {
                 list.add(u.getUsuario());
             }
             int[] searchs = new int[list.size()];
             
             for (int i = 0; i < list.size(); i++) {
-                count = dm.getSearchByUser(list.get(i));                
+                count = inter.getSearchByUser(list.get(i));                
                     searchs[i] = count;
                 
             }
@@ -165,13 +178,15 @@ public class SearchReportController implements Initializable {
         }
     }
 
-    public void initTable() throws SQLException {
+    public void initTable() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         user.setCellValueFactory(new PropertyValueFactory<>("usuario"));
         tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         filtro.setCellValueFactory(new PropertyValueFactory<>("filtro"));
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         hora.setCellValueFactory(new PropertyValueFactory<>("hora"));
-        ArrayList<Busqueda> search = dm.getAllSearch();
+        ArrayList<Busqueda> search = inter.getAllSearch();
         for(Busqueda s:search) {
             table.getItems().add(s);
         }
@@ -184,9 +199,11 @@ public class SearchReportController implements Initializable {
     }
 
     @FXML
-    public void taction() throws SQLException {
+    public void taction() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
-        ArrayList<Busqueda> search = dm.getAllSearch();
+        ArrayList<Busqueda> search = inter.getAllSearch();
         for(Busqueda s:search) {
             if (s.getUsuario().equals(tcUser.getSelectionModel().getSelectedItem())) {
                 table.getItems().add(s);

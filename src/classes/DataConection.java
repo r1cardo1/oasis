@@ -5,6 +5,7 @@
  */
 package classes;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import java.sql.Statement;
  *
  * @author Ricardo
  */
-public class DataConection  {
+public class DataConection  implements Serializable{
     //Configuracion de los datos de la BD
     private String usuario = "root";
     private String pass = "";

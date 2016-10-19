@@ -6,10 +6,13 @@
 package controller;
 
 import classes.Cliente;
-import classes.DataManager;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,7 +22,6 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -70,10 +72,10 @@ public class SearchController implements Initializable {
     @FXML
     Label topPane;
     Double xs, ys;
-    DataManager dm = new DataManager();
     Usuario user;
     Stage primStage;
     SearchController myController;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -98,46 +100,50 @@ public class SearchController implements Initializable {
         stage.close();
     }
 
-    public void search() throws SQLException {
+    public void search() throws SQLException, RemoteException, NotBoundException {
+        
         table.getItems().clear();
         table.getSelectionModel().clearSelection();
+        
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
         String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-        dm.search(user.getUsuario(), (String) stipo.getSelectionModel().getSelectedItem(), str.getText(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+        inter.search(user.getUsuario(), (String) stipo.getSelectionModel().getSelectedItem(), str.getText(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                 Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
                 + ":" + Integer.toString(time.get(Calendar.MINUTE))
                 + ":" + Integer.toString(time.get(Calendar.SECOND))
                 + " " + ampm);
 
         if (stipo.getSelectionModel().getSelectedItem().equals("CEDULA")) {
-            ArrayList<Cliente> clients = dm.searchClientbyCI(str.getText().toUpperCase());
+            ArrayList<Cliente> clients = inter.searchClientbyCI(str.getText().toUpperCase());
             if (!clients.isEmpty()) {
-                for(Cliente cli:clients) {
+                clients.stream().forEach((cli) -> {
                     table.getItems().add(cli);
-                }
+                });
             }
         }
         if (stipo.getSelectionModel().getSelectedItem().equals("NOMBRE")) {
-            ArrayList<Cliente> clients = dm.searchClientbyName(str.getText().toUpperCase());
+            ArrayList<Cliente> clients = inter.searchClientbyName(str.getText().toUpperCase());
             if (!clients.isEmpty()) {
-               for(Cliente cli:clients) {
+                clients.stream().forEach((cli) -> {
                     table.getItems().add(cli);
-                }
+                });
             }
         }
         if (stipo.getSelectionModel().getSelectedItem().equals("CONTRATO")) {
             ResultSet rs;
-            ArrayList<Cliente> client = dm.searchClientbyContract(str.getText().toUpperCase());
+            ArrayList<Cliente> client = inter.searchClientbyContract(str.getText().toUpperCase());
             if (!client.isEmpty()) {
-                for(Cliente cli:client) {
+                client.stream().forEach((cli) -> {
                     table.getItems().add(cli);
-                }
+                });
             }
         }
 
     }
     
-    public void keysearch(KeyEvent evt) throws SQLException{
+    public void keysearch(KeyEvent evt) throws SQLException, RemoteException, NotBoundException{
         if(evt.getCode().equals(KeyCode.ENTER))
             search();
     }
@@ -161,25 +167,19 @@ public class SearchController implements Initializable {
 
     public void drag() {
 
-        topPane.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent evt) {
-                xs = evt.getSceneX();
-                ys = evt.getSceneY();
-            }
+        topPane.setOnMousePressed((MouseEvent evt) -> {
+            xs = evt.getSceneX();
+            ys = evt.getSceneY();
         });
 
-        topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primStage.setX(event.getScreenX() - xs);
-                primStage.setY(event.getScreenY() - ys);
-            }
+        topPane.setOnMouseDragged((MouseEvent event) -> {
+            primStage.setX(event.getScreenX() - xs);
+            primStage.setY(event.getScreenY() - ys);
         });
 
     }
 
-    public void viewAsistencia() throws IOException, SQLException {
+    public void viewAsistencia() throws IOException, SQLException, RemoteException, NotBoundException {
         if (!table.getSelectionModel().isEmpty()) {
             aux.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/asistencia.fxml"));
@@ -190,6 +190,7 @@ public class SearchController implements Initializable {
             controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
             controller.user = this.user;
             controller.menu = myController;
+            controller.host = this.host;
             controller.setACombos();
             controller.initTable();
             aux.toFront();
@@ -209,6 +210,7 @@ public class SearchController implements Initializable {
             controller.menu = myController;
             controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
             controller.user = this.user;
+            controller.host = this.host;
             try {
                 controller.initData();
             } catch (Exception ex) {
@@ -221,7 +223,7 @@ public class SearchController implements Initializable {
 
     }
 
-    public void viewInvitados() throws IOException {
+    public void viewInvitados() throws IOException, RemoteException, NotBoundException {
         if (!table.getSelectionModel().isEmpty()) {
             aux.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/invitados.fxml"));
@@ -232,6 +234,7 @@ public class SearchController implements Initializable {
             controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
             controller.user = this.user;
             controller.menu = myController;
+            controller.host = this.host;
             controller.initTable();
             aux.toFront();
             aux.setVisible(true);
@@ -248,6 +251,7 @@ public class SearchController implements Initializable {
             controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
             controller.initClient();
             controller.primStage=stage;
+            controller.host = this.host;
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.initStyle(StageStyle.UNDECORATED);

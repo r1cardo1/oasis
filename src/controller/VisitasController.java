@@ -7,12 +7,15 @@ package controller;
 
 import classes.Asistencia;
 import classes.Cliente;
-import classes.DataManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -93,22 +96,23 @@ public class VisitasController implements Initializable {
     Pane pdate;
     @FXML
     Pane pfilter;
-    DataManager dm = new DataManager();
-    DataManager dmaux = new DataManager();
     MainMenuController menu;
+    String host;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
             initTable();
-        } catch (SQLException ex) {
+        } catch (SQLException | RemoteException | NotBoundException ex) {
             Logger.getLogger(VisitasController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         initCombo();
     }
 
-    public void initTable() throws SQLException {
+    public void initTable() throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         contrato.setCellValueFactory(new PropertyValueFactory<>("contrato"));
@@ -125,11 +129,11 @@ public class VisitasController implements Initializable {
         hora.prefWidthProperty().bind(table.widthProperty().divide(8));
         ninvitados.prefWidthProperty().bind(table.widthProperty().divide(8));
 
-        ArrayList<Asistencia> asists = dm.visits();
+        ArrayList<Asistencia> asists = inter.visits();
         ResultSet aux;
         Asistencia asist = null;
         for (Asistencia as : asists) {
-            ArrayList<Cliente> client = dmaux.searchClientbyContract(as.getContrato());
+            ArrayList<Cliente> client = inter.searchClientbyContract(as.getContrato());
             if (!client.isEmpty()) {
                 asist = new Asistencia(as.getInvitados(), as.getFecha(), as.getHora(),
                         client.get(0).getCedula(), client.get(0).getNombre(), client.get(0).getContrato(), client.get(0).getPlan(), as.getInvad());
@@ -138,13 +142,15 @@ public class VisitasController implements Initializable {
         }
     }
 
-    public void reloadTable() {
+    public void reloadTable() throws RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
-        ArrayList<Asistencia> asists = dm.visits();
+        ArrayList<Asistencia> asists = inter.visits();
         ResultSet aux;
         Asistencia asist = null;
         for (Asistencia as : asists) {
-            ArrayList<Cliente> client = dmaux.searchClientbyContract(as.getContrato());
+            ArrayList<Cliente> client = inter.searchClientbyContract(as.getContrato());
             if (!client.isEmpty()) {
                 asist = new Asistencia(as.getInvitados(), as.getFecha(), as.getHora(),
                         client.get(0).getCedula(), client.get(0).getNombre(), client.get(0).getContrato(), client.get(0).getPlan(), as.getInvad());
@@ -248,15 +254,16 @@ public class VisitasController implements Initializable {
         to.setValue(from.getValue().plusDays(1));
     }
 
-    public void date() {
-
+    public void date() throws RemoteException, NotBoundException {
+Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
-        ArrayList<Asistencia> asists = dm.visits();
+        ArrayList<Asistencia> asists = inter.visits();
         ResultSet aux;
         Asistencia asist = null;
         for (Asistencia as : asists) {
             if (date.getValue().isEqual(LocalDate.parse(as.getFecha()))) {
-                ArrayList<Cliente> client = dmaux.searchClientbyContract(as.getContrato());
+                ArrayList<Cliente> client = inter.searchClientbyContract(as.getContrato());
                 if (!client.isEmpty()) {
                     asist = new Asistencia(as.getInvitados(), as.getFecha(), as.getHora(),
                             client.get(0).getCedula(), client.get(0).getNombre(), client.get(0).getContrato(), client.get(0).getPlan(), as.getInvad());
@@ -267,15 +274,17 @@ public class VisitasController implements Initializable {
 
     }
 
-    public void toDate() {
+    public void toDate() throws RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
-        ArrayList<Asistencia> asists = dm.visits();
+        ArrayList<Asistencia> asists =inter.visits();
         ResultSet aux;
         Asistencia asist = null;
         for (Asistencia as : asists) {
             if ((from.getValue().isEqual(LocalDate.parse(as.getFecha()))) || from.getValue().isBefore(LocalDate.parse(as.getFecha()))
                         && ((to.getValue().isEqual(LocalDate.parse(as.getFecha())) || to.getValue().isAfter(LocalDate.parse(as.getFecha()))))){
-            ArrayList<Cliente> client = dmaux.searchClientbyContract(as.getContrato());
+            ArrayList<Cliente> client = inter.searchClientbyContract(as.getContrato());
             if (!client.isEmpty()) {
                 asist = new Asistencia(as.getInvitados(), as.getFecha(), as.getHora(),
                         client.get(0).getCedula(), client.get(0).getNombre(), client.get(0).getContrato(), client.get(0).getPlan(), as.getInvad());

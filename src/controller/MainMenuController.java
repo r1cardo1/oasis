@@ -5,7 +5,6 @@
  */
 package controller;
 
-import classes.DataManager;
 import classes.DigitalClock;
 import classes.Usuario;
 import java.io.IOException;
@@ -56,7 +55,6 @@ public class MainMenuController implements Initializable {
     boolean minimized = false;
     MainMenuController myController;
     Usuario user;
-    DataManager dm = new DataManager();
     @FXML
     AnchorPane main;
     @FXML
@@ -67,9 +65,13 @@ public class MainMenuController implements Initializable {
     Label lname;
     @FXML
     GridPane buttons;
+    String host;
+    
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -129,6 +131,7 @@ public class MainMenuController implements Initializable {
         searchController.setMenuController(myController);
         searchController.user = this.user;
         searchController.myController = searchController;
+        searchController.host = this.host;
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         Stage stage = new Stage();
@@ -165,6 +168,7 @@ public class MainMenuController implements Initializable {
             aux.getChildren().add(pan);
             VisitasController controller = loader.getController();
             controller.menu = myController;
+            controller.host=this.host;
             aux.toFront();
             main.setVisible(false);
 
@@ -185,6 +189,7 @@ public class MainMenuController implements Initializable {
             aux.getChildren().add(pan);
             BlackListController controller = loader.getController();
             controller.menu = myController;
+            controller.host=this.host;
             aux.toFront();
 
             main.setVisible(false);
@@ -207,6 +212,7 @@ public class MainMenuController implements Initializable {
             controller.myController = controller;
             controller.menu = myController;
             controller.usuario = user;
+            controller.host=this.host;
             aux.toFront();
             main.setVisible(false);
         } else {
@@ -228,6 +234,7 @@ public class MainMenuController implements Initializable {
             controller.myController = controller;
             controller.menu = myController;
             controller.usuario = user;
+            controller.host=this.host;
             aux.toFront();
             main.setVisible(false);
         } else {
@@ -246,6 +253,7 @@ public class MainMenuController implements Initializable {
         ReservaController controller = loader.getController();
         controller.myController = controller;
         controller.menu = myController;
+        controller.host=this.host;
         controller.usuario = user;
         aux.toFront();
         main.setVisible(false);

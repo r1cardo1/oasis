@@ -5,11 +5,13 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ricardo Marcano
  */
-public class Login {
+public class Login implements Serializable{
     private String nombre;
     private String apellido;
     private String usuario;
