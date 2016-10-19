@@ -10,6 +10,7 @@ import classes.Usuario;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -107,57 +108,58 @@ public class NewUserController implements Initializable {
     @FXML
     public void register(ActionEvent evt) throws SQLException {
         dm = new DataManager();
-        ResultSet rs = dm.searchUserbyUsername(usuario.getText());
-        String u = "NULL";
-        if (rs.next()) {
+        ArrayList<Usuario> user = dm.searchUserbyUsername(usuario.getText());
+        if (!user.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Alerta");
             alert.setHeaderText(null);
             alert.setContentText("El usuario ya existe");
             alert.show();
-        } else if (!nombre.getText().isEmpty()) {
-            if (!apellido.getText().isEmpty()) {
-                if (!usuario.getText().isEmpty()) {
-                    if (pass.getText().equals(cpass.getText()) & !pass.getText().isEmpty()) {
-                        dm.newUser(new Usuario(nombre.getText(), apellido.getText(), usuario.getText(), pass.getText(), lvl.getSelectionModel().getSelectedItem().equals("USUARIO") ? 1
-                                : lvl.getSelectionModel().getSelectedItem().equals("ADMINISTRADOR") ? 2 : 3));
-                        panel.initTable();
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Alerta");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Usuario Registrado con Exito");
-                        alert.show();
-                        Stage stage;
-                        Button b = (Button) evt.getSource();
-                        stage = (Stage) b.getScene().getWindow();
-                        stage.close();
+        } else {
+            if (!nombre.getText().isEmpty()) {
+                if (!apellido.getText().isEmpty()) {
+                    if (!usuario.getText().isEmpty()) {
+                        if (pass.getText().equals(cpass.getText()) & !pass.getText().isEmpty()) {
+                            dm.newUser(new Usuario(nombre.getText(), apellido.getText(), usuario.getText(), pass.getText(), lvl.getSelectionModel().getSelectedItem().equals("USUARIO") ? 1
+                                    : lvl.getSelectionModel().getSelectedItem().equals("ADMINISTRADOR") ? 2 : 3));
+                            panel.initTable();
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Alerta");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Usuario Registrado con Exito");
+                            alert.show();
+                            Stage stage;
+                            Button b = (Button) evt.getSource();
+                            stage = (Stage) b.getScene().getWindow();
+                            stage.close();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Alerta");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Las contraseñas no coinciden");
+                            alert.show();
+                        }
                     } else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Alerta");
                         alert.setHeaderText(null);
-                        alert.setContentText("Las contraseñas no coinciden");
+                        alert.setContentText("El campo usuario no debe estar vacio");
                         alert.show();
                     }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Alerta");
                     alert.setHeaderText(null);
-                    alert.setContentText("El campo usuario no debe estar vacio");
+                    alert.setContentText("El campo apellido no debe estar vacio");
                     alert.show();
                 }
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Alerta");
                 alert.setHeaderText(null);
-                alert.setContentText("El campo apellido no debe estar vacio");
+                alert.setContentText("El campo nombre no debe estar vacio");
                 alert.show();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("El campo nombre no debe estar vacio");
-            alert.show();
         }
     }
 

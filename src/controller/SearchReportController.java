@@ -68,18 +68,15 @@ public class SearchReportController implements Initializable {
 
         ArrayList<String> list = new ArrayList<>();
 
-        ResultSet rs = dm.getUsuarios();
-        while (rs.next()) {
-            list.add(rs.getString("usuario"));
+        ArrayList<Usuario> users = dm.getUsuarios();
+        for (Usuario u : users) {
+            list.add(u.getUsuario());
         }
-        rs.close();
+        int count;
         int[] searchs = new int[list.size()];
-
         for (int i = 0; i < list.size(); i++) {
-            rs = dm.getSearchByUser(list.get(i));
-            if (rs.next()) {
-                searchs[i] = rs.getInt("COUNT(usuario)");
-            }
+            count = dm.getSearchByUser(list.get(i));
+            searchs[i] = count;
         }
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         for (int i = 0; i < list.size(); i++) {
@@ -92,9 +89,9 @@ public class SearchReportController implements Initializable {
         tcUser.getItems().addAll("TODOS");
         mgUser.getItems().add("TODOS");
         ResultSet rs;
-        rs = dm.getUsuarios();
-        while (rs.next()) {
-            String str = rs.getString("usuario");
+        ArrayList<Usuario> users = dm.getUsuarios();
+        for (Usuario u : users) {
+            String str = u.getUsuario();
             tcUser.getItems().add(str);
             mgUser.getItems().add(str);
         }
@@ -139,30 +136,26 @@ public class SearchReportController implements Initializable {
 
     @FXML
     public void action() throws SQLException {
-
+        int count;
         barChart.getData().clear();
         if (!mgUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
-            ResultSet rs = dm.getSearchByUser((String) mgUser.getSelectionModel().getSelectedItem());
+            count = dm.getSearchByUser((String) mgUser.getSelectionModel().getSelectedItem());
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
-            if (rs.next()) {
-                series.getData().add(new XYChart.Data<>((String) mgUser.getSelectionModel().getSelectedItem(), rs.getInt("COUNT(usuario)")));
-            }
+            series.getData().add(new XYChart.Data<>((String) mgUser.getSelectionModel().getSelectedItem(), count));
             barChart.getData().add(series);
         } else {
             ArrayList<String> list = new ArrayList<>();
 
-            ResultSet rs = dm.getUsuarios();
-            while (rs.next()) {
-                list.add(rs.getString("usuario"));
+            ArrayList<Usuario> users = dm.getUsuarios();
+            for(Usuario u:users) {
+                list.add(u.getUsuario());
             }
-            rs.close();
             int[] searchs = new int[list.size()];
-
+            
             for (int i = 0; i < list.size(); i++) {
-                rs = dm.getSearchByUser(list.get(i));
-                if (rs.next()) {
-                    searchs[i] = rs.getInt("COUNT(usuario)");
-                }
+                count = dm.getSearchByUser(list.get(i));                
+                    searchs[i] = count;
+                
             }
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             for (int i = 0; i < list.size(); i++) {
@@ -178,9 +171,9 @@ public class SearchReportController implements Initializable {
         filtro.setCellValueFactory(new PropertyValueFactory<>("filtro"));
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         hora.setCellValueFactory(new PropertyValueFactory<>("hora"));
-        ResultSet rs = dm.getAllSearch();
-        while (rs.next()) {
-            table.getItems().add(new Busqueda(rs.getString("usuario"), rs.getString("modo"), rs.getString("filtro"), rs.getString("fecha"), rs.getString("hora")));
+        ArrayList<Busqueda> search = dm.getAllSearch();
+        for(Busqueda s:search) {
+            table.getItems().add(s);
         }
     }
 
@@ -189,17 +182,20 @@ public class SearchReportController implements Initializable {
         menu.main.setVisible(true);
         menu.main.toFront();
     }
-    
-    @FXML public void taction() throws SQLException{
+
+    @FXML
+    public void taction() throws SQLException {
         table.getItems().clear();
-        ResultSet rs = dm.getAllSearch();
-        while (rs.next()) {
-            if(rs.getString("usuario").equals(tcUser.getSelectionModel().getSelectedItem()))
-                table.getItems().add(new Busqueda(rs.getString("usuario"), rs.getString("modo"), rs.getString("filtro"), rs.getString("fecha"), rs.getString("hora")));
-            else
-                if(tcUser.getSelectionModel().getSelectedItem().equals("TODOS"))
-                    table.getItems().add(new Busqueda(rs.getString("usuario"), rs.getString("modo"), rs.getString("filtro"), rs.getString("fecha"), rs.getString("hora")));
+        ArrayList<Busqueda> search = dm.getAllSearch();
+        for(Busqueda s:search) {
+            if (s.getUsuario().equals(tcUser.getSelectionModel().getSelectedItem())) {
+                table.getItems().add(s);
+            } else {
+                if (tcUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
+                    table.getItems().add(s);
+                }
+            }
         }
-        
+
     }
 }

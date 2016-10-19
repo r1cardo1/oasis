@@ -48,7 +48,8 @@ public class LoginReportController implements Initializable {
     TableView table;
     ArrayList<String> users = new ArrayList<>();
     DataManager dm = new DataManager();
-    @FXML TableColumn <Login,String> nombre,apellido,usuario,fecha,hora;
+    @FXML
+    TableColumn<Login, String> nombre, apellido, usuario, fecha, hora;
 
     ReportMenuController menu;
     int[] logins;
@@ -66,14 +67,14 @@ public class LoginReportController implements Initializable {
 
     public void initUsers() throws SQLException {
         ArrayList<Usuario> user = dm.getUsuarios();
-        for(Usuario u:user) {
+        for (Usuario u : user) {
             users.add(u.getUsuario());
         }
         logins = new int[users.size()];
         int log;
         for (int i = 0; i < users.size(); i++) {
-            log = dm.getLogins(users.get(i));            
-                logins[i] =log;            
+            log = dm.getLogins(users.get(i));
+            logins[i] = log;
         }
         XYChart.Series<String, Integer> series;
         series = new XYChart.Series<>();
@@ -89,8 +90,8 @@ public class LoginReportController implements Initializable {
     public void initCombo() throws SQLException {
         tcUser.getItems().addAll("TODOS");
         mgUser.getItems().add("TODOS");
-       ArrayList<Usuario> user = dm.getUsuarios();
-        for(Usuario u:user) {
+        ArrayList<Usuario> user = dm.getUsuarios();
+        for (Usuario u : user) {
             String str = u.getUsuario();
             tcUser.getItems().add(str);
             mgUser.getItems().add(str);
@@ -141,29 +142,27 @@ public class LoginReportController implements Initializable {
         menu.main.toFront();
     }
 
-        public void initTable() throws SQLException {
+    public void initTable() throws SQLException {
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         hora.setCellValueFactory(new PropertyValueFactory<>("hora"));
         ArrayList<Login> logins = dm.getLogLogins();
-       for(Login log:logins) {
+        for (Login log : logins) {
             table.getItems().add(log);
         }
     }
-    
+
     @FXML
     public void taction() throws SQLException {
         table.getItems().clear();
         ArrayList<Login> logins = dm.getLogLogins();
-        for(Login log:logins) {
+        for (Login log : logins) {
             if (log.getUsuario().equals(tcUser.getSelectionModel().getSelectedItem())) {
                 table.getItems().add(log);
-            } else {
-                if (tcUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
-                    table.getItems().add(log);
-                }
+            } else if (tcUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
+                table.getItems().add(log);
             }
         }
     }
@@ -173,27 +172,20 @@ public class LoginReportController implements Initializable {
 
         barChart.getData().clear();
         if (!mgUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
-            ResultSet rs = dm.getLogins((String) mgUser.getSelectionModel().getSelectedItem());
+            int count = dm.getLogins((String) mgUser.getSelectionModel().getSelectedItem());
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
-            if (rs.next()) {
-                series.getData().add(new XYChart.Data<>((String) mgUser.getSelectionModel().getSelectedItem(), rs.getInt("COUNT(usuario)")));
-            }
+            series.getData().add(new XYChart.Data<>((String) mgUser.getSelectionModel().getSelectedItem(), count));
             barChart.getData().add(series);
         } else {
             ArrayList<String> list = new ArrayList<>();
-
-            ResultSet rs = dm.getUsuarios();
-            while (rs.next()) {
-                list.add(rs.getString("usuario"));
+            ArrayList<Usuario> users = dm.getUsuarios();
+            for (Usuario u : users) {
+                list.add(u.getUsuario());
             }
-            rs.close();
             int[] searchs = new int[list.size()];
-
             for (int i = 0; i < list.size(); i++) {
-                rs = dm.getLogins(list.get(i));
-                if (rs.next()) {
-                    searchs[i] = rs.getInt("COUNT(usuario)");
-                }
+                int count = dm.getLogins(list.get(i));
+                searchs[i] = count;
             }
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             for (int i = 0; i < list.size(); i++) {
@@ -204,4 +196,3 @@ public class LoginReportController implements Initializable {
     }
 
 }
-

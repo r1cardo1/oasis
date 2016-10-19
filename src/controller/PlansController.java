@@ -11,9 +11,8 @@ import classes.Usuario;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,17 +54,17 @@ public class PlansController implements Initializable {
       public void initTable() throws SQLException {
             plan.setCellValueFactory(new PropertyValueFactory<>("plan"));
             cant.setCellValueFactory(new PropertyValueFactory<>("cant"));
-            ResultSet rs = dm.getPlans();
-            while (rs.next()) {
-                  table.getItems().add(new Plan(rs.getString("plan"), rs.getInt("invitados")));
+            ArrayList<Plan> plans = dm.getPlans();
+           for(Plan p:plans) {
+                  table.getItems().add(p);
             }
       }
 
       public void updateTable() throws SQLException {
             table.getItems().clear();
-            ResultSet rs = dm.getPlans();
-            while (rs.next()) {
-                  table.getItems().add(new Plan(rs.getString("plan"), rs.getInt("invitados")));
+             ArrayList<Plan> plans = dm.getPlans();
+           for(Plan p:plans) {
+                  table.getItems().add(p);
             }
       }
 

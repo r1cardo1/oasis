@@ -14,7 +14,10 @@ import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.URL;
-import java.sql.ResultSet;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -51,6 +54,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import oasiscrud.oasisrimbd;
 
 /**
  * FXML Controller class
@@ -120,9 +124,17 @@ public class LoginController implements Initializable {
 
       @FXML
       public void login() throws SQLException, IOException {
-            Usuario u = dm.login(new Usuario(user.getText(), pass.getText()));
+            try{
+                Registry reg = LocateRegistry.getRegistry(host,27019);
+                oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+            
+            Usuario u=null;
+            u= inter.login(new Usuario(user.getText(),pass.getText()));
+            System.out.println(u);
+            // = dm.login(new Usuario(user.getText(), pass.getText()));
             Usuario userLogin = null;
-
+            
+            
             if (u != null) {
                   userLogin = u;
                   Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
@@ -151,7 +163,7 @@ public class LoginController implements Initializable {
                   primStage.close();
             } else {
                   Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
-                  dmaux.logfailLogin(userLogin.getUsuario(), pass.getText(), InetAddress.getLocalHost().getHostName() + " - " + System.getProperty("user.name"), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+                  dmaux.logfailLogin(user.getText(), pass.getText(), InetAddress.getLocalHost().getHostName() + " - " + System.getProperty("user.name"), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                           Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
                           + ":" + Integer.toString(time.get(Calendar.MINUTE))
                           + ":" + Integer.toString(time.get(Calendar.SECOND)));
@@ -160,6 +172,10 @@ public class LoginController implements Initializable {
                   alert.setHeaderText(null);
                   alert.setContentText("Usuario o Contraseña incorrectos");
                   alert.show();
+            }
+            }catch(RemoteException | NotBoundException ex){
+                System.out.println(ex.getMessage());
+                
             }
       }
 

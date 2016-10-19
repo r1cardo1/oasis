@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,10 +67,10 @@ public class UserPanelController implements Initializable {
         nivel.setCellValueFactory(new PropertyValueFactory<>("nivel"));
 
         ResultSet rs;
-        rs = dm.getUsuarios();
-        if (rs != null) {
-            while (rs.next()) {
-                table.getItems().add(new Usuario(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("clave"), rs.getInt("nivel")));
+        ArrayList<Usuario> users = dm.getUsuarios();
+        if (!users.isEmpty()) {
+            for(Usuario u:users) {
+                table.getItems().add(u);
             }
         }
     }

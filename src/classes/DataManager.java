@@ -37,9 +37,10 @@ public class DataManager {
       public Usuario login(Usuario user) {
             Usuario u = null;
             try {
-                  String query = "SELECT * FROM oasisclub.usuarios WHERE usuario LIKE '" + user + "';";
+                  String query = "SELECT * FROM oasisclub.usuarios WHERE usuario LIKE '" + user.getUsuario() + "';";
                   rs = st.executeQuery(query);
                   if (rs.next()) {
+                      System.out.println(rs.getString("nombre"));
                         u = new Usuario(rs.getString("nombre"), rs.getString("apellido"), rs.getString("usuario"), rs.getString("clave"), rs.getInt("nivel"));
                   }
                   if (u != null) {
@@ -180,18 +181,17 @@ public class DataManager {
             }
       }
 
-      public ArrayList<Busqueda> getSearchByUser(String u) {
-            ArrayList<Busqueda> list = new ArrayList<>();
+      public int getSearchByUser(String u) {
+            int count=0;
             try {
                   String query = "SELECT COUNT(usuario) FROM oasisclub.search WHERE usuario = '" + u + "';";
                   rs = st.executeQuery(query);
-                  while (rs.next()) {
-                        list.add(new Busqueda(rs.getString("usuario"), rs.getString("modo"), rs.getString("filtro"), rs.getString("fecha"), rs.getString("hora")));
-                  }
-                  return list;
+                 if(rs.next())
+                     count=rs.getInt("COUNT(usuario)");
+                  return count;
             } catch (Exception e) {
                   System.out.println(e.getMessage());
-                  return list;
+                  return count;
             }
       }
 

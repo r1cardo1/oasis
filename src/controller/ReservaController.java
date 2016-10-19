@@ -13,6 +13,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -95,9 +96,9 @@ public class ReservaController implements Initializable {
 
       public void reloadTable() throws SQLException {
             table.getItems().clear();
-            ResultSet rs = dm.getReservas();
-            while (rs.next()) {
-                  table.getItems().add(new Reserva(rs.getString("titular"), rs.getString("cedula"), rs.getString("telefono"), rs.getString("plan"), rs.getString("invitados"), rs.getString("fecha"), rs.getString("observacion")));
+            ArrayList<Reserva> reservas = dm.getReservas();
+           for(Reserva r:reservas) {
+                  table.getItems().add(r);
             }
       }
 
@@ -158,9 +159,9 @@ public class ReservaController implements Initializable {
       public void searchByName() throws SQLException {
             if (!filter.getText().isEmpty()) {
                   table.getItems().clear();
-                  ResultSet rs = dm.getReservasByName(filter.getText().toUpperCase());
-                  while (rs.next()) {
-                        table.getItems().add(new Reserva(rs.getString("titular"), rs.getString("cedula"), rs.getString("telefono"), rs.getString("plan"), rs.getString("invitados"), rs.getString("fecha"), rs.getString("observacion")));
+                  ArrayList<Reserva> reservas = dm.getReservasByName(filter.getText().toUpperCase());
+                  for(Reserva r:reservas) {
+                        table.getItems().add(r);
                   }
             }
       }
@@ -168,29 +169,29 @@ public class ReservaController implements Initializable {
       public void searchByCI() throws SQLException {
             if (!filter.getText().isEmpty()) {
                   table.getItems().clear();
-                  ResultSet rs = dm.getReservasByCI(filter.getText().toUpperCase());
-                  while (rs.next()) {
-                        table.getItems().add(new Reserva(rs.getString("titular"), rs.getString("cedula"), rs.getString("telefono"), rs.getString("plan"), rs.getString("invitados"), rs.getString("fecha"), rs.getString("observacion")));
+                  ArrayList<Reserva> reservas = dm.getReservasByCI(filter.getText().toUpperCase());
+                  for(Reserva r:reservas) {
+                        table.getItems().add(r);
                   }
             }
       }
 
       public void searchByDate() throws SQLException {
             table.getItems().clear();
-            ResultSet rs = dm.getReservas();
-            while (rs.next()) {
-                  if (date.getValue().isEqual(LocalDate.parse(rs.getString("fecha"))))
-                        table.getItems().add(new Reserva(rs.getString("titular"), rs.getString("cedula"), rs.getString("telefono"), rs.getString("plan"), rs.getString("invitados"), rs.getString("fecha"), rs.getString("observacion")));
+            ArrayList<Reserva> res = dm.getReservas();
+            for(Reserva rsv:res) {
+                  if (date.getValue().isEqual(LocalDate.parse(rsv.getFecha())))
+                        table.getItems().add(rsv);
             }
       }
 
       public void searchByRangeDate() throws SQLException {
             table.getItems().clear();
-            ResultSet rs = dm.getReservas();
-            while (rs.next()) {
-                   if ((from.getValue().isEqual(LocalDate.parse(rs.getString("fecha"))) || from.getValue().isBefore(LocalDate.parse(rs.getString("fecha"))))
-                                && (to.getValue().isEqual(LocalDate.parse(rs.getString("fecha"))) || to.getValue().isAfter(LocalDate.parse(rs.getString("fecha")))))
-                        table.getItems().add(new Reserva(rs.getString("titular"), rs.getString("cedula"), rs.getString("telefono"), rs.getString("plan"), rs.getString("invitados"), rs.getString("fecha"), rs.getString("observacion")));
+            ArrayList<Reserva> res = dm.getReservas();
+            for(Reserva rsv:res) {
+                   if ((from.getValue().isEqual(LocalDate.parse(rsv.getFecha())) || from.getValue().isBefore(LocalDate.parse(rsv.getFecha())))
+                                && (to.getValue().isEqual(LocalDate.parse(rsv.getFecha())) || to.getValue().isAfter(LocalDate.parse(rsv.getFecha()))))
+                        table.getItems().add(rsv);
             }
       }
 

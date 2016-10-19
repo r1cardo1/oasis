@@ -15,7 +15,6 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -26,21 +25,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintServiceLookup;
-import javax.print.SimpleDoc;
-import javax.print.attribute.AttributeSet;
-import javax.print.attribute.HashPrintServiceAttributeSet;
-import javax.print.attribute.standard.PrinterName;
 
 public class OpenTableController implements Initializable {
 
@@ -70,7 +60,7 @@ public class OpenTableController implements Initializable {
         txtcontrato.setText(client.getContrato());
         txtplan.setText(client.getPlan());
         fecha.setValue(LocalDate.now());
-        ResultSet rs = dm.getCantByPlan(client.getPlan());
+        int cant = dm.getCantByPlan(client.getPlan());
         /*if (rs.next()) {
             max = rs.getInt("invitados");
         } else {
@@ -96,8 +86,7 @@ public class OpenTableController implements Initializable {
                                             + ":" + Integer.toString(time.get(Calendar.MINUTE))
                                             + ":" + Integer.toString(time.get(Calendar.SECOND))
                                             + ampm;
-                String result;
-                result = dm.openTable(txtcontrato.getText(), ninvitados.getText(),Integer.toString(table.getItems().size()), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
+                dm.openTable(txtcontrato.getText(), ninvitados.getText(),Integer.toString(table.getItems().size()), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
                     dm.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));

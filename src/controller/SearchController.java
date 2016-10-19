@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -109,32 +110,27 @@ public class SearchController implements Initializable {
                 + " " + ampm);
 
         if (stipo.getSelectionModel().getSelectedItem().equals("CEDULA")) {
-            ResultSet rs;
-            rs = dm.searchClientbyCI(str.getText().toUpperCase());
-            if (rs != null) {
-                while (rs.next()) {
-
-                    table.getItems().add(new Cliente(rs.getString("cedula"), rs.getString("nombre"), rs.getString("contrato"), rs.getString("plan"), rs.getString("banco"), rs.getString("restringido")));
+            ArrayList<Cliente> clients = dm.searchClientbyCI(str.getText().toUpperCase());
+            if (!clients.isEmpty()) {
+                for(Cliente cli:clients) {
+                    table.getItems().add(cli);
                 }
             }
         }
         if (stipo.getSelectionModel().getSelectedItem().equals("NOMBRE")) {
-            ResultSet rs;
-            rs = dm.searchClientbyName(str.getText().toUpperCase());
-            if (rs != null) {
-                while (rs.next()) {
-
-                    table.getItems().add(new Cliente(rs.getString("cedula"), rs.getString("nombre"), rs.getString("contrato"), rs.getString("plan"), rs.getString("banco"), rs.getString("restringido")));
+            ArrayList<Cliente> clients = dm.searchClientbyName(str.getText().toUpperCase());
+            if (!clients.isEmpty()) {
+               for(Cliente cli:clients) {
+                    table.getItems().add(cli);
                 }
             }
         }
         if (stipo.getSelectionModel().getSelectedItem().equals("CONTRATO")) {
             ResultSet rs;
-            rs = dm.searchClientbyContract(str.getText().toUpperCase());
-            if (rs != null) {
-                while (rs.next()) {
-
-                    table.getItems().add(new Cliente(rs.getString("cedula"), rs.getString("nombre"), rs.getString("contrato"), rs.getString("plan"), rs.getString("banco"), rs.getString("restringido")));
+            ArrayList<Cliente> client = dm.searchClientbyContract(str.getText().toUpperCase());
+            if (!client.isEmpty()) {
+                for(Cliente cli:client) {
+                    table.getItems().add(cli);
                 }
             }
         }
