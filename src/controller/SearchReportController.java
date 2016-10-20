@@ -61,15 +61,7 @@ public class SearchReportController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            initCombo();
-            first();
-            initTable();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(SearchReportController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
 
     public void first() throws SQLException, RemoteException, NotBoundException {

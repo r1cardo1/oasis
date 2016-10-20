@@ -101,11 +101,7 @@ public class VisitasController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            initTable();
-        } catch (SQLException | RemoteException | NotBoundException ex) {
-            Logger.getLogger(VisitasController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
 
         initCombo();
     }

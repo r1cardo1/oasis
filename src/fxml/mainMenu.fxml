@@ -36,16 +36,6 @@
                                           <Image url="@../images/logo.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="80.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../images/iguanin.png" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fitHeight="80.0" fitWidth="75.0" layoutX="125.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                                       <image>
-                                          <Image url="@../images/iguaninv.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </GridPane>
                            </children>

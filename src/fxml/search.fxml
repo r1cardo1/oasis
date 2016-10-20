@@ -47,16 +47,6 @@
                                     <Image url="@../images/logo.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="logo1" fitHeight="81.0" fitWidth="200.0" layoutX="330.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/iguanin.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="logo11" fitHeight="81.0" fitWidth="200.0" layoutX="64.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                                 <image>
-                                    <Image url="@../images/iguaninv.png" />
-                                 </image>
-                              </ImageView>
                            </children>
                         </GridPane>
                         <Separator prefWidth="200.0" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />

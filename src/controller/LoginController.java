@@ -82,8 +82,8 @@ public class LoginController implements Initializable {
             // TODO
             drag();
             translate(user, 0.0);
-            translate(pass, 200.0);
-            translatey(login, 300.0);
+            translate(pass, 0.0);
+            translatey(login, 0.0);
 
       }
 

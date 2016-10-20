@@ -107,6 +107,7 @@ public class SearchController implements Initializable {
         
         Registry reg = LocateRegistry.getRegistry(host,27019);
         oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        
         Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
         String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
         inter.search(user.getUsuario(), (String) stipo.getSelectionModel().getSelectedItem(), str.getText(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),

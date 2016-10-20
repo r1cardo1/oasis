@@ -9,6 +9,9 @@ import classes.DigitalClock;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -152,6 +155,7 @@ public class MainMenuController implements Initializable {
         LoginController controller;
         Parent root = load.load();
         controller = load.getController();
+        controller.host=this.host;
         Scene scene = new Scene(root);
         stage.setScene(scene);
         controller.setStage(stage);
@@ -161,7 +165,7 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    public void visitas(ActionEvent evt) throws IOException {
+    public void visitas(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
         if (user.getNivel() >= 2) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/visitas.fxml"));
             AnchorPane pan = loader.load();
@@ -169,6 +173,7 @@ public class MainMenuController implements Initializable {
             VisitasController controller = loader.getController();
             controller.menu = myController;
             controller.host=this.host;
+            controller.initTable();
             aux.toFront();
             main.setVisible(false);
 
@@ -182,7 +187,7 @@ public class MainMenuController implements Initializable {
     }
 
     @FXML
-    public void restringidos(ActionEvent evt) throws IOException {
+    public void restringidos(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
         if (user.getNivel() >= 2) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/blackList.fxml"));
             Pane pan = loader.load();
@@ -190,6 +195,8 @@ public class MainMenuController implements Initializable {
             BlackListController controller = loader.getController();
             controller.menu = myController;
             controller.host=this.host;
+            controller.initTable();
+            
             aux.toFront();
 
             main.setVisible(false);
@@ -246,14 +253,15 @@ public class MainMenuController implements Initializable {
         }
     }
 
-    public void viewReservas() throws IOException {
+    public void viewReservas() throws IOException, RemoteException, NotBoundException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reserva.fxml"));
         AnchorPane pan = loader.load();
         aux.getChildren().add(pan);
         ReservaController controller = loader.getController();
         controller.myController = controller;
         controller.menu = myController;
-        controller.host=this.host;
+        controller.host=this.host;        
+        controller.reloadTable();
         controller.usuario = user;
         aux.toFront();
         main.setVisible(false);

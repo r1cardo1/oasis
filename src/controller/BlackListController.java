@@ -14,8 +14,6 @@ import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -36,11 +34,6 @@ public class BlackListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            initTable();
-        } catch (SQLException | RemoteException | NotBoundException ex) {
-            Logger.getLogger(BlackListController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }    
     
     public void initTable() throws SQLException, RemoteException, NotBoundException{

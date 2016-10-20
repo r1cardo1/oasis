@@ -8,6 +8,9 @@ package controller;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,26 +52,32 @@ public class ReportMenuController implements Initializable {
     }
 
     @FXML
-    public void loginReport(ActionEvent evt) throws IOException {
+    public void loginReport(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loginReport.fxml"));
         Pane pan = loader.load();
         LoginReportController controller = loader.getController();
         controller.menu = myController;
         controller.host = this.host;
+        controller.initUsers();
+            controller.initCombo();
+            controller.initTable();
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();
     }
 
     @FXML
-    public void searchReport() throws IOException {
+    public void searchReport() throws IOException, SQLException, RemoteException, NotBoundException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/searchReport.fxml"));
         Pane pan = loader.load();
         SearchReportController controller = loader.getController();
         controller.menu = myController;
         controller.host=this.host;
+         controller.initCombo();
+         controller.first();
+            controller.initTable();
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();

@@ -59,13 +59,7 @@ public class LoginReportController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            initUsers();
-            initCombo();
-            initTable();
-        } catch (SQLException | RemoteException | NotBoundException ex) {
-            Logger.getLogger(LoginReportController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     public void initUsers() throws SQLException, RemoteException, NotBoundException {

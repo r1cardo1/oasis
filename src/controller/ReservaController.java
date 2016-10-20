@@ -10,6 +10,7 @@ import classes.Reserva;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -66,12 +67,15 @@ public class ReservaController implements Initializable {
 
       @Override
       public void initialize(URL url, ResourceBundle rb) {
-            try {
-                  initTable();
-            } catch (RemoteException | NotBoundException | SQLException ex) {
+            
+            try {                  
+                  
+                   initTable();                 
+                  initCombo();               
+                  
+            } catch (RemoteException | NotBoundException  | SQLException ex) {
               Logger.getLogger(ReservaController.class.getName()).log(Level.SEVERE, null, ex);
           }
-            initCombo();
       }
 
       public void initTable() throws SQLException, RemoteException, NotBoundException {
@@ -81,10 +85,11 @@ public class ReservaController implements Initializable {
             plan.setCellValueFactory(new PropertyValueFactory<>("plan"));
             invitados.setCellValueFactory(new PropertyValueFactory<>("invitados"));
             fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
-            reloadTable();
+           
       }
 
-      public void initCombo() {
+      public void initCombo() throws RemoteException, NotBoundException {
+           
             combo.getItems().addAll("TODAS", "TITULAR", "CEDULA", "FECHA", "RANGO DE FECHA");
             combo.getSelectionModel().selectFirst();
             combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -100,13 +105,14 @@ public class ReservaController implements Initializable {
       }
 
       public void reloadTable() throws RemoteException, NotBoundException {
-          Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+            System.out.println("HOLA");
+            Registry reg = LocateRegistry.getRegistry(host,27019);
+                  oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
             table.getItems().clear();
             ArrayList<Reserva> reservas = inter.getReservas();
-            reservas.stream().forEach((r) -> {
+            for(Reserva r:reservas) {
                 table.getItems().add(r);
-          });
+          }
       }
 
       public void changePane(String old, String neww) throws SQLException, RemoteException, NotBoundException {
