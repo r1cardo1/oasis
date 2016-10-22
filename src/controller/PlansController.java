@@ -49,13 +49,7 @@ public class PlansController implements Initializable {
 
       @Override
       public void initialize(URL url, ResourceBundle rb) {
-            try {
-                  initTable();
-            } catch (SQLException ex) {
-                  System.out.println(ex.getMessage());
-            } catch (RemoteException | NotBoundException ex) {
-              Logger.getLogger(PlansController.class.getName()).log(Level.SEVERE, null, ex);
-          }
+
       }
 
       public void initTable() throws SQLException, RemoteException, NotBoundException {

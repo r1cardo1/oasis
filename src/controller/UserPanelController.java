@@ -49,13 +49,7 @@ public class UserPanelController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            // TODO
-            initTable();
-        } catch (SQLException ex) {
-        } catch (RemoteException | NotBoundException ex) {
-            Logger.getLogger(UserPanelController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
     @FXML

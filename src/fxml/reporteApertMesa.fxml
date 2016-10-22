@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.ReporteApertMesaController">
+   <children>
+      <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" layoutX="341.0" layoutY="40.0" prefHeight="80.0" prefWidth="800.0" text="Reporte de apertura de mesas" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="39.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" AnchorPane.leftAnchor="40.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+      <AnchorPane layoutX="10.0" layoutY="90.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <TableView fx:id="table" layoutX="300.0" layoutY="125.0" prefHeight="520.0" prefWidth="800.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
+              <columns>
+                <TableColumn fx:id="usuario" prefWidth="75.0" text="Usuario" />
+                <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
+                  <TableColumn fx:id="cliente" prefWidth="75.0" text="Cliente" />
+                  <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
+                  <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
+                  <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
+                  <TableColumn fx:id="hora" prefWidth="75.0" text="Hora" />
+                  <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <HBox alignment="CENTER_LEFT" layoutX="80.0" layoutY="-13.0" prefHeight="40.0" prefWidth="245.0" spacing="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Label text="Buscar por:" />
+                  <ComboBox fx:id="type" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbuser" alignment="CENTER_LEFT" layoutX="362.0" layoutY="-10.0" prefHeight="40.0" prefWidth="455.0" visible="false" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <ComboBox fx:id="cbuser" prefHeight="27.0" prefWidth="181.0" promptText="Seleccione un usuario" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbmes" alignment="CENTER_LEFT" layoutX="305.0" layoutY="30.0" prefHeight="40.0" prefWidth="455.0" spacing="20.0" visible="false" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Label text="Año:" />
+                  <ComboBox fx:id="cbano" prefWidth="150.0" />
+                  <Label layoutX="10.0" layoutY="22.0" text="Mes" />
+                  <ComboBox fx:id="cbmes" layoutX="35.0" layoutY="17.0" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbdate" alignment="CENTER_LEFT" layoutX="315.0" layoutY="40.0" prefHeight="40.0" prefWidth="455.0" spacing="20.0" visible="false" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Label text="Seleccione fecha" />
+                  <DatePicker fx:id="dpdate" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbrangedate" alignment="CENTER_LEFT" layoutX="325.0" layoutY="50.0" prefHeight="40.0" prefWidth="455.0" spacing="20.0" visible="false" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Label text="Desde" />
+                  <DatePicker fx:id="dpfrom" prefHeight="27.0" prefWidth="140.0" />
+                  <Label layoutX="10.0" layoutY="22.0" text="Hasta" />
+                  <DatePicker fx:id="dpto" layoutX="44.0" layoutY="17.0" prefHeight="27.0" prefWidth="140.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="hbfilter" alignment="CENTER_LEFT" layoutX="335.0" layoutY="60.0" prefHeight="40.0" prefWidth="455.0" spacing="20.0" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Label text="Filtro:" />
+                  <TextField fx:id="txtfilter" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../css/aprtMesa.css" />
+      <URL value="@../css/theme.css" />
+   </stylesheets>
+</AnchorPane>

@@ -8,6 +8,9 @@ package controller;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,7 +36,7 @@ public class AdminMenuController implements Initializable {
     }
 
     @FXML
-    public void userPanel(ActionEvent evt) throws IOException {
+    public void userPanel(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userPanel.fxml"));
         Pane pan = loader.load();
         aux.getChildren().add(pan);
@@ -42,12 +45,14 @@ public class AdminMenuController implements Initializable {
         controller.myController = controller;
         controller.usuario = this.usuario;
         controller.host = this.host;
+        controller.initTable();
         aux.toFront();
         main.setVisible(false);
     }
-    
-    @FXML public void plans() throws IOException{
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/plans.fxml"));
+
+    @FXML
+    public void plans() throws IOException, SQLException, RemoteException, NotBoundException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/plans.fxml"));
         Pane pan = loader.load();
         aux.getChildren().add(pan);
         PlansController controller = loader.getController();
@@ -55,7 +60,7 @@ public class AdminMenuController implements Initializable {
         controller.myController = controller;
         controller.usuario = this.usuario;
         controller.host = this.host;
-       
+        controller.initTable();
         aux.toFront();
         main.setVisible(false);
     }

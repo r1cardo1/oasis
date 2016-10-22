@@ -60,8 +60,8 @@ public class ReportMenuController implements Initializable {
         controller.menu = myController;
         controller.host = this.host;
         controller.initUsers();
-            controller.initCombo();
-            controller.initTable();
+        controller.initCombo();
+        controller.initTable();
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();
@@ -74,14 +74,25 @@ public class ReportMenuController implements Initializable {
         Pane pan = loader.load();
         SearchReportController controller = loader.getController();
         controller.menu = myController;
-        controller.host=this.host;
-         controller.initCombo();
-         controller.first();
-            controller.initTable();
+        controller.host = this.host;
+        controller.initCombo();
+        controller.first();
+        controller.initTable();
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();
     }
 
+    public void apertMesa() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reporteApertMesa.fxml"));
+        Pane pan = loader.load();
+        ReporteApertMesaController controller = loader.getController();
+        controller.menu = myController;
+        controller.host = this.host;        
+        aux.getChildren().add(pan);
+        main.setVisible(false);
+        aux.toFront();
+    }
 
 }

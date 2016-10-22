@@ -47,7 +47,7 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="112.0" prefWidth="112.0" styleClass="table-button" text="Aperturas de mesas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#apertMesa" prefHeight="112.0" prefWidth="112.0" styleClass="table-button" text="Aperturas de mesas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
                            <effect>
                               <DropShadow />
                            </effect>
