@@ -35,6 +35,7 @@ public class SelectPrinterController implements Initializable {
       OpenTableController sup;
       byte[] a;
       String printer;
+    OpenTableController menu;
 
       @Override
       public void initialize(URL url, ResourceBundle rb) {
@@ -81,6 +82,7 @@ public class SelectPrinterController implements Initializable {
             
 
             job.print(doc, null);
+            menu.back();
             
 
         } catch (javax.print.PrintException pex) {

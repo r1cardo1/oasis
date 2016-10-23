@@ -5,9 +5,11 @@
  */
 package controller;
 
+import classes.Asistencia;
 import classes.Cliente;
 import classes.Invitado;
 import classes.PrinterOptions;
+import classes.ReporteMesa;
 import classes.Usuario;
 import java.io.IOException;
 import java.net.URL;
@@ -48,6 +50,7 @@ public class OpenTableController implements Initializable {
     Usuario user;
     int max = 0;
     SearchController menu;
+    OpenTableController myController;
     String printer;
     String host;
 
@@ -92,7 +95,12 @@ public class OpenTableController implements Initializable {
                                             + ":" + Integer.toString(time.get(Calendar.MINUTE))
                                             + ":" + Integer.toString(time.get(Calendar.SECOND))
                                             + ampm;
-                inter.openTable(txtcontrato.getText(), ninvitados.getText(),Integer.toString(table.getItems().size()), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, us);
+                inter.creaAsistencia(new Asistencia(ninvitados.getText(),LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),hour,client.getContrato(),Integer.toString(table.getItems().size()),user.getUsuario()));
+                inter.openTable(new ReporteMesa(user.getUsuario(),client.getCedula(),
+                        client.getNombre(),client.getContrato(),
+                        client.getPlan(),
+                        LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+                        hour,Integer.toString(Integer.parseInt(ninvitados.getText())+table.getItems().size())));
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
                     inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
@@ -190,7 +198,8 @@ public class OpenTableController implements Initializable {
           Parent root = loader.load();
           Scene scene = new Scene(root);
           SelectPrinterController controller = loader.getController();
-          controller.a=b;          
+          controller.a=b;
+          controller.menu = myController;
           stage.setScene(scene);
           stage.show();
     }

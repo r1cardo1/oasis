@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.ReporteApertMesaController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReporteApertMesaController">
    <children>
       <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -72,7 +71,7 @@
                   <DatePicker fx:id="dpto" layoutX="44.0" layoutY="17.0" prefHeight="27.0" prefWidth="140.0" />
                </children>
             </HBox>
-            <HBox fx:id="hbfilter" alignment="CENTER_LEFT" layoutX="335.0" layoutY="60.0" prefHeight="40.0" prefWidth="455.0" spacing="20.0" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="20.0">
+            <HBox fx:id="hbfilter" alignment="CENTER_LEFT" layoutX="335.0" layoutY="60.0" prefHeight="40.0" prefWidth="455.0" spacing="20.0" visible="false" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="20.0">
                <children>
                   <Label text="Filtro:" />
                   <TextField fx:id="txtfilter" />

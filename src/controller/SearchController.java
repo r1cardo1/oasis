@@ -212,6 +212,7 @@ public class SearchController implements Initializable {
             controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
             controller.user = this.user;
             controller.host = this.host;
+            controller.myController = controller;
             try {
                 controller.initData();
             } catch (Exception ex) {

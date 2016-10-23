@@ -11,6 +11,7 @@ import classes.Cliente;
 import classes.Invitado;
 import classes.Login;
 import classes.Plan;
+import classes.ReporteMesa;
 import classes.Reserva;
 import classes.Usuario;
 import java.rmi.Remote;
@@ -38,6 +39,8 @@ public interface oasisrimbd extends Remote {
     public ArrayList<Usuario> getUsuarios() throws RemoteException;
 
     public ArrayList<Usuario> searchUserbyUsername(String u) throws RemoteException;
+    
+        public ArrayList<ReporteMesa> getOpenTables() throws RemoteException;
 
     public int getLogins(String u) throws RemoteException;
 
@@ -61,7 +64,7 @@ public interface oasisrimbd extends Remote {
 
     public ArrayList<Reserva> getReservasByCI(String ci) throws RemoteException;
 
-    public void openTable(String contrato, String ninvitados, String invad, String fecha, String hora, String usuario) throws RemoteException;
+    public void openTable(ReporteMesa report) throws RemoteException;
 
     public void logLogin(String nombre, String apellido, String usuario, String fecha, String hora) throws RemoteException;
 
@@ -86,5 +89,7 @@ public interface oasisrimbd extends Remote {
     public void actualizaReservacion(Reserva old, Reserva neww) throws RemoteException;
 
     public void eliminaReserva(Reserva r) throws RemoteException;
+    
+    public void creaAsistencia(Asistencia a) throws RemoteException;
 
 }

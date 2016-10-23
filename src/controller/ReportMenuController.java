@@ -83,13 +83,16 @@ public class ReportMenuController implements Initializable {
         aux.toFront();
     }
 
-    public void apertMesa() throws IOException {
+    public void apertMesa() throws IOException, RemoteException, NotBoundException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reporteApertMesa.fxml"));
         Pane pan = loader.load();
         ReporteApertMesaController controller = loader.getController();
         controller.menu = myController;
         controller.host = this.host;        
+        controller.initAnoCombo();
+        controller.reloadTable();
+        controller.initUserCombo();
         aux.getChildren().add(pan);
         main.setVisible(false);
         aux.toFront();

@@ -5,11 +5,13 @@
  */
 package classes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author RicardoMarcano
  */
-public class ReporteMesa {
+public class ReporteMesa implements Serializable{
      public String usuario;
      public String cedula;
      public String cliente;

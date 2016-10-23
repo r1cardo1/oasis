@@ -20,6 +20,14 @@ public class Asistencia implements Serializable{
       String cedula;
       String nombre;
       String contrato;
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
       String plan;
       String usuario;
 
