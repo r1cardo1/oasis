@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import oasiscrud.oasisrimbd;
 
 /**
  * FXML Controller class
@@ -68,7 +69,7 @@ public class UserPanelController implements Initializable {
         nivel.setCellValueFactory(new PropertyValueFactory<>("nivel"));
 
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Usuario> users = inter.getUsuarios();
         if (!users.isEmpty()) {
             for(Usuario u:users) {
@@ -104,7 +105,7 @@ public class UserPanelController implements Initializable {
                 alert.show();
             } else {
                 Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
                 inter.deleteUserByUsername(user.getUsuario());
                 initTable();
             }

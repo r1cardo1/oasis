@@ -40,6 +40,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import oasiscrud.oasisrimbd;
 
 /**
  * FXML Controller class
@@ -106,7 +107,7 @@ public class SearchController implements Initializable {
         table.getSelectionModel().clearSelection();
         
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         
         Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
         String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";

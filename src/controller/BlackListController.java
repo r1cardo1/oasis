@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import oasiscrud.oasisrimbd;
 
 
 public class BlackListController implements Initializable {
@@ -43,7 +44,7 @@ public class BlackListController implements Initializable {
     plan.setCellValueFactory(new PropertyValueFactory<>("plan"));    
 
     Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+       oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
    ArrayList<Cliente> list =inter.getRestringido();
     if(!list.isEmpty())
         list.stream().forEach((c) -> {

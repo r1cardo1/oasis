@@ -29,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import oasiscrud.oasisrimbd;
 
 /**
  * FXML Controller class
@@ -93,7 +94,7 @@ public class ReporteApertMesaController implements Initializable {
 
     public void initUserCombo() throws RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Usuario> users = inter.getUsuarios();
         for (Usuario u : users) {
             cbuser.getItems().add(u.getUsuario());
@@ -169,7 +170,7 @@ public class ReporteApertMesaController implements Initializable {
     
     public void updateMesCombo() throws RemoteException, NotBoundException{
         Registry reg = LocateRegistry.getRegistry(host, 27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<ReporteMesa> reports = inter.getOpenTables();
         String[] meses = {"","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
         int[] mbool = {0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -189,7 +190,7 @@ public class ReporteApertMesaController implements Initializable {
     
     public void initAnoCombo() throws RemoteException, NotBoundException{
         Registry reg = LocateRegistry.getRegistry(host, 27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<ReporteMesa> reports = inter.getOpenTables();
         for(ReporteMesa r:reports){
             if(!cbano.getItems().contains(Integer.toString(LocalDate.parse(r.getFecha()).getYear()))){
@@ -223,7 +224,7 @@ public class ReporteApertMesaController implements Initializable {
 
     public void reloadTable() throws RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<ReporteMesa> reports = inter.getOpenTables();
         for(ReporteMesa r:reports){
             table.getItems().add(r);

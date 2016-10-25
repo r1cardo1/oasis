@@ -27,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import oasiscrud.oasisrimbd;
 
 /**
  * FXML Controller class
@@ -99,7 +100,7 @@ public class NuevaReservaController implements Initializable {
       
       public void save(ActionEvent evt) throws SQLException, RemoteException, NotBoundException{
           Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
             if(!titular.getText().isEmpty() && !cedula.getText().isEmpty())
                   if(save){
                       

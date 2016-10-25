@@ -54,6 +54,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.IOUtils;
+import oasiscrud.oasisrimbd;
 
 
 /**
@@ -107,7 +108,7 @@ public class VisitasController implements Initializable {
 
     public void initTable() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         contrato.setCellValueFactory(new PropertyValueFactory<>("contrato"));
@@ -139,7 +140,7 @@ public class VisitasController implements Initializable {
 
     public void reloadTable() throws RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
         ArrayList<Asistencia> asists = inter.visits();
         ResultSet aux;
@@ -251,7 +252,7 @@ public class VisitasController implements Initializable {
 
     public void date() throws RemoteException, NotBoundException {
 Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
         ArrayList<Asistencia> asists = inter.visits();
         ResultSet aux;
@@ -271,7 +272,7 @@ Registry reg = LocateRegistry.getRegistry(host,27019);
 
     public void toDate() throws RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
         ArrayList<Asistencia> asists =inter.visits();
         ResultSet aux;

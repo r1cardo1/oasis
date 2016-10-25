@@ -32,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import oasiscrud.oasisrimbd;
 
 /**
  * FXML Controller class
@@ -66,7 +67,7 @@ public class SearchReportController implements Initializable {
 
     public void first() throws SQLException, RemoteException, NotBoundException {
 Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<String> list = new ArrayList<>();
 
         ArrayList<Usuario> users = inter.getUsuarios();
@@ -88,7 +89,7 @@ Registry reg = LocateRegistry.getRegistry(host,27019);
 
     public void initCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         tcUser.getItems().addAll("TODOS");
         mgUser.getItems().add("TODOS");
         ResultSet rs;
@@ -140,7 +141,7 @@ Registry reg = LocateRegistry.getRegistry(host,27019);
     @FXML
     public void action() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         int count;
         barChart.getData().clear();
         if (!mgUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
@@ -172,7 +173,7 @@ Registry reg = LocateRegistry.getRegistry(host,27019);
 
     public void initTable() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         user.setCellValueFactory(new PropertyValueFactory<>("usuario"));
         tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         filtro.setCellValueFactory(new PropertyValueFactory<>("filtro"));
@@ -193,7 +194,7 @@ Registry reg = LocateRegistry.getRegistry(host,27019);
     @FXML
     public void taction() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
         ArrayList<Busqueda> search = inter.getAllSearch();
         for(Busqueda s:search) {

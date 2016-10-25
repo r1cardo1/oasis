@@ -167,7 +167,7 @@ public class LoginController implements Initializable {
                 alert.show();
             }
         } catch (RemoteException | NotBoundException ex) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 

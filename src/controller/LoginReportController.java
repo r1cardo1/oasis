@@ -16,8 +16,6 @@ import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -31,7 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-
+import oasiscrud.oasisrimbd;
 /**
  * FXML Controller class
  *
@@ -64,7 +62,7 @@ public class LoginReportController implements Initializable {
 
     public void initUsers() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Usuario> user = inter.getUsuarios();
         user.stream().forEach((u) -> {
             users.add(u.getUsuario());
@@ -88,7 +86,7 @@ public class LoginReportController implements Initializable {
 
     public void initCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         tcUser.getItems().addAll("TODOS");
         mgUser.getItems().add("TODOS");
         ArrayList<Usuario> user = inter.getUsuarios();
@@ -145,7 +143,7 @@ public class LoginReportController implements Initializable {
 
     public void initTable() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
@@ -160,7 +158,7 @@ public class LoginReportController implements Initializable {
     @FXML
     public void taction() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
         ArrayList<Login> logins = inter.getLogLogins();
         for (Login log : logins) {
@@ -175,7 +173,7 @@ public class LoginReportController implements Initializable {
     @FXML
     public void action() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         barChart.getData().clear();
         if (!mgUser.getSelectionModel().getSelectedItem().equals("TODOS")) {
             int count = inter.getLogins((String) mgUser.getSelectionModel().getSelectedItem());

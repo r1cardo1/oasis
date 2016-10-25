@@ -40,7 +40,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-
+import oasiscrud.oasisrimbd;
 /**
  * FXML Controller class
  *
@@ -107,7 +107,7 @@ public class ReservaController implements Initializable {
       public void reloadTable() throws RemoteException, NotBoundException {
             System.out.println("HOLA");
             Registry reg = LocateRegistry.getRegistry(host,27019);
-                  oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+                  oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
             table.getItems().clear();
             ArrayList<Reserva> reservas = inter.getReservas();
             for(Reserva r:reservas) {
@@ -171,7 +171,7 @@ public class ReservaController implements Initializable {
 
       public void searchByName() throws SQLException, RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
             if (!filter.getText().isEmpty()) {
                   table.getItems().clear();
                   ArrayList<Reserva> reservas = inter.getReservasByName(filter.getText().toUpperCase());
@@ -185,7 +185,7 @@ public class ReservaController implements Initializable {
             if (!filter.getText().isEmpty()) {
                   table.getItems().clear();
                   Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
                   ArrayList<Reserva> reservas = inter.getReservasByCI(filter.getText().toUpperCase());
                   reservas.stream().forEach((r) -> {
                       table.getItems().add(r);
@@ -196,7 +196,7 @@ public class ReservaController implements Initializable {
       public void searchByDate() throws SQLException, RemoteException, NotBoundException {
             table.getItems().clear();
             Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
             ArrayList<Reserva> res = inter.getReservas();
             for(Reserva rsv:res) {
                   if (date.getValue().isEqual(LocalDate.parse(rsv.getFecha())))
@@ -207,7 +207,7 @@ public class ReservaController implements Initializable {
       public void searchByRangeDate() throws SQLException, RemoteException, NotBoundException {
             table.getItems().clear();
             Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
             ArrayList<Reserva> res = inter.getReservas();
             for(Reserva rsv:res) {
                    if ((from.getValue().isEqual(LocalDate.parse(rsv.getFecha())) || from.getValue().isBefore(LocalDate.parse(rsv.getFecha())))
@@ -260,7 +260,7 @@ public class ReservaController implements Initializable {
       public void eliminaReserva() throws SQLException, RemoteException, NotBoundException{
             if(!table.getSelectionModel().isEmpty()){
                 Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
                   inter.eliminaReserva((Reserva)table.getSelectionModel().getSelectedItem());
                   reloadTable();
             }

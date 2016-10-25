@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import oasiscrud.oasisrimbd;
 
 public class NewUserController implements Initializable {
 
@@ -110,7 +111,7 @@ public class NewUserController implements Initializable {
     @FXML
     public void register(ActionEvent evt) throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Usuario> user = inter.searchUserbyUsername(usuario.getText());
         if (!user.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

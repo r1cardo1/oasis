@@ -28,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import oasiscrud.oasisrimbd;
 
 public class InvitadosController implements Initializable {
 
@@ -53,7 +54,7 @@ public class InvitadosController implements Initializable {
 
     public void initTable() throws RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
@@ -167,7 +168,7 @@ public class InvitadosController implements Initializable {
 
     public void reloadTable() throws RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         table.getItems().clear();
         ArrayList<Invitado> list = inter.getInvitados();
        for(Invitado in:list)

@@ -9,7 +9,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import oasiscrud.oasisrimbd;
 
 public class AsistenciaController implements Initializable {
 
@@ -48,7 +48,7 @@ public class AsistenciaController implements Initializable {
 
     public void setACombos() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<String> years = new ArrayList<>();
         ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());
        for(Asistencia asist : list) {
@@ -68,7 +68,7 @@ public class AsistenciaController implements Initializable {
 
     public void updateGMCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+       oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());
         int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
@@ -86,7 +86,7 @@ public class AsistenciaController implements Initializable {
 
     public void updateTMCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());
         int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
@@ -108,7 +108,7 @@ public class AsistenciaController implements Initializable {
 
     public void updateTable() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+       oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         if (!tmcombo.getSelectionModel().isEmpty()) {
             table.getItems().clear();
             ArrayList<Asistencia> list = inter.getAsistenciaPorContrato(client.getContrato());

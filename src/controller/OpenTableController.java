@@ -35,6 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import oasiscrud.oasisrimbd;
 
 public class OpenTableController implements Initializable {
 
@@ -61,7 +62,7 @@ public class OpenTableController implements Initializable {
 
     public void initData() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         txtnombre.setText(client.getNombre());
         txtcedula.setText(client.getCedula());
         txtcontrato.setText(client.getContrato());
@@ -84,7 +85,7 @@ public class OpenTableController implements Initializable {
     @FXML
     public void openTable(ActionEvent evt) throws IOException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasiscrud.oasisrimbd inter = (oasiscrud.oasisrimbd) reg.lookup("OasisSev");
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         if (!ninvitados.getText().isEmpty()) {            
                 
                 String hour;
