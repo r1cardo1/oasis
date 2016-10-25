@@ -97,5 +97,8 @@ public class ReportMenuController implements Initializable {
         main.setVisible(false);
         aux.toFront();
     }
+    
+    public void reporteDiario(){
+    }
 
 }
