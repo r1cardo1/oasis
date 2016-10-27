@@ -16,9 +16,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -98,7 +101,17 @@ public class ReportMenuController implements Initializable {
         aux.toFront();
     }
     
-    public void reporteDiario(){
+    public void reporteDiario() throws IOException{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReporteDiario.fxml"));
+        Parent root = loader.load();
+        ReporteDiarioController controller = loader.getController();
+        controller.mycontroller = controller;
+        Scene  scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+        
     }
 
 }

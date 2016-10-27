@@ -92,4 +92,14 @@ public interface oasisrimbd extends Remote {
     
     public void creaAsistencia(Asistencia a) throws RemoteException;
 
+    public void restringe(Cliente c) throws RemoteException;
+
+    public void quitaRestriccion(Cliente c) throws RemoteException;
+
+    public void nuevoCliente(Cliente cliente) throws RemoteException;
+
+    public void eliminaCliente(Cliente cliente) throws RemoteException;
+
+    public boolean existeCliente(Cliente cliente) throws RemoteException;
+
 }

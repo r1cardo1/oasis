@@ -52,17 +52,17 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" layoutX="160.0" layoutY="353.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="112.0" styleClass="assistance" text="Clientes" textAlignment="CENTER" GridPane.rowIndex="1">
+                        <Button contentDisplay="TOP" layoutX="160.0" layoutY="353.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="112.0" styleClass="assistance" text="Generar Reporte Mensual" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" layoutX="86.0" layoutY="344.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="112.0" styleClass="plususer" text="Invitados Adicionales" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button contentDisplay="TOP" layoutX="86.0" layoutY="344.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="112.0" styleClass="plususer" text="Generar Reporte por Fechas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" layoutX="350.0" layoutY="344.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="112.0" styleClass="plususer" text="Reportes Diaros" textAlignment="CENTER" wrapText="true">
+                        <Button contentDisplay="TOP" layoutX="350.0" layoutY="344.0" mnemonicParsing="false" onAction="#reporteDiario" prefHeight="112.0" prefWidth="112.0" styleClass="plususer" text="Generar Reporte Diario" textAlignment="CENTER" wrapText="true">
                            <effect>
                               <DropShadow />
                            </effect>

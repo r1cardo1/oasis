@@ -30,7 +30,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -102,13 +104,13 @@ public class SearchController implements Initializable {
     }
 
     public void search() throws SQLException, RemoteException, NotBoundException {
-        
+
         table.getItems().clear();
-        table.getSelectionModel().clearSelection();
         
-        Registry reg = LocateRegistry.getRegistry(host,27019);
+
+        Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-        
+
         Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
         String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
         inter.search(user.getUsuario(), (String) stipo.getSelectionModel().getSelectedItem(), str.getText(), LocalDate.now().format(DateTimeFormatter.ISO_DATE),
@@ -142,12 +144,15 @@ public class SearchController implements Initializable {
                 });
             }
         }
-
+        table.getSelectionModel().clearSelection();
+        
     }
-    
-    public void keysearch(KeyEvent evt) throws SQLException, RemoteException, NotBoundException{
-        if(evt.getCode().equals(KeyCode.ENTER))
+
+    public void keysearch(KeyEvent evt) throws SQLException, RemoteException, NotBoundException {
+        if (evt.getCode().equals(KeyCode.ENTER)) {
             search();
+        }
+
     }
 
     public void initTable() {
@@ -156,6 +161,33 @@ public class SearchController implements Initializable {
         cedula.setCellValueFactory(new PropertyValueFactory<>("cedula"));
         plan.setCellValueFactory(new PropertyValueFactory<>("plan"));
         restringido.setCellValueFactory(new PropertyValueFactory("restringido"));
+        restringido.setCellFactory(column -> {
+            return new TableCell<Cliente, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    setText(empty ? "" : getItem().toString());
+                    setGraphic(null);
+
+                    TableRow<Cliente> currentRow = getTableRow();
+
+                    if (!isEmpty()) {
+
+                        if (item.equals("SI")) {
+                            currentRow.getStyleClass().clear();
+                            currentRow.getStylesheets().add("/css/theme.css");
+                            currentRow.getStyleClass().add("restringidos");
+
+                        } else {
+                            currentRow.getStyleClass().clear();
+                            currentRow.getStylesheets().add("/css/theme.css");
+                            currentRow.getStyleClass().add("permitidos");
+                        }
+                    }
+                }
+            };
+        });
     }
 
     public void initCombo() {
@@ -244,23 +276,23 @@ public class SearchController implements Initializable {
             main.setVisible(false);
         }
     }
-    
-    public void reservar() throws IOException{
-          if(!table.getSelectionModel().isEmpty()){
+
+    public void reservar() throws IOException {
+        if (!table.getSelectionModel().isEmpty()) {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/NuevaReserva.fxml"));
             Parent root = loader.load();
             NuevaReservaController controller = loader.getController();
             controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
             controller.initClient();
-            controller.primStage=stage;
+            controller.primStage = stage;
             controller.host = this.host;
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
-            
-          }
+
+        }
     }
 
 }

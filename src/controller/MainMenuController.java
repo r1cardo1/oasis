@@ -220,6 +220,7 @@ public class MainMenuController implements Initializable {
             controller.menu = myController;
             controller.usuario = user;
             controller.host=this.host;
+            controller.user= user;
             aux.toFront();
             main.setVisible(false);
         } else {
