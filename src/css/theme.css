@@ -41,7 +41,7 @@
 }
 
 .permitidos{
-    -fx-background-color:lightgreen;
+    -fx-background-color:lightblue;
 }
 
 .permitidos:focused{

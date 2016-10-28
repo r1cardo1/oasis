@@ -71,12 +71,18 @@ public class ReporteDiarioController implements Initializable {
         File f = file.showSaveDialog(null);
         PdfWriter writer = new PdfWriter(f.getAbsolutePath());
         PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf);
-        Image img = new Image(ImageDataFactory.create("src/images/excel-logo.png"));
-        img.setHorizontalAlignment(HorizontalAlignment.CENTER);        
         pdf.setDefaultPageSize(PageSize.LETTER);
-        for(int i=0;i<20;i++)
-            document.add(getWatermarkedImage(pdf, img, "HOLA"));
+        
+        Document document = new Document(pdf);
+        Image img = new Image(ImageDataFactory.create("src/images/pdf-logo.png"));
+        img.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        document.add(img);
+        document.add(new Paragraph("\n\n\n"));
+         img = new Image(ImageDataFactory.create("src/images/banner.png"));
+        img.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        document.add(img);
+        
+        
         document.close();
         System.out.println(f.getAbsolutePath());
         
@@ -92,7 +98,9 @@ public Image getWatermarkedImage(PdfDocument pdfDoc, Image img, String watermark
                 setFontColor(DeviceGray.BLACK).
                 setFontSize(20).
                 showTextAligned(watermark, width/2 , height/2 , TextAlignment.CENTER);
-        return new Image(template);
+        Image im = new Image(template);
+        im.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        return im;
     }
 
 }
