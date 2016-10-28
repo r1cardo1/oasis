@@ -79,7 +79,6 @@ public class OpenTableController implements Initializable {
                     + "Contacte con el administrador para indicar uno.");
             alert.show();
         }*/
-
     }
 
     @FXML

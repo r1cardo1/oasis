@@ -61,8 +61,10 @@ public class InvitadosController implements Initializable {
         fecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
         ArrayList<Invitado> list = inter.getInvitados();        
             for(Invitado in:list) {
-                if (client.getContrato().equals(in.getContrato()));
+                if (client.getContrato().equals(in.getContrato())){
                     table.getItems().add(in);
+                    System.out.println(client.getContrato() +"-"+ in.getContrato());
+                }
             }
         
     }
