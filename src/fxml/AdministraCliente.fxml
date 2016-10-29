@@ -56,10 +56,11 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="70.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#restringir" prefWidth="110.0" text="Restringir" />
-                              <Button mnemonicParsing="false" onAction="#quitarRestriccion" prefWidth="110.0" text="Quitar Restriccion" />
-                              <Button mnemonicParsing="false" onAction="#nuevoCliente" prefWidth="110.0" text="Añadir" />
-                              <Button layoutX="542.0" layoutY="18.0" mnemonicParsing="false" onAction="#eliminaCliente" prefWidth="110.0" text="Eliminar" />
+                              <Button mnemonicParsing="false" onAction="#restringir" prefWidth="80.0" text="Restringir" />
+                              <Button mnemonicParsing="false" onAction="#quitarRestriccion" prefWidth="80.0" text="Permitir" />
+                              <Button mnemonicParsing="false" onAction="#nuevoCliente" prefWidth="80.0" text="Guardar" />
+                              <Button mnemonicParsing="false" onAction="#modoeditar" prefWidth="80.0" text="Modificar" />
+                              <Button layoutX="542.0" layoutY="18.0" mnemonicParsing="false" onAction="#eliminaCliente" prefWidth="80.0" text="Eliminar" />
                            </children></HBox>
                         <TableView fx:id="table" editable="true" prefHeight="276.0" prefWidth="698.0" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
                           <columns>

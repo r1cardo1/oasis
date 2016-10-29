@@ -80,7 +80,6 @@ public class SelectPrinterController implements Initializable {
             Doc doc = new SimpleDoc(b, flavor, null);
             //PrintJobWatcher pjDone = new PrintJobWatcher(job);
             
-
             job.print(doc, null);
             menu.back();
             

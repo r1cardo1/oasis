@@ -102,4 +102,6 @@ public interface oasisrimbd extends Remote {
 
     public boolean existeCliente(Cliente cliente) throws RemoteException;
 
+    public void actualizaCliente(Cliente c, Cliente cliente) throws RemoteException;
+
 }

@@ -33,6 +33,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodRequests;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -69,6 +70,7 @@ public class AdministraClienteController implements Initializable {
     Stage primStage;
     String host;
     AdministraClienteController myController;
+    Boolean editar = false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -176,6 +178,12 @@ public class AdministraClienteController implements Initializable {
                 }
             };
         });
+        txtnombre.textProperty().addListener((ov, oldValue, newValue) -> {
+            txtnombre.setText(newValue.toUpperCase());
+        });
+        txtplan.textProperty().addListener((ov, oldValue, newValue) -> {
+            txtplan.setText(newValue.toUpperCase());
+        });
     }
 
     public void initCombo() {
@@ -204,25 +212,38 @@ public class AdministraClienteController implements Initializable {
     }
 
     public void nuevoCliente() throws RemoteException, NotBoundException, SQLException {
-        if (!txtcedula.getText().isEmpty()) {
-            if (!txtcontrato.getText().isEmpty()) {
-                if (!txtnombre.getText().isEmpty()) {
-                    if (!txtplan.getText().isEmpty()) {
+        if (editar) {
+            actualizaCliente();
+        } else {
+            if (!txtcedula.getText().isEmpty()) {
+                if (!txtcontrato.getText().isEmpty()) {
+                    if (!txtnombre.getText().isEmpty()) {
+                        if (!txtplan.getText().isEmpty()) {
 
-                        Registry reg = LocateRegistry.getRegistry(host, 27019);
-                        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-                        if (!inter.existeCliente(new Cliente("V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), ""))) {
-                            inter.nuevoCliente(new Cliente("V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), ""));
-                            search();
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Informacion");
-                            alert.setContentText("Cliente añadido con exito");
+                            Registry reg = LocateRegistry.getRegistry(host, 27019);
+                            oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+                            if (!inter.existeCliente(new Cliente("V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), ""))) {
+                                inter.nuevoCliente(new Cliente("V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), ""));
+                                search();
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Informacion");
+                                alert.setContentText("Cliente añadido con exito");
+                                alert.show();
+                                txtcedula.clear();
+                                txtcontrato.clear();
+                                txtnombre.clear();
+                                txtplan.clear();
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Error");
+                                alert.setContentText("El Cliente ya existe");
+                                alert.show();
+                            }
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("Error");
+                            alert.setContentText("Todos los campos deben estar llenos");
                             alert.show();
-                        }else{
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Error");
-                        alert.setContentText("El Cliente ya existe");
-                        alert.show();
                         }
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -242,11 +263,6 @@ public class AdministraClienteController implements Initializable {
                 alert.setContentText("Todos los campos deben estar llenos");
                 alert.show();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Todos los campos deben estar llenos");
-            alert.show();
         }
     }
 
@@ -257,6 +273,36 @@ public class AdministraClienteController implements Initializable {
 
             inter.eliminaCliente((Cliente) table.getSelectionModel().getSelectedItem());
             search();
+        }
+    }
+
+    public void actualizaCliente() throws RemoteException, NotBoundException, SQLException {
+        if (!table.getSelectionModel().isEmpty()) {
+            Cliente c = (Cliente) table.getSelectionModel().getSelectedItem();
+            Registry reg = LocateRegistry.getRegistry(host, 27019);
+            oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+            inter.actualizaCliente(c, new Cliente(txtcedula.getText().isEmpty() ? "" : "V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), c.getBanco(), c.getRestringido()));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Alerta");
+            alert.setContentText("Usuario actualizado exitosamente");
+            alert.show();
+            editar = false;
+            txtcedula.clear();
+            txtcontrato.clear();
+            txtnombre.clear();
+            txtplan.clear();
+            search();
+        }
+    }
+
+    public void modoeditar() {
+        if (!table.getSelectionModel().isEmpty()) {
+            Cliente c = (Cliente) table.getSelectionModel().getSelectedItem();
+            txtnombre.setText(c.getNombre());
+            txtcedula.setText(c.getCedula());
+            txtplan.setText(c.getPlan());
+            txtcontrato.setText(c.getContrato());
+            editar = true;
         }
     }
 

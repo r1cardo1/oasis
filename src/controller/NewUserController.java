@@ -124,14 +124,26 @@ public class NewUserController implements Initializable {
                 if (!apellido.getText().isEmpty()) {
                     if (!usuario.getText().isEmpty()) {
                         if (pass.getText().equals(cpass.getText()) & !pass.getText().isEmpty()) {
-                            inter.newUser(new Usuario(nombre.getText(), apellido.getText(), usuario.getText(), pass.getText(), lvl.getSelectionModel().getSelectedItem().equals("USUARIO") ? 1
-                                    : lvl.getSelectionModel().getSelectedItem().equals("ADMINISTRADOR") ? 2 : 3));
+                            Usuario u =new Usuario(nombre.getText(), apellido.getText(), usuario.getText(), pass.getText(), lvl.getSelectionModel().getSelectedItem().equals("USUARIO") ? 1
+                                    : lvl.getSelectionModel().getSelectedItem().equals("ADMINISTRADOR") ? 2 : 3);
+                            Usuario aux = inter.login(u);
+                            if(aux==null){
+                            inter.newUser(u);
+                            System.out.println(u.getNivel());
                             panel.initTable();
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Alerta");
                             alert.setHeaderText(null);
                             alert.setContentText("Usuario Registrado con Exito");
                             alert.show();
+                            }else{
+                            System.out.println(aux.getUsuario());
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Alerta");
+                            alert.setHeaderText(null);
+                            alert.setContentText("El usuario ya existe");
+                            alert.show();
+                                    }
                             Stage stage;
                             Button b = (Button) evt.getSource();
                             stage = (Stage) b.getScene().getWindow();
