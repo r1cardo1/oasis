@@ -40,7 +40,7 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="163.0" layoutY="353.0" mnemonicParsing="false" onAction="#plans" prefHeight="101.0" prefWidth="95.0" styleClass="price-button" text="Precio Inv Adicional" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="163.0" layoutY="353.0" mnemonicParsing="false" onAction="#precio" prefHeight="101.0" prefWidth="95.0" styleClass="price-button" text="Precio Inv Adicional" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <effect>
                               <DropShadow />
                            </effect>

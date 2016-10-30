@@ -6,6 +6,7 @@
 package oasiscrud;
 
 import classes.Asistencia;
+import classes.Autorizado;
 import classes.Busqueda;
 import classes.Cliente;
 import classes.Invitado;
@@ -113,6 +114,14 @@ public interface oasisrimbd extends Remote {
     public Cliente clientePorContrato(String contrato) throws  RemoteException;
 
     public boolean estaPresente(Cliente cliente) throws RemoteException;
+
+    public String precio()throws RemoteException;
+
+    public void creaAcceso(Asistencia asistencia) throws RemoteException;
+
+    public void upPrecio(String text) throws  RemoteException;
+
+    public void autorizar(Autorizado autorizado) throws RemoteException;
 
 
 }

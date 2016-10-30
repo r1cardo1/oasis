@@ -97,5 +97,18 @@ public class AdminMenuController implements Initializable {
         stage.setTitle("Busqueda de clientes Oasis");
         stage.show();
     }
+    
+    public void precio() throws IOException, RemoteException, NotBoundException{
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/precio.fxml"));
+        Parent root = loader.load();
+        Scene scn = new Scene(root);
+        PrecioController controller = loader.getController();
+        controller.host = this.host;
+        controller.initPrecio();
+        stage.setScene(scn);
+        controller.myStage = stage;
+        stage.show();
+    }
 
 }

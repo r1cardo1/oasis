@@ -47,6 +47,11 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <Label layoutX="104.0" layoutY="170.0" text="Autorizado">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                   <VBox layoutX="165.0" layoutY="76.0" prefHeight="219.0" prefWidth="174.0" spacing="5.0">
@@ -57,6 +62,7 @@
                         <TextField fx:id="txtcontrato" layoutX="395.0" layoutY="191.0" />
                         <TextField fx:id="ninvitados" layoutX="389.0" layoutY="216.0" />
                         <DatePicker fx:id="fecha" editable="false" layoutX="389.0" layoutY="282.0" />
+                        <TextField fx:id="autorizado" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER" layoutX="-20.0" layoutY="368.0" AnchorPane.leftAnchor="-20.0" AnchorPane.rightAnchor="26.0" />
@@ -84,8 +90,8 @@
                   <Label layoutX="493.0" layoutY="14.0" text="Invitados Adicionales" />
                   <Button contentDisplay="RIGHT" layoutX="579.0" layoutY="321.0" mnemonicParsing="false" onAction="#deleteAction" styleClass="delete-button" text="Eliminar" />
                   <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" />
-                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="127.0" layoutY="321.0" mnemonicParsing="false" onAction="#controlAcceso" styleClass="select-button" text="Pase Acceso" />
-                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="244.0" layoutY="321.0" mnemonicParsing="false" onAction="#controlAcceso" styleClass="select-button" text="Autorizado" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="127.0" layoutY="321.0" mnemonicParsing="false" styleClass="select-button" text="Pase Acceso" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="244.0" layoutY="321.0" mnemonicParsing="false" styleClass="select-button" text="Autorizado" />
                </children>
             </AnchorPane>
          </children>

@@ -39,6 +39,7 @@ import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -98,7 +99,7 @@ public class ReporteDiarioController implements Initializable {
         Cell c;
         Table tc;
         Paragraph p = new Paragraph();
-        Image img = new Image(ImageDataFactory.create("src/images/pdf-logo.png"));
+        Image img = new Image(ImageDataFactory.create(getClass().getResource("/images/pdf-logo.png")));
         img.setHorizontalAlignment(HorizontalAlignment.CENTER);
         document.add(img);
 
@@ -117,7 +118,7 @@ public class ReporteDiarioController implements Initializable {
         p.add("Numero de titulares\n");
         p.add("Numero de invitados adicionales");
         p.setFontSize(10);
-        p.setFont(PdfFontFactory.createFont("src/font/segoeui.ttf", true));
+        p.setFont(PdfFontFactory.createRegisteredFont("times-italic"));
         p.setFontColor(Color.BLACK);
         c.add(p);
         c.setBorder(Border.NO_BORDER);
@@ -129,7 +130,7 @@ public class ReporteDiarioController implements Initializable {
         p.add(list.size() + "\n");
         p.add(cantInvitadosAd() + "");
         p.setFontSize(10);
-        p.setFont(PdfFontFactory.createFont("src/font/segoeui.ttf", true));
+        p.setFont(PdfFontFactory.createRegisteredFont("times-italic"));
         p.setFontColor(Color.BLACK);
         c.add(p);
         c.setBorder(Border.NO_BORDER);
@@ -162,7 +163,7 @@ public class ReporteDiarioController implements Initializable {
         Cell c = new Cell();
         c.setBackgroundColor(Color.BLACK);
         c.setFontColor(Color.WHITE);
-        c.setFont(PdfFontFactory.createFont("src/font/segoeui.ttf", true));
+        c.setFont(PdfFontFactory.createRegisteredFont("times-italic"));
         c.setFontSize(10);
         c.setTextAlignment(TextAlignment.CENTER);
         c.setBorder(Border.NO_BORDER);
@@ -174,7 +175,7 @@ public class ReporteDiarioController implements Initializable {
     public Cell generaCabezera(String text) throws IOException {
         Cell c = new Cell();
         c.setFontColor(Color.GRAY);
-        c.setFont(PdfFontFactory.createFont("src/font/segoeui.ttf", true));
+        c.setFont(PdfFontFactory.createRegisteredFont("times-italic"));
         c.setFontSize(20);
         c.setTextAlignment(TextAlignment.CENTER);
         c.setBorder(Border.NO_BORDER);
@@ -193,19 +194,21 @@ public class ReporteDiarioController implements Initializable {
         if (white > 0) {
             tc.setBackgroundColor(Color.LIGHT_GRAY);
         }
+        if(c!=null){
         tc.addCell(generaCeldaCliente(c.getCedula()));
         tc.addCell(generaCeldaCliente(c.getNombre()));
         tc.addCell(generaCeldaCliente(a.getContrato()));
         tc.addCell(generaCeldaCliente(c.getPlan()));
         tc.addCell(generaCeldaCliente(a.getInvitados()));
         tc.addCell(generaInvitadosAdicionales(a.getContrato()));
+        }
 
         return tc;
     }
 
     public Cell generaCeldaCliente(String text) throws IOException {
-        Cell c = new Cell();
-        c.setFont(PdfFontFactory.createFont("src/font/segoeui.ttf", true));
+        Cell c = new Cell();        
+        c.setFont(PdfFontFactory.createRegisteredFont("times-italic"));
         c.setFontSize(8);
         c.setFontColor(Color.BLACK);
         c.setTextAlignment(TextAlignment.CENTER);
@@ -221,7 +224,7 @@ public class ReporteDiarioController implements Initializable {
     public Cell generaTitulo(String text) throws IOException {
         Cell c = new Cell();
         c.setFontColor(Color.GRAY);
-        c.setFont(PdfFontFactory.createFont("src/font/segoeui.ttf", true));
+        c.setFont(PdfFontFactory.createRegisteredFont("times-italic"));
         c.setFontSize(15);
         c.setTextAlignment(TextAlignment.CENTER);
         c.setBorder(Border.NO_BORDER);
@@ -250,7 +253,7 @@ public class ReporteDiarioController implements Initializable {
     public Cell generaInvitadosAdicionales(String con) throws IOException {
         int ci=1;
         Cell c = new Cell();
-        c.setFont(PdfFontFactory.createFont("src/font/segoeui.ttf", true));
+        c.setFont(PdfFontFactory.createRegisteredFont("times-italic"));
         c.setFontSize(8);
         c.setTextAlignment(TextAlignment.LEFT);
         c.setBorder(Border.NO_BORDER);

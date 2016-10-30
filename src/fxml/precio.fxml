@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.PrecioController">
+   <children>
+      <TextField fx:id="precio" layoutX="76.0" layoutY="118.0" />
+      <Text layoutX="78.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio de invitado adicional" />
+      <Button layoutX="116.0" layoutY="161.0" mnemonicParsing="false" onAction="#updatePrecio" text="Actualizar" />
+   </children>
+</AnchorPane>

@@ -6,6 +6,7 @@
 package controller;
 
 import classes.Asistencia;
+import classes.Autorizado;
 import classes.Cliente;
 import classes.Invitado;
 import classes.PrinterOptions;
@@ -42,7 +43,7 @@ import oasiscrud.oasisrimbd;
 public class OpenTableController implements Initializable {
 
     @FXML
-    TextField txtnombre, txtcedula, txtcontrato, txtplan, ninvitados,  addnombre, addapellido, addcedula;
+    TextField txtnombre, txtcedula, txtcontrato, txtplan, ninvitados,  addnombre, addapellido, addcedula,autorizado;
     @FXML
     DatePicker fecha;
     @FXML
@@ -140,11 +141,61 @@ public class OpenTableController implements Initializable {
                 p.setText("1" + "\t" + "Apert. Mesa" + "\t" +  "1" + "\t" + "0");
                 p.newLine();
                 if(table.getItems().size()>0)
-                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + inter.precio());
                 p.newLine();
                 p.addLineSeperator();
                 p.newLine();
-                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*4000 );
+                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*Integer.parseInt(inter.precio()) );
+                p.newLine();
+                p.addLineSeperator();
+                p.feed((byte) 3);
+                p.finit();
+                p.alignCenter();
+                p.setText("Oasis Club C.A");
+                p.newLine();
+                p.setText("Carretera Kilómetro 7 1/2");
+                p.newLine();                
+                p.setText("Vía la Cañada Sector Camuri.");
+                p.newLine();
+                p.setText("San francisco, Zulia");
+                p.newLine();
+                p.addLineSeperator();
+                p.alignLeft();
+                p.newLine();
+                p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                p.newLine();
+                p.setText("Cliente \t:" + client.getNombre());
+                p.newLine();
+                p.setText("Cedula \t\t:" +client.getCedula());
+                p.newLine();
+                p.setText("Contrato \t:"+client.getContrato());
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.alignCenter();
+                p.setText(" Articulos ");
+                p.newLine();
+                p.alignLeft();
+                p.addLineSeperator();
+
+                p.newLine();
+
+                p.setText("No \tArt\t\tCant\tPrec");
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.setText("1" + "\t" + "Control de" + "\t" +  "1" + "\t" + "0");
+                p.newLine();
+                p.setText("1" + "\t" + "Acceso");
+                p.newLine();
+                p.setText("1" + "\t" + "(Seguridad)");
+                p.newLine();
+                if(table.getItems().size()>0)
+                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + inter.precio());
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*Integer.parseInt(inter.precio()) );
                 p.newLine();
                 p.addLineSeperator();
                 p.feed((byte) 3);
@@ -198,17 +249,12 @@ public class OpenTableController implements Initializable {
                                             + ":" + Integer.toString(time.get(Calendar.SECOND))
                                             + ampm;
                 inter.creaAsistencia(new Asistencia(ninvitados.getText(),LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),hour,client.getContrato(),Integer.toString(table.getItems().size()),user.getUsuario()));
-                inter.openTable(new ReporteMesa(user.getUsuario(),client.getCedula(),
-                        client.getNombre(),client.getContrato(),
-                        client.getPlan(),
-                        LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                        hour,Integer.toString(Integer.parseInt(ninvitados.getText())+table.getItems().size())));
+                
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
                     inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
                 }
                 PrinterOptions p = new PrinterOptions();
-
                 p.resetAll();
                 p.initialize();
                 p.feedBack((byte) 2);
@@ -247,14 +293,18 @@ public class OpenTableController implements Initializable {
                 p.newLine();
                 p.addLineSeperator();
                 p.newLine();
-                p.setText("1" + "\t" + "Apert. Mesa" + "\t" +  "1" + "\t" + "0");
+                p.setText("1" + "\t" + "Control de" + "\t" +  "1" + "\t" + "0");
+                p.newLine();
+                p.setText("1" + "\t" + "Acceso");
+                p.newLine();
+                p.setText("1" + "\t" + "(Seguridad)");
                 p.newLine();
                 if(table.getItems().size()>0)
-                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + inter.precio());
                 p.newLine();
                 p.addLineSeperator();
                 p.newLine();
-                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*4000 );
+                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*Integer.parseInt(inter.precio()) );
                 p.newLine();
                 p.addLineSeperator();
                 p.feed((byte) 3);
@@ -284,12 +334,11 @@ public class OpenTableController implements Initializable {
                                             + ":" + Integer.toString(time.get(Calendar.MINUTE))
                                             + ":" + Integer.toString(time.get(Calendar.SECOND))
                                             + ampm;
-                inter.creaAsistencia(new Asistencia(ninvitados.getText(),LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),hour,client.getContrato(),Integer.toString(table.getItems().size()),user.getUsuario()));
-                inter.openTable(new ReporteMesa(user.getUsuario(),client.getCedula(),
+                inter.autorizar(new Autorizado(user.getUsuario(),client.getCedula(),
                         client.getNombre(),client.getContrato(),
                         client.getPlan(),
                         LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                        hour,Integer.toString(Integer.parseInt(ninvitados.getText())+table.getItems().size())));
+                        hour,Integer.toString(Integer.parseInt(ninvitados.getText())+table.getItems().size()),autorizado.getText()));
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
                     inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
@@ -334,14 +383,20 @@ public class OpenTableController implements Initializable {
                 p.newLine();
                 p.addLineSeperator();
                 p.newLine();
-                p.setText("1" + "\t" + "Apert. Mesa" + "\t" +  "1" + "\t" + "0");
+                p.setText("1" + "\t" + "Control de" + "\t" +  "1" + "\t" + "0");
+                p.newLine();
+                p.setText("1" + "\t" + "Acceso");
+                p.newLine();
+                p.setText("1" + "\t" + "Autorizado");
+                p.newLine();
+                p.setText("1" + "\t" + "Seguridad");
                 p.newLine();
                 if(table.getItems().size()>0)
-                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + inter.precio());
                 p.newLine();
                 p.addLineSeperator();
                 p.newLine();
-                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*4000 );
+                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*Integer.parseInt(inter.precio()));
                 p.newLine();
                 p.addLineSeperator();
                 p.feed((byte) 3);
@@ -378,13 +433,14 @@ public class OpenTableController implements Initializable {
     public void updateClient() throws RemoteException, NotBoundException{
         if(!(txtcedula.equals(client.getCedula()) && txtcontrato.equals(client.getContrato()) && txtnombre.equals(client.getNombre()) && txtplan.equals(client.getPlan()))){
             Registry reg = LocateRegistry.getRegistry(host,27019);
-        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-            Cliente c = client;
+            oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+            Cliente c = new Cliente(client.getCedula(),client.getNombre(),client.getContrato(),client.getPlan(),client.getBanco(),client.getRestringido());
             c.setNombre(txtnombre.getText());
             c.setCedula(txtcedula.getText());
-            c.setContrato(txtcedula.getText());
+            c.setContrato(txtcontrato.getText());
             c.setPlan(txtplan.getText());
             inter.actualizaCliente(client, c);
+            this.client=c;
         }
     }
 

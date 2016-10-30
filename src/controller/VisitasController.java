@@ -308,7 +308,7 @@ Registry reg = LocateRegistry.getRegistry(host,27019);
             HSSFSheet sheet = workbook.createSheet("FirstSheet");
             int bool = 1;
 
-            InputStream inputStream = new FileInputStream("src/images/excel-logo.jpg");
+            InputStream inputStream = getClass().getResourceAsStream("/images/excel-logo.jpg");
 
             byte[] imageBytes = IOUtils.toByteArray(inputStream);
 
