@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenTableController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenTableController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="35.0" prefHeight="480.0" prefWidth="765.0" styleClass="background" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="15.0">
                <children>
@@ -78,12 +78,14 @@
                      </children>
                   </HBox>
                   <Button contentDisplay="RIGHT" layoutX="441.0" layoutY="321.0" mnemonicParsing="false" onAction="#addAction" styleClass="add-button" text="Añadir" />
-                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="141.0" layoutY="321.0" mnemonicParsing="false" onAction="#openTable" styleClass="select-button" text="Abrir Mesa" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="14.0" layoutY="321.0" mnemonicParsing="false" onAction="#openTable" styleClass="select-button" text="Abrir Mesa" />
                   <Separator layoutX="358.0" layoutY="-6.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Label layoutX="147.0" layoutY="14.0" text="Datos del cliente" />
                   <Label layoutX="493.0" layoutY="14.0" text="Invitados Adicionales" />
                   <Button contentDisplay="RIGHT" layoutX="579.0" layoutY="321.0" mnemonicParsing="false" onAction="#deleteAction" styleClass="delete-button" text="Eliminar" />
                   <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="127.0" layoutY="321.0" mnemonicParsing="false" onAction="#controlAcceso" styleClass="select-button" text="Pase Acceso" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="244.0" layoutY="321.0" mnemonicParsing="false" onAction="#controlAcceso" styleClass="select-button" text="Autorizado" />
                </children>
             </AnchorPane>
          </children>

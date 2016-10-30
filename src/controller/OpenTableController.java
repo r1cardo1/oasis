@@ -29,6 +29,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -68,25 +70,15 @@ public class OpenTableController implements Initializable {
         txtcontrato.setText(client.getContrato());
         txtplan.setText(client.getPlan());
         fecha.setValue(LocalDate.now());
-        int cant = inter.getCantByPlan(client.getPlan());
-        /*if (rs.next()) {
-            max = rs.getInt("invitados");
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("El plan que posee el cliente no tiene un numero de invitados,"
-                    + "Contacte con el administrador para indicar uno.");
-            alert.show();
-        }*/
     }
 
     @FXML
     public void openTable(ActionEvent evt) throws IOException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host,27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-        if (!ninvitados.getText().isEmpty()) {            
-                
+        if (!ninvitados.getText().isEmpty()) {
+            if(!inter.estaPresente(client)){
+                updateClient();
                 String hour;
                 String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();                
                 Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
@@ -157,9 +149,14 @@ public class OpenTableController implements Initializable {
                 p.addLineSeperator();
                 p.feed((byte) 3);
                 p.finit();
-               // feedPrinter(p.finalCommandSet().getBytes());
                print(p.finalCommandSet().getBytes());
-               System.out.println(p.finalCommandSet());           
+               System.out.println(p.finalCommandSet());         
+            }else{
+                Alert a = new Alert(AlertType.INFORMATION);
+                a.setTitle("Informacion");
+                a.setContentText("Ya el cliente ingreso al club, para reimprimir el ticket dirijase a la seccion de visitas en la parte inferior de la lista de busqueda de clientes");
+                a.show();
+            }
         }
     }
 
@@ -177,12 +174,186 @@ public class OpenTableController implements Initializable {
                 }
             }
     }
-
+    
     @FXML
     public void deleteAction() {
         if (!table.getSelectionModel().isEmpty()) {
             table.getItems().remove(table.getSelectionModel().getSelectedIndex());
             table.getSelectionModel().clearSelection();
+        }
+    }
+    
+    public void controlAcceso() throws IOException, RemoteException, NotBoundException{
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+        if (!ninvitados.getText().isEmpty()) {
+            if(!inter.estaPresente(client)){
+                updateClient();
+                String hour;
+                String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();                
+                Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+                hour =  Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                                            + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                                            + ":" + Integer.toString(time.get(Calendar.SECOND))
+                                            + ampm;
+                inter.creaAsistencia(new Asistencia(ninvitados.getText(),LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),hour,client.getContrato(),Integer.toString(table.getItems().size()),user.getUsuario()));
+                inter.openTable(new ReporteMesa(user.getUsuario(),client.getCedula(),
+                        client.getNombre(),client.getContrato(),
+                        client.getPlan(),
+                        LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+                        hour,Integer.toString(Integer.parseInt(ninvitados.getText())+table.getItems().size())));
+                for (int i = 0; i < table.getItems().size(); i++) {
+                    Invitado inv = (Invitado) table.getItems().get(i);
+                    inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                }
+                PrinterOptions p = new PrinterOptions();
+
+                p.resetAll();
+                p.initialize();
+                p.feedBack((byte) 2);
+                p.color(0);
+                p.alignCenter();
+                p.setText("Oasis Club C.A");
+                p.newLine();
+                p.setText("Carretera Kilómetro 7 1/2");
+                p.newLine();                
+                p.setText("Vía la Cañada Sector Camuri.");
+                p.newLine();
+                p.setText("San francisco, Zulia");
+                p.newLine();
+                p.addLineSeperator();
+                p.alignLeft();
+                p.newLine();
+                p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                p.newLine();
+                p.setText("Cliente \t:" + client.getNombre());
+                p.newLine();
+                p.setText("Cedula \t\t:" +client.getCedula());
+                p.newLine();
+                p.setText("Contrato \t:"+client.getContrato());
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.alignCenter();
+                p.setText(" Articulos ");
+                p.newLine();
+                p.alignLeft();
+                p.addLineSeperator();
+
+                p.newLine();
+
+                p.setText("No \tArt\t\tCant\tPrec");
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.setText("1" + "\t" + "Apert. Mesa" + "\t" +  "1" + "\t" + "0");
+                p.newLine();
+                if(table.getItems().size()>0)
+                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*4000 );
+                p.newLine();
+                p.addLineSeperator();
+                p.feed((byte) 3);
+                p.finit();
+               print(p.finalCommandSet().getBytes());
+               System.out.println(p.finalCommandSet());         
+            }else{
+                Alert a = new Alert(AlertType.INFORMATION);
+                a.setTitle("Informacion");
+                a.setContentText("Ya el cliente ingreso al club, para reimprimir el ticket dirijase a la seccion de visitas en la parte inferior de la lista de busqueda de clientes");
+                a.show();
+            }
+        }
+    }
+    
+    public void autorizar() throws IOException, RemoteException, NotBoundException{
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+        if (!ninvitados.getText().isEmpty()) {
+            if(!inter.estaPresente(client)){
+                updateClient();
+                String hour;
+                String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();                
+                Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+                String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+                hour =  Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                                            + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                                            + ":" + Integer.toString(time.get(Calendar.SECOND))
+                                            + ampm;
+                inter.creaAsistencia(new Asistencia(ninvitados.getText(),LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),hour,client.getContrato(),Integer.toString(table.getItems().size()),user.getUsuario()));
+                inter.openTable(new ReporteMesa(user.getUsuario(),client.getCedula(),
+                        client.getNombre(),client.getContrato(),
+                        client.getPlan(),
+                        LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+                        hour,Integer.toString(Integer.parseInt(ninvitados.getText())+table.getItems().size())));
+                for (int i = 0; i < table.getItems().size(); i++) {
+                    Invitado inv = (Invitado) table.getItems().get(i);
+                    inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                }
+                PrinterOptions p = new PrinterOptions();
+
+                p.resetAll();
+                p.initialize();
+                p.feedBack((byte) 2);
+                p.color(0);
+                p.alignCenter();
+                p.setText("Oasis Club C.A");
+                p.newLine();
+                p.setText("Carretera Kilómetro 7 1/2");
+                p.newLine();                
+                p.setText("Vía la Cañada Sector Camuri.");
+                p.newLine();
+                p.setText("San francisco, Zulia");
+                p.newLine();
+                p.addLineSeperator();
+                p.alignLeft();
+                p.newLine();
+                p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+                p.newLine();
+                p.setText("Cliente \t:" + client.getNombre());
+                p.newLine();
+                p.setText("Cedula \t\t:" +client.getCedula());
+                p.newLine();
+                p.setText("Contrato \t:"+client.getContrato());
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.alignCenter();
+                p.setText(" Articulos ");
+                p.newLine();
+                p.alignLeft();
+                p.addLineSeperator();
+
+                p.newLine();
+
+                p.setText("No \tArt\t\tCant\tPrec");
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.setText("1" + "\t" + "Apert. Mesa" + "\t" +  "1" + "\t" + "0");
+                p.newLine();
+                if(table.getItems().size()>0)
+                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" +  table.getItems().size() + "\t" + "4000");
+                p.newLine();
+                p.addLineSeperator();
+                p.newLine();
+                p.setText("Precio Total" + "\t" + "\t" +  table.getItems().size()*4000 );
+                p.newLine();
+                p.addLineSeperator();
+                p.feed((byte) 3);
+                p.finit();
+               print(p.finalCommandSet().getBytes());
+               System.out.println(p.finalCommandSet());         
+            }else{
+                Alert a = new Alert(AlertType.INFORMATION);
+                a.setTitle("Informacion");
+                a.setContentText("Ya el cliente ingreso al club, para reimprimir el ticket dirijase a la seccion de visitas en la parte inferior de la lista de busqueda de clientes");
+                a.show();
+            }
         }
     }
 
@@ -202,6 +373,19 @@ public class OpenTableController implements Initializable {
           controller.menu = myController;
           stage.setScene(scene);
           stage.show();
+    }
+    
+    public void updateClient() throws RemoteException, NotBoundException{
+        if(!(txtcedula.equals(client.getCedula()) && txtcontrato.equals(client.getContrato()) && txtnombre.equals(client.getNombre()) && txtplan.equals(client.getPlan()))){
+            Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+            Cliente c = client;
+            c.setNombre(txtnombre.getText());
+            c.setCedula(txtcedula.getText());
+            c.setContrato(txtcedula.getText());
+            c.setPlan(txtplan.getText());
+            inter.actualizaCliente(client, c);
+        }
     }
 
 }

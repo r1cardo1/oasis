@@ -107,6 +107,7 @@ public class ReportMenuController implements Initializable {
         Parent root = loader.load();
         ReporteDiarioController controller = loader.getController();
         controller.mycontroller = controller;
+        controller.host = this.host;
         Scene  scene = new Scene(root);
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);

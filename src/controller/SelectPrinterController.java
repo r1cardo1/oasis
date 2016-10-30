@@ -45,11 +45,11 @@ public class SelectPrinterController implements Initializable {
 
       public void initCombo() {
             PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
-
+            PrintService print = PrintServiceLookup.lookupDefaultPrintService();
             for (PrintService printer : printServices) {
                   combo.getItems().add(printer.getName());
             }
-            combo.getSelectionModel().selectFirst();
+            combo.getSelectionModel().select(print.getName());
       }
 
       public void accept(ActionEvent evt) {
@@ -81,8 +81,7 @@ public class SelectPrinterController implements Initializable {
             //PrintJobWatcher pjDone = new PrintJobWatcher(job);
             
             job.print(doc, null);
-            menu.back();
-            
+            menu.back();       
 
         } catch (javax.print.PrintException pex) {
 

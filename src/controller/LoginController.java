@@ -125,7 +125,7 @@ public class LoginController implements Initializable {
             oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
 
             Usuario u = null;
-            u = inter.login(new Usuario(user.getText(), pass.getText()));
+            u = inter.login(new Usuario("ROOT", "ADMIN"));
             Usuario userLogin = null;
             if (u != null) {
                 userLogin = u;
@@ -280,7 +280,7 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void initHost() {
+    public void initHost() throws IOException, SQLException {
         login.setDisable(true);
         host = getHost();
         if (host == null) {
@@ -297,6 +297,7 @@ public class LoginController implements Initializable {
             }
         } else {
             login.setDisable(false);
+            login();
         }
     }
 

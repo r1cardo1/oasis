@@ -40,7 +40,7 @@ public interface oasisrimbd extends Remote {
 
     public ArrayList<Usuario> searchUserbyUsername(String u) throws RemoteException;
     
-        public ArrayList<ReporteMesa> getOpenTables() throws RemoteException;
+    public ArrayList<ReporteMesa> getOpenTables() throws RemoteException;
 
     public int getLogins(String u) throws RemoteException;
 
@@ -63,6 +63,12 @@ public interface oasisrimbd extends Remote {
     public ArrayList<Reserva> getReservasByName(String titular) throws RemoteException;
 
     public ArrayList<Reserva> getReservasByCI(String ci) throws RemoteException;
+    
+    public ArrayList<Asistencia> asistenciaPorFecha(String date) throws RemoteException;
+    
+    public ArrayList<Asistencia> asistenciaPorRangoDeFecha(String from, String to) throws  RemoteException;
+    
+    public ArrayList<Asistencia> asistenciaPorMes(String mes) throws RemoteException;
 
     public void openTable(ReporteMesa report) throws RemoteException;
 
@@ -103,5 +109,10 @@ public interface oasisrimbd extends Remote {
     public boolean existeCliente(Cliente cliente) throws RemoteException;
 
     public void actualizaCliente(Cliente c, Cliente cliente) throws RemoteException;
+
+    public Cliente clientePorContrato(String contrato) throws  RemoteException;
+
+    public boolean estaPresente(Cliente cliente) throws RemoteException;
+
 
 }

@@ -27,6 +27,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -214,27 +216,31 @@ public class SearchController implements Initializable {
     }
 
     public void viewAsistencia() throws IOException, SQLException, RemoteException, NotBoundException {
-        if (!table.getSelectionModel().isEmpty()) {
-            aux.setVisible(false);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/asistencia.fxml"));
-            AsistenciaController controller;
-            AnchorPane pan = loader.load();
-            aux.getChildren().add(pan);
-            controller = loader.getController();
-            controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
-            controller.user = this.user;
-            controller.menu = myController;
-            controller.host = this.host;
-            controller.setACombos();
-            controller.initTable();
-            aux.toFront();
-            aux.setVisible(true);
-            main.setVisible(false);
+        
+        if (!table.getSelectionModel().isEmpty()) {            
+                aux.setVisible(false);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/asistencia.fxml"));
+                AsistenciaController controller;
+                AnchorPane pan = loader.load();
+                aux.getChildren().add(pan);
+                controller = loader.getController();
+                controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
+                controller.user = this.user;
+                controller.menu = myController;
+                controller.host = this.host;
+                controller.setACombos();
+                controller.initTable();
+                aux.toFront();
+                aux.setVisible(true);
+                main.setVisible(false);
         }
     }
 
-    public void openTable(ActionEvent evt) throws IOException, SQLException {
+    public void openTable(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host, 27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         if (!table.getSelectionModel().isEmpty()) {
+            if(!inter.estaPresente((Cliente) table.getSelectionModel().getSelectedItem())){
             aux.setVisible(false);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
             OpenTableController controller;
@@ -254,6 +260,12 @@ public class SearchController implements Initializable {
             aux.toFront();
             aux.setVisible(true);
             main.setVisible(false);
+            }else{
+                Alert a = new Alert(AlertType.INFORMATION);
+                a.setTitle("Informacion");
+                a.setContentText("El cliente ya ingreso al club hoy. Para reimprimir el ticket vaya a la seccion de visitas en la parte inferior del listado de busquedas");
+                a.show();
+            }
         }
 
     }
