@@ -9,11 +9,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AsistenciaController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AutorizadosController">
    <children>
       <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="386.0" layoutY="32.0" prefHeight="80.0" prefWidth="800.0" text="Aperturas de mesas del cliente" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Label alignment="CENTER" layoutX="386.0" layoutY="32.0" prefHeight="80.0" prefWidth="800.0" text="Asistencias del cliente al club" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -29,9 +29,10 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="table" layoutX="300.0" layoutY="146.0" prefHeight="326.0" prefWidth="720.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
+                              <TableView fx:id="table" layoutX="300.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
                                 <columns>
-                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
+                                    <TableColumn fx:id="autorizado" prefWidth="75.0" text="Autorizado" />
+                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Cliente" />
                                   <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
                                     <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
                                     <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
@@ -48,13 +49,6 @@
                                     <ComboBox fx:id="tacombo" prefWidth="150.0" />
                                     <Label text="Mes" />
                                     <ComboBox fx:id="tmcombo" onAction="#updateTable" prefWidth="150.0" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutY="412.0" prefHeight="40.0" prefWidth="40.0" spacing="50.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" text="Modificar Ap de Mesa" />
-                                    <Button mnemonicParsing="false" text="Reimprimir Ticket" />
-                                    <Button mnemonicParsing="false" text="Eliminar Ap de Mesa" />
                                  </children>
                               </HBox>
                            </children>

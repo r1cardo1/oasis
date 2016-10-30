@@ -3,7 +3,6 @@ package controller;
 import classes.Cliente;
 import classes.ReporteMesa;
 import classes.Usuario;
-import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -14,18 +13,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import oasiscrud.oasisrimbd;
 
 
-public class AsistenciaController implements Initializable {
+public class PasesController implements Initializable {
 
     @FXML
     ComboBox tmcombo,tacombo;
@@ -37,9 +33,6 @@ public class AsistenciaController implements Initializable {
     Usuario user;
     Cliente client;
     String host;
-    @FXML AnchorPane aux,main;
-    AsistenciaController myController;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,7 +43,7 @@ public class AsistenciaController implements Initializable {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<String> years = new ArrayList<>();
-        ArrayList<ReporteMesa> list = inter.getOpenTables();
+        ArrayList<ReporteMesa> list = inter.getPases();
         for (ReporteMesa asist : list) {
             if (asist.getContrato().equals(client.getContrato())) {
                 if (!years.contains(Integer.toString(LocalDate.parse(asist.getFecha()).getYear()))) {
@@ -69,7 +62,7 @@ public class AsistenciaController implements Initializable {
     public void updateTMCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-        ArrayList<ReporteMesa> list = inter.getOpenTables();
+        ArrayList<ReporteMesa> list = inter.getPases();
         int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
         for (ReporteMesa asist : list) {
@@ -96,7 +89,7 @@ public class AsistenciaController implements Initializable {
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         if (!tmcombo.getSelectionModel().isEmpty()) {
             table.getItems().clear();
-            ArrayList<ReporteMesa> list = inter.getOpenTables();
+            ArrayList<ReporteMesa> list = inter.getPases();
             String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
             int mont = 0;
             for (int i = 1; i < montsNames.length; i++) {
@@ -132,50 +125,6 @@ public class AsistenciaController implements Initializable {
         menu.aux.getChildren().clear();
         menu.main.setVisible(true);
         menu.main.toFront();
-    }
-    
-    public void modificaAperturaMesa() throws IOException, RemoteException, NotBoundException{
-        Registry reg = LocateRegistry.getRegistry(host, 27019);
-        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-
-        if (!table.getSelectionModel().isEmpty()) {
-            Cliente cli = (Cliente) table.getSelectionModel().getSelectedItem();
-            if (cli.getRestringido().equals("NO")) {
-                if (!inter.estaPresente((Cliente) table.getSelectionModel().getSelectedItem())) {
-                    aux.setVisible(false);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
-                    OpenTableController controller;
-                    AnchorPane pan = loader.load();
-                    aux.getChildren().add(pan);
-                    controller = loader.getController();
-                    controller.asistenciaController = myController;
-                    controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
-                    controller.user = this.user;
-                    controller.host = this.host;
-                    controller.myController = controller;
-                    try {
-                        controller.initData();
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                    aux.toFront();
-                    aux.setVisible(true);
-                    main.setVisible(false);
-                } else {
-                    Alert a = new Alert(Alert.AlertType.INFORMATION);
-                    a.setTitle("Informacion");
-                    a.setContentText("El cliente ya ingreso al club hoy. Para reimprimir el ticket vaya a la seccion de visitas en la parte inferior del listado de busquedas");
-                    a.show();
-                }
-            } else {
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setTitle("Informacion");
-                a.setContentText("El cliente esta restringido");
-                a.show();
-            }
-        }
-        table.getSelectionModel().clearSelection();
-        
     }
 
 }

@@ -35,7 +35,9 @@ public class SelectPrinterController implements Initializable {
       OpenTableController sup;
       byte[] a;
       String printer;
-    OpenTableController menu;
+        OpenTableController menu;
+        GenerarPaseController pase;
+    AutorizarController autorizar;
 
       @Override
       public void initialize(URL url, ResourceBundle rb) {

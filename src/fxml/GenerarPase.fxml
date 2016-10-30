@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenTableController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GenerarPaseController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -78,7 +78,7 @@
                      </children>
                   </HBox>
                   <Button contentDisplay="RIGHT" layoutX="441.0" layoutY="321.0" mnemonicParsing="false" onAction="#addAction" styleClass="add-button" text="Añadir" />
-                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="114.0" layoutY="321.0" mnemonicParsing="false" onAction="#openTable" styleClass="select-button" text="Abrir Mesa" />
+                  <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="141.0" layoutY="321.0" mnemonicParsing="false" onAction="#controlAcceso" styleClass="select-button" text="Generar Pase" />
                   <Separator layoutX="358.0" layoutY="-6.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <Label layoutX="147.0" layoutY="14.0" text="Datos del cliente" />
                   <Label layoutX="493.0" layoutY="14.0" text="Invitados Adicionales" />

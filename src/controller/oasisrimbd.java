@@ -117,11 +117,17 @@ public interface oasisrimbd extends Remote {
 
     public String precio()throws RemoteException;
 
-    public void creaAcceso(Asistencia asistencia) throws RemoteException;
+    public void creaAcceso(ReporteMesa report) throws RemoteException;
 
     public void upPrecio(String text) throws  RemoteException;
 
     public void autorizar(Autorizado autorizado) throws RemoteException;
 
+    public ArrayList<ReporteMesa> getPases() throws RemoteException;
 
+    public ArrayList<Autorizado> getAutorizados() throws RemoteException;
+
+    public void updateAsistencia(Asistencia vieja, Asistencia nueva) throws  RemoteException;
+
+    public void updateOpenTable(ReporteMesa viejo, ReporteMesa nuevo) throws  RemoteException;
 }
