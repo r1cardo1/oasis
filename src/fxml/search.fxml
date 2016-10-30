@@ -56,8 +56,8 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="70.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openTable" prefWidth="120.0" styleClass="open-table-button" text="Ver Pases" />
-                              <Button contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewAsistencia" prefWidth="120.0" styleClass="ver-visitas-button" text="Ver Autorizados" />
+                              <Button contentDisplay="RIGHT" mnemonicParsing="false" prefWidth="120.0" styleClass="ver-pase-button" text="Ver Pases" />
+                              <Button contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="120.0" styleClass="ver-autorizar-button" text="Ver Autorizados" />
                               <Button contentDisplay="RIGHT" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" onAction="#viewInvitados" prefWidth="120.0" styleClass="ver-invitados-button" text="Ver Invitados" />
                               <Button contentDisplay="RIGHT" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" onAction="#reservar" prefWidth="120.0" styleClass="reserva-button" text="Reservar" />
                            </children>
@@ -90,10 +90,10 @@
                         </HBox>
                         <HBox alignment="CENTER" layoutX="190.0" layoutY="382.0" prefHeight="40.0" prefWidth="200.0" spacing="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <children>
-                              <Button contentDisplay="RIGHT" mnemonicParsing="false" prefWidth="120.0" styleClass="open-table-button" text="Abrir Mesa" />
+                              <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#openTable" prefWidth="120.0" styleClass="open-table-button" text="Abrir Mesa" />
                               <Button contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="120.0" styleClass="pase-button" text="Generar Pase" />
                               <Button contentDisplay="RIGHT" layoutX="154.0" layoutY="10.0" mnemonicParsing="false" prefWidth="120.0" styleClass="autorizar-button" text="Autorizar" />
-                              <Button contentDisplay="RIGHT" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" prefWidth="120.0" styleClass="reserva-button" text="Ver visitas" />
+                              <Button contentDisplay="RIGHT" layoutX="569.0" layoutY="14.0" mnemonicParsing="false" onAction="#viewAsistencia" prefWidth="120.0" styleClass="ver-visitas-button" text="Ver visitas" />
                            </children>
                         </HBox>
                      </children>
