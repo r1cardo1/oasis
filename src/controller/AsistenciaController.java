@@ -134,14 +134,12 @@ public class AsistenciaController implements Initializable {
         menu.main.toFront();
     }
     
-    public void modificaAperturaMesa() throws IOException, RemoteException, NotBoundException{
+    public void modificarAperturaMesa() throws IOException, RemoteException, NotBoundException{
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
 
         if (!table.getSelectionModel().isEmpty()) {
-            Cliente cli = (Cliente) table.getSelectionModel().getSelectedItem();
-            if (cli.getRestringido().equals("NO")) {
-                if (!inter.estaPresente((Cliente) table.getSelectionModel().getSelectedItem())) {
+            ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
                     aux.setVisible(false);
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
                     OpenTableController controller;
@@ -149,10 +147,11 @@ public class AsistenciaController implements Initializable {
                     aux.getChildren().add(pan);
                     controller = loader.getController();
                     controller.asistenciaController = myController;
-                    controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
                     controller.user = this.user;
                     controller.host = this.host;
                     controller.myController = controller;
+                    controller.report=report;
+                    controller.initUpdateData();
                     try {
                         controller.initData();
                     } catch (Exception ex) {
@@ -161,18 +160,6 @@ public class AsistenciaController implements Initializable {
                     aux.toFront();
                     aux.setVisible(true);
                     main.setVisible(false);
-                } else {
-                    Alert a = new Alert(Alert.AlertType.INFORMATION);
-                    a.setTitle("Informacion");
-                    a.setContentText("El cliente ya ingreso al club hoy. Para reimprimir el ticket vaya a la seccion de visitas en la parte inferior del listado de busquedas");
-                    a.show();
-                }
-            } else {
-                Alert a = new Alert(Alert.AlertType.INFORMATION);
-                a.setTitle("Informacion");
-                a.setContentText("El cliente esta restringido");
-                a.show();
-            }
         }
         table.getSelectionModel().clearSelection();
         

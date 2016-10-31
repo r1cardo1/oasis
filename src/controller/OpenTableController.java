@@ -6,7 +6,6 @@
 package controller;
 
 import classes.Asistencia;
-import classes.Autorizado;
 import classes.Cliente;
 import classes.Invitado;
 import classes.PrinterOptions;
@@ -74,12 +73,16 @@ public class OpenTableController implements Initializable {
         fecha.setValue(LocalDate.now());
     }
     
-    public void initUpdateData(){
+    public void initUpdateData() throws RemoteException, NotBoundException{
+         Registry reg = LocateRegistry.getRegistry(host, 27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         txtnombre.setText(report.getCliente());
         txtcedula.setText(report.getCedula());
         txtcontrato.setText(report.getContrato());
         txtplan.setText(report.getPlan());
         fecha.setValue(LocalDate.now());
+        ninvitados.setText(report.getInvitados());
+        client = inter.clientePorContrato(report.getContrato());
     }
 
     @FXML
@@ -223,7 +226,6 @@ public class OpenTableController implements Initializable {
             }
         }else{
             if (!ninvitados.getText().isEmpty()) {
-                if (!inter.estaPresente(client)) {
                     updateClient();
                     String hour;
                     String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
@@ -332,9 +334,9 @@ public class OpenTableController implements Initializable {
                     p.newLine();
                     p.setText("1" + "\t" + "Control de" + "\t" + "1" + "\t" + "0");
                     p.newLine();
-                    p.setText("1" + "\t" + "Acceso");
+                    p.setText("  " + "\t" + "Acceso");
                     p.newLine();
-                    p.setText("1" + "\t" + "(Seguridad)");
+                    p.setText("  " + "\t" + "(Seguridad)");
                     p.newLine();
                     if (table.getItems().size() > 0) {
                         p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + inter.precio());
@@ -349,12 +351,6 @@ public class OpenTableController implements Initializable {
                     p.finit();
                     print(p.finalCommandSet().getBytes());
                     System.out.println(p.finalCommandSet());
-                } else {
-                    Alert a = new Alert(AlertType.INFORMATION);
-                    a.setTitle("Informacion");
-                    a.setContentText("Ya el cliente ingreso al club, para reimprimir el ticket dirijase a la seccion de visitas en la parte inferior de la lista de busqueda de clientes");
-                    a.show();
-                }
             }
         }
     }

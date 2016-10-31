@@ -11,58 +11,63 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AsistenciaController">
    <children>
-      <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="aux" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="main" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="386.0" layoutY="32.0" prefHeight="80.0" prefWidth="800.0" text="Aperturas de mesas del cliente" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Button layoutX="50.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" AnchorPane.leftAnchor="40.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-         <children>
-            <TabPane prefHeight="520.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <tabs>
-                <Tab text="Tabla">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView fx:id="table" layoutX="300.0" layoutY="146.0" prefHeight="326.0" prefWidth="720.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
-                                <columns>
-                                  <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
-                                  <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
-                                    <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
-                                    <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
-                                    <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
-                                    <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
-                                </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
-                              <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="14.0" prefHeight="40.0" prefWidth="529.0" spacing="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="15.0">
+            <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="386.0" layoutY="32.0" prefHeight="80.0" prefWidth="800.0" text="Aperturas de mesas del cliente" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="50.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" AnchorPane.leftAnchor="40.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <TabPane prefHeight="520.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                      <Tab text="Tabla">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Label text="Año" />
-                                    <ComboBox fx:id="tacombo" prefWidth="150.0" />
-                                    <Label text="Mes" />
-                                    <ComboBox fx:id="tmcombo" onAction="#updateTable" prefWidth="150.0" />
+                                    <TableView fx:id="table" layoutX="300.0" layoutY="146.0" prefHeight="326.0" prefWidth="720.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
+                                      <columns>
+                                        <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
+                                        <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
+                                          <TableColumn fx:id="contrato" prefWidth="75.0" text="Contrato" />
+                                          <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
+                                          <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
+                                          <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
+                                      </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="14.0" prefHeight="40.0" prefWidth="529.0" spacing="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="15.0">
+                                       <children>
+                                          <Label text="Año" />
+                                          <ComboBox fx:id="tacombo" prefWidth="150.0" />
+                                          <Label text="Mes" />
+                                          <ComboBox fx:id="tmcombo" onAction="#updateTable" prefWidth="150.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" layoutY="412.0" prefHeight="40.0" prefWidth="40.0" spacing="50.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                          <Button mnemonicParsing="false" onAction="#modificarAperturaMesa" text="Modificar Ap de Mesa" />
+                                          <Button mnemonicParsing="false" text="Reimprimir Ticket" />
+                                          <Button mnemonicParsing="false" text="Eliminar Ap de Mesa" />
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
-                              <HBox alignment="CENTER" layoutY="412.0" prefHeight="40.0" prefWidth="40.0" spacing="50.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" text="Modificar Ap de Mesa" />
-                                    <Button mnemonicParsing="false" text="Reimprimir Ticket" />
-                                    <Button mnemonicParsing="false" text="Eliminar Ap de Mesa" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
