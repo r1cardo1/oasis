@@ -1,6 +1,8 @@
 package controller;
 
 import classes.Cliente;
+import classes.Invitado;
+import classes.PrinterOptions;
 import classes.ReporteMesa;
 import classes.Usuario;
 import java.io.IOException;
@@ -12,23 +14,27 @@ import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import oasiscrud.oasisrimbd;
-
 
 public class AsistenciaController implements Initializable {
 
     @FXML
-    ComboBox tmcombo,tacombo;
+    ComboBox tmcombo, tacombo;
     @FXML
     TableColumn<ReporteMesa, String> nombre, cedula, contrato, plan, invitados, fecha;
     @FXML
@@ -37,9 +43,9 @@ public class AsistenciaController implements Initializable {
     Usuario user;
     Cliente client;
     String host;
-    @FXML AnchorPane aux,main;
+    @FXML
+    AnchorPane aux, main;
     AsistenciaController myController;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,19 +64,19 @@ public class AsistenciaController implements Initializable {
                 }
             }
         }
+        Collections.reverse(years);
         for (int i = 0; i < years.size(); i++) {
             tacombo.getItems().add(years.get(i));
         }
-        tacombo.getSelectionModel().selectFirst();
+        tacombo.getSelectionModel().selectLast();
         updateTMCombo();
     }
-
 
     public void updateTMCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<ReporteMesa> list = inter.getOpenTables();
-        int[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        Integer[] montBool = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
         for (ReporteMesa asist : list) {
             if (asist.getContrato().equals(client.getContrato())) {
@@ -79,13 +85,17 @@ public class AsistenciaController implements Initializable {
                 }
             }
         }
-        for (int i = 0; i < montBool.length; i++) {
-            if (montBool[i] == 1) {
-                tmcombo.getItems().add(montsNames[i]);
+        List<String> monts = Arrays.asList(montsNames);
+        List<Integer> mont = Arrays.asList(montBool);
+        
+        
+        for (int i = 0; i < mont.size(); i++) {
+            if (mont.get(i) == 1) {
+                tmcombo.getItems().add(monts.get(i));
             }
         }
         if (!tmcombo.getItems().isEmpty()) {
-            tmcombo.getSelectionModel().selectFirst();
+            tmcombo.getSelectionModel().selectLast();
         }
         updateTable();
     }
@@ -97,6 +107,7 @@ public class AsistenciaController implements Initializable {
         if (!tmcombo.getSelectionModel().isEmpty()) {
             table.getItems().clear();
             ArrayList<ReporteMesa> list = inter.getOpenTables();
+            Collections.reverse(list);
             String[] montsNames = {"", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"};
             int mont = 0;
             for (int i = 1; i < montsNames.length; i++) {
@@ -133,36 +144,198 @@ public class AsistenciaController implements Initializable {
         menu.main.setVisible(true);
         menu.main.toFront();
     }
-    
-    public void modificarAperturaMesa() throws IOException, RemoteException, NotBoundException{
+
+    public void modificarAperturaMesa() throws IOException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
 
         if (!table.getSelectionModel().isEmpty()) {
             ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
-                    aux.setVisible(false);
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
-                    OpenTableController controller;
-                    AnchorPane pan = loader.load();
-                    aux.getChildren().add(pan);
-                    controller = loader.getController();
-                    controller.asistenciaController = myController;
-                    controller.user = this.user;
-                    controller.host = this.host;
-                    controller.myController = controller;
-                    controller.report=report;
-                    controller.initUpdateData();
-                    try {
-                        controller.initData();
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                    aux.toFront();
-                    aux.setVisible(true);
-                    main.setVisible(false);
+            aux.setVisible(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openTable.fxml"));
+            OpenTableController controller;
+            AnchorPane pan = loader.load();
+            aux.getChildren().add(pan);
+            controller = loader.getController();
+            controller.asistenciaController = myController;
+            controller.user = this.user;
+            controller.host = this.host;
+            controller.myController = controller;
+            controller.report = report;
+            controller.initUpdateInvitados();
+            controller.initUpdateData();
+            controller.update = true;
+            try {
+                controller.initData();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            aux.toFront();
+            aux.setVisible(true);
+            main.setVisible(false);
         }
         table.getSelectionModel().clearSelection();
-        
+
     }
 
+    public void imprimeFactura() throws IOException, RemoteException, NotBoundException {
+        if(!table.getSelectionModel().isEmpty()){
+        int inViejos = 0;
+        Registry reg = LocateRegistry.getRegistry(host, 27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+        ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
+        ArrayList<Invitado> list = inter.getInvitados();
+        ArrayList<Invitado> table = new ArrayList<>();
+        for (Invitado in : list) {
+            if (in.getContrato().equals(report.getContrato())) {
+                if (in.getFecha().equals(report.getFecha())) {
+                    table.add(in);
+                }
+            }
+        }
+
+        PrinterOptions p = new PrinterOptions();
+        p.resetAll();
+        p.initialize();
+        p.feedBack((byte) 2);
+        p.color(0);
+        p.alignCenter();
+        p.setText("Oasis Club S.A");
+        p.newLine();
+        p.setText("Carretera Kilómetro 7 1/2");
+        p.newLine();
+        p.setText("Vía la Cañada Sector Camuri.");
+        p.newLine();
+        p.setText("San francisco, Zulia");
+        p.newLine();
+        p.addLineSeperator();
+        p.alignLeft();
+        p.newLine();
+        p.setText("Fecha \t\t:" + report.getFecha());
+        p.newLine();
+        p.setText("Cliente \t:" + report.getCliente());
+        p.newLine();
+        p.setText("Cedula \t\t:" + report.getCedula());
+        p.newLine();
+        p.setText("Contrato \t:" + report.getContrato());
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        p.alignCenter();
+        p.setText(" Articulos ");
+        p.newLine();
+        p.alignLeft();
+        p.addLineSeperator();
+
+        p.newLine();
+
+        p.setText("No \tArt\t\tCant\tPrec");
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        p.setText("1" + "\t" + "Apert. Mesa" + "\t" + "1" + "\t" + "0");
+        p.newLine();
+        if (table.size() > 0) {
+            p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.size() + "\t" + (Integer.parseInt(inter.precio()) * table.size()));
+            if (inViejos != 0) {
+                p.newLine();
+                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + inViejos + "\t" + "-" + (Integer.parseInt(inter.precio()) * inViejos));
+                p.newLine();
+                p.setText("  " + "\t" + "Pagado");
+            }
+        }
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        p.setText("Precio Total" + "\t" + "\t" + (table.size() - inViejos) * Integer.parseInt(inter.precio()));
+        p.newLine();
+        p.addLineSeperator();
+        p.feed((byte) 3);
+        p.finit();
+        p.alignCenter();
+        p.setText("Oasis Club C.A");
+        p.newLine();
+        p.setText("Carretera Kilómetro 7 1/2");
+        p.newLine();
+        p.setText("Vía la Cañada Sector Camuri.");
+        p.newLine();
+        p.setText("San francisco, Zulia");
+        p.newLine();
+        p.addLineSeperator();
+        p.alignLeft();
+        p.newLine();
+        p.setText("Fecha \t\t:" + report.getFecha());
+        p.newLine();
+        p.setText("Cliente \t:" + report.getCliente());
+        p.newLine();
+        p.setText("Cedula \t\t:" + report.getCedula());
+        p.newLine();
+        p.setText("Contrato \t:" + report.getContrato());
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        p.alignCenter();
+        p.setText(" Articulos ");
+        p.newLine();
+        p.alignLeft();
+        p.addLineSeperator();
+
+        p.newLine();
+
+        p.setText("No \tArt\t\tCant\tPrec");
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        p.setText("1" + "\t" + "Control de" + "\t" + "1" + "\t" + "0");
+        p.newLine();
+        p.setText("  " + "\t" + "Acceso");
+        p.newLine();
+        p.setText("  " + "\t" + "(Seguridad)");
+        p.newLine();
+        p.setText("  " + "\t" + "Invitados:"+report.getInvitados());
+        p.newLine();
+        if (table.size() > 0) {
+            p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.size() + "\t" + (Integer.parseInt(inter.precio()) * table.size()));
+            if (inViejos != 0) {
+                p.newLine();
+                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + inViejos + "\t" + "-" + (Integer.parseInt(inter.precio()) * inViejos));
+                p.newLine();
+                p.setText("  " + "\t" + "Pagado");
+            }
+        }
+        p.newLine();
+        p.addLineSeperator();
+        p.newLine();
+        p.setText("Precio Total" + "\t" + "\t" + (table.size() - inViejos) * Integer.parseInt(inter.precio()));
+        p.newLine();
+        p.addLineSeperator();
+        p.feed((byte) 3);
+        p.finit();
+        System.out.println(p.finalCommandSet());
+        print(p.finalCommandSet().getBytes());
+        }
+    }
+
+    public void print(byte[] b) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/selectPrinter.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        SelectPrinterController controller = loader.getController();
+        controller.a = b;
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void eliminaOpenTable() throws RemoteException, NotBoundException, SQLException{
+        if(!table.getSelectionModel().isEmpty()){
+            Registry reg = LocateRegistry.getRegistry(host,27019);
+            oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+            ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
+            inter.eliminaAsistencia(report.getContrato(),report.getFecha());
+            inter.eliminaOpenTable(report.getContrato(),report.getFecha());
+            inter.eliminaInvitados(report.getContrato(),report.getFecha());
+            updateTable();
+        }
+    }
 }

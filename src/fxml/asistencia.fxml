@@ -56,8 +56,8 @@
                                     <HBox alignment="CENTER" layoutY="412.0" prefHeight="40.0" prefWidth="40.0" spacing="50.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                        <children>
                                           <Button mnemonicParsing="false" onAction="#modificarAperturaMesa" text="Modificar Ap de Mesa" />
-                                          <Button mnemonicParsing="false" text="Reimprimir Ticket" />
-                                          <Button mnemonicParsing="false" text="Eliminar Ap de Mesa" />
+                                          <Button mnemonicParsing="false" onAction="#imprimeFactura" text="Reimprimir Ticket" />
+                                          <Button mnemonicParsing="false" onAction="#eliminaOpenTable" text="Eliminar Ap de Mesa" />
                                        </children>
                                     </HBox>
                                  </children>
