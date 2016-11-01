@@ -152,17 +152,12 @@ public class OpenTableController implements Initializable {
                             client.getPlan(),
                             LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
                             hour, Integer.toString(Integer.parseInt(ninvitados.getText()) + table.getItems().size())));
-                    if(inViejos!=0){
-                        for (int i = inViejos; i < table.getItems().size(); i++) {
-                            Invitado inv = (Invitado) table.getItems().get(i);
-                            inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
-                        }
-                    }else{
+                    inter.eliminaInvitados(report.getContrato(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
                         for (int i = 0; i < table.getItems().size(); i++) {
                             Invitado inv = (Invitado) table.getItems().get(i);
                             inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
                         }
-                    }
+                    
                     imprimeFactura();
                     asistenciaController.updateTable();
             }

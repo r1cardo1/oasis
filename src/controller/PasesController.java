@@ -3,6 +3,7 @@ package controller;
 import classes.Cliente;
 import classes.ReporteMesa;
 import classes.Usuario;
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -13,11 +14,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import oasiscrud.oasisrimbd;
 
 
@@ -33,6 +36,8 @@ public class PasesController implements Initializable {
     Usuario user;
     Cliente client;
     String host;
+    @FXML AnchorPane aux,main;
+    PasesController myController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -118,6 +123,42 @@ public class PasesController implements Initializable {
 
     public void initChart() {
 
+    }
+    
+    public void modificaPase() throws IOException, RemoteException, NotBoundException{
+        
+            ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
+            aux.setVisible(false);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GenerarPase.fxml"));
+            GenerarPaseController controller;
+            AnchorPane pan = loader.load();
+            aux.getChildren().add(pan);
+            controller = loader.getController();
+            controller.paseController = myController;
+            controller.user = this.user;
+            controller.host = this.host;
+            controller.myController = controller;
+            controller.report = report;
+            controller.initUpdateInvitados();
+            controller.initUpdateData();
+            controller.update = true;
+            try {
+                controller.initData();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            aux.toFront();
+            aux.setVisible(true);
+            main.setVisible(false);
+        
+    }
+    
+    public void reimprimePase(){
+        
+    }
+    
+    public void eliminaPase(){
+        
     }
 
     @FXML

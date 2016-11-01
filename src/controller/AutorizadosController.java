@@ -55,7 +55,7 @@ public class AutorizadosController implements Initializable {
         for (int i = 0; i < years.size(); i++) {
             tacombo.getItems().add(years.get(i));
         }
-        tacombo.getSelectionModel().selectFirst();
+        tacombo.getSelectionModel().selectLast();
         updateTMCombo();
     }
 
@@ -79,7 +79,7 @@ public class AutorizadosController implements Initializable {
             }
         }
         if (!tmcombo.getItems().isEmpty()) {
-            tmcombo.getSelectionModel().selectFirst();
+            tmcombo.getSelectionModel().selectLast();
         }
         updateTable();
     }

@@ -17,6 +17,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.border.SolidBorder;
+import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
@@ -39,7 +40,6 @@ import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -92,8 +92,8 @@ public class ReporteDiarioController implements Initializable {
         PdfWriter writer = new PdfWriter(f.getAbsolutePath());
 
         PdfDocument pdf = new PdfDocument(writer);
-        pdf.setDefaultPageSize(PageSize.LETTER);
-
+        pdf.setDefaultPageSize(PageSize.A4);
+        
         Document document = new Document(pdf);
 
         Cell c;
@@ -139,7 +139,7 @@ public class ReporteDiarioController implements Initializable {
         document.add(tc);
         document.add(new Paragraph("\n"));
         tc = new Table(1);
-        tc.addCell(generaTitulo("Detalles de Clientes"));
+        tc.addCell(generaTitulo("Detalles de Asistencia General"));
         document.add(tc);
         tc = new Table(6);
         tc.addCell(generaCelda("Cedula"));
@@ -153,11 +153,16 @@ public class ReporteDiarioController implements Initializable {
             document.add(generaTabla(a));
             white*=-1;
         }
-
+       
+        pdf.addNewPage();
+        document.add(new AreaBreak());
+        document.add(new Paragraph("HOLA"));
         document.close();
         System.out.println(f.getAbsolutePath());
         close(evt);
     }
+    
+    
 
     public Cell generaCelda(String text) throws IOException {
         Cell c = new Cell();
