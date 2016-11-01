@@ -78,153 +78,12 @@ public class GenerarPaseController implements Initializable {
         fecha.setValue(LocalDate.now());
     }
 
-    @FXML
-    public void openTable(ActionEvent evt) throws IOException, RemoteException, NotBoundException {
-        Registry reg = LocateRegistry.getRegistry(host, 27019);
-        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-        if (!ninvitados.getText().isEmpty()) {
-            if (!inter.estaPresente(client)) {
-                updateClient();
-                String hour;
-                String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
-                Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
-                String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-                hour = Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
-                        + ":" + Integer.toString(time.get(Calendar.MINUTE))
-                        + ":" + Integer.toString(time.get(Calendar.SECOND))
-                        + ampm;
-                inter.creaAsistencia(new Asistencia(ninvitados.getText(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, client.getContrato(), Integer.toString(table.getItems().size()), user.getUsuario()));
-                inter.openTable(new ReporteMesa(user.getUsuario(), client.getCedula(),
-                        client.getNombre(), client.getContrato(),
-                        client.getPlan(),
-                        LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                        hour, Integer.toString(Integer.parseInt(ninvitados.getText()) + table.getItems().size())));
-                for (int i = 0; i < table.getItems().size(); i++) {
-                    Invitado inv = (Invitado) table.getItems().get(i);
-                    inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
-                }
-                PrinterOptions p = new PrinterOptions();
-
-                p.resetAll();
-                p.initialize();
-                p.feedBack((byte) 2);
-                p.color(0);
-                p.alignCenter();
-                p.setText("Oasis Club C.A");
-                p.newLine();
-                p.setText("Carretera Kilómetro 7 1/2");
-                p.newLine();
-                p.setText("Vía la Cañada Sector Camuri.");
-                p.newLine();
-                p.setText("San francisco, Zulia");
-                p.newLine();
-                p.addLineSeperator();
-                p.alignLeft();
-                p.newLine();
-                p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
-                p.newLine();
-                p.setText("Cliente \t:" + client.getNombre());
-                p.newLine();
-                p.setText("Cedula \t\t:" + client.getCedula());
-                p.newLine();
-                p.setText("Contrato \t:" + client.getContrato());
-                p.newLine();
-                p.addLineSeperator();
-                p.newLine();
-                p.alignCenter();
-                p.setText(" Articulos ");
-                p.newLine();
-                p.alignLeft();
-                p.addLineSeperator();
-
-                p.newLine();
-
-                p.setText("No \tArt\t\tCant\tPrec");
-                p.newLine();
-                p.addLineSeperator();
-                p.newLine();
-                p.setText("1" + "\t" + "Apert. Mesa" + "\t" + "1" + "\t" + "0");
-                p.newLine();
-                if (table.getItems().size() > 0) {
-                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + inter.precio());
-                }
-                p.newLine();
-                p.addLineSeperator();
-                p.newLine();
-                p.setText("Precio Total" + "\t" + "\t" + table.getItems().size() * Integer.parseInt(inter.precio()));
-                p.newLine();
-                p.addLineSeperator();
-                p.feed((byte) 3);
-                p.finit();
-                p.alignCenter();
-                p.setText("Oasis Club C.A");
-                p.newLine();
-                p.setText("Carretera Kilómetro 7 1/2");
-                p.newLine();
-                p.setText("Vía la Cañada Sector Camuri.");
-                p.newLine();
-                p.setText("San francisco, Zulia");
-                p.newLine();
-                p.addLineSeperator();
-                p.alignLeft();
-                p.newLine();
-                p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
-                p.newLine();
-                p.setText("Cliente \t:" + client.getNombre());
-                p.newLine();
-                p.setText("Cedula \t\t:" + client.getCedula());
-                p.newLine();
-                p.setText("Contrato \t:" + client.getContrato());
-                p.newLine();
-                p.addLineSeperator();
-                p.newLine();
-                p.alignCenter();
-                p.setText(" Articulos ");
-                p.newLine();
-                p.alignLeft();
-                p.addLineSeperator();
-
-                p.newLine();
-
-                p.setText("No \tArt\t\tCant\tPrec");
-                p.newLine();
-                p.addLineSeperator();
-                p.newLine();
-                p.setText("1" + "\t" + "Control de" + "\t" + "1" + "\t" + "0");
-                p.newLine();
-                p.setText("1" + "\t" + "Acceso");
-                p.newLine();
-                p.setText("1" + "\t" + "(Seguridad)");
-                p.newLine();
-                if (table.getItems().size() > 0) {
-                    p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + inter.precio());
-                }
-                p.newLine();
-                p.addLineSeperator();
-                p.newLine();
-                p.setText("Precio Total" + "\t" + "\t" + table.getItems().size() * Integer.parseInt(inter.precio()));
-                p.newLine();
-                p.addLineSeperator();
-                p.feed((byte) 3);
-                p.finit();
-                print(p.finalCommandSet().getBytes());
-                System.out.println(p.finalCommandSet());
-            } else {
-                Alert a = new Alert(AlertType.INFORMATION);
-                a.setTitle("Informacion");
-                a.setContentText("Ya el cliente ingreso al club, para reimprimir el ticket dirijase a la seccion de visitas en la parte inferior de la lista de busqueda de clientes");
-                a.show();
-            }
-        }
-    }
-
     public void initTable() {
         nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         cedula.setCellValueFactory(new PropertyValueFactory("cedula"));
     }
 
-    @FXML
     public void addAction() {
         if (!addnombre.getText().isEmpty()) {
             if (!addapellido.getText().isEmpty()) {
@@ -233,7 +92,6 @@ public class GenerarPaseController implements Initializable {
         }
     }
 
-    @FXML
     public void deleteAction() {
         if (!table.getSelectionModel().isEmpty()) {
             table.getItems().remove(table.getSelectionModel().getSelectedIndex());
@@ -261,6 +119,7 @@ public class GenerarPaseController implements Initializable {
                         client.getPlan(),
                         LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
                         hour, Integer.toString(Integer.parseInt(ninvitados.getText()))));
+                inter.eliminaInvitados(report.getContrato(), report.getFecha());
                 for (int i = 0; i < table.getItems().size(); i++) {
                     Invitado inv = (Invitado) table.getItems().get(i);
                     inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
@@ -372,7 +231,7 @@ public class GenerarPaseController implements Initializable {
         }
     }
 
-    void initUpdateInvitados() throws RemoteException, NotBoundException {
+    public void initUpdateInvitados() throws RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         txtnombre.setText(report.getCliente());
@@ -383,7 +242,7 @@ public class GenerarPaseController implements Initializable {
         ninvitados.setText(Integer.toString(Integer.parseInt(report.getInvitados()) - inViejos));
     }
 
-    void initUpdateData() throws RemoteException, NotBoundException {
+    public void initUpdateData() throws RemoteException, NotBoundException {
 
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
