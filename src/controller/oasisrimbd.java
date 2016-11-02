@@ -138,5 +138,7 @@ public interface oasisrimbd extends Remote {
     public void eliminaInvitados(String contrato, String fecha) throws  RemoteException;
 
     public void updateAcceso(ReporteMesa report, ReporteMesa reporteMesa) throws RemoteException;
+
+    public void eliminaPase(ReporteMesa report) throws RemoteException;
     
 }

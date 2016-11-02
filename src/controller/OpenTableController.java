@@ -83,7 +83,7 @@ public class OpenTableController implements Initializable {
         txtcontrato.setText(report.getContrato());
         txtplan.setText(report.getPlan());
         fecha.setValue(LocalDate.now());
-        ninvitados.setText(Integer.toString(Integer.parseInt(report.getInvitados())-inViejos));
+        ninvitados.setText(report.getInvitados());
         
     }
     
@@ -122,7 +122,7 @@ public class OpenTableController implements Initializable {
                             client.getNombre(), client.getContrato(),
                             client.getPlan(),
                             LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                            hour, Integer.toString(Integer.parseInt(ninvitados.getText()) + table.getItems().size())));
+                            hour, ninvitados.getText()));
                     for (int i = 0; i < table.getItems().size(); i++) {
                         Invitado inv = (Invitado) table.getItems().get(i);
                         inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
@@ -151,7 +151,7 @@ public class OpenTableController implements Initializable {
                             client.getNombre(), client.getContrato(),
                             client.getPlan(),
                             LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                            hour, Integer.toString(Integer.parseInt(ninvitados.getText()) + table.getItems().size())));
+                            hour,ninvitados.getText()));
                     inter.eliminaInvitados(report.getContrato(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE));
                         for (int i = 0; i < table.getItems().size(); i++) {
                             Invitado inv = (Invitado) table.getItems().get(i);
@@ -209,10 +209,10 @@ public class OpenTableController implements Initializable {
                     p.setText("1" + "\t" + "Apert. Mesa" + "\t" + "1" + "\t" + "0");
                     p.newLine();
                     if (table.getItems().size() > 0) {
-                        p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + (Integer.parseInt(inter.precio())*table.getItems().size()));
+                        p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + inter.precio());
                         if(inViejos!=0){
                             p.newLine();
-                            p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + inViejos + "\t" + "-"+ (Integer.parseInt(inter.precio())*inViejos));
+                            p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + inViejos + "\t" + "-"+ inter.precio());
                             p.newLine();
                             p.setText("  " + "\t" + "Pagado");
                         }
@@ -268,10 +268,10 @@ public class OpenTableController implements Initializable {
                     p.setText("  " + "\t" + "Invitados:" + (table.getItems().size()+Integer.parseInt(ninvitados.getText())));
                     p.newLine();
                     if (table.getItems().size() > 0) {
-                        p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + (Integer.parseInt(inter.precio())*table.getItems().size()));
+                        p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + inter.precio());
                         if(inViejos!=0){
                             p.newLine();
-                            p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + inViejos + "\t" + "-"+ (Integer.parseInt(inter.precio())*inViejos));
+                            p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + inViejos + "\t" + "-"+ inter.precio());
                             p.newLine();
                             p.setText("  " + "\t" + "Pagado");
                         }

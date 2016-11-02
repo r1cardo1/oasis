@@ -86,10 +86,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void close(ActionEvent evt) {
-        Stage stage;
-        Button b = (Button) evt.getSource();
-        stage = (Stage) b.getScene().getWindow();
-        stage.close();
+        System.exit(0);
     }
 
     public void setStage(Stage s) {

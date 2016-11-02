@@ -56,8 +56,8 @@
                                     <HBox alignment="CENTER" layoutX="320.0" layoutY="377.0" prefHeight="40.0" prefWidth="200.0" spacing="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                        <children>
                                           <Button mnemonicParsing="false" onAction="#modificaPase" text="Modificar pase" />
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Reimprimir Pase" />
-                                          <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Eliminar Pase" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#generarRecibo" text="Reimprimir Pase" />
+                                          <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#eliminarPase" text="Eliminar Pase" />
                                        </children>
                                     </HBox>
                                  </children>

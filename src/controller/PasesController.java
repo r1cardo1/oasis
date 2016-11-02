@@ -1,6 +1,8 @@
 package controller;
 
 import classes.Cliente;
+import classes.Invitado;
+import classes.PrinterOptions;
 import classes.ReporteMesa;
 import classes.Usuario;
 import java.io.IOException;
@@ -16,18 +18,20 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import oasiscrud.oasisrimbd;
-
 
 public class PasesController implements Initializable {
 
     @FXML
-    ComboBox tmcombo,tacombo;
+    ComboBox tmcombo, tacombo;
     @FXML
     TableColumn<ReporteMesa, String> nombre, cedula, contrato, plan, invitados, fecha;
     @FXML
@@ -36,7 +40,8 @@ public class PasesController implements Initializable {
     Usuario user;
     Cliente client;
     String host;
-    @FXML AnchorPane aux,main;
+    @FXML
+    AnchorPane aux, main;
     PasesController myController;
 
     @Override
@@ -62,7 +67,6 @@ public class PasesController implements Initializable {
         tacombo.getSelectionModel().selectFirst();
         updateTMCombo();
     }
-
 
     public void updateTMCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
@@ -124,41 +128,135 @@ public class PasesController implements Initializable {
     public void initChart() {
 
     }
-    
-    public void modificaPase() throws IOException, RemoteException, NotBoundException{
-        
+
+    public void modificaPase() throws IOException, RemoteException, NotBoundException {
+
+        ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
+        aux.setVisible(false);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GenerarPase.fxml"));
+        GenerarPaseController controller;
+        AnchorPane pan = loader.load();
+        aux.getChildren().add(pan);
+        controller = loader.getController();
+        controller.paseController = myController;
+        controller.user = this.user;
+        controller.host = this.host;
+        controller.myController = controller;
+        controller.report = report;
+        controller.initUpdateInvitados();
+        controller.initUpdateData();
+        controller.update = true;
+        try {
+            controller.initData();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        aux.toFront();
+        aux.setVisible(true);
+        main.setVisible(false);
+
+    }
+
+    public void generarRecibo() throws RemoteException, IOException, NumberFormatException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host, 27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+
+        if (!table.getSelectionModel().isEmpty()) {
             ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
-            aux.setVisible(false);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GenerarPase.fxml"));
-            GenerarPaseController controller;
-            AnchorPane pan = loader.load();
-            aux.getChildren().add(pan);
-            controller = loader.getController();
-            controller.paseController = myController;
-            controller.user = this.user;
-            controller.host = this.host;
-            controller.myController = controller;
-            controller.report = report;
-            controller.initUpdateInvitados();
-            controller.initUpdateData();
-            controller.update = true;
-            try {
-                controller.initData();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            Cliente client = inter.clientePorContrato(report.getContrato());
+            ArrayList<Invitado> inv = inter.getInvitados();
+            ArrayList<Invitado> invid = new ArrayList<>();
+            for(int i = 0;i<inv.size();i++){                
+                if(inv.get(i).getFecha().equals(report.getFecha()) && inv.get(i).getContrato().equals(report.getContrato())){
+                    invid.add(inv.get(i));
+                }
             }
-            aux.toFront();
-            aux.setVisible(true);
-            main.setVisible(false);
-        
+            PrinterOptions p = new PrinterOptions();
+            p.resetAll();
+            p.initialize();
+            p.feedBack((byte) 2);
+            p.color(0);
+            p.alignCenter();
+            p.setText("Oasis Club C.A");
+            p.newLine();
+            p.setText("Carretera Kilómetro 7 1/2");
+            p.newLine();
+            p.setText("Vía la Cañada Sector Camuri.");
+            p.newLine();
+            p.setText("San francisco, Zulia");
+            p.newLine();
+            p.addLineSeperator();
+            p.alignLeft();
+            p.newLine();
+            p.setText("Fecha \t\t:" + report.getFecha());
+            p.newLine();
+            p.setText("Cliente \t:" + client.getNombre());
+            p.newLine();
+            p.setText("Cedula \t\t:" + client.getCedula());
+            p.newLine();
+            p.setText("Contrato \t:" + client.getContrato());
+            p.newLine();
+            p.setText("Plan \t\t:" + client.getPlan());
+            p.newLine();
+            p.addLineSeperator();
+            p.newLine();
+            p.alignCenter();
+            p.setText(" Articulos ");
+            p.newLine();
+            p.alignLeft();
+            p.addLineSeperator();
+
+            p.newLine();
+
+            p.setText("No \tArt\t\tCant\tPrec");
+            p.newLine();
+            p.addLineSeperator();
+            p.newLine();
+            p.setText("1" + "\t" + "Control de" + "\t" + "1" + "\t" + "0");
+            p.newLine();
+            p.setText("  " + "\t" + "Acceso");
+            p.newLine();
+            p.setText("  " + "\t" + "(Seguridad)");
+            p.newLine();
+            p.setText("  " + "\t" + "Invitados: " + (Integer.parseInt(report.getInvitados())+invid.size()));
+            p.newLine();
+            if (inv.size() > 0) {
+                p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + invid.size() + "\t" + inter.precio());
+            }
+            p.newLine();
+            p.addLineSeperator();
+            p.newLine();
+            p.setText("Precio Total" + "\t" + "\t" + invid.size() * Integer.parseInt(inter.precio()));
+            p.newLine();
+            p.addLineSeperator();
+            p.feed((byte) 3);
+            p.finit();
+            print(p.finalCommandSet().getBytes());
+            System.out.println(p.finalCommandSet());
+        }
     }
-    
-    public void reimprimePase(){
-        
+
+    public void print(byte[] b) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/selectPrinter.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        SelectPrinterController controller = loader.getController();
+        controller.a = b;
+        stage.setScene(scene);
+        stage.show();
     }
-    
-    public void eliminaPase(){
-        
+
+    public void eliminarPase() throws RemoteException, NotBoundException, SQLException {
+        Registry reg = LocateRegistry.getRegistry(host,27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+        if(!table.getSelectionModel().isEmpty()){
+            ReporteMesa report = (ReporteMesa) table.getSelectionModel().getSelectedItem();
+            inter.eliminaPase((ReporteMesa)table.getSelectionModel().getSelectedItem());
+            inter.eliminaAsistencia(report.getContrato(),report.getFecha());
+            inter.eliminaInvitados(report.getContrato(), report.getFecha());
+        }
+        updateTable();
     }
 
     @FXML

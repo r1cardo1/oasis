@@ -103,29 +103,29 @@ public class GenerarPaseController implements Initializable {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         if (!ninvitados.getText().isEmpty()) {
-                updateClient();
-                String hour;
-                String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
-                Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
-                String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
-                hour = Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
-                        + ":" + Integer.toString(time.get(Calendar.MINUTE))
-                        + ":" + Integer.toString(time.get(Calendar.SECOND))
-                        + ampm;
-                inter.updateAsistencia(new Asistencia(report.getInvitados(),report.getFecha(),report.getHora(),report.getContrato(),Integer.toString(inViejos),report.getUsuario()),
-                                                                new Asistencia(ninvitados.getText(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, client.getContrato(), Integer.toString(table.getItems().size()), user.getUsuario()));
-                inter.updateAcceso(report, new ReporteMesa(user.getUsuario(), client.getCedula(),
-                        client.getNombre(), client.getContrato(),
-                        client.getPlan(),
-                        LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                        hour, Integer.toString(Integer.parseInt(ninvitados.getText()))));
-                inter.eliminaInvitados(report.getContrato(), report.getFecha());
-                for (int i = 0; i < table.getItems().size(); i++) {
-                    Invitado inv = (Invitado) table.getItems().get(i);
-                    inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
-                }
-                generaRecibo(inter);
-            
+            updateClient();
+            String hour;
+            String us = user.getNombre() + " " + user.getApellido() + " " + user.getUsuario();
+            Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+            String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+            hour = Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                    + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                    + ":" + Integer.toString(time.get(Calendar.SECOND))
+                    + ampm;
+            inter.updateAsistencia(new Asistencia(report.getInvitados(), report.getFecha(), report.getHora(), report.getContrato(), Integer.toString(inViejos), report.getUsuario()),
+                    new Asistencia(ninvitados.getText(), LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE), hour, client.getContrato(), Integer.toString(table.getItems().size()), user.getUsuario()));
+            inter.updateAcceso(report, new ReporteMesa(user.getUsuario(), client.getCedula(),
+                    client.getNombre(), client.getContrato(),
+                    client.getPlan(),
+                    LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
+                    hour, Integer.toString(Integer.parseInt(ninvitados.getText()))));
+            inter.eliminaInvitados(report.getContrato(), report.getFecha());
+            for (int i = 0; i < table.getItems().size(); i++) {
+                Invitado inv = (Invitado) table.getItems().get(i);
+                inter.addInvad(inv.getNombre(), inv.getApellido(), inv.getCedula(), inv.getContrato(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+            }
+            generaRecibo(inter);
+
         }
     }
 
@@ -162,9 +162,9 @@ public class GenerarPaseController implements Initializable {
         p.newLine();
         p.alignLeft();
         p.addLineSeperator();
-        
+
         p.newLine();
-        
+
         p.setText("No \tArt\t\tCant\tPrec");
         p.newLine();
         p.addLineSeperator();
@@ -179,6 +179,12 @@ public class GenerarPaseController implements Initializable {
         p.newLine();
         if (table.getItems().size() > 0) {
             p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + table.getItems().size() + "\t" + inter.precio());
+            if(inViejos!=0){
+                            p.newLine();
+                            p.setText("1" + "\t" + "Pase Inv Adic" + "\t" + inViejos + "\t" + "-"+ inter.precio());
+                            p.newLine();
+                            p.setText("  " + "\t" + "Pagado");
+                        }
         }
         p.newLine();
         p.addLineSeperator();
@@ -190,19 +196,6 @@ public class GenerarPaseController implements Initializable {
         p.finit();
         print(p.finalCommandSet().getBytes());
         System.out.println(p.finalCommandSet());
-    }
-
-    public void back() {
-        if(menu!=null){
-        menu.aux.getChildren().clear();
-        menu.main.setVisible(true);
-        menu.main.toFront();
-        }
-        if(paseController!=null){
-            paseController.aux.getChildren().clear();
-            paseController.main.setVisible(true);
-            paseController.main.toFront();
-        }
     }
 
     public void print(byte[] b) throws IOException {
@@ -256,6 +249,19 @@ public class GenerarPaseController implements Initializable {
             }
         }
         inViejos = table.getItems().size();
+    }
+
+    public void back() {
+        if (menu != null) {
+            menu.aux.getChildren().clear();
+            menu.main.setVisible(true);
+            menu.main.toFront();
+        }
+        if (paseController != null) {
+            paseController.aux.getChildren().clear();
+            paseController.main.setVisible(true);
+            paseController.main.toFront();
+        }
     }
 
 }
