@@ -144,5 +144,23 @@ public interface oasisrimbd extends Remote {
      public void updateAutorizar(Autorizado viejo, Autorizado nuevo) throws RemoteException;
 
      public void eliminaAutorizado(String contrato, String fecha) throws RemoteException;
+     
+     public ArrayList<ReporteMesa> apMesasDiario(String fecha) throws RemoteException;
+
+     public ArrayList<ReporteMesa> apMesasmes(int mes) throws RemoteException;
+     
+     public ArrayList<ReporteMesa> apMesasFechas(String from,String to) throws RemoteException;
+     
+     public ArrayList<ReporteMesa> pasesDiario(String fecha) throws RemoteException;
+
+     public ArrayList<ReporteMesa> pasesMes(int mes) throws RemoteException;
+     
+     public ArrayList<ReporteMesa> pasesFechas(String from,String to) throws RemoteException;
+     
+     public ArrayList<Autorizado> AutorizadoDiario(String fecha) throws RemoteException;
+
+     public ArrayList<Autorizado> AutorizadoMes(int mes) throws RemoteException;
+     
+     public ArrayList<Autorizado> AutorizadoFechas(String from,String to) throws RemoteException;
 
 }

@@ -59,9 +59,9 @@ import oasiscrud.oasisrimbd;
  *
  * @author RicardoMarcano
  */
-public class ReporteDiarioController implements Initializable {
+public class ReporteFechaController implements Initializable {
 
-    ReporteDiarioController mycontroller;
+    ReporteFechaController mycontroller;
 
     ArrayList<ReporteMesa> apMesas;
     ArrayList<ReporteMesa> pases;
