@@ -154,8 +154,16 @@ public class AutorizadosController implements Initializable {
 
     }
 
-    public void eliminaAutorizado() {
-
+    public void eliminaAutorizado() throws RemoteException, NotBoundException, SQLException {
+         Registry reg = LocateRegistry.getRegistry(host,27019);
+         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+         if(!table.getSelectionModel().isEmpty()){
+              Autorizado auto = (Autorizado) table.getSelectionModel().getSelectedItem();
+              inter.eliminaInvitados(auto.getContrato(),auto.getFecha());
+              inter.eliminaAsistencia(auto.getContrato() ,auto.getFecha());
+              inter.eliminaAutorizado(auto.getContrato(),auto.getFecha());
+              updateTable();
+         }
     }
 
     public void back() {
