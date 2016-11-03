@@ -434,6 +434,7 @@ public class SearchController implements Initializable {
             controller.user = this.user;
             controller.menu = myController;
             controller.host = this.host;
+            controller.myController = controller;
             controller.setACombos();
             controller.initTable();
             aux.toFront();

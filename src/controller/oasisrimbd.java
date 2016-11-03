@@ -40,7 +40,7 @@ public interface oasisrimbd extends Remote {
     public ArrayList<Usuario> getUsuarios() throws RemoteException;
 
     public ArrayList<Usuario> searchUserbyUsername(String u) throws RemoteException;
-    
+
     public ArrayList<ReporteMesa> getOpenTables() throws RemoteException;
 
     public int getLogins(String u) throws RemoteException;
@@ -64,11 +64,11 @@ public interface oasisrimbd extends Remote {
     public ArrayList<Reserva> getReservasByName(String titular) throws RemoteException;
 
     public ArrayList<Reserva> getReservasByCI(String ci) throws RemoteException;
-    
+
     public ArrayList<Asistencia> asistenciaPorFecha(String date) throws RemoteException;
-    
-    public ArrayList<Asistencia> asistenciaPorRangoDeFecha(String from, String to) throws  RemoteException;
-    
+
+    public ArrayList<Asistencia> asistenciaPorRangoDeFecha(String from, String to) throws RemoteException;
+
     public ArrayList<Asistencia> asistenciaPorMes(String mes) throws RemoteException;
 
     public void openTable(ReporteMesa report) throws RemoteException;
@@ -96,7 +96,7 @@ public interface oasisrimbd extends Remote {
     public void actualizaReservacion(Reserva old, Reserva neww) throws RemoteException;
 
     public void eliminaReserva(Reserva r) throws RemoteException;
-    
+
     public void creaAsistencia(Asistencia a) throws RemoteException;
 
     public void restringe(Cliente c) throws RemoteException;
@@ -111,15 +111,15 @@ public interface oasisrimbd extends Remote {
 
     public void actualizaCliente(Cliente c, Cliente cliente) throws RemoteException;
 
-    public Cliente clientePorContrato(String contrato) throws  RemoteException;
+    public Cliente clientePorContrato(String contrato) throws RemoteException;
 
     public boolean estaPresente(Cliente cliente) throws RemoteException;
 
-    public String precio()throws RemoteException;
+    public String precio() throws RemoteException;
 
     public void creaAcceso(ReporteMesa report) throws RemoteException;
 
-    public void upPrecio(String text) throws  RemoteException;
+    public void upPrecio(String text) throws RemoteException;
 
     public void autorizar(Autorizado autorizado) throws RemoteException;
 
@@ -127,18 +127,20 @@ public interface oasisrimbd extends Remote {
 
     public ArrayList<Autorizado> getAutorizados() throws RemoteException;
 
-    public void updateAsistencia(Asistencia vieja, Asistencia nueva) throws  RemoteException;
+    public void updateAsistencia(Asistencia vieja, Asistencia nueva) throws RemoteException;
 
-    public void updateOpenTable(ReporteMesa viejo, ReporteMesa nuevo) throws  RemoteException;
+    public void updateOpenTable(ReporteMesa viejo, ReporteMesa nuevo) throws RemoteException;
 
     public void eliminaAsistencia(String contrato, String fecha) throws RemoteException;
 
     public void eliminaOpenTable(String contrato, String fecha) throws RemoteException;
 
-    public void eliminaInvitados(String contrato, String fecha) throws  RemoteException;
+    public void eliminaInvitados(String contrato, String fecha) throws RemoteException;
 
-    public void updateAcceso(ReporteMesa report, ReporteMesa reporteMesa) throws RemoteException;
+    public void updateAcceso(ReporteMesa viejo, ReporteMesa nuevo) throws RemoteException;
 
     public void eliminaPase(ReporteMesa report) throws RemoteException;
-    
+
+    public void updateAutorizar(Autorizado viejo, Autorizado nuevo) throws RemoteException;
+
 }

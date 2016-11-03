@@ -1,9 +1,10 @@
 package controller;
 
-import classes.Autorizado;
 import classes.Cliente;
 import classes.Autorizado;
+import classes.ReporteMesa;
 import classes.Usuario;
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -11,29 +12,34 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import oasiscrud.oasisrimbd;
-
 
 public class AutorizadosController implements Initializable {
 
     @FXML
-    ComboBox tmcombo,tacombo;
+    ComboBox tmcombo, tacombo;
     @FXML
-    TableColumn<Autorizado, String> nombre, cedula, contrato, plan, invitados, fecha,autorizado;
+    TableColumn<Autorizado, String> nombre, cedula, contrato, plan, invitados, fecha, autorizado;
     @FXML
     TableView table;
+    @FXML
+    AnchorPane main, aux;
     SearchController menu;
     Usuario user;
     Cliente client;
     String host;
+    AutorizadosController myController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,7 +65,6 @@ public class AutorizadosController implements Initializable {
         updateTMCombo();
     }
 
-
     public void updateTMCombo() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -84,7 +89,6 @@ public class AutorizadosController implements Initializable {
         updateTable();
     }
 
-    @FXML
     public void updateTable() throws SQLException, RemoteException, NotBoundException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -118,11 +122,42 @@ public class AutorizadosController implements Initializable {
         autorizado.setCellValueFactory(new PropertyValueFactory<>("autorizado"));
     }
 
-    public void initChart() {
+    public void modificaAutorizado() throws IOException, RemoteException, NotBoundException, SQLException {
+        Registry reg = LocateRegistry.getRegistry(host, 27019);
+        oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
+        if (!table.getSelectionModel().isEmpty()) {
+            Autorizado report = (Autorizado) table.getSelectionModel().getSelectedItem();
+            if(report.getFecha().equals(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE))){
+                aux.setVisible(false);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/autorizar.fxml"));
+                AutorizarController controller;
+                aux.getChildren().add(loader.load());
+                controller = loader.getController();
+                controller.host = this.host;
+                controller.myController = controller;
+                controller.report = report;
+                controller.update = true;
+                controller.auto = myController;
+                controller.user = user;
+                controller.initUpdateData();
+                controller.initDataInvitadosAdicional();
+                aux.toFront();
+                aux.setVisible(true);
+                main.setVisible(false);
+            }
+        }
+        table.getSelectionModel().clearSelection();
 
     }
 
-    @FXML
+    public void reimprimeFactura() {
+
+    }
+
+    public void eliminaAutorizado() {
+
+    }
+
     public void back() {
         menu.aux.getChildren().clear();
         menu.main.setVisible(true);
