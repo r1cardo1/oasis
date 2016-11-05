@@ -38,15 +38,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,29 +66,31 @@ public class ReporteMesController implements Initializable {
     ArrayList<ReporteMesa> pases;
 
     String host;
-    @FXML ComboBox cbano,cbmes;
+    @FXML
+    ComboBox cbano, cbmes;
     int white = 1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         try {
-              initDate();
-         } catch (RemoteException | NotBoundException ex) {
-              Logger.getLogger(ReporteMesController.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+            initDate();
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(ReporteMesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void initDate() throws RemoteException, NotBoundException {
-        Registry reg = LocateRegistry.getRegistry(host,27019);
+        Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Asistencia> list = inter.visits();
-        for(Asistencia a:list){
-             if(!cbano.getItems().contains(LocalDate.parse(a.getFecha()).getYear()))
-                  cbano.getItems().add(LocalDate.parse(a.getFecha()).getYear());
+        for (Asistencia a : list) {
+            if (!cbano.getItems().contains(LocalDate.parse(a.getFecha()).getYear())) {
+                cbano.getItems().add(LocalDate.parse(a.getFecha()).getYear());
+            }
         }
-        cbmes.getItems().addAll("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        cbmes.getItems().addAll("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
         cbano.getSelectionModel().selectLast();
-        
+
     }
 
     public void close(ActionEvent evt) {
@@ -129,7 +125,7 @@ public class ReporteMesController implements Initializable {
         document.add(new Paragraph("\n"));
 
         tc = new Table(1);
-        tc.addCell(generaCabezera("Reporte del mes "+ cbmes.getSelectionModel().getSelectedItem()+ " del año " +cbano.getSelectionModel().getSelectedItem()));
+        tc.addCell(generaCabezera("Reporte del mes " + cbmes.getSelectionModel().getSelectedItem() + " del año " + cbano.getSelectionModel().getSelectedItem()));
         document.add(tc);
 
         generaTitulo(document, "Detalles de asistencias General");
@@ -163,7 +159,7 @@ public class ReporteMesController implements Initializable {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         ArrayList<Asistencia> asist = inter.asistenciaPorMes((cbmes.getSelectionModel().getSelectedIndex() + 1));
-        
+
         ArrayList<Invitado> invad = inter.getInvitados();
         List<String> ls = new ArrayList<>();
         for (Asistencia o : asist) {
@@ -232,8 +228,9 @@ public class ReporteMesController implements Initializable {
         c.setFontSize(8);
         c.setTextAlignment(TextAlignment.LEFT);
         for (Invitado in : l) {
-            if(LocalDate.parse(in.getFecha()).getMonthValue() == (cbmes.getSelectionModel().getSelectedIndex() + 1))
-            c.add(in.getNombre() + " " + in.getApellido());
+            if (LocalDate.parse(in.getFecha()).getMonthValue() == (cbmes.getSelectionModel().getSelectedIndex() + 1)) {
+                c.add(in.getNombre() + " " + in.getApellido());
+            }
         }
         return c;
 
@@ -488,14 +485,14 @@ public class ReporteMesController implements Initializable {
         Table tc;
         ArrayList<Login> log = inter.getLogLogins();
         log.removeIf(l -> !(LocalDate.parse(l.getFecha()).getMonthValue() == (cbmes.getSelectionModel().getSelectedIndex() + 1)));
-        List<String> l = Arrays.asList("Nombre","Apellido","Usuario","Fecha","Hora");
+        List<String> l = Arrays.asList("Nombre", "Apellido", "Usuario", "Fecha", "Hora");
         tc = generaCabezera(l);
         doc.add(tc);
-        for(Login ll:log){
-            generaLogin(doc,ll);
-            white*=-1;
+        for (Login ll : log) {
+            generaLogin(doc, ll);
+            white *= -1;
         }
-        
+
     }
 
     private void generaLogin(Document doc, Login ll) throws IOException {
@@ -517,12 +514,12 @@ public class ReporteMesController implements Initializable {
         Table tc;
         ArrayList<Busqueda> log = inter.getAllSearch();
         log.removeIf(l -> !(LocalDate.parse(l.getFecha()).getMonthValue() == (cbmes.getSelectionModel().getSelectedIndex() + 1)));
-        List<String> l = Arrays.asList("Usuario","Tipo","Filtro","Fecha","Hora");
+        List<String> l = Arrays.asList("Usuario", "Tipo", "Filtro", "Fecha", "Hora");
         tc = generaCabezera(l);
         doc.add(tc);
-        for(Busqueda ll:log){
-            generaBusqueda(doc,ll);
-            white*=-1;
+        for (Busqueda ll : log) {
+            generaBusqueda(doc, ll);
+            white *= -1;
         }
     }
 
