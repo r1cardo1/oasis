@@ -19,28 +19,67 @@
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#userPanel" prefHeight="95.0" prefWidth="95.0" styleClass="users-button" text="Usuarios">
+                        <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#userPanel" prefHeight="115.0" prefWidth="100.0" styleClass="users-button" text="Usuarios" textAlignment="CENTER" wrapText="true">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="95.0" prefWidth="95.0" styleClass="user-button" text="Clientes" GridPane.columnIndex="1">
+                        <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#clientes" prefHeight="115.0" prefWidth="100.0" styleClass="user-button" text="Clientes" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#plans" prefHeight="95.0" prefWidth="95.0" styleClass="plan-button" text="Planes" GridPane.rowIndex="1">
+                        <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#plans" prefHeight="115.0" prefWidth="100.0" styleClass="plan-button" text="Planes" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
                            <effect>
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="163.0" layoutY="353.0" mnemonicParsing="false" onAction="#precio" prefHeight="101.0" prefWidth="95.0" styleClass="price-button" text="Precio Inv Adicional" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="163.0" layoutY="353.0" mnemonicParsing="false" onAction="#precio" prefHeight="115.0" prefWidth="100.0" styleClass="price-button" text="Precio Inv Adicional" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="263.0" layoutY="93.0" mnemonicParsing="false" onAction="#deleteLogins" prefHeight="115.0" prefWidth="100.0" styleClass="delete-login-button" text="Eliminar Inicios de sesion" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="463.0" layoutY="93.0" mnemonicParsing="false" onAction="#deleteReservas" prefHeight="115.0" prefWidth="100.0" styleClass="delete-reserva-button" text="Eliminar reservas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="663.0" layoutY="93.0" mnemonicParsing="false" onAction="#deleteBusquedas" prefHeight="115.0" prefWidth="100.0" styleClass="delete-search-button" text="Eliminar busquedas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="463.0" layoutY="353.0" mnemonicParsing="false" onAction="#deleteOpenTables" prefHeight="115.0" prefWidth="100.0" styleClass="delete-open-table-button" text="Eliminar Aperturas de mesas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="523.0" layoutY="93.0" mnemonicParsing="false" onAction="#deletePases" prefHeight="115.0" prefWidth="100.0" styleClass="delete-pase-button" text="Eliminar Pases" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="683.0" layoutY="93.0" mnemonicParsing="false" onAction="#deleteAutorizados" prefHeight="115.0" prefWidth="100.0" styleClass="delete-autorizacion-button" text="Eliminar Autorizaciones" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="TOP" layoutX="683.0" layoutY="223.0" mnemonicParsing="false" onAction="#eliminaInvitados" prefHeight="115.0" prefWidth="100.0" styleClass="delete-invitado-button" text="Eliminar Invitados" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
                            <effect>
                               <DropShadow />
                            </effect>

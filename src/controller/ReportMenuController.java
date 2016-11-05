@@ -30,89 +30,114 @@ import javafx.stage.StageStyle;
  */
 public class ReportMenuController implements Initializable {
 
-    Usuario usuario;
-    Stage stage;
-    MainMenuController menu;
-    @FXML
-    AnchorPane main;
-    @FXML
-    AnchorPane aux;
-    ReportMenuController myController;
-    String host;
+     Usuario usuario;
+     Stage stage;
+     MainMenuController menu;
+     @FXML
+     AnchorPane main;
+     @FXML
+     AnchorPane aux;
+     ReportMenuController myController;
+     String host;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+     /**
+      * Initializes the controller class.
+      */
+     @Override
+     public void initialize(URL url, ResourceBundle rb) {
+          // TODO
+     }
 
-    public void back(ActionEvent evt) {
-        menu.aux.getChildren().clear();
-        menu.main.setVisible(true);
-        menu.main.toFront();
-    }
+     public void back(ActionEvent evt) {
+          menu.aux.getChildren().clear();
+          menu.main.setVisible(true);
+          menu.main.toFront();
+     }
 
-    @FXML
-    public void loginReport(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loginReport.fxml"));
-        Pane pan = loader.load();
-        LoginReportController controller = loader.getController();
-        controller.menu = myController;
-        controller.host = this.host;
-        controller.initUsers();
-        controller.initCombo();
-        controller.initTable();
-        aux.getChildren().add(pan);
-        main.setVisible(false);
-        aux.toFront();
-    }
+     @FXML
+     public void loginReport(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/loginReport.fxml"));
+          Pane pan = loader.load();
+          LoginReportController controller = loader.getController();
+          controller.menu = myController;
+          controller.host = this.host;
+          controller.initUsers();
+          controller.initCombo();
+          controller.initTable();
+          aux.getChildren().add(pan);
+          main.setVisible(false);
+          aux.toFront();
+     }
 
-    @FXML
-    public void searchReport() throws IOException, SQLException, RemoteException, NotBoundException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/searchReport.fxml"));
-        Pane pan = loader.load();
-        SearchReportController controller = loader.getController();
-        controller.menu = myController;
-        controller.host = this.host;
-        controller.initCombo();
-        controller.first();
-        controller.initTable();
-        aux.getChildren().add(pan);
-        main.setVisible(false);
-        aux.toFront();
-    }
+     @FXML
+     public void searchReport() throws IOException, SQLException, RemoteException, NotBoundException {
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/searchReport.fxml"));
+          Pane pan = loader.load();
+          SearchReportController controller = loader.getController();
+          controller.menu = myController;
+          controller.host = this.host;
+          controller.initCombo();
+          controller.first();
+          controller.initTable();
+          aux.getChildren().add(pan);
+          main.setVisible(false);
+          aux.toFront();
+     }
 
-    public void apertMesa() throws IOException, RemoteException, NotBoundException {
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reporteApertMesa.fxml"));
-        Pane pan = loader.load();
-        ReporteApertMesaController controller = loader.getController();
-        controller.menu = myController;
-        controller.host = this.host;        
-        controller.initAnoCombo();
-        controller.reloadTable();
-        controller.initUserCombo();
-        aux.getChildren().add(pan);
-        main.setVisible(false);
-        aux.toFront();
-    }
-    
-    public void reporteDiario() throws IOException{
-        Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReporteDiario.fxml"));
-        Parent root = loader.load();
-        ReporteDiarioController controller = loader.getController();
-        controller.mycontroller = controller;
-        controller.host = this.host;
-        Scene  scene = new Scene(root);
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.show();
-        
-    }
+     public void apertMesa() throws IOException, RemoteException, NotBoundException {
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reporteApertMesa.fxml"));
+          Pane pan = loader.load();
+          ReporteApertMesaController controller = loader.getController();
+          controller.menu = myController;
+          controller.host = this.host;
+          controller.initAnoCombo();
+          controller.reloadTable();
+          controller.initUserCombo();
+          aux.getChildren().add(pan);
+          main.setVisible(false);
+          aux.toFront();
+     }
+
+     public void reporteDiario() throws IOException {
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReporteDiario.fxml"));
+          Parent root = loader.load();
+          ReporteDiarioController controller = loader.getController();
+          controller.mycontroller = controller;
+          controller.host = this.host;
+          Scene scene = new Scene(root);
+          stage.setScene(scene);
+          stage.initStyle(StageStyle.UNDECORATED);
+          stage.show();
+     }
+
+     public void reporteMes() throws IOException {
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReporteMes.fxml"));
+          Parent root = loader.load();
+          ReporteMesController controller = loader.getController();
+          controller.mycontroller = controller;
+          controller.host = this.host;
+          Scene scene = new Scene(root);
+          stage.setScene(scene);
+          stage.initStyle(StageStyle.UNDECORATED);
+          stage.show();
+     }
+     
+     public void reporteFecha() throws IOException{
+          Stage stage = new Stage();
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ReporteFecha.fxml"));
+          Parent root = loader.load();
+          ReporteFechaController controller = loader.getController();
+          controller.mycontroller = controller;
+          controller.host = this.host;
+          Scene scene = new Scene(root);
+          stage.setScene(scene);
+          stage.initStyle(StageStyle.UNDECORATED);
+          stage.show();
+     }
 
 }

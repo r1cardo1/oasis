@@ -8,11 +8,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" styleClass="content-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReporteDiarioController">
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="300.0" styleClass="content-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReporteFechaController">
    <children>
       <Pane prefHeight="202.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10; -fx-opacity: 0.5;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-      <DatePicker fx:id="date" layoutX="55.0" layoutY="90.0" />
-      <Label alignment="CENTER" text="Seleccione un día" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <Label alignment="CENTER" text="Seleccione fechas" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -20,6 +19,10 @@
       <Button layoutX="60.0" layoutY="140.0" mnemonicParsing="false" onAction="#generaPDF" text="Generar" />
       <Button layoutX="170.0" layoutY="140.0" mnemonicParsing="false" onAction="#close" text="Cancelar" />
       <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="close-button" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0" />
+      <DatePicker fx:id="from" layoutX="23.0" layoutY="98.0" onAction="#fromDate" prefHeight="27.0" prefWidth="123.0" />
+      <DatePicker fx:id="to" layoutX="154.0" layoutY="98.0" prefHeight="27.0" prefWidth="123.0" />
+      <Label layoutX="59.0" layoutY="75.0" text="Desde" />
+      <Label layoutX="208.0" layoutY="75.0" text="Hasta" />
    </children>
    <stylesheets>
       <URL value="@../css/ReporteDiario.css" />

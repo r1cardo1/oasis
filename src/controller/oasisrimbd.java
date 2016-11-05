@@ -69,7 +69,7 @@ public interface oasisrimbd extends Remote {
 
      public ArrayList<Asistencia> asistenciaPorRangoDeFecha(String from, String to) throws RemoteException;
 
-     public ArrayList<Asistencia> asistenciaPorMes(String mes) throws RemoteException;
+     public ArrayList<Asistencia> asistenciaPorMes(int mes) throws RemoteException;
 
      public void openTable(ReporteMesa report) throws RemoteException;
 
@@ -162,5 +162,19 @@ public interface oasisrimbd extends Remote {
      public ArrayList<Autorizado> AutorizadoMes(int mes) throws RemoteException;
      
      public ArrayList<Autorizado> AutorizadoFechas(String from,String to) throws RemoteException;
+
+     public void truncatePases() throws RemoteException;
+
+     public void truncateLogins() throws RemoteException;
+
+     public void truncateReservas() throws RemoteException;
+
+     public void truncateBusquedas() throws RemoteException;
+
+     public void truncateOpenTables() throws RemoteException;
+
+     public void truncateAutorizados() throws RemoteException;
+
+     public void truncateInvitados() throws RemoteException;
 
 }

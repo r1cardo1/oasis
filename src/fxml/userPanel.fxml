@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="790.0" stylesheets="@../css/userPanel.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserPanelController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserPanelController">
    <children>
       <AnchorPane layoutX="46.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,7 +22,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
          <children>
-            <TableView fx:id="table" layoutX="295.0" layoutY="160.0" prefHeight="520.0" prefWidth="790.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="80.0">
+            <TableView fx:id="table" layoutX="295.0" layoutY="160.0" prefHeight="520.0" prefWidth="790.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="40.0">
               <columns>
                 <TableColumn fx:id="nombre" prefWidth="75.0" text="Nombre" />
                 <TableColumn fx:id="apellido" prefWidth="75.0" text="Apellido" />
@@ -37,18 +38,13 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#newUser" text="Nuevo Usuario" />
                   <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteUser" text="Eliminar Usuario" />
-                  <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" text="Modificar Usuario" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="131.0" prefHeight="40.0" prefWidth="200.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-               <children>
-                  <Label text="Modo" />
-                  <ComboBox prefWidth="150.0" />
-                  <Label text="Filtro:" />
-                  <TextField />
                </children>
             </HBox>
          </children>
       </AnchorPane>
    </children>
+   <stylesheets>
+      <URL value="@../css/userPanel.css" />
+      <URL value="@../css/theme.css" />
+   </stylesheets>
 </AnchorPane>

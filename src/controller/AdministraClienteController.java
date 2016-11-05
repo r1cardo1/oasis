@@ -222,8 +222,8 @@ public class AdministraClienteController implements Initializable {
 
                             Registry reg = LocateRegistry.getRegistry(host, 27019);
                             oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-                            if (!inter.existeCliente(new Cliente("V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), ""))) {
-                                inter.nuevoCliente(new Cliente("V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), ""));
+                            if (inter.clientePorContrato(txtcontrato.getText())==null) {
+                                inter.nuevoCliente(new Cliente(txtcedula.getText().toUpperCase(), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), ""));
                                 search();
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Informacion");
@@ -281,7 +281,7 @@ public class AdministraClienteController implements Initializable {
             Cliente c = (Cliente) table.getSelectionModel().getSelectedItem();
             Registry reg = LocateRegistry.getRegistry(host, 27019);
             oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-            inter.actualizaCliente(c, new Cliente(txtcedula.getText().isEmpty() ? "" : "V-" + txtcedula.getText().toUpperCase().replace("V-", ""), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), c.getBanco(), c.getRestringido()));
+            inter.actualizaCliente(c, new Cliente(txtcedula.getText().toUpperCase(), txtnombre.getText().toUpperCase(), txtcontrato.getText().toUpperCase(), txtplan.getText().toUpperCase(), c.getBanco(), c.getRestringido()));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Alerta");
             alert.setContentText("Usuario actualizado exitosamente");
