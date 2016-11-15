@@ -10,68 +10,81 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReservaController">
    <children>
-      <AnchorPane prefHeight="80.0" prefWidth="790.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="aux" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="main" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="CENTER" layoutX="381.0" layoutY="23.0" prefHeight="80.0" prefWidth="790.0" text="Control de reservas" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Button layoutX="41.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" AnchorPane.leftAnchor="40.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="600.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
-      <AnchorPane prefHeight="600.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-         <children>
-            <TableView fx:id="table" layoutX="295.0" layoutY="160.0" prefHeight="520.0" prefWidth="790.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
-              <columns>
-                <TableColumn fx:id="titular" prefWidth="75.0" text="Titular" />
-                <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
-                  <TableColumn fx:id="telefono" prefWidth="75.0" text="Telefono" />
-                  <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
-                  <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
-                  <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
-              </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-            <HBox alignment="CENTER" layoutY="466.0" prefHeight="40.0" prefWidth="200.0" spacing="80.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <AnchorPane prefHeight="80.0" prefWidth="790.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#nuevaReserva" styleClass="add-button" text="Añadir" />
-                  <Button contentDisplay="RIGHT" layoutX="379.0" layoutY="18.0" mnemonicParsing="false" onAction="#editaReserva" styleClass="edit-button" text="Editar" />
-                  <Button contentDisplay="RIGHT" layoutX="405.0" layoutY="18.0" mnemonicParsing="false" onAction="#eliminaReserva" styleClass="delete-button" text="Eliminar" />
+                  <Label alignment="CENTER" layoutX="381.0" layoutY="23.0" prefHeight="80.0" prefWidth="790.0" text="Control de reservas" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="41.0" layoutY="24.0" mnemonicParsing="false" onAction="#back" styleClass="back-button" AnchorPane.leftAnchor="40.0" />
                </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="18.0" spacing="10.0" AnchorPane.leftAnchor="40.0">
+            </AnchorPane>
+            <AnchorPane prefHeight="600.0" prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
                <children>
-                  <Label text="Buscar por" />
-                  <ComboBox fx:id="combo" prefWidth="150.0" />
+                  <TableView fx:id="table" layoutX="295.0" layoutY="160.0" prefHeight="520.0" prefWidth="790.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="60.0">
+                    <columns>
+                      <TableColumn fx:id="titular" prefWidth="75.0" text="Titular" />
+                      <TableColumn fx:id="cedula" prefWidth="75.0" text="Cedula" />
+                        <TableColumn fx:id="telefono" prefWidth="75.0" text="Telefono" />
+                        <TableColumn fx:id="plan" prefWidth="75.0" text="Plan" />
+                        <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
+                        <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <HBox alignment="CENTER" layoutY="466.0" prefHeight="40.0" prefWidth="200.0" spacing="80.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#nuevaReserva" prefWidth="140.0" styleClass="add-button" text="Añadir" />
+                        <Button contentDisplay="RIGHT" layoutX="379.0" layoutY="18.0" mnemonicParsing="false" onAction="#editaReserva" prefWidth="140.0" styleClass="edit-button" text="Editar" />
+                        <Button contentDisplay="RIGHT" layoutX="405.0" layoutY="18.0" mnemonicParsing="false" onAction="#eliminaReserva" prefWidth="140.0" styleClass="delete-button" text="Eliminar Seleccion" />
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#exportPDF" prefWidth="140.0" styleClass="export-pdf-button" text="Exportar a PDF" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="18.0" spacing="10.0" AnchorPane.leftAnchor="40.0">
+                     <children>
+                        <Label text="Buscar por" />
+                        <ComboBox fx:id="combo" prefWidth="150.0" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="pfilter" alignment="CENTER_LEFT" layoutX="295.0" prefHeight="40.0" prefWidth="593.0" spacing="10.0" visible="false" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <Label text="Filtro" />
+                        <TextField fx:id="filter" />
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#filterSearch" styleClass="search-button" text="Button" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="rangeDate" alignment="CENTER_LEFT" layoutX="277.0" layoutY="20.0" prefHeight="40.0" prefWidth="593.0" spacing="10.0" visible="false" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <Label text="Desde" />
+                        <DatePicker fx:id="from" onAction="#fromDate" />
+                        <Label layoutX="10.0" layoutY="22.0" text="Hasta" />
+                        <DatePicker fx:id="to" layoutX="54.0" layoutY="18.0" />
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#searchByRangeDate" styleClass="search-button" text="Buscar" />
+                     </children>
+                  </HBox>
+                  <HBox fx:id="pdate" alignment="CENTER_LEFT" layoutX="287.0" layoutY="30.0" prefHeight="40.0" prefWidth="593.0" spacing="10.0" visible="false" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <Label text="Fecha" />
+                        <DatePicker fx:id="date" />
+                        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#searchByDate" styleClass="search-button" text="Button" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="440.0" prefHeight="40.0" prefWidth="200.0" spacing="80.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Button contentDisplay="RIGHT" layoutX="405.0" layoutY="18.0" mnemonicParsing="false" onAction="#abrirMesa" prefWidth="140.0" styleClass="open-table-button" text="Abrir Mesa" />
+                        <Button contentDisplay="RIGHT" layoutX="194.0" layoutY="14.0" mnemonicParsing="false" onAction="#generaPase" prefWidth="140.0" styleClass="pase-button" text="GenerarPase" />
+                        <Button contentDisplay="RIGHT" layoutX="285.0" layoutY="14.0" mnemonicParsing="false" onAction="#generaAutorizado" prefWidth="140.0" styleClass="autorizar-button" text="Autorizado" />
+                        <Button contentDisplay="RIGHT" layoutX="473.0" layoutY="14.0" mnemonicParsing="false" onAction="#eliminaResultados" prefWidth="140.0" styleClass="delete-button" text="Eliminar Result." />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox fx:id="pfilter" alignment="CENTER_LEFT" layoutX="295.0" prefHeight="40.0" prefWidth="593.0" spacing="10.0" visible="false" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <Label text="Filtro" />
-                  <TextField fx:id="filter" />
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#filterSearch" styleClass="search-button" text="Button" />
-               </children>
-            </HBox>
-            <HBox fx:id="rangeDate" alignment="CENTER_LEFT" layoutX="277.0" layoutY="20.0" prefHeight="40.0" prefWidth="593.0" spacing="10.0" visible="false" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <Label text="Desde" />
-                  <DatePicker fx:id="from" onAction="#fromDate" />
-                  <Label layoutX="10.0" layoutY="22.0" text="Hasta" />
-                  <DatePicker fx:id="to" layoutX="54.0" layoutY="18.0" />
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#searchByRangeDate" styleClass="search-button" text="Buscar" />
-               </children>
-            </HBox>
-            <HBox fx:id="pdate" alignment="CENTER_LEFT" layoutX="287.0" layoutY="30.0" prefHeight="40.0" prefWidth="593.0" spacing="10.0" visible="false" AnchorPane.leftAnchor="267.0" AnchorPane.topAnchor="10.0">
-               <children>
-                  <Label text="Fecha" />
-                  <DatePicker fx:id="date" />
-                  <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#searchByDate" styleClass="search-button" text="Button" />
-               </children>
-            </HBox>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

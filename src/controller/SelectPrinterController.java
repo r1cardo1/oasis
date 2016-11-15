@@ -30,73 +30,79 @@ import javax.print.attribute.standard.PrinterName;
  */
 public class SelectPrinterController implements Initializable {
 
-    @FXML
-    ComboBox combo;
-    OpenTableController sup;
-    byte[] a;
-    String printer;
-    OpenTableController menu;
-    GenerarPaseController pase;
-    AutorizarController autorizar;
+     @FXML
+     ComboBox combo;
+     OpenTableController sup;
+     byte[] a;
+     String printer;
+     OpenTableController menu;
+     GenerarPaseController pase;
+     AutorizarController autorizar;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        initCombo();
-    }
+     @Override
+     public void initialize(URL url, ResourceBundle rb) {
+          // TODO
+          initCombo();
+     }
 
-    public void initCombo() {
-        PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
-        PrintService print = PrintServiceLookup.lookupDefaultPrintService();
-        for (PrintService printer : printServices) {
-            combo.getItems().add(printer.getName());
-        }
-        combo.getSelectionModel().select(print.getName());
-    }
+     public void initCombo() {
+          PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
+          PrintService print = PrintServiceLookup.lookupDefaultPrintService();
+          for (PrintService printer : printServices) {
+               combo.getItems().add(printer.getName());
+          }
+          combo.getSelectionModel().select(print.getName());
+     }
 
-    public void accept(ActionEvent evt) {
-        printer = (String) combo.getSelectionModel().getSelectedItem();
-        feedPrinter(a);
-        Stage stage;
-        Button b = (Button) evt.getSource();
-        stage = (Stage) b.getScene().getWindow();
-        stage.close();
-    }
+     public void accept(ActionEvent evt) {
+          printer = (String) combo.getSelectionModel().getSelectedItem();
+          feedPrinter(a);
+          Stage stage;
+          Button b = (Button) evt.getSource();
+          stage = (Stage) b.getScene().getWindow();
+          stage.close();
+     }
 
-    public void cancel(ActionEvent evt) {
-        Stage stage;
-        Button b = (Button) evt.getSource();
-        stage = (Stage) b.getScene().getWindow();
-        stage.close();
-    }
+     public void cancel(ActionEvent evt) {
+          Stage stage;
+          Button b = (Button) evt.getSource();
+          stage = (Stage) b.getScene().getWindow();
+          stage.close();
+     }
 
-    private boolean feedPrinter(byte[] b) {
-        try {
+     private boolean feedPrinter(byte[] b) {
+          try {
 
-            AttributeSet attrSet = new HashPrintServiceAttributeSet(new PrinterName(printer, null)); //EPSON TM-U220 ReceiptE4
+               AttributeSet attrSet = new HashPrintServiceAttributeSet(new PrinterName(printer, null)); //EPSON TM-U220 ReceiptE4
 
-            DocPrintJob job = PrintServiceLookup.lookupPrintServices(null, attrSet)[0].createPrintJob();
-            //PrintServiceLookup.lookupDefaultPrintService().createPrintJob();  
+               DocPrintJob job = PrintServiceLookup.lookupPrintServices(null, attrSet)[0].createPrintJob();
+               //PrintServiceLookup.lookupDefaultPrintService().createPrintJob();  
 
-            DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-            Doc doc = new SimpleDoc(b, flavor, null);
-            //PrintJobWatcher pjDone = new PrintJobWatcher(job);
+               DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+               Doc doc = new SimpleDoc(b, flavor, null);
+               //PrintJobWatcher pjDone = new PrintJobWatcher(job);
 
-            job.print(doc, null);
-            if (menu != null) {
-                menu.back();
-            }
+               job.print(doc, null);
+               if (menu != null) {
+                    menu.back();
+               }
+               if (pase != null) {
+                    pase.back();
+               }
+               if (autorizar != null) {
+                    autorizar.back();
+               }
 
-        } catch (javax.print.PrintException pex) {
+          } catch (javax.print.PrintException pex) {
 
-            System.out.println("Printer Error " + pex.getMessage());
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+               System.out.println("Printer Error " + pex.getMessage());
+               return false;
+          } catch (Exception e) {
+               e.printStackTrace();
+               return false;
+          }
 
-        return true;
-    }
+          return true;
+     }
 
 }

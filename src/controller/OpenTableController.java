@@ -61,6 +61,7 @@ public class OpenTableController implements Initializable {
     ReporteMesa report=null;
     AsistenciaController asistenciaController=null;
     int inViejos=0;
+     ReservaController reserva;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -321,6 +322,11 @@ public class OpenTableController implements Initializable {
             asistenciaController.aux.getChildren().clear();
             asistenciaController.main.setVisible(true);
             asistenciaController.main.toFront();
+        }
+        if(reserva!=null){
+             reserva.aux.getChildren().clear();
+             reserva.main.setVisible(true);
+             reserva.main.toFront();
         }
             
     }

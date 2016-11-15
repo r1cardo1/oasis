@@ -61,6 +61,7 @@ public class AutorizarController implements Initializable {
     AutorizadosController auto;
     boolean update = false;
     int inViejos = 0;
+     ReservaController reserva;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,7 +80,8 @@ public class AutorizarController implements Initializable {
         txtcontrato.setText(client.getContrato());
         txtplan.setText(client.getPlan());
         fecha.setValue(LocalDate.now());
-        autorizado.setText(report.getAutorizado());
+        if(report!=null)
+          autorizado.setText(report.getAutorizado());
     }
 
     public void initTable() {
@@ -240,6 +242,12 @@ public class AutorizarController implements Initializable {
             auto.main.setVisible(true);
             auto.main.toFront();
         }
+        
+        if(reserva!=null){
+             reserva.aux.getChildren().clear();
+             reserva.main.setVisible(true);
+             reserva.main.toFront();
+        }
     }
 
     public void print(byte[] b) throws IOException {
@@ -289,5 +297,7 @@ public class AutorizarController implements Initializable {
         }
         inViejos = table.getItems().size();
     }
+    
+    
 
 }
