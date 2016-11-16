@@ -297,6 +297,7 @@ public class ReservaController implements Initializable {
         controller.primStage = stage;
         Scene scene = new Scene(root);
         controller.menu = myController;
+        controller.host = this.host;
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
@@ -314,6 +315,7 @@ public class ReservaController implements Initializable {
             controller.menu = myController;
             controller.save = false;
             controller.r = (Reserva) table.getSelectionModel().getSelectedItem();
+            controller.host = this.host;
             controller.initData();
             Scene scene = new Scene(root);
             stage.initStyle(StageStyle.UNDECORATED);
@@ -453,12 +455,12 @@ public class ReservaController implements Initializable {
 
     }
 
-    public void abrirMesa() throws IOException, RemoteException, NotBoundException {
+    public void abrirMesa() throws IOException, RemoteException, NotBoundException, SQLException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         Reserva r = table.getSelectionModel().getSelectedItem();
         ArrayList<Cliente> c = inter.clientePorCedula(r.getCedula());
-
+        System.out.println(c.size());
         if (c.size() == 1) {
             if (!inter.abrioReserva(r.getCedula())) {
                 aux.setVisible(false);
@@ -472,6 +474,7 @@ public class ReservaController implements Initializable {
                 controller.user = this.usuario;
                 controller.host = this.host;
                 controller.myController = controller;
+                controller.initData();
                 try {
                     controller.initData();
                 } catch (NotBoundException | RemoteException | SQLException ex) {
@@ -493,8 +496,11 @@ public class ReservaController implements Initializable {
             Parent root = loader.load();
             SeleccionaClienteController con = loader.getController();
             con.list = c;
-            con.controller = myController;
-            con.opc="OPN";
+            con.rcontroller = myController;
+            con.opc = "OPN";
+            con.host = this.host;
+            con.usuario = this.usuario;
+            con.r = r;
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -552,8 +558,11 @@ public class ReservaController implements Initializable {
             Parent root = loader.load();
             SeleccionaClienteController con = loader.getController();
             con.list = c;
-            con.controller = myController;
-            con.opc ="PAS";
+            con.rcontroller = myController;
+            con.opc = "PAS";
+            con.host = this.host;
+            con.usuario = this.usuario;
+            con.r = r;
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -575,7 +584,7 @@ public class ReservaController implements Initializable {
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         Reserva r = table.getSelectionModel().getSelectedItem();
         ArrayList<Cliente> c = inter.clientePorCedula(r.getCedula());
-        if (c.size()==1) {
+        if (c.size() == 1) {
             if (!inter.abrioReserva(r.getCedula())) {
                 aux.setVisible(false);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/autorizar.fxml"));
@@ -602,18 +611,22 @@ public class ReservaController implements Initializable {
                 a.setContentText("Ya el cliente ingreso al club hoy");
                 a.show();
             }
-        } if(c.size()>1) {
+        }
+        if (c.size() > 1) {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/SeleccionaCliente.fxml"));
             Parent root = loader.load();
             SeleccionaClienteController con = loader.getController();
             con.list = c;
-            con.controller = myController;
-            con.opc="AUT";
+            con.rcontroller = myController;
+            con.opc = "AUT";
+            con.host = this.host;
+            con.usuario = this.usuario;
+            con.r = r;
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("No se encontro el cliente");
             alert.setHeaderText("¿Desea buscar el cliente manualmente?");
@@ -625,4 +638,5 @@ public class ReservaController implements Initializable {
             }
         }
     }
+
 }

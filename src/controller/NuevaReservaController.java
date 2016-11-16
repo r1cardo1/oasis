@@ -36,110 +36,112 @@ import oasiscrud.oasisrimbd;
  */
 public class NuevaReservaController implements Initializable {
 
-      @FXML
-      Label topPane;
-      @FXML TextField titular,cedula,plan,telefono,invitados,observacion;
-      @FXML DatePicker fecha;
-      Double xs, ys;
-      Stage primStage;
-      Reserva r;
-      Boolean save = true;
-      ReservaController menu;
-      Cliente client;
+    @FXML
+    Label topPane;
+    @FXML
+    TextField titular, cedula, plan, telefono, invitados, observacion;
+    @FXML
+    DatePicker fecha;
+    Double xs, ys;
+    Stage primStage;
+    Reserva r;
+    Boolean save = true;
+    ReservaController menu;
+    Cliente client;
     String host;
-      
-      @Override
-      public void initialize(URL url, ResourceBundle rb) {
-            // TODO
-            drag();
-      }
 
-      public void close(ActionEvent evt) {
-            Stage stage;
-            Button b = (Button) evt.getSource();
-            stage = (Stage) b.getScene().getWindow();
-            stage.close();
-      }
-      
-      public void initData(){
-            titular.setText(r.getTitular());
-            cedula.setText(r.getCedula());
-            plan.setText(r.getPlan());
-            telefono.setText(r.getTelefono());
-            invitados.setText(r.getInvitados());
-            observacion.setText(r.getObservaciones());
-            fecha.setValue(LocalDate.parse(r.getFecha()));
-      }
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        drag();
+    }
 
-      public void minimize(ActionEvent evt) {
-            Stage stage;
-            Button b = (Button) evt.getSource();
-            stage = (Stage) b.getScene().getWindow();
-            stage.setIconified(true);
-      }
+    public void close(ActionEvent evt) {
+        Stage stage;
+        Button b = (Button) evt.getSource();
+        stage = (Stage) b.getScene().getWindow();
+        stage.close();
+    }
 
-      public void drag() {
+    public void initData() {
+        titular.setText(r.getTitular());
+        cedula.setText(r.getCedula());
+        plan.setText(r.getPlan());
+        telefono.setText(r.getTelefono());
+        invitados.setText(r.getInvitados());
+        observacion.setText(r.getObservaciones());
+        fecha.setValue(LocalDate.parse(r.getFecha()));
+    }
 
-            topPane.setOnMousePressed(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent evt) {
-                        xs = evt.getSceneX();
-                        ys = evt.getSceneY();
-                  }
-            });
+    public void minimize(ActionEvent evt) {
+        Stage stage;
+        Button b = (Button) evt.getSource();
+        stage = (Stage) b.getScene().getWindow();
+        stage.setIconified(true);
+    }
 
-            topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-                  @Override
-                  public void handle(MouseEvent event) {
-                        primStage.setX(event.getScreenX() - xs);
-                        primStage.setY(event.getScreenY() - ys);
-                  }
-            });
+    public void drag() {
 
-      }
-      
-      public void save(ActionEvent evt) throws SQLException, RemoteException, NotBoundException{
-          Registry reg = LocateRegistry.getRegistry(host,27019);
+        topPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent evt) {
+                xs = evt.getSceneX();
+                ys = evt.getSceneY();
+            }
+        });
+
+        topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primStage.setX(event.getScreenX() - xs);
+                primStage.setY(event.getScreenY() - ys);
+            }
+        });
+
+    }
+
+    public void save(ActionEvent evt) throws SQLException, RemoteException, NotBoundException {
+        Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-            if(!titular.getText().isEmpty() && !cedula.getText().isEmpty())
-                  if(save){
-                      
-                        inter.guardaReservacion(new Reserva(titular.getText(),cedula.getText(),telefono.getText(),plan.getText(),invitados.getText(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),observacion.getText()));
-                        try{
-                        menu.reloadTable();
-                        }catch(Exception ex){
-                              System.out.println(ex.getMessage());
-                        }
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Alerta");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Reserva añadida con exito");
-                        alert.show();
-                        Stage stage;
-                        Button b = (Button) evt.getSource();
-                        stage = (Stage) b.getScene().getWindow();
-                        stage.close();
-                  }else{
-                        inter.actualizaReservacion(r,new Reserva(titular.getText(),cedula.getText(),telefono.getText(),plan.getText(),invitados.getText(),fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),observacion.getText()));
-                        menu.reloadTable();
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Alerta");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Reserva actualizada con exito");
-                        alert.show();
-                        Stage stage;
-                        Button b = (Button) evt.getSource();
-                        stage = (Stage) b.getScene().getWindow();
-                        stage.close();
-                  }
-      }
 
-      void initClient() {
-            titular.setText(client.getNombre());
-            cedula.setText(client.getCedula());
-            plan.setText(client.getPlan());            
-      }
-      
-      
+        if (!titular.getText().isEmpty() && !cedula.getText().isEmpty()) {
+            if (save) {
+
+                inter.guardaReservacion(new Reserva(titular.getText(), cedula.getText(), telefono.getText(), plan.getText(), invitados.getText(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), observacion.getText()));
+                try {
+                    menu.reloadTable();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Alerta");
+                alert.setHeaderText(null);
+                alert.setContentText("Reserva añadida con exito");
+                alert.show();
+                Stage stage;
+                Button b = (Button) evt.getSource();
+                stage = (Stage) b.getScene().getWindow();
+                stage.close();
+            } else {
+                inter.actualizaReservacion(r, new Reserva(titular.getText(), cedula.getText(), telefono.getText(), plan.getText(), invitados.getText(), fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE), observacion.getText()));
+                menu.reloadTable();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Alerta");
+                alert.setHeaderText(null);
+                alert.setContentText("Reserva actualizada con exito");
+                alert.show();
+                Stage stage;
+                Button b = (Button) evt.getSource();
+                stage = (Stage) b.getScene().getWindow();
+                stage.close();
+            }
+        }
+    }
+
+    void initClient() {
+        titular.setText(client.getNombre());
+        cedula.setText(client.getCedula());
+        plan.setText(client.getPlan());
+    }
 
 }
