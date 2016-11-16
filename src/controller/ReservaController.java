@@ -474,7 +474,6 @@ public class ReservaController implements Initializable {
                 controller.user = this.usuario;
                 controller.host = this.host;
                 controller.myController = controller;
-                controller.initData();
                 try {
                     controller.initData();
                 } catch (NotBoundException | RemoteException | SQLException ex) {
@@ -501,6 +500,7 @@ public class ReservaController implements Initializable {
             con.host = this.host;
             con.usuario = this.usuario;
             con.r = r;
+            con.initTable();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -563,6 +563,7 @@ public class ReservaController implements Initializable {
             con.host = this.host;
             con.usuario = this.usuario;
             con.r = r;
+            con.initTable();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -623,6 +624,7 @@ public class ReservaController implements Initializable {
             con.host = this.host;
             con.usuario = this.usuario;
             con.r = r;
+            con.initTable();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
