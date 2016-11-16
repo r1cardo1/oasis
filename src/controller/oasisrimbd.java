@@ -177,7 +177,7 @@ public interface oasisrimbd extends Remote {
 
      public void truncateInvitados() throws RemoteException;
 
-     public Cliente clientePorCedula(String cedula) throws RemoteException;
+     public ArrayList<Cliente> clientePorCedula(String cedula) throws RemoteException;
 
      public boolean abrioReserva(String cedula) throws RemoteException;
 
