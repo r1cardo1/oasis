@@ -219,6 +219,8 @@ public class AsistenciaController implements Initializable {
         p.newLine();
         p.setText("Contrato \t:" + report.getContrato());
         p.newLine();
+        p.setText("Plan \t\t:" + report.getPlan());
+        p.newLine();
         p.addLineSeperator();
         p.newLine();
         p.alignCenter();
@@ -271,6 +273,8 @@ public class AsistenciaController implements Initializable {
         p.setText("Cedula \t\t:" + report.getCedula());
         p.newLine();
         p.setText("Contrato \t:" + report.getContrato());
+        p.newLine();
+        p.setText("Plan \t\t:" + report.getPlan());
         p.newLine();
         p.addLineSeperator();
         p.newLine();

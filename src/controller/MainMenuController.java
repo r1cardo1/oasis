@@ -46,303 +46,316 @@ import javafx.util.Duration;
  */
 public class MainMenuController implements Initializable {
 
-    @FXML
-    Label date;
-    @FXML
-    Label hour;
-    @FXML
-    AnchorPane topPane;
-    public Stage primStage;
-    Double xs, ys;
-    boolean maximized = false;
-    boolean minimized = false;
-    MainMenuController myController;
-    Usuario user;
-    @FXML
-    AnchorPane main;
-    @FXML
-    AnchorPane aux;
-    @FXML
-    Label luser;
-    @FXML
-    Label lname;
-    @FXML
-    GridPane buttons;
-    String host;
-    
+     @FXML
+     Label date;
+     @FXML
+     Label hour;
+     @FXML
+     AnchorPane topPane;
+     public Stage primStage;
+     Double xs, ys;
+     boolean maximized = false;
+     boolean minimized = false;
+     MainMenuController myController;
+     Usuario user;
+     @FXML
+     AnchorPane main;
+     @FXML
+     AnchorPane aux;
+     @FXML
+     Label luser;
+     @FXML
+     Label lname;
+     @FXML
+     GridPane buttons;
+     String host;
 
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        new DigitalClock(date, hour);
-        drag();
-        translatey(buttons, 0.0);
-    }
+     /**
+      * Initializes the controller class.
+      *
+      * @param url
+      * @param rb
+      */
+     @Override
+     public void initialize(URL url, ResourceBundle rb) {
+          // TODO
+          new DigitalClock(date, hour);
+          drag();
+          translatey(buttons, 0.0);
+     }
 
-    @FXML
-    public void close(ActionEvent evt) {
-        System.exit(0);
-    }
+     @FXML
+     public void close(ActionEvent evt) {
+          System.exit(0);
+     }
 
-    public void setStage(Stage s) {
-        primStage = s;
-    }
+     public void setStage(Stage s) {
+          primStage = s;
+     }
 
-    @FXML
-    public void maximize(ActionEvent evt) {
+     @FXML
+     public void maximize(ActionEvent evt) {
 
-        Stage stage;
-        Button b = (Button) evt.getSource();
-        stage = (Stage) b.getScene().getWindow();
-        if (maximized) {
-            stage.setMaximized(false);
-            maximized = false;
-        } else {
-            stage.setMaximized(true);
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            stage.setX(primaryScreenBounds.getMinX());
-            stage.setY(primaryScreenBounds.getMinY());
-            stage.setWidth(primaryScreenBounds.getWidth());
-            stage.setHeight(primaryScreenBounds.getHeight());
-            maximized = true;
-        }
+          Stage stage;
+          Button b = (Button) evt.getSource();
+          stage = (Stage) b.getScene().getWindow();
+          if (maximized) {
+               stage.setMaximized(false);
+               maximized = false;
+          } else {
+               stage.setMaximized(true);
+               Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+               stage.setX(primaryScreenBounds.getMinX());
+               stage.setY(primaryScreenBounds.getMinY());
+               stage.setWidth(primaryScreenBounds.getWidth());
+               stage.setHeight(primaryScreenBounds.getHeight());
+               maximized = true;
+          }
 
-    }
+     }
 
-    @FXML
-    public void minimize(ActionEvent evt) {
-        Stage stage;
-        Button b = (Button) evt.getSource();
-        stage = (Stage) b.getScene().getWindow();
-        stage.setIconified(true);
-    }
+     @FXML
+     public void minimize(ActionEvent evt) {
+          Stage stage;
+          Button b = (Button) evt.getSource();
+          stage = (Stage) b.getScene().getWindow();
+          stage.setIconified(true);
+     }
 
-    @FXML
-    public void clientes(ActionEvent evt) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search.fxml"));
-        SearchController searchController;
-        Parent root = loader.load();
-        searchController = loader.getController();
-        searchController.setMenuController(myController);
-        searchController.user = this.user;
-        searchController.myController = searchController;
-        searchController.host = this.host;
-        Scene scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        searchController.primStage = stage;
-        stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
-        stage.setTitle("Busqueda de clientes Oasis");
-        stage.show();
-        fadein(root);
+     @FXML
+     public void clientes(ActionEvent evt) throws IOException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search.fxml"));
+          SearchController searchController;
+          Parent root = loader.load();
+          searchController = loader.getController();
+          searchController.setMenuController(myController);
+          searchController.user = this.user;
+          searchController.myController = searchController;
+          searchController.host = this.host;
+          Scene scene = new Scene(root);
+          scene.setFill(Color.TRANSPARENT);
+          Stage stage = new Stage();
+          stage.setScene(scene);
+          stage.initStyle(StageStyle.TRANSPARENT);
+          searchController.primStage = stage;
+          stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/task.png")));
+          stage.setTitle("Busqueda de clientes Oasis");
+          stage.show();
+          fadein(root);
 
-    }
+     }
 
-    @FXML
-    public void logout(ActionEvent evt) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-        LoginController controller;
-        Parent root = load.load();
-        controller = load.getController();
-        controller.host=this.host;
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        controller.setStage(stage);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.show();
-        primStage.close();
-    }
+     @FXML
+     public void logout(ActionEvent evt) throws IOException {
+          Stage stage = new Stage();
+          FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+          LoginController controller;
+          Parent root = load.load();
+          controller = load.getController();
+          controller.host = this.host;
+          Scene scene = new Scene(root);
+          stage.setScene(scene);
+          controller.setStage(stage);
+          stage.initStyle(StageStyle.TRANSPARENT);
+          stage.show();
+          primStage.close();
+     }
 
-    @FXML
-    public void visitas(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
-        if (user.getNivel() >= 2) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/visitas.fxml"));
-            AnchorPane pan = loader.load();
-            aux.getChildren().add(pan);
-            VisitasController controller = loader.getController();
-            controller.menu = myController;
-            controller.host=this.host;
-            controller.initTable();
-            aux.toFront();
-            main.setVisible(false);
+     @FXML
+     public void visitas(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
+          if (user.getNivel() >= 2) {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/visitas.fxml"));
+               AnchorPane pan = loader.load();
+               aux.getChildren().add(pan);
+               VisitasController controller = loader.getController();
+               controller.menu = myController;
+               controller.host = this.host;
+               controller.initTable();
+               aux.toFront();
+               main.setVisible(false);
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
-            alert.show();
-        }
-    }
+          } else {
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Alerta");
+               alert.setHeaderText(null);
+               alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+               alert.show();
+          }
+     }
 
-    @FXML
-    public void restringidos(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
-        if (user.getNivel() >= 2) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/blackList.fxml"));
-            Pane pan = loader.load();
-            aux.getChildren().add(pan);
-            BlackListController controller = loader.getController();
-            controller.menu = myController;
-            controller.host=this.host;
-            controller.initTable();
-            
-            aux.toFront();
+     @FXML
+     public void restringidos(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
+          if (user.getNivel() >= 2) {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/blackList.fxml"));
+               Pane pan = loader.load();
+               aux.getChildren().add(pan);
+               BlackListController controller = loader.getController();
+               controller.menu = myController;
+               controller.host = this.host;
+               controller.initTable();
 
-            main.setVisible(false);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
-            alert.show();
-        }
-    }
+               aux.toFront();
 
-    @FXML
-    public void adminMenu(ActionEvent evt) throws IOException {
-        if (user.getNivel() == 3) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
-            Pane pan = loader.load();
-            aux.getChildren().add(pan);
-            AdminMenuController controller = loader.getController();
-            controller.myController = controller;
-            controller.menu = myController;
-            controller.usuario = user;
-            controller.host=this.host;
-            controller.user= user;
-            aux.toFront();
-            main.setVisible(false);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
-            alert.show();
-        }
-    }
+               main.setVisible(false);
+          } else {
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Alerta");
+               alert.setHeaderText(null);
+               alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+               alert.show();
+          }
+     }
 
-    @FXML
-    public void reportMenu() throws IOException {
-        if (user.getNivel() >= 2) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reportMenu.fxml"));
-            Pane pan = loader.load();
-            aux.getChildren().add(pan);
-            ReportMenuController controller = loader.getController();
-            controller.myController = controller;
-            controller.menu = myController;
-            controller.usuario = user;
-            controller.host=this.host;
-            aux.toFront();
-            main.setVisible(false);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Alerta");
-            alert.setHeaderText(null);
-            alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
-            alert.show();
-        }
-    }
+     @FXML
+     public void adminMenu(ActionEvent evt) throws IOException {
+          if (user.getNivel() == 3) {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/adminMenu.fxml"));
+               Pane pan = loader.load();
+               aux.getChildren().add(pan);
+               AdminMenuController controller = loader.getController();
+               controller.myController = controller;
+               controller.menu = myController;
+               controller.usuario = user;
+               controller.host = this.host;
+               controller.user = user;
+               aux.toFront();
+               main.setVisible(false);
+          } else {
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Alerta");
+               alert.setHeaderText(null);
+               alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+               alert.show();
+          }
+     }
 
-    public void viewReservas() throws IOException, RemoteException, NotBoundException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reserva.fxml"));
-        AnchorPane pan = loader.load();
-        aux.getChildren().add(pan);
-        ReservaController controller = loader.getController();
-        controller.myController = controller;
-        controller.menu = myController;
-        controller.host=this.host;        
-        controller.reloadTable();
-        controller.usuario = user;
-        aux.toFront();
-        main.setVisible(false);
-    }
+     @FXML
+     public void reportMenu() throws IOException {
+          if (user.getNivel() >= 2) {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reportMenu.fxml"));
+               Pane pan = loader.load();
+               aux.getChildren().add(pan);
+               ReportMenuController controller = loader.getController();
+               controller.myController = controller;
+               controller.menu = myController;
+               controller.usuario = user;
+               controller.host = this.host;
+               aux.toFront();
+               main.setVisible(false);
+          } else {
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Alerta");
+               alert.setHeaderText(null);
+               alert.setContentText("No tiene los permisos suficientes para acceder a esta seccion");
+               alert.show();
+          }
+     }
 
-    public void setController(MainMenuController c) {
-        this.myController = c;
-    }
+     public void viewReservas() throws IOException, RemoteException, NotBoundException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reserva.fxml"));
+          AnchorPane pan = loader.load();
+          aux.getChildren().add(pan);
+          ReservaController controller = loader.getController();
+          controller.myController = controller;
+          controller.menu = myController;
+          controller.host = this.host;
+          controller.reloadTable();
+          controller.usuario = user;
+          aux.toFront();
+          main.setVisible(false);
+     }
 
-    public void setUser(Usuario u) {
-        this.user = u;
-        lname.setText(user.getNombre() + " " + user.getApellido());
-        luser.setText(user.getUsuario());
-    }
+     public void paseCortesia() throws IOException, RemoteException, NotBoundException {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PasesDeCortesia.fxml"));
+          AnchorPane pan = loader.load();
+          aux.getChildren().add(pan);
+          PasesDeCortesiaController controller = loader.getController();
+          controller.myController = controller;
+          controller.menu = myController;
+          controller.host = this.host;
+          controller.usuario = user;
+          aux.toFront();
+          main.setVisible(false);
+     }
 
-    public void drag() {
+     public void setController(MainMenuController c) {
+          this.myController = c;
+     }
 
-        topPane.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent evt) {
-                xs = evt.getSceneX();
-                ys = evt.getSceneY();
-            }
-        });
+     public void setUser(Usuario u) {
+          this.user = u;
+          lname.setText(user.getNombre() + " " + user.getApellido());
+          luser.setText(user.getUsuario());
+     }
 
-        topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                primStage.setX(event.getScreenX() - xs);
-                primStage.setY(event.getScreenY() - ys);
-            }
-        });
+     public void drag() {
 
-    }
+          topPane.setOnMousePressed(new EventHandler<MouseEvent>() {
+               @Override
+               public void handle(MouseEvent evt) {
+                    xs = evt.getSceneX();
+                    ys = evt.getSceneY();
+               }
+          });
 
-    public void translatey(Node n, Double delay) {
-        TranslateTransition tt = new TranslateTransition();
-        tt.setNode(n);
-        tt.setDelay(Duration.millis(delay));
-        tt.setDuration(Duration.millis(600));
-        tt.setFromY(main.getPrefHeight());
-        tt.setToY(n.getTranslateY());
-        tt.play();
-    }
+          topPane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+               @Override
+               public void handle(MouseEvent event) {
+                    primStage.setX(event.getScreenX() - xs);
+                    primStage.setY(event.getScreenY() - ys);
+               }
+          });
 
-    public void translatex(Node n, Double delay) {
-        TranslateTransition tt = new TranslateTransition();
-        tt.setNode(n);
-        tt.setDelay(Duration.millis(delay));
-        tt.setDuration(Duration.millis(600));
-        tt.setFromX(main.getPrefWidth());
-        tt.setToX(n.getTranslateX());
-        tt.play();
-    }
+     }
 
-    public void scaleout(Node n) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode(n);
-        st.setDuration(Duration.millis(500));
-        st.setFromX(1);
-        st.setFromY(1);
-        st.setToX(0);
-        st.setToY(0);
-        st.play();
-    }
+     public void translatey(Node n, Double delay) {
+          TranslateTransition tt = new TranslateTransition();
+          tt.setNode(n);
+          tt.setDelay(Duration.millis(delay));
+          tt.setDuration(Duration.millis(600));
+          tt.setFromY(main.getPrefHeight());
+          tt.setToY(n.getTranslateY());
+          tt.play();
+     }
 
-    public void scalein(Node n) {
-        ScaleTransition st = new ScaleTransition();
-        st.setNode(n);
-        st.setDuration(Duration.millis(500));
-        st.setFromX(0);
-        st.setFromY(0);
-        st.setToX(1);
-        st.setToY(1);
-        st.play();
-    }
+     public void translatex(Node n, Double delay) {
+          TranslateTransition tt = new TranslateTransition();
+          tt.setNode(n);
+          tt.setDelay(Duration.millis(delay));
+          tt.setDuration(Duration.millis(600));
+          tt.setFromX(main.getPrefWidth());
+          tt.setToX(n.getTranslateX());
+          tt.play();
+     }
 
-    public void fadein(Node n) {
-        FadeTransition ft = new FadeTransition();
-        ft.setNode(n);
-        ft.setFromValue(0);
-        ft.setToValue(1);
-        ft.setDuration(Duration.millis(250));
-        ft.play();
-    }
+     public void scaleout(Node n) {
+          ScaleTransition st = new ScaleTransition();
+          st.setNode(n);
+          st.setDuration(Duration.millis(500));
+          st.setFromX(1);
+          st.setFromY(1);
+          st.setToX(0);
+          st.setToY(0);
+          st.play();
+     }
+
+     public void scalein(Node n) {
+          ScaleTransition st = new ScaleTransition();
+          st.setNode(n);
+          st.setDuration(Duration.millis(500));
+          st.setFromX(0);
+          st.setFromY(0);
+          st.setToX(1);
+          st.setToY(1);
+          st.play();
+     }
+
+     public void fadein(Node n) {
+          FadeTransition ft = new FadeTransition();
+          ft.setNode(n);
+          ft.setFromValue(0);
+          ft.setToValue(1);
+          ft.setDuration(Duration.millis(250));
+          ft.play();
+     }
 }

@@ -71,7 +71,7 @@
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
-                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" prefHeight="95.0" prefWidth="95.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#logout" prefHeight="95.0" prefWidth="95.0" styleClass="logout-button" text="Cerrar Sesion" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                        <effect>
                                           <DropShadow />
                                        </effect></Button>
@@ -80,6 +80,11 @@
                                           <DropShadow />
                                        </effect></Button>
                                     <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#viewReservas" prefHeight="95.0" prefWidth="95.0" styleClass="reserva-button" text="Reservaciones" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </Button>
+                                    <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#paseCortesia" prefHeight="95.0" prefWidth="95.0" styleClass="reserva-button" text="Pase Cortesia" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <effect>
                                           <DropShadow />
                                        </effect>

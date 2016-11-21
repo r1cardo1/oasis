@@ -2,6 +2,7 @@ package controller;
 
 import classes.Cliente;
 import classes.Invitado;
+import classes.Plan;
 import classes.PrinterOptions;
 import classes.ReporteMesa;
 import classes.Usuario;
@@ -172,6 +173,7 @@ public class PasesController implements Initializable {
                 }
             }
             PrinterOptions p = new PrinterOptions();
+            ArrayList<Plan> plan  = inter.getPlans();
             p.resetAll();
             p.initialize();
             p.feedBack((byte) 2);
@@ -198,6 +200,22 @@ public class PasesController implements Initializable {
             p.newLine();
             p.setText("Plan \t\t:" + client.getPlan());
             p.newLine();
+            Boolean t= false;
+            for (Plan o : plan) {
+               if (o.getPlan().equals(client.getPlan())) {
+                    t = true;
+               }
+               
+          }
+            if (t) {
+                    p.setText("Area Picnic \t:" + "SI");
+                    p.newLine();
+               } else {
+                    if (!t) {
+                         p.setText("Area Picnic \t:" + "NO");
+                         p.newLine();
+                    }
+               }
             p.addLineSeperator();
             p.newLine();
             p.alignCenter();

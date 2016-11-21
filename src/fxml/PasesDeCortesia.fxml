@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/theme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.PasesDeCortesiaController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/theme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PasesDeCortesiaController">
    <children>
       <AnchorPane prefHeight="80.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,6 +27,7 @@
                   <TableColumn fx:id="telefono" prefWidth="75.0" text="Telefono" />
                   <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
                   <TableColumn fx:id="invitados" prefWidth="75.0" text="Invitados" />
+                  <TableColumn fx:id="codigo" prefWidth="75.0" text="Codigo" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -38,22 +38,22 @@
                   <HBox alignment="CENTER_LEFT" layoutX="38.0" layoutY="-30.0" prefHeight="40.0" prefWidth="350.0" spacing="30.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Modo de busqueda" />
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="combo" prefWidth="150.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="10.0" prefHeight="40.0" prefWidth="350.0" spacing="30.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="0.0">
+                  <HBox fx:id="hfiltro" alignment="CENTER_LEFT" layoutX="50.0" layoutY="10.0" prefHeight="40.0" prefWidth="350.0" spacing="30.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Filtro" />
                         <TextField fx:id="filtro" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="360.0" layoutY="10.0" prefHeight="40.0" prefWidth="350.0" spacing="30.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="0.0">
+                  <HBox fx:id="hfecha" alignment="CENTER_LEFT" layoutX="360.0" layoutY="10.0" prefHeight="40.0" prefWidth="350.0" spacing="30.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Fecha" />
                         <DatePicker fx:id="dfecha" onAction="#buscaPorFecha" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="360.0" layoutY="10.0" prefHeight="40.0" prefWidth="409.0" spacing="10.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="0.0">
+                  <HBox fx:id="hrango" alignment="CENTER_LEFT" layoutX="360.0" layoutY="10.0" prefHeight="40.0" prefWidth="409.0" spacing="10.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label text="Desde" />
                         <DatePicker fx:id="desde" prefWidth="150.0" />
@@ -67,12 +67,12 @@
                <children>
                   <HBox alignment="CENTER" layoutX="24.0" layoutY="-30.0" prefHeight="40.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField prefWidth="123.0" promptText="Nombre" />
-                        <TextField layoutX="10.0" layoutY="10.0" prefWidth="123.0" promptText="Cedula" />
-                        <TextField layoutX="159.0" layoutY="10.0" prefWidth="123.0" promptText="Telefono" />
-                        <DatePicker prefWidth="123.0" promptText="Fecha" />
-                        <TextField layoutX="457.0" layoutY="10.0" prefWidth="123.0" promptText="Invitados" />
-                        <TextField layoutX="653.0" layoutY="18.0" prefWidth="123.0" promptText="Codigo" />
+                        <TextField fx:id="tnombre" prefWidth="123.0" promptText="Nombre" />
+                        <TextField fx:id="tcedula" layoutX="10.0" layoutY="10.0" prefWidth="123.0" promptText="Cedula" />
+                        <TextField fx:id="ttelefono" layoutX="159.0" layoutY="10.0" prefWidth="123.0" promptText="Telefono" />
+                        <DatePicker fx:id="ddfecha" prefWidth="123.0" promptText="Fecha" />
+                        <TextField fx:id="tinvitados" layoutX="457.0" layoutY="10.0" prefWidth="123.0" promptText="Invitados" />
+                        <TextField fx:id="tcodigo" layoutX="653.0" layoutY="18.0" prefWidth="123.0" promptText="Codigo" />
                      </children>
                   </HBox>
                </children>
@@ -82,12 +82,11 @@
             <Separator layoutX="14.0" layoutY="459.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <HBox alignment="CENTER" layoutX="14.0" layoutY="440.0" prefHeight="40.0" prefWidth="200.0" spacing="40.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="86.0" text="Guardar" />
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Editar" />
-                  <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Eliminar" />
-                  <Button layoutX="114.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Generar Pase" />
-                  <Button layoutX="166.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Exportar PDF" />
-                  <Button layoutX="639.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Exportar Excel" />
+                  <Button mnemonicParsing="false" onAction="#nuevoPase" prefWidth="86.0" text="Guardar" />
+                  <Button fx:id="editaPase" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Editar" />
+                  <Button fx:id="eliminaPase" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Eliminar" />
+                  <Button fx:id="generaPase" layoutX="114.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Generar Pase" />
+                  <Button fx:id="exportPDF" layoutX="166.0" layoutY="10.0" mnemonicParsing="false" prefWidth="86.0" text="Exportar PDF" />
                </children>
             </HBox>
          </children>
