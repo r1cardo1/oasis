@@ -123,7 +123,7 @@ public class MainMenuController implements Initializable {
      }
 
      @FXML
-     public void clientes(ActionEvent evt) throws IOException {
+     public void clientes(ActionEvent evt) throws IOException, SQLException, RemoteException, NotBoundException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search.fxml"));
           SearchController searchController;
           Parent root = loader.load();
@@ -132,6 +132,7 @@ public class MainMenuController implements Initializable {
           searchController.user = this.user;
           searchController.myController = searchController;
           searchController.host = this.host;
+          searchController.search();
           Scene scene = new Scene(root);
           scene.setFill(Color.TRANSPARENT);
           Stage stage = new Stage();
