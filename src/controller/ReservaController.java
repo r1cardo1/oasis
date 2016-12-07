@@ -519,7 +519,7 @@ public class ReservaController implements Initializable {
 
     }
 
-    public void generaPase() throws IOException, RemoteException, NotBoundException {
+    public void generaPase() throws IOException, RemoteException, NotBoundException, SQLException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         Reserva r = table.getSelectionModel().getSelectedItem();
@@ -580,7 +580,7 @@ public class ReservaController implements Initializable {
         }
     }
 
-    public void generaAutorizado() throws RemoteException, NotBoundException, IOException {
+    public void generaAutorizado() throws RemoteException, NotBoundException, IOException, SQLException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
         Reserva r = table.getSelectionModel().getSelectedItem();

@@ -188,7 +188,7 @@ public interface oasisrimbd extends Remote {
 
      public ArrayList<PaseCortesia> damePasesPorFecha(String fecha) throws RemoteException;
 
-     public ArrayList<PaseCortesia> damePasesPorRangoDeFecha(String desde, String hasta);
+     public ArrayList<PaseCortesia> damePasesPorRangoDeFecha(String desde, String hasta) throws RemoteException;
 
      public ArrayList<PaseCortesia> damePasesPorCedula(String cedula) throws RemoteException;
 
@@ -196,6 +196,10 @@ public interface oasisrimbd extends Remote {
 
      public void eliminaPaseCortesia(PaseCortesia pase) throws RemoteException;
 
-     public void actualizaPaseCortesia(PaseCortesia paseNuevo, PaseCortesia paseViejo);
+     public void actualizaPaseCortesia(PaseCortesia paseNuevo, PaseCortesia paseViejo) throws RemoteException;
+
+     public String dameNumero() throws RemoteException;
+
+     public void updateNumero() throws RemoteException;
 
 }

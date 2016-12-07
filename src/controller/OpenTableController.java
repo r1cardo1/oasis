@@ -177,6 +177,9 @@ public class OpenTableController implements Initializable {
           p.initialize();
           p.feedBack((byte) 2);
           p.color(0);
+          p.alignRight();
+          p.setText("N° " + damenumero(inter));
+          p.newLine();
           p.alignCenter();
           p.setText("Oasis Club S.A");
           p.newLine();
@@ -189,7 +192,21 @@ public class OpenTableController implements Initializable {
           p.addLineSeperator();
           p.alignLeft();
           p.newLine();
-          p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+          p.setText("Hora:");
+          p.alignRight();
+          Calendar time = Calendar.getInstance(TimeZone.getTimeZone("GMT-4:00"));
+          String ampm = time.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM";
+          p.setText(Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                 + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                 + ":" + Integer.toString(time.get(Calendar.SECOND))
+                 + ampm);
+          p.alignLeft();
+          p.setText("Fecha:");
+          p.alignRight();
+          p.setText(fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+          p.newLine();
+          p.addLineSeperator();
+          p.alignLeft();
           p.newLine();
           p.setText("Cliente \t:" + client.getNombre());
           p.newLine();
@@ -199,22 +216,22 @@ public class OpenTableController implements Initializable {
           p.newLine();
           p.setText("Plan \t\t:" + client.getPlan());
           p.newLine();
-          Boolean t= false;
-            for (Plan o : plan) {
+          Boolean t = false;
+          for (Plan o : plan) {
                if (o.getPlan().equals(client.getPlan())) {
                     t = true;
                }
-               
+
           }
-            if (t) {
-                    p.setText("Area Picnic \t:" + "SI");
+          if (t) {
+               p.setText("Area Picnic \t:" + "SI");
+               p.newLine();
+          } else {
+               if (!t) {
+                    p.setText("Area Picnic \t:" + "NO");
                     p.newLine();
-               } else {
-                    if (!t) {
-                         p.setText("Area Picnic \t:" + "NO");
-                         p.newLine();
-                    }
                }
+          }
           p.addLineSeperator();
           p.newLine();
           p.alignCenter();
@@ -242,12 +259,20 @@ public class OpenTableController implements Initializable {
           }
           p.newLine();
           p.addLineSeperator();
-          p.newLine();
-          p.setText("Precio Total" + "\t" + "\t" + (table.getItems().size() - inViejos) * Integer.parseInt(inter.precio()));
-          p.newLine();
-          p.addLineSeperator();
+          if (table.getItems().size() > 0) {
+               p.setText("Precio Total" + "\t" + "\t" + table.getItems().size() * Integer.parseInt(inter.precio()));
+               p.newLine();
+               p.addLineSeperator();
+               p.newLine();
+          }
+          p.alignCenter();
+          p.setText("Gracias por su visita!");
           p.feed((byte) 3);
           p.finit();
+          p.color(0);
+          p.alignRight();
+          p.setText("N° " + damenumero(inter));
+          p.newLine();
           p.alignCenter();
           p.setText("Oasis Club S.A");
           p.newLine();
@@ -259,9 +284,20 @@ public class OpenTableController implements Initializable {
           p.newLine();
           p.addLineSeperator();
           p.alignLeft();
+          p.setText("Hora:");
+          p.alignRight();
+          p.setText(Integer.toString(time.get(Calendar.HOUR) == 0 ? 12 : time.get(Calendar.HOUR))
+                 + ":" + Integer.toString(time.get(Calendar.MINUTE))
+                 + ":" + Integer.toString(time.get(Calendar.SECOND))
+                 + ampm);
+          p.alignLeft();
           p.newLine();
-          p.setText("Fecha \t\t:" + fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
+          p.setText("Fecha:");
+          p.alignRight();
+          p.setText(fecha.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE));
           p.newLine();
+          p.addLineSeperator();
+          p.alignLeft();
           p.setText("Cliente \t:" + client.getNombre());
           p.newLine();
           p.setText("Cedula \t\t:" + client.getCedula());
@@ -270,15 +306,15 @@ public class OpenTableController implements Initializable {
           p.newLine();
           p.setText("Plan \t\t:" + client.getPlan());
           p.newLine();
-            if (t) {
-                    p.setText("Area Picnic \t:" + "SI");
+          if (t) {
+               p.setText("Area Picnic \t:" + "SI");
+               p.newLine();
+          } else {
+               if (!t) {
+                    p.setText("Area Picnic \t:" + "NO");
                     p.newLine();
-               } else {
-                    if (!t) {
-                         p.setText("Area Picnic \t:" + "NO");
-                         p.newLine();
-                    }
                }
+          }
           p.addLineSeperator();
           p.newLine();
           p.alignCenter();
@@ -313,8 +349,14 @@ public class OpenTableController implements Initializable {
           p.newLine();
           p.addLineSeperator();
           p.newLine();
-          p.setText("Precio Total" + "\t" + "\t" + (table.getItems().size() - inViejos) * Integer.parseInt(inter.precio()));
-          p.newLine();
+          if (table.getItems().size() > 0) {
+               p.setText("Precio Total" + "\t" + "\t" + table.getItems().size() * Integer.parseInt(inter.precio()));
+               p.newLine();
+               p.addLineSeperator();
+               p.newLine();
+          }
+          p.alignCenter();
+          p.setText("Gracias por su visita!");
           p.addLineSeperator();
           p.feed((byte) 3);
           p.finit();
@@ -388,6 +430,12 @@ public class OpenTableController implements Initializable {
                inter.actualizaCliente(client, c);
                this.client = c;
           }
+     }
+
+     public String damenumero(oasisrimbd inter) throws RemoteException {
+          String str = inter.dameNumero();
+          inter.updateNumero();
+          return String.format("%06d",Integer.parseInt(str));
      }
 
 }
