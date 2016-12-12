@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.GeneraCarnetController">
+   <children>
+      <AnchorPane prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="478.0" layoutY="32.0" prefHeight="80.0" prefWidth="800.0" text="Datos del carnet" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Button layoutX="32.0" layoutY="28.0" mnemonicParsing="false" text="Button" AnchorPane.leftAnchor="40.0" />
+         </children>
+      </AnchorPane>
+      <GridPane prefHeight="464.0" prefWidth="678.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" layoutX="-10.0" layoutY="-7.0" prefHeight="520.0" prefWidth="400.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="63.0" prefWidth="400.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Datos del cliente">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <VBox prefHeight="299.0" prefWidth="253.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
+                              <TextField fx:id="nombre" />
+                              <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido" />
+                              <TextField fx:id="apellido" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cedula" />
+                              <TextField fx:id="cedula" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Contrato" />
+                              <TextField fx:id="contrato" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Plan" />
+                              <TextField fx:id="plan" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="30.0" right="30.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <HBox fx:id="base" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

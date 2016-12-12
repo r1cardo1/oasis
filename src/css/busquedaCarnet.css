@@ -12,3 +12,66 @@ and open the template in the editor.
     -fx-background-image: url("../images/container.png");
     -fx-background-size: cover;
 }
+
+.back-button{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.back-button:hover{
+    -fx-padding:0px;
+    -fx-background-color:lightgray;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.search-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+}
+
+.search-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/search-button.png");
+        -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}
+
+.next-button{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/next.png");
+}
+
+.next-button:hover{
+    -fx-background-radius:0px;
+    -fx-background-color:white;
+    -fx-border-color:gray;
+    -fx-border-width:2px;
+    -fx-background-insets:-1px;
+    -fx-graphic:url("../images/next.png");
+        -fx-effect:dropshadow( three-pass-box , black , 8, 0.5 , 0 , 0);
+}
+
+.table-column{
+    -fx-alignment: center;
+}
+
+.text-field{
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-border-radius:0px;
+    -fx-background-radius: 0px;
+}
