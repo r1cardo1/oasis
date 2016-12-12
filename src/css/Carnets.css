@@ -1,0 +1,87 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-dic-2016, 10:13:55
+    Author     : Sammy Guergachi <sguergachi at gmail.com>
+*/
+
+
+.back-button{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.back-button:hover{
+    -fx-padding:0px;
+    -fx-background-color:lightgray;
+    -fx-background-radius:50px;
+    -fx-graphic:url("../images/back.png");
+}
+
+.gcc-button{
+    -fx-background-color:white;
+    -fx-graphic:url("../images/carnett.png");
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
+}
+
+.gcc-button:hover{
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
+    -fx-graphic:url("../images/carnett.png");
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+}
+
+.gcf-button{
+    -fx-background-color:white;
+    -fx-graphic:url("../images/carnetf.png");
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
+}
+
+.gcf-button:hover{
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
+    -fx-graphic:url("../images/carnetf.png");
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+}
+
+.lcg-button{
+    -fx-background-color:white;
+    -fx-graphic:url("../images/listacarnet.png");
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+   -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
+}
+
+.lcg-button:hover{
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
+    -fx-graphic:url("../images/listacarnet.png");
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+}

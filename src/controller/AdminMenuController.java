@@ -86,6 +86,7 @@ public class AdminMenuController implements Initializable {
           menu.main.toFront();
      }
 
+     @FXML
      public void clientes() throws IOException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdministraCliente.fxml"));
           Parent root = loader.load();
@@ -105,6 +106,7 @@ public class AdminMenuController implements Initializable {
           stage.show();
      }
 
+     @FXML
      public void precio() throws IOException, RemoteException, NotBoundException {
           Stage stage = new Stage();
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/precio.fxml"));
@@ -118,6 +120,7 @@ public class AdminMenuController implements Initializable {
           stage.show();
      }
 
+     @FXML
      public void deletePases() throws RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host, 27019);
           oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -134,6 +137,7 @@ public class AdminMenuController implements Initializable {
 
      }
 
+     @FXML
      public void deleteLogins() throws RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host, 27019);
           oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -150,6 +154,7 @@ public class AdminMenuController implements Initializable {
 
      }
 
+     @FXML
      public void deleteReservas() throws RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host, 27019);
           oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -166,6 +171,7 @@ public class AdminMenuController implements Initializable {
 
      }
 
+     @FXML
      public void deleteBusquedas() throws RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host, 27019);
           oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -181,6 +187,7 @@ public class AdminMenuController implements Initializable {
 
      }
 
+     @FXML
      public void deleteOpenTables() throws RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host, 27019);
           oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -197,6 +204,7 @@ public class AdminMenuController implements Initializable {
 
      }
 
+     @FXML
      public void deleteAutorizados() throws RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host, 27019);
           oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
@@ -213,6 +221,7 @@ public class AdminMenuController implements Initializable {
 
      }
 
+     @FXML
      public void eliminaInvitados() throws RemoteException, NotBoundException {
           Registry reg = LocateRegistry.getRegistry(host, 27019);
           oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");

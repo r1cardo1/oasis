@@ -48,6 +48,7 @@
                                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints />
@@ -85,6 +86,11 @@
                                        </effect>
                                     </Button>
                                     <Button contentDisplay="TOP" disable="true" mnemonicParsing="false" onAction="#paseCortesia" prefHeight="95.0" prefWidth="95.0" styleClass="reserva-button" text="Pase Cortesia" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </Button>
+                                    <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#carnetMenu" prefHeight="95.0" prefWidth="95.0" styleClass="carnet-button" text="Carnet" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow />
                                        </effect>

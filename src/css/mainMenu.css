@@ -248,3 +248,24 @@ and open the template in the editor.
     -fx-border-radius:10px;
     -fx-border-width:1px;    
 }
+
+.carnet-button{
+    -fx-background-color:white;
+    -fx-graphic:url("../images/carnet.png");
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;
+       -fx-background-insets: 2px;
+   -fx-background-radius: 10px;
+}
+
+.carnet-button:hover{
+    -fx-background-radius: 10px;
+    -fx-background-color:white;
+    -fx-background-insets: 2px;
+    -fx-graphic:url("../images/carnet.png");
+    -fx-effect: dropshadow( three-pass-box , black , 12, 0.5 , 0 , 0);
+    -fx-border-color:black;
+    -fx-border-radius:10px;
+    -fx-border-width:1px;    
+}

@@ -251,6 +251,20 @@ public class MainMenuController implements Initializable {
                alert.show();
           }
      }
+     
+     @FXML
+     public void carnetMenu() throws IOException{
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CarnetMenu.fxml"));
+               Pane pan = loader.load();
+               aux.getChildren().add(pan);
+               CarnetMenuController controller = loader.getController();
+               controller.myController = controller;
+               controller.menu = myController;
+               controller.usuario = user;
+               controller.host = this.host;
+               aux.toFront();
+               main.setVisible(false);
+     }
 
      public void viewReservas() throws IOException, RemoteException, NotBoundException {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reserva.fxml"));
