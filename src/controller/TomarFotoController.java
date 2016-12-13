@@ -15,6 +15,7 @@ import javafx.embed.swing.SwingNode;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +25,9 @@ import javafx.stage.Stage;
  */
 public class TomarFotoController implements Initializable {
     @FXML
-    AnchorPane cam,pic;
+    AnchorPane pic;
+    @FXML
+    VBox cam;
     Stage myStage;
     TomarFotoController myController;
     
@@ -32,9 +35,9 @@ public class TomarFotoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {        
         Webcam webcam = Webcam.getDefault();
         webcam.setViewSize(WebcamResolution.QVGA.getSize());
-        webcam.open();
+        //webcam.open();
         Dimension size = WebcamResolution.QVGA.getSize();
-        WebcamPanel panel = new WebcamPanel(webcam,size,false);
+        WebcamPanel panel = new WebcamPanel(webcam,size,true);
         SwingNode swcam = new SwingNode();
         swcam.setContent(panel);
         cam.getChildren().add(swcam);

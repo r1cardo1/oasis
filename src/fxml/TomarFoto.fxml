@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../css/TomarFoto.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.TomarFotoController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../css/TomarFoto.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TomarFotoController">
    <children>
       <AnchorPane prefHeight="30.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,11 +41,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="cam" prefHeight="400.0" prefWidth="400.0" style="-fx-border-color: black;">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </AnchorPane>
+                        <VBox fx:id="cam" alignment="CENTER" />
                         <Button mnemonicParsing="false" text="Tomar Foto" />
                      </children>
                   </VBox>
