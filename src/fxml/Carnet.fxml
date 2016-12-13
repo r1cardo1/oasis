@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -8,50 +9,49 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="339.0" prefWidth="553.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.CarnetController">
+<AnchorPane id="AnchorPane" prefHeight="221.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarnetController">
    <children>
-      <HBox alignment="CENTER" prefHeight="338.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="259.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fxcarnet.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="244.0" prefWidth="400.0" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="109.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="363.0" fitWidth="553.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/fxcarnet.png" />
-               </image>
-            </ImageView>
-         </children>
-      </HBox>
-      <AnchorPane prefHeight="339.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label fx:id="nombre" layoutX="179.0" layoutY="117.0" prefHeight="17.0" prefWidth="360.0" text="\$nombre">
+            <Label fx:id="tipo" alignment="CENTER" layoutX="255.0" layoutY="216.0" text="\$tipo" textFill="WHITE">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold Italic" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="apellido" layoutX="179.0" layoutY="147.0" prefHeight="17.0" prefWidth="360.0" text="\$apellido">
+            <Label fx:id="plan" alignment="CENTER" layoutX="39.0" layoutY="216.0" text="\$plan" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold Italic" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="cedula" layoutX="179.0" layoutY="177.0" prefHeight="17.0" prefWidth="360.0" text="\$cedula">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="contrato" layoutX="179.0" layoutY="207.0" prefHeight="17.0" prefWidth="360.0" text="\$contrato">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="tipo" alignment="CENTER" layoutX="193.0" layoutY="307.0" prefHeight="30.0" prefWidth="360.0" text="\$tipo" textFill="WHITE">
-               <font>
-                  <Font name="System Bold Italic" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="plan" alignment="CENTER" layoutY="287.0" prefHeight="51.0" prefWidth="179.0" text="\$plan" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Label>
+            <VBox layoutX="125.0" layoutY="81.0" prefHeight="95.0" prefWidth="244.0" spacing="5.0">
+               <children>
+                  <Label fx:id="nombre" prefHeight="17.0" prefWidth="360.0" text="\$nombre">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="apellido" text="\$apellido">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cedula" text="\$cedula">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="contrato" prefHeight="17.0" prefWidth="360.0" text="\$contrato">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>
