@@ -41,7 +41,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <VBox fx:id="cam" alignment="CENTER" />
+                        <Pane fx:id="cam" prefHeight="400.0" prefWidth="240.0" />
                         <Button mnemonicParsing="false" text="Tomar Foto" />
                      </children>
                   </VBox>
