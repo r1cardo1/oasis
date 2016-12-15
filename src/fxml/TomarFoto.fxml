@@ -41,8 +41,8 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Pane fx:id="cam" prefHeight="400.0" prefWidth="240.0" />
-                        <Button mnemonicParsing="false" text="Tomar Foto" />
+                        <HBox fx:id="cam" alignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#tomaFoto" text="Tomar Foto" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="1">
@@ -52,7 +52,17 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="pic" prefHeight="400.0" prefWidth="400.0" style="-fx-border-color: black;" />
+                        <Group>
+                           <children>
+                              <Pane prefHeight="300.0" prefWidth="320.0">
+                                 <children>
+                                    <Slider fx:id="tam" layoutX="45.0" layoutY="272.0" prefHeight="14.0" prefWidth="230.0" />
+                                    <Text layoutX="149.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zoom" />
+                                    <Pane fx:id="pic" prefHeight="240.0" prefWidth="320.0" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Group>
                         <Button mnemonicParsing="false" text="Confirmar" />
                      </children>
                   </VBox>
