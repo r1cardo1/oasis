@@ -41,7 +41,17 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <HBox fx:id="cam" alignment="CENTER" />
+                        <Group>
+                           <children>
+                              <Pane prefHeight="300.0" prefWidth="320.0">
+                                 <children>
+                                    <Pane fx:id="cam" prefHeight="240.0" prefWidth="320.0" />
+                                    <ComboBox fx:id="camaras" layoutX="140.0" layoutY="261.0" prefWidth="150.0" />
+                                    <Text layoutX="57.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Camara:" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Group>
                         <Button mnemonicParsing="false" onAction="#tomaFoto" text="Tomar Foto" />
                      </children>
                   </VBox>
