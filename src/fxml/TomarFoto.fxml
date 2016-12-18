@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -45,7 +46,11 @@
                            <children>
                               <Pane prefHeight="300.0" prefWidth="320.0">
                                  <children>
-                                    <Pane fx:id="cam" prefHeight="240.0" prefWidth="320.0" />
+                                    <Pane fx:id="cam" prefHeight="240.0" prefWidth="320.0">
+                                       <children>
+                                          <ImageView fx:id="imgWebCamCapturedImage" fitHeight="240.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </Pane>
                                     <ComboBox fx:id="camaras" layoutX="140.0" layoutY="261.0" prefWidth="150.0" />
                                     <Text layoutX="57.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Camara:" />
                                  </children>
