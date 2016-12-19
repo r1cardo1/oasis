@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CarnetController implements Initializable {
@@ -58,6 +59,13 @@ public class CarnetController implements Initializable {
 
      public void setPlan(String plan) {
           this.plan.setText(plan);
+     }
+     
+     public void setFoto(Image foto){
+         this.foto.setImage(foto);
+         this.foto.setLayoutX(75);
+         this.foto.setLayoutY(105);
+         
      }
 
 }

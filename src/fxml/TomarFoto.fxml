@@ -46,7 +46,7 @@
                            <children>
                               <Pane prefHeight="300.0" prefWidth="320.0">
                                  <children>
-                                    <Pane fx:id="cam" prefHeight="240.0" prefWidth="320.0">
+                                    <Pane prefHeight="240.0" prefWidth="320.0">
                                        <children>
                                           <ImageView fx:id="imgWebCamCapturedImage" fitHeight="240.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" />
                                        </children>
@@ -78,7 +78,7 @@
                               </Pane>
                            </children>
                         </Group>
-                        <Button mnemonicParsing="false" text="Confirmar" />
+                        <Button mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
                      </children>
                   </VBox>
                </children>

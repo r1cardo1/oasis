@@ -19,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -66,6 +67,7 @@ public class TomarFotoController implements Initializable {
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
     private BorderPane webCamPane;
     ImageView img;
+    Image capture;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -124,10 +126,10 @@ public class TomarFotoController implements Initializable {
     public void tomaFoto() {
         pic.getChildren().clear();
         img = new ImageView();
-        Image im = SwingFXUtils.toFXImage(webCam.getImage(), null);
+        capture = SwingFXUtils.toFXImage(webCam.getImage(), null);
         img.setFitHeight(240);
         img.setFitWidth(320);
-        img.setImage(im);
+        img.setImage(capture);
 
         pic.getChildren().add(img);
         addRectangle(pic);
@@ -269,8 +271,14 @@ public class TomarFotoController implements Initializable {
         }
     }
     
-    public void confirmar(){
-        carnet.foto.setImage(img.getImage());
+    public void confirmar(ActionEvent evt){
+        rect.setFill(Color.TRANSPARENT);
+        Image photo = new WritableImage(capture.getPixelReader(),(int)rect.getLayoutX(),(int)rect.getLayoutY(),(int)rect.getWidth(),(int)rect.getHeight());
+        carnet.setFoto(photo);
+        myStage.close();
+        
+        
+        
     }
 
 }
