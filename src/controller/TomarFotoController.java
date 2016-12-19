@@ -6,6 +6,7 @@
 package controller;
 
 import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamResolution;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -110,6 +111,7 @@ public class TomarFotoController implements Initializable {
 				}
 
 				webCam = Webcam.getWebcams().get(webCamIndex);
+                                webCam.setViewSize(WebcamResolution.QVGA.getSize());
 				webCam.open();
 
 				startWebCamStream();
@@ -127,8 +129,8 @@ public class TomarFotoController implements Initializable {
         pic.getChildren().clear();
         img = new ImageView();
         capture = SwingFXUtils.toFXImage(webCam.getImage(), null);
-        img.setFitHeight(240);
-        img.setFitWidth(320);
+        img.setFitHeight(webCam.getViewSize().height);
+        img.setFitWidth(webCam.getViewSize().width);
         img.setImage(capture);
 
         pic.getChildren().add(img);
@@ -272,13 +274,10 @@ public class TomarFotoController implements Initializable {
     }
     
     public void confirmar(ActionEvent evt){
-        rect.setFill(Color.TRANSPARENT);
         Image photo = new WritableImage(capture.getPixelReader(),(int)rect.getLayoutX(),(int)rect.getLayoutY(),(int)rect.getWidth(),(int)rect.getHeight());
         carnet.setFoto(photo);
+        stopWebCamCamera();
         myStage.close();
-        
-        
-        
     }
 
 }

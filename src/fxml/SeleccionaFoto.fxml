@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.SeleccionaFotoController">
+   <children>
+      <AnchorPane layoutX="53.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutY="30.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="TOP" layoutX="386.0" layoutY="32.0" prefHeight="80.0" prefWidth="800.0" text="Recortar Imagen" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="166.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="490.0" prefWidth="800.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <Group fx:id="group">
+                     <children>
+                        <ImageView fx:id="foto" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Group>
+               </children>
+            </HBox>
+            <Button layoutX="366.0" layoutY="441.0" mnemonicParsing="false" onAction="#confirmar" text="Confirmar" />
+            <Slider fx:id="tam" layoutX="234.0" layoutY="423.0" prefHeight="14.0" prefWidth="334.0" />
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

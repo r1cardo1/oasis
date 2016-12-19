@@ -63,9 +63,8 @@ public class CarnetController implements Initializable {
      
      public void setFoto(Image foto){
          this.foto.setImage(foto);
-         this.foto.setLayoutX(75);
-         this.foto.setLayoutY(105);
-         
+         this.foto.setFitWidth(75);
+         this.foto.setFitHeight(105);
      }
 
 }

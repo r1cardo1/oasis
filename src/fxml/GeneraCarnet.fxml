@@ -81,7 +81,7 @@
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#tomaFoto" text="Webcam" />
-                                    <Button mnemonicParsing="false" text="Archivo" />
+                                    <Button mnemonicParsing="false" onAction="#seleccionaFoto" text="Archivo" />
                                  </children>
                               </HBox>
                            </children>
