@@ -18,6 +18,7 @@ import classes.Reserva;
 import classes.Usuario;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -104,7 +105,8 @@ public interface oasisrimbd extends Remote {
 
      public void quitaRestriccion(Cliente c) throws RemoteException;
 
-     public void nuevoCliente(Cliente cliente) throws RemoteException;
+     public void nuevoCliente(Cliente cliente) throws RemoteException, SQLException;
+     
 
      public void eliminaCliente(Cliente cliente) throws RemoteException;
 

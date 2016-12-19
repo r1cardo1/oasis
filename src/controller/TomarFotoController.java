@@ -59,7 +59,7 @@ public class TomarFotoController implements Initializable {
     private FlowPane bottomCameraControlPane;
     private FlowPane topPane;
     private BorderPane root;
-    private String cameraListPromptText = "Choose Camera";
+    private String cameraListPromptText = "Seleccionar camara...";
     @FXML
     ImageView imgWebCamCapturedImage;
     private Webcam webCam = null;
@@ -129,9 +129,10 @@ public class TomarFotoController implements Initializable {
         pic.getChildren().clear();
         img = new ImageView();
         capture = SwingFXUtils.toFXImage(webCam.getImage(), null);
+        
         img.setFitHeight(webCam.getViewSize().height);
         img.setFitWidth(webCam.getViewSize().width);
-        img.setImage(capture);
+        img.setImage(scale(capture));
 
         pic.getChildren().add(img);
         addRectangle(pic);
@@ -279,5 +280,12 @@ public class TomarFotoController implements Initializable {
         stopWebCamCamera();
         myStage.close();
     }
-
+    
+    public Image scale(Image source) {
+    ImageView imageView = new ImageView(source);
+    imageView.setPreserveRatio(true);
+    imageView.setFitWidth(320);
+    imageView.setFitHeight(240);
+    return imageView.snapshot(null, null);
+    }
 }
