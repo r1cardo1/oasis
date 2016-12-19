@@ -69,7 +69,8 @@ public class GeneraCarnetController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/TomarFoto.fxml"));
         Parent root = loader.load();
         TomarFotoController controller = loader.getController();
-        controller.myStage=stage;        
+        controller.myStage=stage;       
+        controller.carnet=this.carnet;
         Scene sc = new Scene(root);
         stage.setScene(sc);
         stage.show();

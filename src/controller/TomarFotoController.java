@@ -6,9 +6,6 @@
 package controller;
 
 import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamPanel;
-import com.github.sarxos.webcam.WebcamResolution;
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +19,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.embed.swing.SwingNode;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,6 +51,7 @@ public class TomarFotoController implements Initializable {
     ComboBox<WebCamInfo> camaras;
     Stage myStage;
     TomarFotoController myController;
+    CarnetController carnet;
     Rectangle rect;
     Double x0, y0, xf, yf;
     private FlowPane bottomCameraControlPane;
@@ -68,6 +65,7 @@ public class TomarFotoController implements Initializable {
     private BufferedImage grabbedImage;
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
     private BorderPane webCamPane;
+    ImageView img;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -125,7 +123,7 @@ public class TomarFotoController implements Initializable {
 
     public void tomaFoto() {
         pic.getChildren().clear();
-        ImageView img = new ImageView();
+        img = new ImageView();
         Image im = SwingFXUtils.toFXImage(webCam.getImage(), null);
         img.setFitHeight(240);
         img.setFitWidth(320);
@@ -219,12 +217,9 @@ public class TomarFotoController implements Initializable {
                 while (!stopCamera) {
                     try {
                         if ((img = webCam.getImage()) != null) {
-
                             ref.set(SwingFXUtils.toFXImage(img, ref.get()));
                             img.flush();
-
                             Platform.runLater(new Runnable() {
-
                                 @Override
                                 public void run() {
                                     imageProperty.set(ref.get());
@@ -275,7 +270,7 @@ public class TomarFotoController implements Initializable {
     }
     
     public void confirmar(){
-        
+        carnet.foto.setImage(img.getImage());
     }
 
 }

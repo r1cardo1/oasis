@@ -12,29 +12,32 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
+import javafx.scene.image.ImageView;
 
 public class CarnetController implements Initializable {
 
      @FXML
-     Label nombre,apellido,cedula,contrato,tipo,plan;
+     Label nombre, apellido, cedula, contrato, tipo, plan;
+     @FXML
+     ImageView foto;
      CarnetController myController;
      String host;
      Usuario usuario;
-     
+
      @Override
      public void initialize(URL url, ResourceBundle rb) {
-     }   
-     
-     public void initData(Cliente c,int tip){
+     }
+
+     public void initData(Cliente c, int tip) {
           nombre.setText(c.getNombre());
           cedula.setText(c.getCedula());
           contrato.setText(c.getContrato());
           plan.setText(c.getPlan());
-          if(tip==0)
+          if (tip == 0) {
                tipo.setText("TITULAR");
-          else
+          } else {
                tipo.setText("FAMILIAR");
+          }
      }
 
      public void setNombre(String nombre) {
@@ -57,6 +60,4 @@ public class CarnetController implements Initializable {
           this.plan.setText(plan);
      }
 
-     
-     
 }
