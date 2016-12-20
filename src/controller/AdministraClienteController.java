@@ -242,6 +242,7 @@ public class AdministraClienteController implements Initializable {
                               alert.setContentText("El cliente ya existe");
                               alert.show();
                          }
+                         
                     }
                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
