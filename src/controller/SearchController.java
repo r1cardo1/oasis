@@ -228,15 +228,18 @@ public class SearchController implements Initializable {
                 aux.getChildren().add(pan);
                 controller = loader.getController();
                 controller.menu = myController;
-                controller.client = (Cliente) table.getSelectionModel().getSelectedItem();
+                controller.client = cli;
                 controller.user = this.user;
                 controller.host = this.host;
                 controller.myController = controller;
+                if(inter.estaPresente(cli))
+                    controller.setReporte(inter.apMesasDiario(LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)),inter);
                 try {
                     controller.initData();
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
+                
                 aux.toFront();
                 aux.setVisible(true);
                 main.setVisible(false);
@@ -271,7 +274,6 @@ public class SearchController implements Initializable {
     public void generaPase() throws RemoteException, NotBoundException, IOException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-
         if (!table.getSelectionModel().isEmpty()) {
             Cliente cli = (Cliente) table.getSelectionModel().getSelectedItem();
             if (cli.getRestringido().equals("NO")) {
@@ -308,11 +310,9 @@ public class SearchController implements Initializable {
     public void autorizar() throws RemoteException, NotBoundException, IOException {
         Registry reg = LocateRegistry.getRegistry(host, 27019);
         oasisrimbd inter = (oasisrimbd) reg.lookup("OasisSev");
-
         if (!table.getSelectionModel().isEmpty()) {
             Cliente cli = (Cliente) table.getSelectionModel().getSelectedItem();
             if (cli.getRestringido().equals("NO")) {
-
                 aux.setVisible(false);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/autorizar.fxml"));
                 AutorizarController controller;
@@ -332,7 +332,6 @@ public class SearchController implements Initializable {
                 aux.toFront();
                 aux.setVisible(true);
                 main.setVisible(false);
-
             } else {
                 Alert a = new Alert(AlertType.INFORMATION);
                 a.setTitle("Informacion");

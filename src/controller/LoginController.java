@@ -78,12 +78,10 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         drag();
         translate(user, 0.0);
         translate(pass, 0.0);
         translatey(login, 0.0);
-
     }
 
     @FXML
@@ -300,5 +298,6 @@ public class LoginController implements Initializable {
             login();
         }
     }
+    
 
 }
