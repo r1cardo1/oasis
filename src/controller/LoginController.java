@@ -6,6 +6,7 @@
 package controller;
 
 import classes.Usuario;
+import java.io.File;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -296,6 +297,12 @@ public class LoginController implements Initializable {
         } else {
             login.setDisable(false);
             login();
+        }
+    }
+    
+    public void revisaConfiguracion(){
+        if(!new File("C:/SWMS/Config.cfg").isFile()){
+            
         }
     }
     

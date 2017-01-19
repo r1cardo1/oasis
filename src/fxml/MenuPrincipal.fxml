@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuPrincipalController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fondoPrincipal" stylesheets="@../css/MenuPrincipal.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: black; -fx-opacity: 0.3;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox layoutX="693.0" layoutY="3.0" AnchorPane.rightAnchor="124.0">
+                     <children>
+                        <Label text="Sabado" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label text="18/01/2017" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="794.0" layoutY="10.0" AnchorPane.rightAnchor="14.0">
+                     <children>
+                        <Label text="Hora" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="08:59:00" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="10.0" layoutY="80.0" prefHeight="200.0" prefWidth="205.0" style="-fx-background-color: black; -fx-opacity: 0.3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
+               <children>
+                  <Accordion prefHeight="500.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <panes>
+                      <TitledPane style="-fx-animated: true;" text="Clientes">
+                        <content>
+                          <AnchorPane>
+                                 <children>
+                                    <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" styleClass="buscarCliente" text="Buscar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="29.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="179.0" styleClass="agregarCliente" text="Agregar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                      </TitledPane>
+                      <TitledPane text="Visitas">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="BASELINE_LEFT" layoutY="8.0" mnemonicParsing="false" styleClass="verVisitas" text="Ver Lista" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children></AnchorPane>
+                        </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                      </TitledPane>
+                        <TitledPane layoutX="10.0" layoutY="60.0" text="Carnet">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" styleClass="carnetCliente" text="Generar Carnet Cliente" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" styleClass="carnetCliente" text="Generar Carnet Adicional" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" styleClass="carnetEmpleado" text="Generar Carnet Empleado" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="89.0" mnemonicParsing="false" styleClass="listaCarnet" text="Ver Carnets Generados" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children></AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane layoutX="10.0" layoutY="85.0" text="Pases de cortesia">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="BASELINE_LEFT" layoutY="14.0" mnemonicParsing="false" styleClass="agregarCliente" text="Agregar Nuevo" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button alignment="BASELINE_LEFT" layoutY="41.0" mnemonicParsing="false" styleClass="buscarCliente" text="Ver Lista" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children></AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane layoutX="10.0" layoutY="110.0" text="Lista Negra">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="BASELINE_LEFT" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" styleClass="buscarCliente" text="Ver Lista Negra" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children></AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TitledPane>
+                        <TitledPane layoutX="10.0" layoutY="165.0" text="Reportes">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button alignment="BASELINE_LEFT" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" styleClass="reporteDiario" text="Generar Reporte Diario" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button alignment="BASELINE_LEFT" layoutX="16.0" layoutY="41.0" mnemonicParsing="false" styleClass="reporteSemanal" text="Generar Reporte Semanal" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button alignment="BASELINE_LEFT" layoutX="16.0" layoutY="68.0" mnemonicParsing="false" styleClass="reporteMensual" text="Generar Reporte Mensual" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TitledPane>
+                      <TitledPane text="Reservas">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Button layoutX="14.0" layoutY="2.0" mnemonicParsing="false" styleClass="agregarCliente" text="Nueva reserva" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                    <Button layoutX="14.0" layoutY="29.0" mnemonicParsing="false" styleClass="verVisitas" text="Ver reservaciones" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children></AnchorPane>
+                        </content>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                      </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

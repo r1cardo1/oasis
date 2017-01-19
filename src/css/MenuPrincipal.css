@@ -1,0 +1,183 @@
+.fondoPrincipal{
+    -fx-background-image: url("../images/MenuPrincipal.png");
+    -fx-background-size: cover;
+    
+}
+
+.titled-pane > .title {
+    -fx-pref-height: 36.0;
+}
+
+.accordion .titled-pane > *.content{
+    -fx-background-color: transparent ;
+    -fx-border-color:transparent;
+    -fx-pref-width:auto;
+}
+
+.accordion .titled-pane > .title{
+    -fx-background-color: transparent ;
+}
+
+.accordion .titled-pane > .title:hover{
+    -fx-effect:dropshadow( three-pass-box , #ffffff , 1 , 50 , 0 , 0 ) ;
+    -fx-background-color:#006666;
+}
+
+.accordion .titled-pane:focused > .title{
+    -fx-effect:dropshadow( three-pass-box , #ffffff , 1 , 50 , 0 , 0 ) ;
+    -fx-background-color:#006666;
+}
+
+.accordion .titled-pane .title .text{
+    -fx-background-color: transparent ;
+    -fx-fill:#ccffff    
+}
+
+.accordion .titled-pane .title .arrow{
+    -fx-background-color: transparent ;
+    -fx-border-color:transparent;
+    -fx-graphic:url("../images/close.png");
+}
+
+.buscarCliente{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/Search.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.buscarCliente:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/Search.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+}
+
+.agregarCliente{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/Plus.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.agregarCliente:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/Plus.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
+
+.verVisitas{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/Visita.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.verVisitas:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/Visita.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
+
+.carnetCliente{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/CarnetCliente.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.carnetCliente:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/CarnetCliente.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
+
+.carnetEmpleado{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/CarnetEmpleado.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.carnetEmpleado:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/CarnetEmpleado.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
+
+.listaCarnet{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/ListaCarnet.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.listaCarnet:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/ListaCarnet.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
+
+.reporteDiario{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/ReporteDiario.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.reporteDiario:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/ReporteDiario.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
+
+.reporteSemanal{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/ReporteSemanal.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.reporteSemanal:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/ReporteSemanal.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
+
+.reporteMensual{
+    -fx-background-color:transparent;
+    -fx-graphic:url("../images/ReporteMensual.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+}
+
+.reporteMensual:hover{
+    -fx-background-color:#009999;
+    -fx-graphic:url("../images/ReporteMensual.png");
+    -fx-padding:0;
+    -fx-text-fill:white;
+    -fx-background-radius:0;
+    
+}
