@@ -13,9 +13,11 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="fondoPrincipal" stylesheets="@../css/MenuPrincipal.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: black; -fx-opacity: 0.3;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <AnchorPane prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane prefHeight="70.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane layoutX="10.0" layoutY="80.0" prefHeight="200.0" prefWidth="205.0" style="-fx-background-color: black; -fx-opacity: 0.3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
                <children>
-                  <VBox layoutX="693.0" layoutY="3.0" AnchorPane.rightAnchor="124.0">
+                  <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0">
                      <children>
                         <Label text="Sabado" textFill="WHITE">
                            <font>
@@ -29,13 +31,8 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox layoutX="794.0" layoutY="10.0" AnchorPane.rightAnchor="14.0">
+                  <VBox AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="14.0">
                      <children>
-                        <Label text="Hora" textFill="WHITE">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
                         <Label text="08:59:00" textFill="WHITE">
                            <font>
                               <Font size="25.0" />
@@ -43,12 +40,7 @@
                         </Label>
                      </children>
                   </VBox>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="10.0" layoutY="80.0" prefHeight="200.0" prefWidth="205.0" style="-fx-background-color: black; -fx-opacity: 0.3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0" />
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
-               <children>
-                  <Accordion prefHeight="500.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Accordion prefHeight="397.0" prefWidth="205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <panes>
                       <TitledPane style="-fx-animated: true;" text="Clientes">
                         <content>
